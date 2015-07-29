@@ -1,0 +1,26 @@
+h2 {
+	margin-top: 0px;
+}
+
+#outOfStock {
+	margin-top: 20px;
+}
+#outOfStock ul {
+	padding-left: 0;
+	list-style-type: none;
+}
+#outOfStock ul li > div {
+	margin-bottom: 3px;
+}
+#outOfStock .form-horizontal .control-label {
+	text-align: left;
+	padding: 0;
+}
+
+#liste-courses {
+	margin-top: 20px;
+}
+
+#liste-courses h3 {
+	margin-top:	0px;
+}
