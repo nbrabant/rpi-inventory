@@ -15,7 +15,7 @@ return [
     */
 
     'mailgun' => [
-        'domain' => '',
+        'domain' => 'localhost',
         'secret' => '',
     ],
 

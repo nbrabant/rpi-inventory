@@ -24,3 +24,8 @@ h2 {
 #liste-courses h3 {
 	margin-top:	0px;
 }
+
+.btn-adding .btn {
+	padding: 1px 8px;
+	min-width: 27px;
+}

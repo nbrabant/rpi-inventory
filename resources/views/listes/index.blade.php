@@ -58,17 +58,22 @@
 					@endif
 
 					<div id="liste-courses" class="clearfix">
-						<div class="col-md-9">
+						<div class="col-md-12">
 							<h3>Liste de courses</h3>
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-12 pull-right">
+							<a href="listes/export/pdf" class="btn btn-sm btn-success" target="_blank">
+								<span class="glyphicon glyphicon-ok"></span> Exporter la liste en PDF
+							</a>
+							<a href="listes/export/mail" class="btn btn-sm btn-success">
+								<span class="glyphicon glyphicon-ok"></span> Envoyer la liste par mail
+							</a>
 							<a href="listes/endingList" class="btn btn-sm btn-danger" onclick="return confirm('Cette action renouvellera le stock avec les produits de la liste de courses. En ëtes vous sûr?')">
 								<span class="glyphicon glyphicon-ok"></span> Clore la liste de course
 							</a>
 						</div>
 					</div>
 					@if (count($liste->lignesproduits) > 0)
-@Todo : bouton export, bouton envoi mail, changement de quantite
 						<table class="table">
 							<thead>
 								<th>
@@ -82,7 +87,17 @@
 									<tr>
 										<td></td>
 										<td>{{ $ligneProduit->produit->nom }}</td>
-										<td>{{ $ligneProduit->quantite }}</td>
+										<td>
+											<div class="clearfix">
+												<div class="col-sm-3">
+													{{ $ligneProduit->quantite }}
+												</div>
+												<div class="col-sm-9 btn-adding">
+													<a href="listes/changeQty/add/{{ $ligneProduit->id }}" class="btn btn-default">+</a>
+													<a href="listes/changeQty/del/{{ $ligneProduit->id }}" class="btn btn-default">-</a>
+												</div>
+											</div>
+										</td>
 										<td>
 											<a href="/listes/delProducts/{{ $ligneProduit->id }}" class="btn btn-sm btn-danger">
 												<span class="glyphicon glyphicon-close"></span> Supprimer de la liste
