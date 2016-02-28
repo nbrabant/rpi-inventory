@@ -5,7 +5,7 @@ use App\Liste;
 use App\Ligneproduit;
 use App\Operation;
 use Illuminate\Http\Request;
-//use Barryvdh\DomPDF\PDF;
+use App\Trellomanager;
 
 class ListesController extends Controller {
 
@@ -17,10 +17,13 @@ class ListesController extends Controller {
 	}
 
 	public function index() {
+		// var_dump(config('services.trello.client_token'), Socialite::with('trello'));
+
         return view('listes.index', [
-            'title'		=> 'Liste de courses',
-            'liste'		=> $this->currentListe,
-            'produits'	=> Produit::getOutOfStockProducts($this->currentListe->getProductListIds()),
+            'title'			=> 'Liste de courses',
+            'liste'			=> $this->currentListe,
+            'produits'		=> Produit::getOutOfStockProducts($this->currentListe->getProductListIds()),
+			'trello_token'	=> config('services.trello.client_token')
         ]);
     }
 
@@ -96,6 +99,8 @@ class ListesController extends Controller {
 		if($type === 'pdf') {
 			$pdf = \PDF::loadView('pdf.exportliste', $datas);
 			return $pdf->download('liste-courses.pdf');
+		} elseif($type === 'trello') {
+			$response = Trellomanager::exportToTrello($this->currentListe);
 		} elseif($type === 'mail') {
 			try {
 				\Mail::send('emails.exportliste', $datas, function ($m) use ($datas) {

@@ -68,6 +68,12 @@
 							<a href="listes/export/mail" class="btn btn-sm btn-success">
 								<span class="glyphicon glyphicon-ok"></span> Envoyer la liste par mail
 							</a>
+							<a href="listes/export/trello" class="btn btn-sm btn-success">
+								<span class="glyphicon glyphicon-ok"></span> Envoyer la liste sur carte Trello
+							</a>
+							<!-- <a id="exportToTrello" href="#" class="btn btn-sm btn-success">
+								<span class="glyphicon glyphicon-ok"></span> Envoyer la liste sur carte Trello
+							</a> -->
 							<a href="listes/endingList" class="btn btn-sm btn-danger" onclick="return confirm('Cette action renouvellera le stock avec les produits de la liste de courses. En ëtes vous sûr?')">
 								<span class="glyphicon glyphicon-ok"></span> Clore la liste de course
 							</a>

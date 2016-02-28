@@ -35,4 +35,10 @@ return [
         'secret' => '',
     ],
 
+    'trello' => [
+        'client_token' => env('TRELLO_TOKEN'),
+        'client_id' => env('TRELLO_KEY'),
+        'client_secret' => env('TRELLO_SECRET'),
+        'redirect' => env('TRELLO_REDIRECT_URI'),
+    ]
 ];

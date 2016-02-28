@@ -8,7 +8,8 @@ class Liste extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'termine'
+		'termine',
+		'trello_card_id'
 	];
 
 	//hierarchical
@@ -20,5 +21,5 @@ class Liste extends Eloquent {
 		return $this->lignesproduits()->lists('produit_id')->toArray();
 	}
 
-	
+
 }

@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
 		"laravelcollective/html": "~5.0",
 		"barryvdh/laravel-dompdf": "0.6.*",
-		"guzzlehttp/guzzle": "~5.3|~6.0"
+		"guzzlehttp/guzzle": "~5.3|~6.0",
+		"gregoriohc/laravel-trello": "0.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -14,6 +14,7 @@ class CreateListesTable extends Migration
     {
         Schema::create('listes', function(Blueprint $table){
 			$table->increments('id');
+            $table->string('trello_card_id')->nullable();
 			$table->boolean('termine')->default(0);
 			$table->timestamps();
 		});

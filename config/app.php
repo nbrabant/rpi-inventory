@@ -147,6 +147,8 @@ return [
 		'Collective\Html\HtmlServiceProvider',
 
 		Barryvdh\DomPDF\ServiceProvider::class,
+        Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
+        // \SocialiteProviders\Manager\ServiceProvider::class
 
     ],
 
@@ -198,6 +200,8 @@ return [
 		'Form'		=> 'Collective\Html\FormFacade',
 		'Html'		=> 'Collective\Html\HtmlFacade',
 		'PDF'		=> Barryvdh\DomPDF\Facade::class,
+        // 'Socialize' => 'Laravel\Socialite\Facades\Socialite',
+        'Trello'    => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
     ],
 
 ];
