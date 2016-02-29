@@ -17,7 +17,7 @@ class ListesController extends Controller {
 	}
 
 	public function index() {
-		// var_dump(config('services.trello.client_token'), Socialite::with('trello'));
+
 
         return view('listes.index', [
             'title'			=> 'Liste de courses',
@@ -47,7 +47,7 @@ class ListesController extends Controller {
 				$this->currentListe->lignesproduits()->saveMany( $lstProduits );
 			}
 		}
-		return redirect(url('liste-courses'));
+		return redirect(url('liste-courses'))->with('success', 'Produit ajouté à la liste');
 	}
 
 	public function deleteproduits($id) {
@@ -72,7 +72,7 @@ class ListesController extends Controller {
 		// passage de la liste courante à terminé + save + redirect en homepage
 		$this->currentListe->termine = 1;
 		$this->currentListe->save();
-		return redirect(url('/'));
+		return redirect(url('/'))->with('success', 'Liste close, les stocks de produits on étés mis à jour');
 	}
 
 	public function changequantity($type, $id) {
@@ -87,7 +87,7 @@ class ListesController extends Controller {
 			$ligneProduit->quantite++;
 			$ligneProduit->save();
 		}
-		return redirect(url('liste-courses'));
+		return redirect(url('liste-courses'))->with('success', 'Données mises à jour');
 	}
 
 	public function export($type) {
@@ -101,6 +101,11 @@ class ListesController extends Controller {
 			return $pdf->download('liste-courses.pdf');
 		} elseif($type === 'trello') {
 			$response = Trellomanager::exportToTrello($this->currentListe);
+			if($response['status'] == true) {
+				return redirect(url('liste-courses'))->with('success', $response['message']);
+			} else {
+				return redirect(url('liste-courses'))->with('error', $response['message']);
+			}
 		} elseif($type === 'mail') {
 			try {
 				\Mail::send('emails.exportliste', $datas, function ($m) use ($datas) {
@@ -111,7 +116,7 @@ class ListesController extends Controller {
 			} catch (Exception $e) {
 				echo $e->getTraceAsString(); exit;
 			}
+			return redirect(url('liste-courses'))->with('error', 'Fonctionnel à venir');
 		}
-		return redirect(url('liste-courses'));
 	}
 }

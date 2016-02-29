@@ -34,7 +34,7 @@ class CategoriesController extends Controller {
 
 			$categorie->nom = $values['nom'];
 			if(($categorie->save())) {
-				return redirect(url('categories'));
+				return redirect(url('categories'))->with('success', 'Données mises à jour');
 			}
 		}
 
@@ -53,10 +53,10 @@ class CategoriesController extends Controller {
 
 			$categorie->nom = $values['nom'];
 			if(($categorie->save())) {
-				return redirect(url('categories'));
+				return redirect(url('categories'))->with('success', 'Données mises à jour');
 			}
 		}
-		
+
         return view('categories.edit', [
             'title'         => 'Edition d\'une catégorie',
             'categorie'     => $categorie,

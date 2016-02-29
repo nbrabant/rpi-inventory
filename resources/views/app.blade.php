@@ -57,6 +57,12 @@
 		</div>
 	</nav>
 
+	<div class="row">
+        <div class="col-sm-12">
+            {!! App\Helpers\Messages::render() !!}
+        </div>
+    </div>
+
 	@yield('content')
 </body>
 </html>

@@ -22,7 +22,7 @@ class ProduitsController extends Controller {
                 'operation'		=> 'required',
                 'quantite'		=> 'required',
             ]);
-		
+
 			$values = $request->all();
 
 			$operation = new Operation;
@@ -31,7 +31,7 @@ class ProduitsController extends Controller {
 			$operation->quantite	= $values['quantite'];
 			$operation->detail		= $values['detail'];
 			if($operation->save()) {
-                return redirect(url('produits/show/'.$produit->id));
+                return redirect(url('produits/show/'.$produit->id))->with('success', 'Stock du produit mis à jour');
             }
 		}
 
@@ -50,7 +50,7 @@ class ProduitsController extends Controller {
                 'quantite'		=> 'required',
                 'quantite_min'	=> 'required',
             ]);
-            
+
             $values = $request->all();
 
 			//@TODO : ajouter une opération de type ajout
@@ -64,9 +64,9 @@ class ProduitsController extends Controller {
             $produit->nom			= $values['nom'];
             $produit->description	= $values['description'];
             $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
-			
+
             if($produit->push() && $produit->operations()->save($operation)) {
-                return redirect(url('produits'));
+                return redirect(url('produits'))->with('success', 'Données mises à jour');
             }
         }
 
@@ -94,7 +94,7 @@ class ProduitsController extends Controller {
             $produit->description	= $values['description'];
             $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
 			if($produit->save()) {
-                return redirect(url('produits'));
+                return redirect(url('produits'))->with('success', 'Données mises à jour');
             }
         }
 
@@ -105,4 +105,3 @@ class ProduitsController extends Controller {
         ]);
     }
 }
-
