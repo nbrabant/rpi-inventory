@@ -53,9 +53,9 @@ class ListesController extends Controller {
 	public function deleteproduits($id) {
 		$ligneProduit = $this->currentListe->lignesproduits()->whereId($id)->first();
 		if(is_null($ligneProduit) || !($ligneProduit instanceof Ligneproduit) || !$ligneProduit->delete()) {
-			// error message
+			return redirect(url('produits'))->with('error', 'Impossible de retirer le produit de la liste de courses');
 		}
-		return redirect(url('liste-courses'));
+		return redirect(url('liste-courses'))->with('success', 'Produit supprimé de la liste de courses');
 	}
 
 	public function endinglist() {
@@ -106,17 +106,6 @@ class ListesController extends Controller {
 			} else {
 				return redirect(url('liste-courses'))->with('error', $response['message']);
 			}
-		} elseif($type === 'mail') {
-			try {
-				\Mail::send('emails.exportliste', $datas, function ($m) use ($datas) {
-					$m->from('brabantnicolas59@gmail.com', 'admin')
-						->to('brabantnicolas59@gmail.com', 'user')
-						->subject($datas['title']);
-				});
-			} catch (Exception $e) {
-				echo $e->getTraceAsString(); exit;
-			}
-			return redirect(url('liste-courses'))->with('error', 'Fonctionnel à venir');
 		}
 	}
 }

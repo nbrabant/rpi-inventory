@@ -8,7 +8,8 @@ class Categorie extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'nom'
+		'nom',
+		'position'
 	];
 
     //hierarchical
@@ -17,6 +18,12 @@ class Categorie extends Eloquent {
 	}
 
 	//scope functions
+	public function scopeByPosition($query, $order = 'ASC') {
+		if(!in_array($order, ['ASC', 'DESC'])){
+			$order = 'ASC';
+		}
+		return $query->orderBy('position', $order);
+	}
 
 	public static function getList($emptyLine = true) {
 		$categories = self::all();

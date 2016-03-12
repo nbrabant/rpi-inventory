@@ -32,6 +32,7 @@
 							<thead>
 								<th>
 									<th>Nom</th>
+									<th>Position</th>
 									<th class="actions">Actions</th>
 								</th>
 							</thead>
@@ -40,6 +41,7 @@
 									<tr>
 										<td>{{ $categorie->id }}</td>
 										<td>{{ $categorie->nom }}</td>
+										<td>{{ $categorie->position }}</td>
 										<td>
 											<a href="/categories/show/{{ $categorie->id }}" class="btn btn-sm btn-primary">
 												<span class="glyphicon glyphicon-eye-open"></span> Voir les produits

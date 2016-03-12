@@ -29,3 +29,12 @@ h2 {
 	padding: 1px 8px;
 	min-width: 27px;
 }
+
+#outofstock_form {
+	height: auto;
+	overflow: hidden;
+}
+
+#outofstock_form.masqued {
+	height: 0;
+}

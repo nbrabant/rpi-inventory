@@ -10,7 +10,7 @@ class CategoriesController extends Controller {
 	public function index(Categorie $categorie) {
 		return view('categories.index', [
 			'title'     => 'Catégories',
-			'categories'=> $categorie->all()
+			'categories'=> $categorie->byPosition()->get()
 		]);
 	}
 
@@ -28,6 +28,7 @@ class CategoriesController extends Controller {
 			//if validation fails, validate returns an exception and route on the view
 			$this->validate($request, [
 				'nom' => 'required',
+				'position' => 'required',
 			]);
 
 			$values = $request->all();
@@ -47,6 +48,7 @@ class CategoriesController extends Controller {
 		if($request->method() == 'POST') {
 			$this->validate($request, [
 				'nom' => 'required',
+				'position' => 'required',
 			]);
 
 			$values = $request->all();

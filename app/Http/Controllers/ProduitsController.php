@@ -3,6 +3,8 @@
 use App\Produit;
 use App\Categorie;
 use App\Operation;
+use App\Liste;
+use App\Ligneproduit;
 use Illuminate\Http\Request;
 
 class ProduitsController extends Controller {
@@ -10,7 +12,8 @@ class ProduitsController extends Controller {
     public function index(Produit $produit) {
         return view('produits.index', [
             'title'     => 'Administration des produits',
-            'produits'  => $produit->all()
+            'produits'  => $produit->all(),
+            'categories'  => Categorie::byPosition()->get()
         ]);
     }
 
@@ -104,4 +107,22 @@ class ProduitsController extends Controller {
             'produit'     => $produit
         ]);
     }
+
+	public function addToCart(Produit $produit, Request $request) {
+		$currentListe = Liste::firstOrCreate(['termine' => 0]);
+
+		// produit présent danns liste de course?
+		$productLine = $currentListe->lignesproduits()->where('produit_id', $produit->id)->first();
+		if(isset($productLine) && $productLine instanceof Ligneproduit) {
+			$productLine->quantite += 1;
+			$productLine->save();
+			return redirect(url('produits'))->with('success', 'Nombre de produit mis à jour');
+		}
+
+		$newLine = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
+		if($currentListe->lignesproduits()->save($newLine)) {
+			return redirect(url('produits'))->with('success', 'Produit ajouté à la liste de courses');
+		}
+		return redirect(url('produits'))->with('error', 'Impossible d\'ajouter le produit à la liste de courses');
+	}
 }
