@@ -4,6 +4,7 @@ use App\Produit;
 use App\Liste;
 use App\Ligneproduit;
 use App\Operation;
+use App\Categorie;
 use Illuminate\Http\Request;
 use App\Trellomanager;
 
@@ -40,14 +41,64 @@ class ListesController extends Controller {
 				if(is_null($produit) || !($produit instanceof Produit)) {
 					continue;
 				}
-				$lstProduits[] = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
+
+				$ligneProduit = $this->currentListe->lignesproduits()->whereProduitId($produit->id)->first();
+				if(isset($ligneProduit) && $ligneProduit instanceof Ligneproduit) {
+					$ligneProduit->quantite++;
+					$ligneProduit->save();
+				} else {
+					$lstProduits[] = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
+				}
 			}
 
 			if(is_array($lstProduits) && !empty($lstProduits)) {
 				$this->currentListe->lignesproduits()->saveMany( $lstProduits );
 			}
+
+			if(isset($values['ajaxCall']) && $values['ajaxCall'] == true) {
+				return response()->json([
+					'status' 	=> true,
+					'html'		=> (string)view('listes.productslist', ['liste' => $this->currentListe])
+				]);
+			}
 		}
 		return redirect(url('liste-courses'))->with('success', 'Produit ajouté à la liste');
+	}
+
+	public function createAndAddProduct(Request $request) {
+		if($request->method() == 'POST') {
+            //if validation fails, validate returns an exception and route on the view
+            $this->validate($request, [
+                'nom'			=> 'required',
+                'quantite'		=> 'required',
+                'quantite_min'	=> 'required',
+            ]);
+
+            $values = $request->all();
+
+			//@TODO : check et récup du produit s'il existe déjà
+			$operation = new Operation;
+			$operation->operation	= '+';
+			$operation->quantite	= $values['quantite'];
+			$operation->detail		= 'Première entrée';
+
+            $produit = new Produit;
+			$produit->categorie_id	= ($values['categorie_id'] > 0 ? $values['categorie_id'] : null);
+            $produit->nom			= $values['nom'];
+            $produit->description	= $values['description'];
+            $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
+
+            if($produit->push() && $produit->operations()->save($operation)) {
+				$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
+				$this->currentListe->lignesproduits()->save( $ligneProduit );
+                return redirect(url('liste-courses'))->with('success', 'Données mises à jour');
+            }
+        }
+
+        return view('listes.product_add', [
+            'title'			=> 'Ajout d\'un produit à la liste',
+            'categories'	=> Categorie::getList()
+        ]);
 	}
 
 	public function deleteproduits($id) {

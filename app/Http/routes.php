@@ -13,6 +13,7 @@ Route::get('home', 'HomeController@index');
 
 Route::any('liste-courses', 'ListesController@index');
 Route::post('listes/addProducts', 'ListesController@ajoutproduits');
+Route::any('listes/createproduits', 'ListesController@createAndAddProduct');
 Route::get('listes/delProducts/{id}', 'ListesController@deleteproduits');
 Route::get('listes/changeQty/{type}/{id}', 'ListesController@changequantity');
 Route::get('listes/endingList', 'ListesController@endinglist');
