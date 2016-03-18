@@ -76,23 +76,30 @@ class ListesController extends Controller {
 
             $values = $request->all();
 
-			//@TODO : check et récup du produit s'il existe déjà
-			$operation = new Operation;
-			$operation->operation	= '+';
-			$operation->quantite	= $values['quantite'];
-			$operation->detail		= 'Première entrée';
+			// check et récup du produit s'il existe déjà
+			$produit = Produit::where('nom', 'LIKE', $values['nom'])->first();
+			if(!is_null($produit)) {
+				$produit = new Produit;
 
-            $produit = new Produit;
+				$operation = new Operation;
+				$operation->operation	= '+';
+				$operation->quantite	= $values['quantite'];
+				$operation->detail		= 'Première entrée';
+
+				$produit->operations()->add($operation);
+			}
+
 			$produit->categorie_id	= ($values['categorie_id'] > 0 ? $values['categorie_id'] : null);
-            $produit->nom			= $values['nom'];
-            $produit->description	= $values['description'];
-            $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
+			$produit->nom			= $values['nom'];
+			$produit->description	= $values['description'];
+			$produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
+            $produit->push();
 
-            if($produit->push() && $produit->operations()->save($operation)) {
-				$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
-				$this->currentListe->lignesproduits()->save( $ligneProduit );
-                return redirect(url('liste-courses'))->with('success', 'Données mises à jour');
-            }
+			// et dans tous les cas :
+			$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->id, 'quantite' => 1 ]);
+			$this->currentListe->lignesproduits()->save( $ligneProduit );
+
+			return redirect(url('liste-courses'))->with('success', 'Données mises à jour');
         }
 
         return view('listes.product_add', [
@@ -103,7 +110,7 @@ class ListesController extends Controller {
 
 	public function deleteproduits($id) {
 		$ligneProduit = $this->currentListe->lignesproduits()->whereId($id)->first();
-		if(is_null($ligneProduit) || !($ligneProduit instanceof Ligneproduit) || !$ligneProduit->delete()) {
+		if(is_null($ligneProduit) || !$ligneProduit->delete()) {
 			return redirect(url('produits'))->with('error', 'Impossible de retirer le produit de la liste de courses');
 		}
 		return redirect(url('liste-courses'))->with('success', 'Produit supprimé de la liste de courses');
@@ -151,7 +158,7 @@ class ListesController extends Controller {
 			$pdf = \PDF::loadView('pdf.exportliste', $datas);
 			return $pdf->download('liste-courses.pdf');
 		} elseif($type === 'trello') {
-			$response = Trellomanager::exportToTrello($this->currentListe);
+			$response = $this->currentListe->exportToTrello();
 			if($response['status'] == true) {
 				return redirect(url('liste-courses'))->with('success', $response['message']);
 			} else {

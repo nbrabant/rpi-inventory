@@ -56,7 +56,6 @@ class ProduitsController extends Controller {
 
             $values = $request->all();
 
-			//@TODO : ajouter une opération de type ajout
 			$operation = new Operation;
 			$operation->operation	= '+';
 			$operation->quantite	= $values['quantite'];
