@@ -112,7 +112,7 @@ class ProduitsController extends Controller {
 
 		// produit présent danns liste de course?
 		$productLine = $currentListe->lignesproduits()->where('produit_id', $produit->id)->first();
-		if(isset($productLine) && $productLine instanceof Ligneproduit) {
+		if(!is_null($productLine)) {
 			$productLine->quantite += 1;
 			$productLine->save();
 			return redirect(url('produits'))->with('success', 'Nombre de produit mis à jour');
@@ -123,5 +123,23 @@ class ProduitsController extends Controller {
 			return redirect(url('produits'))->with('success', 'Produit ajouté à la liste de courses');
 		}
 		return redirect(url('produits'))->with('error', 'Impossible d\'ajouter le produit à la liste de courses');
+	}
+
+	public function autocomplete() {
+		return View::make('autocomplete');
+	}
+
+	public function getProducts(Request $request) {
+		$term = strtolower($request->term);
+	    $return_array = array();
+
+		$products = Produit::where('nom', 'LIKE', '%'.$term.'%')->get();
+	    foreach ($products as $product) {
+	        $return_array[] = array(
+				'id' => $product->id,
+				'value' => $product->nom,
+			);
+	    }
+	    return response()->json($return_array);
 	}
 }

@@ -16,13 +16,23 @@ class Liste extends Eloquent {
 	];
 
 	//hierarchical
-	public function lignesproduits() {
+	public function lignesproduits()
+	{
 		return $this->hasMany('App\Ligneproduit');
 	}
 
-	public function getProductListIds() {
+	public function getProductListIds()
+	{
 		return $this->lignesproduits()->lists('produit_id')->toArray();
 	}
 
-
+	public function getProductsOrderedByCategory()
+	{
+		return $this->lignesproduits()->with([
+			'produit',
+			'produit.categorie' => function($query) {
+				$query->orderBy('position', 'ASC');
+			}
+		])->get();
+	}
 }

@@ -38,3 +38,25 @@ h2 {
 #outofstock_form.masqued {
 	height: 0;
 }
+
+#sortable {
+	padding: 0;
+}
+#sortable > li {
+	list-style-type: none;
+	border-radius: 4px;
+	padding: 5px 0;
+	line-height: 28px;
+}
+#sortable > li .ui-icon {
+	margin-top: 5px;
+}
+#sortable > li:hover {
+	cursor: grab;
+}
+#sortable > li::selection {
+	cursor: grabbing;
+}
+#sortable > li .btn {
+	color: #fff;
+}

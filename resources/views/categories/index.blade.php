@@ -28,32 +28,27 @@
 					@endif
 
 					@if (count($categories) > 0)
-						<table class="table">
-							<thead>
-								<th>
-									<th>Nom</th>
-									<th>Position</th>
-									<th class="actions">Actions</th>
-								</th>
-							</thead>
-							<tbody>
-								@foreach ($categories as $categorie)
-									<tr>
-										<td>{{ $categorie->id }}</td>
-										<td>{{ $categorie->nom }}</td>
-										<td>{{ $categorie->position }}</td>
-										<td>
-											<a href="/categories/show/{{ $categorie->id }}" class="btn btn-sm btn-primary">
-												<span class="glyphicon glyphicon-eye-open"></span> Voir les produits
-											</a>
-											<a href="/categories/edit/{{ $categorie->id }}" class="btn btn-sm btn-info">
-												<span class="glyphicon glyphicon-edit"></span> Editer
-											</a>
-										</td>
-									</tr>
-								@endforeach
-							</tbody>
-						</table>
+						<div id="feedback"></div>
+						<ul id="sortable">
+							@foreach ($categories as $categorie)
+								<li id="{{$categorie->id}}" class="ui-state-default clearfix">
+									<div class="col-sm-1">
+										<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+									</div>
+									<div class="col-sm-7">
+										{{ $categorie->nom }}
+									</div>
+									<div class="col-sm-4">
+										<a href="/categories/show/{{ $categorie->id }}" class="btn btn-sm btn-primary">
+											<span class="glyphicon glyphicon-eye-open"></span> Voir les produits
+										</a>
+										<a href="/categories/edit/{{ $categorie->id }}" class="btn btn-sm btn-info">
+											<span class="glyphicon glyphicon-edit"></span> Editer
+										</a>
+									</div>
+								</li>
+							@endforeach
+						</ul>
 					@else
 						<div class="alert alert-warning">Aucun résultat.</div>
 					@endif

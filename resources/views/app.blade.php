@@ -12,12 +12,19 @@
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
 
-	<link rel="stylesheet"href="//codeorigin.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//codeorigin.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+	@if (isset($js_files) && is_array($js_files) && !empty($js_files))
+		@foreach ($js_files as $js_file)
+			<script src="/js/{{$js_file}}"></script>
+		@endforeach
+	@endif
+
+	<link href="/css/jquery-ui.min.css" rel="stylesheet">
+	<link href="/css/jquery-ui.structure.min.css" rel="stylesheet">
+	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,7 +33,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	<script type="text/javascript">
-		var baseURL = '{{URL::to('/')}}' 
+		var baseURL = '{{URL::to('/')}}'
 	</script>
 </head>
 <body>
