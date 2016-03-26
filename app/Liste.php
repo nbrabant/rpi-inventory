@@ -21,6 +21,10 @@ class Liste extends Eloquent {
 		return $this->hasMany('App\Ligneproduit');
 	}
 
+	public function listecourante() {
+		return $this->hasMany('App\Listecourante');
+	}
+
 	public function getProductListIds()
 	{
 		return $this->lignesproduits()->lists('produit_id')->toArray();

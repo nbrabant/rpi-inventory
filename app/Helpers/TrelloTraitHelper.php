@@ -32,15 +32,14 @@ trait TrelloTraitHelper
 			}
         }
 
-		$categoryId = null;
-		$checklist = null;
-        foreach ($this->getProductsOrderedByCategory() as $ligneProduit) {
-			if(is_null($categoryId) || $categoryId !== $ligneProduit->produit->categorie_id)  {
-				$checklist = $this->createChecklist($card, $ligneProduit->produit->categorie->nom);
-				$categoryId = $ligneProduit->produit->categorie_id;
+		$categorie = $checklist = null;
+		$this->listecourante->each( function($ligneListeCourante) use ($card, &$checklist, &$categorie) {
+			if(is_null($categorie) || $categorie != $ligneListeCourante->categorie) {
+				$checklist = $this->createChecklist($card, $ligneListeCourante->categorie);
+				$categorie = $ligneListeCourante->categorie;
 			}
-            Trello::checklist()->items()->create($checklist->getId(), $ligneProduit->quantite.' '.$ligneProduit->produit->nom);
-        }
+			Trello::checklist()->items()->create($checklist->getId(), $ligneListeCourante->quantite.' '.$ligneListeCourante->produit);
+		});
         return array('status' => true, 'message' => 'Liste exportée sur Trello avec succès.');
     }
 
