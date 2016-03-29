@@ -31,7 +31,7 @@
 						<div id="feedback"></div>
 						<ul id="sortable">
 							@foreach ($categories as $categorie)
-								<li id="{{$categorie->id}}" class="ui-state-default clearfix">
+								<li id="categorie_{{$categorie->id}}" class="ui-state-default clearfix">
 									<div class="col-sm-1">
 										<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
 									</div>

@@ -78,15 +78,15 @@ class ListesController extends Controller {
 
 			// check et récup du produit s'il existe déjà
 			$produit = Produit::where('nom', 'LIKE', $values['nom'])->first();
-			if(!is_null($produit)) {
+			if(is_null($produit)) {
 				$produit = new Produit;
 
-				$operation = new Operation;
-				$operation->operation	= '+';
-				$operation->quantite	= $values['quantite'];
-				$operation->detail		= 'Première entrée';
-
-				$produit->operations()->add($operation);
+				// $operation = new Operation;
+				// $operation->operation	= '+';
+				// $operation->quantite	= $values['quantite'];
+				// $operation->detail		= 'Première entrée';
+				//
+				// $produit->operations()->add($operation);
 			}
 
 			$produit->categorie_id	= ($values['categorie_id'] > 0 ? $values['categorie_id'] : null);

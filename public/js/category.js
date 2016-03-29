@@ -2,14 +2,13 @@ function json_encode(a) {var b,c=this.window.JSON;try{if(typeof c==="object"&&ty
 
 var updatePos = function(e) {
 	var list = e.length ? e : $(e.target);
-console.log($('#sortable').sortable('serialize'));
 	$.ajax({
 		type:  "POST",
 		url:   "/sortlist",
 		async: true,
 		cache: false,
 		dataType: "json",
-		data: {positions: json_encode( $('#sortable').sortable('serialize') )},
+		data: {positions: json_encode( list.sortable('serialize') )},
 		beforeSend: function() {
 			$('#feedback').html('<div class="alert alert-warning">Mise à jour en cours</div>');
 		},
@@ -28,6 +27,7 @@ console.log($('#sortable').sortable('serialize'));
 
 $(function() {
 	$( "#sortable" ).sortable({
+		placeholder: "ui-state-highlight",
 		update: updatePos
 	})
 	.disableSelection();
