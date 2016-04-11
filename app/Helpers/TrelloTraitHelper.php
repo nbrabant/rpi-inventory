@@ -21,16 +21,8 @@ trait TrelloTraitHelper
         	$this->save();
 		}
 
-        // si une checklist a déjà été créée auparavant,
-        // on la supprime afin de pouvoir entrer les nouvelles données
-        $checklists = $card->getChecklists();
-        if(is_array($checklists) && !empty($checklists))
-		{
-			foreach ($checklists as $checklist)
-			{
-				$checklist->remove();
-			}
-        }
+		// Nettoyage des checklists existantes
+        $this->clearChecklists($card);
 
 		$categorie = $checklist = null;
 		$this->listecourante->each( function($ligneListeCourante) use ($card, &$checklist, &$categorie) {
@@ -47,9 +39,12 @@ trait TrelloTraitHelper
 	{
 		try
 		{
+			if(is_null($trelloCardId)) {
+				return $this->createTrelloCard();
+			}
             return Trello::manager()->getCard($trelloCardId);
         }
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			return $this->createTrelloCard();
         }
@@ -78,5 +73,23 @@ trait TrelloTraitHelper
             ->setName($categoryName)
             ->save();
 		return $checklist;
+	}
+
+	public function clearChecklists($card)
+	{
+		try {
+			// si une checklist a déjà été créée auparavant,
+	        // on la supprime afin de pouvoir entrer les nouvelles données
+	        $checklists = $card->getChecklists();
+	        if(is_array($checklists) && !empty($checklists))
+			{
+				foreach ($checklists as $checklist)
+				{
+					$checklist->remove();
+				}
+	        }
+		} catch (\Exception $e) {
+			return true;
+		}
 	}
 }
