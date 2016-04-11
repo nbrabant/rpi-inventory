@@ -18,13 +18,11 @@ class ListesController extends Controller {
 	}
 
 	public function index() {
-
-
         return view('listes.index', [
             'title'			=> 'Liste de courses',
             'liste'			=> $this->currentListe,
             'produits'		=> Produit::getOutOfStockProducts($this->currentListe->getProductListIds()),
-			'trello_token'	=> config('services.trello.client_token')
+			'trello_token'	=> config('services.trello.client_token'),
         ]);
     }
 

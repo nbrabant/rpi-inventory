@@ -63,6 +63,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="/categories">Catégories</a></li>
 							<li><a href="/produits">Produits</a></li>
+							<li><a href="/consomation">Consomation</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="/produits">Trouver une recette</a></li>

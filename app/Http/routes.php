@@ -32,3 +32,5 @@ Route::any('produits/edit/{produit}', 'ProduitsController@edit');
 Route::any('produits/addToCart/{produit}', 'ProduitsController@addToCart');
 Route::get('autocomplete', 'ProduitsController@autocomplete');
 Route::get('getdata', 'ProduitsController@getProducts');
+Route::any('consomation', 'ProduitsController@consomation');
+Route::any('consomation/productDetails/{produit}', 'ProduitsController@consomationDetails');

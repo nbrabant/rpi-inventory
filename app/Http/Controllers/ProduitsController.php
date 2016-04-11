@@ -125,6 +125,27 @@ class ProduitsController extends Controller {
 		return redirect(url('produits'))->with('error', 'Impossible d\'ajouter le produit à la liste de courses');
 	}
 
+	public function consomation(Request $request) {
+		return view('consomation.index', [
+			'title'       => 'Etat des consomations',
+
+		]);
+	}
+
+	public function consomationDetails(Produit $produit, Request $request)
+	{
+		$return = view('consomation.productdetails', [
+			'title'			=> 'Produit : '.$produit->nom,
+			'produit' 		=> $produit,
+			'operations'	=> $produit->operations()->orderBy('created_at', 'desc')->get()
+		])->render();
+
+		return response()->json([
+			'status' => true,
+			'html' => $return
+		]);
+	}
+
 	public function autocomplete() {
 		return View::make('autocomplete');
 	}
