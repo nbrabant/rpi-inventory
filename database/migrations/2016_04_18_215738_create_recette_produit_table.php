@@ -18,13 +18,13 @@ class CreateRecetteProduitTable extends Migration
 			$table->integer('produit_id');
 			$table->integer('quantite');
 
-			$table->foreign('recette_id')
-				->references('id')->on('recettes')
-				->onDelete('cascade');
-
-			$table->foreign('produit_id')
-				->references('id')->on('produits')
-				->onDelete('cascade');
+			// $table->foreign('recette_id')
+			// 	->references('id')->on('recettes')
+			// 	->onDelete('cascade');
+			//
+			// $table->foreign('produit_id')
+			// 	->references('id')->on('produits')
+			// 	->onDelete('cascade');
 		});
     }
 

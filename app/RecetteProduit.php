@@ -15,6 +15,8 @@ class RecetteProduit extends Model
 		'quantite',
 	];
 
+	public $timestamps = false;
+
 	//hierarchical
 	public function recette() {
 		return $this->belongsTo('App\Recette');
