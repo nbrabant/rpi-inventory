@@ -66,7 +66,15 @@
 							<li><a href="/consomation">Consomation</a></li>
 						</ul>
 					</li>
-					<li class="dropdown"><a href="/produits">Trouver une recette</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Recettes <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/recettes">Liste des recettes</a></li>
+							<li><a href="/recettes">Rechercher une recette à partir d'ingrédients</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>

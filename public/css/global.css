@@ -60,3 +60,12 @@ h2 {
 #sortable > li .btn {
 	color: #fff;
 }
+
+#admin-recette #liste_produits {
+	list-style-type: none;
+}
+
+#admin-recette #liste_produits li {
+	line-height: 15px;
+	margin-bottom: 2px;
+}

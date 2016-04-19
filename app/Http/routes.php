@@ -8,6 +8,10 @@ Route::bind('produit', function($id){
 	return App\Produit::whereId($id)->first();
 });
 
+Route::bind('recette', function($id){
+	return App\Recette::whereId($id)->first();
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
@@ -34,3 +38,7 @@ Route::get('autocomplete', 'ProduitsController@autocomplete');
 Route::get('getdata', 'ProduitsController@getProducts');
 Route::any('consomation', 'ProduitsController@consomation');
 Route::any('consomation/productDetails/{produit}', 'ProduitsController@consomationDetails');
+
+Route::get('recettes', 'RecettesController@index');
+Route::any('recettes/add', 'RecettesController@add');
+Route::any('recettes/edit/{recette}', 'RecettesController@edit');

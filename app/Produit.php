@@ -28,6 +28,10 @@ class Produit extends Eloquent {
 		return $this->hasMany('App\Ligneproduit');
 	}
 
+	public function recettes() {
+		return $this->hasMany('App\RecetteProduit');
+	}
+
 	//scope functions
 	public function scopeWithoutIds($query, $ids = []) {
 		if(is_array($ids) && !empty($ids)){

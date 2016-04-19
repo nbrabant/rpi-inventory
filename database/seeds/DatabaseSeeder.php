@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
 	public static $produits = [
 		1 => ['Blanc de poulet', 'Canard', 'Viande hachée', 'Steak'],
-		2 => ['Saumon', 'Colin'],
+		2 => ['Saumon', 'Colin', 'Surimi'],
 		3 => ['Tomate', 'banane', 'pomme', 'nectarine', 'courgette', 'raisin sec'],
 		4 => ['Salade'],
 		5 => ['brioche', 'petit pain', 'pain burger', 'madeleine', 'pain', 'lait', 'oeuf', 'beurre', 'camembert', 'brie', 'charcuterie seche', 'yaourt', 'mousse chocolat'],
@@ -72,4 +72,3 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
     }
 }
-

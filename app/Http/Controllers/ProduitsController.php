@@ -128,7 +128,6 @@ class ProduitsController extends Controller {
 	public function consomation(Request $request) {
 		return view('consomation.index', [
 			'title'       => 'Etat des consomations',
-
 		]);
 	}
 
