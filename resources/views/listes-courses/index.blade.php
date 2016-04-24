@@ -6,8 +6,8 @@
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
 				<div class="panel-heading clearfix">
-					@include('listes.autocomplete')
-					@include('listes.outofstock')
+					@include('listes-courses.autocomplete')
+					@include('listes-courses.outofstock')
 				</div>
 
 				<div class="panel-body">
@@ -27,19 +27,19 @@
 							<h3>Liste de courses</h3>
 						</div>
 						<div class="col-md-12 pull-right">
-							<a href="listes/export/pdf" class="btn btn-sm btn-success" target="_blank">
+							<a href="listes-courses/export/pdf" class="btn btn-sm btn-success" target="_blank">
 								<span class="glyphicon glyphicon-ok"></span> Exporter la liste en PDF
 							</a>
-							<a href="listes/export/trello" class="btn btn-sm btn-success">
+							<a href="listes-courses/export/trello" class="btn btn-sm btn-success">
 								<span class="glyphicon glyphicon-ok"></span> Envoyer la liste sur carte Trello
 							</a>
-							<a href="listes/endingList" class="btn btn-sm btn-danger" onclick="return confirm('Cette action renouvellera le stock avec les produits de la liste de courses. En ëtes vous sûr?')">
+							<a href="listes-courses/endingList" class="btn btn-sm btn-danger" onclick="return confirm('Cette action renouvellera le stock avec les produits de la liste de courses. En ëtes vous sûr?')">
 								<span class="glyphicon glyphicon-ok"></span> Clore la liste de course
 							</a>
 						</div>
 					</div>
 					<div id="liste-courses-products">
-						@include('listes.productslist')
+						@include('listes-courses.productslist')
 					</div>
 				</div>
 			</div>

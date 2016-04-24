@@ -20,10 +20,11 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th></th>
 									<th>Nom</th>
-									<th>Nombre de personnes</th>
-									<th>Temps de préparation</th>
-									<th>Temps de cuisson</th>
+									<th>Nb personnes</th>
+									<th>Tps préparation</th>
+									<th>Tps cuisson</th>
 									<th class="actions">Actions</th>
 								</tr>
 							</thead>
@@ -36,6 +37,9 @@
 										<td>{{ $recette->temps_preparation }}</td>
 										<td>{{ $recette->temps_cuisson }}</td>
 										<td>
+											<a href="/recettes/show/{{ $recette->id }}" class="btn btn-xs btn-primary">
+												<span class="glyphicon glyphicon-eye-open"></span> Show
+											</a>
 											<a href="/recettes/edit/{{ $recette->id }}" class="btn btn-xs btn-info">
 												<span class="glyphicon glyphicon-edit"></span> Editer
 											</a>

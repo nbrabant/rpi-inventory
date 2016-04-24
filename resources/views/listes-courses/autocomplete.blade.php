@@ -1,7 +1,7 @@
 <div id="autocomplete_form" class="clearfix">
 	<h2>Rechercher un produit</h2>
 	<div class="clearfix">
-		{!! Form::open(array('class' => 'col-sm-8 form-horizontal', 'url' => 'listes/addProducts')) !!}
+		{!! Form::open(array('class' => 'col-sm-8 form-horizontal', 'url' => 'listes-courses/addProducts')) !!}
 		<div class="form-group">
 			{!! Form::label('produits', 'Saisir des premières lettres du produit', array('class' => 'col-md-6 control-label')) !!}
 			<div class="col-md-6">
@@ -10,7 +10,7 @@
 		</div>
 		{!! Form::close() !!}
 		<div id="no-result" class="col-sm-3">
-			<a href="/listes/createproduits" class="btn btn-sm btn-success">
+			<a href="/listes-courses/createproduits" class="btn btn-sm btn-success">
 				<span class="glyphicon glyphicon-plus"></span> Ajouter un produit inexistant à la liste
 			</a>
 		</div>
@@ -25,7 +25,7 @@
             select: function( event, ui ) {
 				$.ajax({
 					type: "POST",
-					url: baseURL+"/listes/addProducts",
+					url: baseURL+"/listes-courses/addProducts",
 					async: true,
 					data: {
 						produits: [ui.item.id],

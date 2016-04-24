@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 		1 => ['Blanc de poulet', 'Canard', 'Viande hachée', 'Steak'],
 		2 => ['Saumon', 'Colin', 'Surimi'],
 		3 => ['Tomate', 'banane', 'pomme', 'nectarine', 'courgette', 'raisin sec'],
-		4 => ['Salade'],
+		4 => ['Salade', 'oignons'],
 		5 => ['brioche', 'petit pain', 'pain burger', 'madeleine', 'pain', 'lait', 'oeuf', 'beurre', 'camembert', 'brie', 'charcuterie seche', 'yaourt', 'mousse chocolat'],
 		6 => ['pizza', 'glace'],
 		7 => ['pâtes', 'riz', 'haricot vert', 'tomate pelée', 'champignon', 'cacahuete', 'chips', 'mayonnaise', 'soupe'],

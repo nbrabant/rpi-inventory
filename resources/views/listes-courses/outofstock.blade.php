@@ -21,7 +21,7 @@
 				</div>
 			</div>
 
-			{!! Form::open(array('class' => 'form-horizontal', 'url' => 'listes/addProducts')) !!}
+			{!! Form::open(array('class' => 'form-horizontal', 'url' => 'listes-courses/addProducts')) !!}
 				<ul id="outofstock-form">
 					@foreach ($produits as $produit)
 					<li class="col-sm-6">

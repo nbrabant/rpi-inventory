@@ -15,13 +15,16 @@ Route::bind('recette', function($id){
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
+
 Route::any('liste-courses', 'ListesController@index');
-Route::post('listes/addProducts', 'ListesController@ajoutproduits');
-Route::any('listes/createproduits', 'ListesController@createAndAddProduct');
-Route::get('listes/delProducts/{id}', 'ListesController@deleteproduits');
-Route::get('listes/changeQty/{type}/{id}', 'ListesController@changequantity');
-Route::get('listes/endingList', 'ListesController@endinglist');
-Route::get('listes/export/{type}', 'ListesController@export');
+Route::group(['prefix' => 'listes-courses'], function () {
+	Route::post('addProducts', 'ListesController@ajoutproduits');
+	Route::any('createproduits', 'ListesController@createAndAddProduct');
+	Route::get('delProducts/{id}', 'ListesController@deleteproduits');
+	Route::get('changeQty/{type}/{id}', 'ListesController@changequantity');
+	Route::get('endingList', 'ListesController@endinglist');
+	Route::get('export/{type}', 'ListesController@export');
+});
 
 Route::get('categories', 'CategoriesController@index');
 Route::get('categories/show/{categorie}', 'CategoriesController@show');
@@ -40,5 +43,8 @@ Route::any('consomation', 'ProduitsController@consomation');
 Route::any('consomation/productDetails/{produit}', 'ProduitsController@consomationDetails');
 
 Route::get('recettes', 'RecettesController@index');
-Route::any('recettes/add', 'RecettesController@add');
-Route::any('recettes/edit/{recette}', 'RecettesController@edit');
+Route::group(['prefix' => 'recettes'], function () {
+	Route::get('show/{recette}', 'RecettesController@show');
+	Route::any('add', 'RecettesController@add');
+	Route::any('edit/{recette}', 'RecettesController@edit');
+});

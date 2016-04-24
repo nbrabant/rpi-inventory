@@ -148,7 +148,7 @@ return [
 
 		Barryvdh\DomPDF\ServiceProvider::class,
         Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
-        // \SocialiteProviders\Manager\ServiceProvider::class
+		Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -202,6 +202,7 @@ return [
 		'PDF'		=> Barryvdh\DomPDF\Facade::class,
         // 'Socialize' => 'Laravel\Socialite\Facades\Socialite',
         'Trello'    => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
+		'Image' 	=> Intervention\Image\Facades\Image::class
     ],
 
 ];

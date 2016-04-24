@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Image;
 use Illuminate\Database\Eloquent\Model;
 
 class Recette extends Model
@@ -24,4 +25,10 @@ class Recette extends Model
 		return $this->hasMany('App\RecetteProduit');
 	}
 
+	public function getImage() {
+		if(is_null($this->visuel) || !is_file('public/img/recette/'.$this->visuel)) {
+			return '';
+		}
+		return Image::make('public/img/recette/'.$this->visuel);
+	}
 }

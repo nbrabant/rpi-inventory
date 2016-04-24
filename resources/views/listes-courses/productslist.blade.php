@@ -18,13 +18,13 @@
 								{{ $ligneProduit->quantite }}
 							</div>
 							<div class="col-sm-9 btn-adding">
-								<a href="listes/changeQty/add/{{ $ligneProduit->id }}" class="btn btn-default">+</a>
-								<a href="listes/changeQty/del/{{ $ligneProduit->id }}" class="btn btn-default">-</a>
+								<a href="listes-courses/changeQty/add/{{ $ligneProduit->id }}" class="btn btn-default">+</a>
+								<a href="listes-courses/changeQty/del/{{ $ligneProduit->id }}" class="btn btn-default">-</a>
 							</div>
 						</div>
 					</td>
 					<td>
-						<a href="/listes/delProducts/{{ $ligneProduit->id }}" class="btn btn-sm btn-danger">
+						<a href="/listes-courses/delProducts/{{ $ligneProduit->id }}" class="btn btn-sm btn-danger">
 							<span class="glyphicon glyphicon-close"></span> Supprimer de la liste
 						</a>
 					</td>

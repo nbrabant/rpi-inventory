@@ -17,8 +17,8 @@
 							</ul>
 						</div>
 					@endif
-					
-					{!! Form::open(array('class' => 'form-horizontal', 'url' => 'listes/createproduits')) !!}
+
+					{!! Form::open(array('class' => 'form-horizontal', 'url' => 'listes-courses/createproduits')) !!}
 						<div class="form-group">
 							<label class="col-md-4 control-label">Categorie</label>
 							<div class="col-md-6">

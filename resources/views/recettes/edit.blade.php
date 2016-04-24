@@ -18,7 +18,7 @@
 						</div>
 					@endif
 
-					{!! Form::open(array('class' => 'form-horizontal', 'url' => 'recettes/add', 'files'=>true)) !!}
+					{!! Form::model($recette, array('class' => 'form-horizontal', 'url' => 'recettes/edit/'.$recette->id, 'files'=>true)) !!}
 						<div class="form-group">
 							{!! Form::label('nom', 'Nom', array('class' => 'col-md-4 control-label')) !!}
 							<div class="col-md-6">
