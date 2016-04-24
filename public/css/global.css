@@ -69,6 +69,14 @@ h2 {
 	list-style-type: none;
 }
 
+#admin-recette #liste_produits.box {
+	border: solid #555 1px;
+	background-color: #f5f5f5;
+	padding: 5px;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+
 #admin-recette #liste_produits li {
 	line-height: 15px;
 	margin-bottom: 2px;

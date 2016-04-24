@@ -3,6 +3,7 @@
 use Input;
 use Image;
 use App\Recette;
+use App\RecetteProduit;
 use Illuminate\Http\Request;
 
 class RecettesController extends Controller
@@ -17,8 +18,9 @@ class RecettesController extends Controller
 	public function show(Recette $recette) {
 
 		return view('recettes.show', [
-            'title'     => $recette->nom,
-            'recette'	=> $recette
+            'title'     	=> $recette->nom,
+            'recette'		=> $recette,
+			'ingredients' 	=> $recette->produits
         ]);
 	}
 
@@ -41,16 +43,30 @@ class RecettesController extends Controller
 			$recette->temps_preparation	= $values['temps_preparation'];
 			$recette->temps_cuisson		= $values['temps_cuisson'];
 
-			// @TODO : produits
+			$lstProduits = array();
+			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
+			{
+				foreach ($values['produits'] as $produitId) {
+					if(!isset($values['quantite_'.$produitId])) {
+						continue;
+					}
+
+					$lstProduits[] = new RecetteProduit([ 'produit_id' => $produitId, 'quantite' => $values['quantite_'.$produitId] ]);
+				}
+			}
 
 			if($recette->save()) {
-				if(strlen($values['visuel']) > 0 && Input::file()) {
+				if(isset($values['visuel']) && strlen($values['visuel']) > 0 && Input::file()) {
 					$image = Input::file('visuel');
 					$filename  = $recette->id.'.'.$image->getClientOriginalExtension();
 					$path = public_path('recettes/'.$filename);
 					Image::make($image->getRealPath())->resize(200, 200)->save($path);
 	                $recette->visuel = $values['visuel'];
 	                $recette->save();
+				}
+
+				if(is_array($lstProduits) && !empty($lstProduits)) {
+					$recette->produits()->saveMany( $lstProduits );
 				}
 
                 return redirect(url('recettes'))->with('success', 'Recette créée');
@@ -85,9 +101,8 @@ class RecettesController extends Controller
 			$recette->temps_preparation	= $values['temps_preparation'];
 			$recette->temps_cuisson		= $values['temps_cuisson'];
 
-			// @TODO : produits
 
-			if(strlen($values['visuel']) > 0 && Input::file()) {
+			if(isset($values['visuel']) && strlen($values['visuel']) > 0 && Input::file()) {
 				$image = Input::file('visuel');
 				$filename  = $recette->id.'.'.$image->getClientOriginalExtension();
 				$path = public_path('img/recettes/'.$filename);
@@ -95,7 +110,23 @@ class RecettesController extends Controller
                 $recette->visuel = $values['visuel'];
 			}
 
-			if($recette->save()) {
+			$lstProduits = array();
+			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
+			{
+				foreach ($values['produits'] as $produitId) {
+					if(!isset($values['quantite_'.$produitId])) {
+						continue;
+					}
+
+					$lstProduits[] = new RecetteProduit([ 'produit_id' => $produitId, 'quantite' => $values['quantite_'.$produitId] ]);
+				}
+			}
+
+			if(is_array($lstProduits) && !empty($lstProduits)) {
+				$recette->produits()->saveMany( $lstProduits );
+			}
+
+			if($recette->save() ) {
                 return redirect(url('recettes'))->with('success', 'Recette mise à jour');
             }
 		}
@@ -106,5 +137,6 @@ class RecettesController extends Controller
 			'recette'   => $recette
         ]);
 	}
+
 
 }
