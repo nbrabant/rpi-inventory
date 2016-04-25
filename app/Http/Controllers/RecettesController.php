@@ -101,7 +101,7 @@ class RecettesController extends Controller
 			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
 			{
 				foreach ($values['produits'] as $produitId) {
-					if(!isset($values['quantite_'.$produitId])) {
+					if(!isset($values['quantite_'.$produitId]) || $values['quantite_'.$produitId] <= 0) {
 						continue;
 					}
 

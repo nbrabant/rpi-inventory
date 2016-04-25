@@ -65,7 +65,19 @@
 						<div class="clearfix">
 							<legend>Liste des ingrédients</legend>
 							@include('recettes.autocomplete')
-							<ul id="liste_produits"></ul>
+							<ul id="liste_produits">
+								@if (count($recette->produits) > 0)
+									@foreach ($recette->produits as $produit)
+										<li id="ingredient_{{$produit->id}}" data-id="{{$produit->produit_id}}">
+											<div class="clearfix">
+												<input type="hidden" name="produits[]" value="{{$produit->produit_id}}">
+												<input class="col-sm-2" type="text" name="quantite_{{$produit->id}}" value="{{ $produit->quantite }}">
+												<span class="col-sm-10">{{ $produit->produit->nom }}</span>
+											</div>
+										</li>
+									@endforeach
+								@endif
+							</ul>
 						</div>
 
 						<div class="form-group">

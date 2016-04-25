@@ -17,7 +17,7 @@
             select: function( event, ui ) {
 				// add product on liste des produits
 				var existProduct = false;
-				$('#liste_produits li').each(function(){
+				$('#liste_produits li').each(function() {
 					if($(this).data('id') == ui.item.id) {
 						existProduct = true;
 					}
@@ -31,7 +31,7 @@
 								<input class="col-sm-2" type="text" name="quantite_'+ui.item.id+'">\
 								<span class="col-sm-10">'+ui.item.value+'</span>\
 							</div>\
-						</li');
+						</li>');
 				} else {
 					alert('L\'ingrédient est déjà présent dans la recette.')
 				}
