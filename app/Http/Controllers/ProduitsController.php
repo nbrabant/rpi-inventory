@@ -48,11 +48,7 @@ class ProduitsController extends Controller {
     public function add(Produit $produit, Request $request) {
         if($request->method() == 'POST') {
             //if validation fails, validate returns an exception and route on the view
-            $this->validate($request, [
-                'nom'			=> 'required',
-                'quantite'		=> 'required',
-                'quantite_min'	=> 'required',
-            ]);
+            $this->validate($request, $produit->getValidators());
 
             $values = $request->all();
 
@@ -84,10 +80,7 @@ class ProduitsController extends Controller {
         }
 
         if($request->method() == 'POST') {
-            $this->validate($request, [
-				'nom'			=> 'required',
-                'quantite_min'	=> 'required',
-            ]);
+            $this->validate($request, $produit->getValidators());
 
             $values = $request->all();
 
@@ -110,7 +103,7 @@ class ProduitsController extends Controller {
 	public function addToCart(Produit $produit, Request $request) {
 		$currentListe = Liste::firstOrCreate(['termine' => 0]);
 
-		// produit présent danns liste de course?
+		// produit présent dans liste de course?
 		$productLine = $currentListe->lignesproduits()->where('produit_id', $produit->id)->first();
 		if(!is_null($productLine)) {
 			$productLine->quantite += 1;

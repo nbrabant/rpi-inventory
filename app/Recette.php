@@ -20,12 +20,26 @@ class Recette extends Model
 		'temps_cuisson',
 	];
 
+	protected $validators = [
+		'nom'				=> 'required',
+		'instructions'		=> 'required',
+		'nombre_personnes'	=> 'required|integer',
+		'temps_preparation'	=> 'integer',
+		'temps_cuisson'		=> 'integer',
+	];
+
 	//hierarchical
 	public function produits() {
 		return $this->hasMany('App\RecetteProduit');
 	}
 
+	public function getValidators()
+	{
+		return $this->validators;
+	}
+
 	public function getImage() {
+var_dump('public/img/recette/'.$this->visuel);
 		if(is_null($this->visuel) || !is_file('public/img/recette/'.$this->visuel)) {
 			return '';
 		}

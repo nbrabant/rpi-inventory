@@ -15,6 +15,12 @@ class Produit extends Eloquent {
 		'quantite_min'
 	];
 
+	protected $validators = [
+		'nom'			=> 'required',
+		'quantite'		=> 'required',
+		'quantite_min'	=> 'required',
+	];
+
 	//hierarchical
 	public function categorie() {
 		return $this->belongsTo('App\Categorie');
@@ -38,6 +44,11 @@ class Produit extends Eloquent {
 			$query->whereNotIn('id', $ids);
 		}
 		return $query;
+	}
+
+	public function getValidators()
+	{
+		return $this->validators;
 	}
 
 	public static function getList($withoutId = null, $emptyLine = true) {

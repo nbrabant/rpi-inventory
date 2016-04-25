@@ -30,10 +30,7 @@ class CategoriesController extends Controller {
 	{
 		if($request->method() == 'POST') {
 			//if validation fails, validate returns an exception and route on the view
-			$this->validate($request, [
-				'nom' => 'required',
-				'position' => 'required',
-			]);
+			$this->validate($request, $categorie->getValidators());
 
 			$values = $request->all();
 
@@ -51,10 +48,7 @@ class CategoriesController extends Controller {
 	public function edit(Categorie $categorie, Request $request)
 	{
 		if($request->method() == 'POST') {
-			$this->validate($request, [
-				'nom' => 'required',
-				'position' => 'required',
-			]);
+			$this->validate($request, $categorie->getValidators());
 
 			$values = $request->all();
 

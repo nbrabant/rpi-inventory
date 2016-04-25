@@ -26,13 +26,7 @@ class RecettesController extends Controller
 
 	public function add(Recette $recette, Request $request) {
 		if($request->method() == 'POST') {
-			$this->validate($request, [
-                'nom'				=> 'required',
-                'instructions'		=> 'required',
-                'nombre_personnes'	=> 'required|integer',
-                'temps_preparation'	=> 'integer',
-                'temps_cuisson'		=> 'integer',
-            ]);
+			$this->validate($request, $recette->getValidators());
 
 			$values = $request->all();
 
@@ -85,13 +79,7 @@ class RecettesController extends Controller
         }
 
 		if($request->method() == 'POST') {
-			$this->validate($request, [
-                'nom'				=> 'required',
-                'instructions'		=> 'required',
-                'nombre_personnes'	=> 'required|integer',
-                'temps_preparation'	=> 'integer',
-                'temps_cuisson'		=> 'integer',
-            ]);
+			$this->validate($request, $recette->getValidators());
 
 			$values = $request->all();
 
@@ -100,7 +88,6 @@ class RecettesController extends Controller
 			$recette->nombre_personnes	= $values['nombre_personnes'];
 			$recette->temps_preparation	= $values['temps_preparation'];
 			$recette->temps_cuisson		= $values['temps_cuisson'];
-
 
 			if(isset($values['visuel']) && strlen($values['visuel']) > 0 && Input::file()) {
 				$image = Input::file('visuel');

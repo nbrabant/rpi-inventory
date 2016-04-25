@@ -12,9 +12,19 @@ class Categorie extends Eloquent {
 		'position'
 	];
 
+	protected $validators = [
+		'nom' 		=> 'required',
+		'position' 	=> 'required',
+	];
+
     //hierarchical
 	public function produits() {
 		return $this->hasMany('App\Produit');
+	}
+
+	public function getValidators()
+	{
+		return $this->validators;
 	}
 
 	//scope functions
@@ -38,4 +48,6 @@ class Categorie extends Eloquent {
 		}
 		return $results;
 	}
+
+
 }
