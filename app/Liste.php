@@ -3,8 +3,8 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Helpers\TrelloTraitHelper;
 
-class Liste extends Eloquent {
-
+class Liste extends Eloquent
+{
 	use TrelloTraitHelper;
 
 	protected $table = 'listes';

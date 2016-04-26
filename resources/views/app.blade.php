@@ -72,7 +72,7 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="/recettes">Liste des recettes</a></li>
-							<li><a href="/recettes">Rechercher une recette à partir d'ingrédients</a></li>
+							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
 						</ul>
 					</li>
 				</ul>

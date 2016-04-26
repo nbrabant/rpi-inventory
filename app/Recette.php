@@ -4,9 +4,12 @@ namespace App;
 
 use Image;
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\MarmitonTraitHelper;
 
 class Recette extends Model
 {
+	use MarmitonTraitHelper;
+
 	protected $table = 'recettes';
 
 	//columns

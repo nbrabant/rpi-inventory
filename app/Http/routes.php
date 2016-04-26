@@ -47,4 +47,6 @@ Route::group(['prefix' => 'recettes'], function () {
 	Route::get('show/{recette}', 'RecettesController@show');
 	Route::any('add', 'RecettesController@add');
 	Route::any('edit/{recette}', 'RecettesController@edit');
+	Route::any('recherche', 'RecettesController@recherche');
+	Route::any('apisearch', 'RecettesController@apisearch');
 });

@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class RecettesController extends Controller
 {
+	private $js_files = ['plugins/ckeditor/ckeditor.js', 'recettes.js'];
+
 	public function index(Recette $recette) {
         return view('recettes.index', [
             'title'     => 'Liste des recettes',
@@ -16,7 +18,6 @@ class RecettesController extends Controller
     }
 
 	public function show(Recette $recette) {
-
 		return view('recettes.show', [
             'title'     	=> $recette->nom,
             'recette'		=> $recette,
@@ -69,7 +70,7 @@ class RecettesController extends Controller
 
 		return view('recettes.add', [
             'title'			=> 'Ajout d\'une recette',
-			'js_files'		=> ['plugins/ckeditor/ckeditor.js', 'recettes.js']
+			'js_files'		=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js']
         ]);
 	}
 
@@ -120,10 +121,23 @@ class RecettesController extends Controller
 
 		return view('recettes.edit', [
             'title'		=> 'Edition d\'une recette',
-			'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'recettes.js'],
+			'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js'],
 			'recette'   => $recette
         ]);
 	}
 
+	public function recherche(Recette $recette, Request $request)
+	{
+		return view('recettes.recherche', [
+            'title' 	=> 'Rechercher une recette Marmiton.com',
+			'js_files' 	=> ['recettes.js']
+        ]);
+	}
 
+	public function apisearch(Recette $recette, Request $request)
+	{
+		$result = $recette->getApiRecettes($request->ingredients);
+
+		return response()->json(['status' => true, 'html' => '']);
+	}
 }
