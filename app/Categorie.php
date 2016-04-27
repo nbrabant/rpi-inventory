@@ -36,17 +36,15 @@ class Categorie extends Eloquent {
 	}
 
 	public static function getList($emptyLine = true) {
-		$categories = self::all();
-
-		$results = [];
+        $return = [];
 		if($emptyLine) {
-			$results['-1'] = '---';
+			$return['-1'] = '---';
 		}
 
-		foreach ($categories as $categorie)  {
-			$results[$categorie->id] = $categorie->nom;
-		}
-		return $results;
+        static::get()->map(function($item) use (&$return) {
+            $results[$item->id] = $item->nom;
+        });
+        return $return;
 	}
 
 
