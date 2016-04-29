@@ -129,15 +129,18 @@ class RecettesController extends Controller
 	public function recherche(Recette $recette, Request $request)
 	{
 		return view('recettes.recherche', [
-            'title' 	=> 'Rechercher une recette Marmiton.com',
+            'title' 	=> 'Rechercher une recette 750g.com',
 			'js_files' 	=> ['recettes.js']
         ]);
 	}
 
 	public function apisearch(Recette $recette, Request $request)
 	{
-		$result = $recette->getApiRecettes($request->ingredients);
+		$recipes = $recette->getApiRecettes($request->ingredients);
 
-		return response()->json(['status' => true, 'html' => $result]);
+		return response()->json([
+			'status' => true,
+			'html' => view('recettes.searchresult', ['recipes' => $recipes])->render()
+		]);
 	}
 }

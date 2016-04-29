@@ -42,7 +42,7 @@ class Categorie extends Eloquent {
 		}
 
         static::get()->map(function($item) use (&$return) {
-            $results[$item->id] = $item->nom;
+            $return[$item->id] = $item->nom;
         });
         return $return;
 	}

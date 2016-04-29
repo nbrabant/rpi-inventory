@@ -52,17 +52,16 @@ class Produit extends Eloquent {
 	}
 
 	public static function getList($withoutId = null, $emptyLine = true) {
-		$produits = self::without($withoutId)->get();
-
-		$results = [];
+		$return = [];
 		if($emptyLine) {
-			$results['-1'] = '---';
+			$return['-1'] = '---';
 		}
 
-		foreach ($produits as $produit)  {
-			$results[$produit->id] = $produit->nom;
-		}
-		return $results;
+		static::without($withoutId)->get()->map(function($item) use (&$return) {
+            $return[$item->id] = $item->nom;
+        });
+
+		return $return;
 	}
 
 	public function getStatus() {
@@ -76,10 +75,9 @@ class Produit extends Eloquent {
 
 	// récup des produits avec stock > stock mini hors produit dans la liste
 	public static function getOutOfStockProducts($withoutIds = []) {
-		$produits = self::withoutIds($withoutIds)
+		return self::withoutIds($withoutIds)
 				->where('quantite_min', '>', 0)
 				->whereRaw('produits.quantite <= produits.quantite_min')
 				->get();
-		return $produits;
 	}
 }

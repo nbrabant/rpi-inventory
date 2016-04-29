@@ -81,3 +81,7 @@ h2 {
 	line-height: 15px;
 	margin-bottom: 2px;
 }
+
+#admin-recette .recipe {
+	height: 20px;
+}

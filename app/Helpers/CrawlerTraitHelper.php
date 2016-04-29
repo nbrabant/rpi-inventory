@@ -6,7 +6,7 @@ use Cache;
 
 trait CrawlerTraitHelper
 {
-	private $_uri = 'http://www.cuisineaz.com/recettes/recherche_v2.aspx?';
+	private $_uri = 'http://www.750g.com/recherche.htm';
 
 	// requête CURL recherche
 	// http://www.cuisineaz.com/recettes/recherche_v2.aspx?recherche=pomme-carotte
@@ -20,30 +20,49 @@ trait CrawlerTraitHelper
 		$results = Cache::get($cacheKey);
 		if(is_null($results)) {
 			$postDatas = [
-				'recherche' => str_replace(' ', '-', $ingredients)
+				'search' => str_replace(' ', ' ', $ingredients)
 			];
 
 			// envoi du résultat dans un fichier de cache au nom de la recherche
-			$results = $this->parseRecettes($this->getSslPage($this->_uri, $postDatas));
+			$results = $this->getSslPage($this->_uri, $postDatas);
 
 			Cache::put($cacheKey, $results, 60);
 		}
-		return $results;
+
+		return $this->parseRecipes($results);
 	}
 
-	private function parseRecettes($html)
+	private function parseRecipes($html)
 	{
-		// m_resultats_liste_recherche
+		$xml = new \DOMDocument();
 
-		// premier tag
-		// $html = strstr($html, '<div class="m_rechercher_recette"');
-		//
-		// $html = str_replace(strstr($html, '<div id="m_col_right"'), '', $html);
+		@$xml->loadHTML($html, LIBXML_ERR_NONE);
 
-		return $html;
+		$recipes = [];
+		foreach($xml->getElementsByTagName('section') as $recipe) {
+			$links = [];
+			foreach($recipe->getElementsByTagName('a') as $link) {
+		        $links[] = ['url' => $link->getAttribute('href'), 'name' => $link->nodeValue];
+		    }
+
+			if(empty($links)) {
+				continue;
+			}
+
+			$images = [];
+			foreach($recipe->getElementsByTagName('img') as $image) {
+		        $images[] = ['src' => $link->getAttribute('src')];
+		    }
+
+			$recipes[] = [
+				'name' 	=> reset($links)['name'],
+				'url' 	=> reset($links)['url'],
+				'img' => !empty($images) ? reset($images)['src'] : public_path().'/img/index.jpg',
+			];
+		}
+
+		return $recipes;
 	}
-
-
 
 	private static function getSslPage($url, $postDatas = false) {
 		try {
@@ -66,7 +85,6 @@ trait CrawlerTraitHelper
 
 			$result = curl_exec($ch);
 			$resultStatus = curl_getinfo($ch);
-var_dump($resultStatus); exit;
 			if(is_array($resultStatus) && isset($resultStatus['http_code']) && $resultStatus['http_code'] == 200) {
 				return $result;
 			}
@@ -75,4 +93,5 @@ var_dump($resultStatus); exit;
 			throw $e;
 		}
 	}
+
 }
