@@ -138,6 +138,6 @@ class RecettesController extends Controller
 	{
 		$result = $recette->getApiRecettes($request->ingredients);
 
-		return response()->json(['status' => true, 'html' => '']);
+		return response()->json(['status' => true, 'html' => $result]);
 	}
 }

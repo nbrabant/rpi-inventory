@@ -21,7 +21,7 @@ $(document).ready(function() {
 				if (data.status != true) {
 					$('#result-recette').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la mise à jour des informations</div>');
 				} else {
-					$('#result-recette').html('<div class="alert alert-success">Mise à jour effectuée avec succès</div>');
+					$('#result-recette').html(data.html);
 				}
 			},
 			error: function(jqXHR, textStatus, errorThrown) {

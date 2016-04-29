@@ -4,11 +4,11 @@ namespace App;
 
 use Image;
 use Illuminate\Database\Eloquent\Model;
-use App\Helpers\MarmitonTraitHelper;
+use App\Helpers\CrawlerTraitHelper;
 
 class Recette extends Model
 {
-	use MarmitonTraitHelper;
+	use CrawlerTraitHelper;
 
 	protected $table = 'recettes';
 
