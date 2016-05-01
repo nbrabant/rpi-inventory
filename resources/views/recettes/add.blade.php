@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+
 <div id="admin-recette" class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -30,7 +31,9 @@
 							{!! Form::label('visuel', 'Visuel', array('class' => 'col-md-4 control-label')) !!}
 							<div class="col-md-6">
 								{!! Form::file('visuel') !!}
-								<p class="help-block">Format de fichier autorisé : JPG / PNG</p>
+								<p class="help-block">
+									Format de fichier autorisé : JPG / PNG
+								</p>
 							</div>
 						</div>
 

@@ -32,6 +32,18 @@ trait CrawlerTraitHelper
 		return $this->parseRecipes($results);
 	}
 
+	public function getDetailRecettes($uri) {
+		$results = Cache::get($uri);
+		if(is_null($results)) {
+			// envoi du résultat dans un fichier de cache au nom de la recherche
+			$results = $this->getSslPage('http://www.750g.com'.$uri);
+
+			Cache::put($uri, $results, 60);
+		}
+
+		return $this->populateRecette($results);
+	}
+
 	private function parseRecipes($html)
 	{
 		$xml = new \DOMDocument();
@@ -64,6 +76,41 @@ trait CrawlerTraitHelper
 		return $recipes;
 	}
 
+	private function populateRecette($html)
+	{
+		$xml = new \DOMDocument();
+
+		@$xml->loadHTML($html, LIBXML_ERR_NONE);
+
+		$return = [
+			'nom'				=> '',
+			'imgurl'			=> '',
+			'instructions'		=> '',
+			'nombre_personnes'	=> '',
+			'temps_preparation'	=> '',
+			'temps_cuisson'		=> '',
+			'ingredients'		=> '',
+		];
+
+		foreach($xml->getElementsByTagName('h1') as $element) {
+			$return['nom'] = $element->nodeValue;
+		}
+
+		foreach($this->domFinderByAttibuteName($xml, 'c-swiper__media') as $element) {
+			$return['imgurl'] = $element->getAttribute('src');
+		}
+
+		foreach($this->domFinderByAttibuteName($xml, 'c-recipe-steps__item') as $element) {
+			$return['instructions'] .= $element->nodeValue;
+		}
+
+		foreach($this->domFinderByAttibuteName($xml, 'recipeYield', 'itemprop') as $element) {
+			$return['nombre_personnes'] = $element->nodeValue;
+		}
+
+		return $return;
+	}
+
 	private static function getSslPage($url, $postDatas = false) {
 		try {
 			$ch = curl_init();
@@ -92,6 +139,11 @@ trait CrawlerTraitHelper
 		} catch (\Exception $e) {
 			throw $e;
 		}
+	}
+
+	private function domFinderByAttibuteName($xml, $content = '', $typeAttribute = 'class') {
+		$finder = new \DomXPath($xml);
+		return $finder->query("//*[contains(concat(' ', normalize-space(@$typeAttribute), ' '), ' $content ')]");
 	}
 
 }

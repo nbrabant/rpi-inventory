@@ -31,3 +31,27 @@ $(document).ready(function() {
 	});
 
 });
+
+$(document).on('click', '.populate-recipe', function() {
+	$.ajax({
+		type:  "POST",
+		url:   "/recettes/apipopulate",
+		async: true,
+		cache: false,
+		dataType: "json",
+		data: {url: $(this).data('url')},
+		beforeSend: function() {
+			$('#result-recette').html('<div class="alert alert-warning">Recherche en cours</div>');
+		},
+		success: function(data, textStatus, jqXHR) {
+			if (data.status != true) {
+				$('#result-recette').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la mise à jour des informations</div>');
+			} else {
+				$('#result-recette').html(data.html);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			$('#result-recette').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la mise à jour des informations</div>');
+		}
+	});
+});

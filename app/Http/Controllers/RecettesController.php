@@ -143,4 +143,16 @@ class RecettesController extends Controller
 			'html' => view('recettes.searchresult', ['recipes' => $recipes])->render()
 		]);
 	}
+
+	public function populaterecette(Recette $recette, Request $request)
+	{
+		return response()->json([
+			'status' => true,
+			'html' => view('recettes.populate', [
+				'recipe' 	=> $recette->getDetailRecettes($request->url),
+				'title'		=> 'Ajout d\'une recette',
+				'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js']
+			])->render()
+		]);
+	}
 }
