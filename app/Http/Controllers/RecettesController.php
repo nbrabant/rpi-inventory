@@ -37,6 +37,7 @@ class RecettesController extends Controller
 			$recette->nombre_personnes	= $values['nombre_personnes'];
 			$recette->temps_preparation	= $values['temps_preparation'];
 			$recette->temps_cuisson		= $values['temps_cuisson'];
+			$recette->complement		= isset($values['complement']) ? $values['complement'] : null;
 
 			$lstProduits = array();
 			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
@@ -58,12 +59,17 @@ class RecettesController extends Controller
 					Image::make($image->getRealPath())->resize(200, 200)->save($path);
 	                $recette->visuel = $values['visuel'];
 	                $recette->save();
+				} elseif (isset($values['imgurl']) && strlen($values['imgurl']) > 0) {
+
 				}
 
 				if(is_array($lstProduits) && !empty($lstProduits)) {
 					$recette->produits()->saveMany( $lstProduits );
 				}
 
+				if(isset($values['ajax']) && $values['ajax'] == true) {
+					return response()->json(['status' => true]);
+				}
                 return redirect(url('recettes'))->with('success', 'Recette créée');
             }
 		}

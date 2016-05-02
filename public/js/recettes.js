@@ -55,3 +55,38 @@ $(document).on('click', '.populate-recipe', function() {
 		}
 	});
 });
+
+$(document).on('click', '#sumbitRecette', function() {
+	$.ajax({
+		type:  "POST",
+		url:   "/recettes/add",
+		async: true,
+		cache: false,
+		dataType: "json",
+		data: {
+			ajax 				: true,
+			nom					: $('#nom').val(),
+			imgurl				: $('#imgurl').val(),
+			instructions		: $('#instructions').val(),
+			nombre_personnes	: $('#nombre_personnes').val(),
+			temps_preparation	: $('#temps_preparation').val(),
+			temps_cuisson		: $('#temps_cuisson').val(),
+			complement			: $('#complement').val()
+		},
+		beforeSend: function() {
+			$('#result-recette').html('<div class="alert alert-warning">Recherche en cours</div>');
+		},
+		success: function(data, textStatus, jqXHR) {
+			if (data.status != true) {
+				$('#result-recette').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la mise à jour des informations</div>');
+			} else {
+				window.location.href = baseURL + "/recettes";
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			$('#result-recette').html('<div class="alert alert-danger">Une erreur s\'est produite lors de la mise à jour des informations</div>');
+		}
+	});
+
+	return false;
+});

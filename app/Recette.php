@@ -21,14 +21,16 @@ class Recette extends Model
 		'nombre_personnes',
 		'temps_preparation',
 		'temps_cuisson',
+		'complement',
 	];
 
 	protected $validators = [
 		'nom'				=> 'required',
 		'instructions'		=> 'required',
-		'nombre_personnes'	=> 'required|integer',
+		'nombre_personnes'	=> 'required|string|max:64',
 		'temps_preparation'	=> 'integer',
 		'temps_cuisson'		=> 'integer',
+		'complement'		=> 'string',
 	];
 
 	//hierarchical

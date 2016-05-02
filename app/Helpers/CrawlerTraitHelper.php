@@ -108,6 +108,10 @@ trait CrawlerTraitHelper
 			$return['nombre_personnes'] = $element->nodeValue;
 		}
 
+		foreach($this->domFinderByAttibuteName($xml, 'ingredients', 'itemprop') as $element) {
+			$return['ingredients'] .= $element->nodeValue;
+		}
+
 		return $return;
 	}
 

@@ -18,9 +18,10 @@ class CreateRecetteTable extends Migration
 			$table->enum('type_recette', ['entrée', 'plat', 'dessert']);
 			$table->text('visuel')->nullable();
 			$table->text('instructions');
-			$table->integer('nombre_personnes')->nullable();
+			$table->string('nombre_personnes')->nullable();
 			$table->integer('temps_preparation')->nullable();
 			$table->integer('temps_cuisson')->nullable();
+			$table->text('complement')->nullable();
 			$table->timestamps();
 		});
     }

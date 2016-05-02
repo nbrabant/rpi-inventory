@@ -22,27 +22,17 @@
 						</div>
 					</div>
 
-					<div class="form-group">
-						{!! Form::label('visuel', 'Visuel', array('class' => 'col-md-4 control-label')) !!}
-						<div class="col-md-6">
-							{!! Form::file('visuel') !!}
-							<p class="help-block">
-								Format de fichier autorisé : JPG / PNG
-								@if (isset($recipe))
-									<br/>
-									<span class="bold">Url de l'image de la recette : </span>
-									<a href="{{ $recipe['imgurl'] }}" target="_blank">
-										<img src="{{ $recipe['imgurl'] }}" alt="cliquer pour voir"/>
-									</a>
-								@endif
-							</p>
-						</div>
-					</div>
+					@if (isset($recipe))
+						{!! Form::hidden('imgurl', $recipe['imgurl']) !!}
+						<a href="{{ $recipe['imgurl'] }}" target="_blank">
+							<img src="{{ $recipe['imgurl'] }}" alt="cliquer pour voir"/>
+						</a>
+					@endif
 
 					<div class="form-group">
 						{!! Form::label('instructions', 'Instructions', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::textarea('instructions', (isset($recipe) ? $recipe['instructions'] : null), array('class' => 'form-control ckeditor')) !!}
+							{!! Form::textarea('instructions', (isset($recipe) ? $recipe['instructions'] : null), array('class' => 'form-control')) !!}
 						</div>
 					</div>
 
@@ -69,13 +59,12 @@
 
 					<div class="clearfix">
 						<legend>Liste des ingrédients</legend>
-						@include('recettes.autocomplete')
-						<ul id="liste_produits"></ul>
+						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control')) !!}
 					</div>
 
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-4">
-							{!! Form::submit('Enregistrer', array('class' => 'btn btn-primary')) !!}
+							{!! Form::submit('Enregistrer', array('class' => 'btn btn-primary', 'id' => 'sumbitRecette')) !!}
 						</div>
 					</div>
 				{!! Form::close() !!}
