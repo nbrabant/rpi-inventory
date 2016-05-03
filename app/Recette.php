@@ -45,7 +45,7 @@ class Recette extends Model
 
 	public function getImage() {
 var_dump('public/img/recette/'.$this->visuel);
-		if(is_null($this->visuel) || !is_file('public/img/recette/'.$this->visuel)) {
+		if(is_null($this->visuel) || !is_file(public_path().'/img/recette/'.$this->visuel)) {
 			return '';
 		}
 		return Image::make('public/img/recette/'.$this->visuel);

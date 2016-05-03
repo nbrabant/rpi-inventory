@@ -9,10 +9,10 @@ trait CrawlerTraitHelper
 	private $_uri = 'http://www.750g.com/recherche.htm';
 
 	// requête CURL recherche
-	// http://www.cuisineaz.com/recettes/recherche_v2.aspx?recherche=pomme-carotte
+	// http://www.750g.com/recherche.htm
 
 	// requête CURL accès
-	// http://www.marmiton.org/recettes/recette_veloute-de-carottes-au-cumin_16952.aspx
+	// http://www.750g.com/recette_veloute-de-carottes-au-cumin_16952.aspx
 
 	public function getApiRecettes($ingredients) {
 		$cacheKey = str_replace(' ', '-', $ingredients);
@@ -142,6 +142,38 @@ trait CrawlerTraitHelper
 			return false;
 		} catch (\Exception $e) {
 			throw $e;
+		}
+	}
+
+	// $recette = App\Recette::find(1)
+	// App\Recette::getImageFromUrl('http://static.750g.com/images/auto-427/0d235217214002ffa55e7c090d1342db/cake-pomme-carotte-et-cannelle.jpeg', public_path().'/img/recettes/'.$recette->id.'.jpg')
+	protected static function getImageFromURL($url, $filepath) {
+		if (is_null($url) OR !is_string($url) || strlen($url) == 0
+			|| is_null($filepath) OR !is_string($filepath) || strlen($filepath) == 0) {
+			return false;
+		}
+
+		try {
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+			curl_setopt($ch, CURLOPT_FAILONERROR, true);
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_REFERER, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$result = curl_exec($ch);
+			$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			if($resultStatus == 200) {
+				$result = file_get_contents($url);
+				$save = file_put_contents($filepath, $result);
+var_dump($url, $filepath, $save);
+
+				return ['status' => true];
+			}
+			return ['status' => false, 'message' => 'Erreur code : '.$resultStatus];
+		} catch (\Exception $e) {
+			return ['status' => false, 'message' => $e->getMessage()];
 		}
 	}
 

@@ -46,7 +46,6 @@ class RecettesController extends Controller
 					if(!isset($values['quantite_'.$produitId])) {
 						continue;
 					}
-
 					$lstProduits[] = new RecetteProduit([ 'produit_id' => $produitId, 'quantite' => $values['quantite_'.$produitId] ]);
 				}
 			}
@@ -55,12 +54,17 @@ class RecettesController extends Controller
 				if(isset($values['visuel']) && strlen($values['visuel']) > 0 && Input::file()) {
 					$image = Input::file('visuel');
 					$filename  = $recette->id.'.'.$image->getClientOriginalExtension();
-					$path = public_path('recettes/'.$filename);
+					$path = public_path().'/img/recettes/'.$filename;
 					Image::make($image->getRealPath())->resize(200, 200)->save($path);
 	                $recette->visuel = $values['visuel'];
 	                $recette->save();
 				} elseif (isset($values['imgurl']) && strlen($values['imgurl']) > 0) {
-
+					$filepath = public_path().'/img/recettes/'.$recette->id.'.jpg';
+					$result = $recette->getImageFromURL($url, $filepath);
+					if($result['status'] == true) {
+						$recette->visuel = $recette->id.'.jpg';
+		                $recette->save();
+					}
 				}
 
 				if(is_array($lstProduits) && !empty($lstProduits)) {
