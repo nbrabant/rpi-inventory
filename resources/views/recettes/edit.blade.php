@@ -64,6 +64,16 @@
 
 						<div class="clearfix">
 							<legend>Liste des ingrédients</legend>
+							@if (!is_null($recette->complement))
+								<div class="alert alert-warning">
+									<strong>
+										Certains ingrédients de la recettes n'ont pas été renseignés. Ceux-ci ne pourrons pas être mis à jour dans la liste de course :
+									</strong>
+									<br />
+									{{ $recette->complement }}
+								</div>
+							@endif
+
 							@include('recettes.autocomplete')
 							<ul id="liste_produits">
 								@if (count($recette->produits) > 0)

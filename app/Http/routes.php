@@ -51,3 +51,5 @@ Route::group(['prefix' => 'recettes'], function () {
 	Route::any('apisearch', 'RecettesController@apisearch');
 	Route::any('apipopulate', 'RecettesController@populaterecette');
 });
+
+Route::get('agendas', 'AgendasController@index');

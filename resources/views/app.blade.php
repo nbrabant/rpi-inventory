@@ -32,6 +32,7 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<!-- Scripts -->
 	<script type="text/javascript">
 		var baseURL = '{{URL::to('/')}}'
 	</script>
@@ -40,7 +41,6 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 
-	<!-- Scripts -->
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					<span class="sr-only">Toggle Navigation</span>
@@ -73,6 +73,14 @@
 						<ul class="dropdown-menu">
 							<li><a href="/recettes">Liste des recettes</a></li>
 							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Agenda <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
 						</ul>
 					</li>
 				</ul>
