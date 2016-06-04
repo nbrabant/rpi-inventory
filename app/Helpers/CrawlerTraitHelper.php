@@ -167,7 +167,6 @@ trait CrawlerTraitHelper
 			if($resultStatus == 200) {
 				$result = file_get_contents($url);
 				$save = file_put_contents($filepath, $result);
-var_dump($url, $filepath, $save);
 
 				return ['status' => true];
 			}

@@ -85,3 +85,17 @@ h2 {
 #result-recette .recipe {
 	height: 20px;
 }
+
+#calendar tr.active td {
+	background-color: #7DC4DB;
+	color: #0099CC;
+	font-weight: bold;
+}
+
+.modal-backdrop {
+	height: 100% !important;
+}
+.modal-dialog {
+	top: -400px;
+	width: 720px;
+}

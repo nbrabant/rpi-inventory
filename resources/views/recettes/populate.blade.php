@@ -18,12 +18,12 @@
 					<div class="form-group">
 						{!! Form::label('nom', 'Nom', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('nom', (isset($recipe) ? $recipe['nom'] : null), array('class' => 'form-control')) !!}
+							{!! Form::text('nom', (isset($recipe) ? $recipe['nom'] : null), array('class' => 'form-control', 'id' => 'nom')) !!}
 						</div>
 					</div>
 
 					@if (isset($recipe))
-						{!! Form::hidden('imgurl', $recipe['imgurl']) !!}
+						{!! Form::hidden('imgurl', $recipe['imgurl'], ['id' => 'imgurl']) !!}
 						<a href="{{ $recipe['imgurl'] }}" target="_blank">
 							<img src="{{ $recipe['imgurl'] }}" alt="cliquer pour voir"/>
 						</a>
@@ -32,34 +32,34 @@
 					<div class="form-group">
 						{!! Form::label('instructions', 'Instructions', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::textarea('instructions', (isset($recipe) ? $recipe['instructions'] : null), array('class' => 'form-control')) !!}
+							{!! Form::textarea('instructions', (isset($recipe) ? $recipe['instructions'] : null), array('class' => 'form-control', 'id' => 'instructions')) !!}
 						</div>
 					</div>
 
 					<div class="form-group">
 						{!! Form::label('nombre_personnes', 'Nombre de personnes', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('nombre_personnes', (isset($recipe) ? $recipe['nombre_personnes'] : null), array('class' => 'form-control')) !!}
+							{!! Form::text('nombre_personnes', (isset($recipe) ? $recipe['nombre_personnes'] : null), array('class' => 'form-control', 'id' => 'nombre_personnes')) !!}
 						</div>
 					</div>
 
 					<div class="form-group">
 						{!! Form::label('temps_preparation', 'Temps de preparation', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('temps_preparation', (isset($recipe) ? $recipe['temps_preparation'] : null), array('class' => 'form-control')) !!}
+							{!! Form::text('temps_preparation', (isset($recipe) ? $recipe['temps_preparation'] : null), array('class' => 'form-control', 'id' => 'temps_preparation')) !!}
 						</div>
 					</div>
 
 					<div class="form-group">
 						{!! Form::label('temps_cuisson', 'Temps de cuisson', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('temps_cuisson', (isset($recipe) ? $recipe['temps_cuisson'] : null), array('class' => 'form-control')) !!}
+							{!! Form::text('temps_cuisson', (isset($recipe) ? $recipe['temps_cuisson'] : null), array('class' => 'form-control', 'id' => 'temps_cuisson')) !!}
 						</div>
 					</div>
 
 					<div class="clearfix">
 						<legend>Liste des ingrédients</legend>
-						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control')) !!}
+						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control', 'id' => 'complement')) !!}
 					</div>
 
 					<div class="form-group">

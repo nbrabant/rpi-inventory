@@ -60,7 +60,7 @@ class RecettesController extends Controller
 	                $recette->save();
 				} elseif (isset($values['imgurl']) && strlen($values['imgurl']) > 0) {
 					$filepath = public_path().'/img/recettes/'.$recette->id.'.jpg';
-					$result = $recette->getImageFromURL($url, $filepath);
+					$result = Recette::getImageFromURL($values['imgurl'], $filepath);
 					if($result['status'] == true) {
 						$recette->visuel = $recette->id.'.jpg';
 		                $recette->save();

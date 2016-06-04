@@ -16,7 +16,7 @@
 					</div>
 				</div>
 				<div class="panel-body">
-					
+					{!! $calendar !!}
 				</div>
 			</div>
 		</div>

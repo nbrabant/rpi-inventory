@@ -95,5 +95,7 @@
     </div>
 
 	@yield('content')
+
+	<div id="myModal"></div>
 </body>
 </html>

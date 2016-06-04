@@ -34,6 +34,10 @@ class Recette extends Model
 	];
 
 	//hierarchical
+	public function agendas() {
+		return $this->hasMany('App\Agenda');
+	}
+
 	public function produits() {
 		return $this->hasMany('App\RecetteProduit');
 	}

@@ -15,8 +15,8 @@ class Agenda extends Migration
 		Schema::create('agendas', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('recette_id');
-			$table->date('date');
-
+			$table->date('date_recette');
+			$table->enum('moment', ['matin', 'midi', 'soir']);
 			$table->boolean('realise');
 			$table->timestamps();
 		});

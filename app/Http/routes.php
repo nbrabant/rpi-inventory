@@ -53,3 +53,6 @@ Route::group(['prefix' => 'recettes'], function () {
 });
 
 Route::get('agendas', 'AgendasController@index');
+Route::group(['prefix' => 'agendas'], function () {
+	Route::get('recette/{recette}', 'AgendasController@recette');
+});
