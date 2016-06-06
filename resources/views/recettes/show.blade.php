@@ -14,7 +14,7 @@
 			</div>
 			<div class="clearfix">
 				<div class="col-md-5">
-					{{ $recette->getImage() }}
+					{!! $recette->getImage() !!}
 				</div>
 				<div class="col-md-7">
 					<div class="clearfix">

@@ -26,10 +26,11 @@ class AgendasController extends Controller
 		]);
 	}
 
-	public function recette(Recette $recette, Request $request)
+	public function recette(Agenda $agenda, Recette $recette, Request $request)
 	{
 		$return =  view('agendas.recette', [
 			'title'     	=> $recette->nom,
+            'agenda'		=> $agenda,
             'recette'		=> $recette,
 			'ingredients' 	=> $recette->produits
 		])->render();
@@ -38,5 +39,22 @@ class AgendasController extends Controller
 			'status' => true,
 			'html' => $return
 		]);
+	}
+
+	public function realise(Agenda $agenda, Request $request)
+	{
+		$agenda->realise = 1;
+		$agenda->save();
+
+		// @TODO maj des quantités produits (opérations)
+		// fe $agenda->recette->produits
+
+		return redirect(url('agendas'));
+	}
+
+	public function delete(Agenda $agenda, Request $request)
+	{
+		$agenda->delete();
+		return redirect(url('agendas'));
 	}
 }

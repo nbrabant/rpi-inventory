@@ -32,9 +32,10 @@ class Calendar
 	public function setAgendas($agendas)
 	{
 		$agendas->map(function($agenda) {
-			$this->agendas[$agenda->date_recette->format('d/m/Y')][$agenda->moment] = [
-				'id' => $agenda->recette_id,
-				'nom' => $agenda->recette->nom
+			$this->agendas[$agenda->date_recette->format('d/m/Y')][$agenda->moment][] = [
+				'id' 			=> $agenda->id,
+				'recette_id' 	=> $agenda->recette_id,
+				'nom' 			=> $agenda->recette->nom
 			];
 		});
 
@@ -50,7 +51,7 @@ class Calendar
 
 			$this->dateDebut->addDays(1);
 		}
-// var_dump($days); exit;
+
 		return $days;
 	}
 

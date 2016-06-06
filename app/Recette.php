@@ -48,13 +48,9 @@ class Recette extends Model
 	}
 
 	public function getImage() {
-		try {
-			if(is_null($this->visuel) || !is_file(public_path().'/img/recettes/'.$this->visuel)) {
-				return '';
-			}
-			return Image::make(public_path().'/img/recettes/'.$this->visuel);
-		} catch (Exception $e) {
-			return $e->getMessage();
+		if(!is_null($this->visuel) && is_file(public_path().'/img/recettes/'.$this->visuel)) {
+			return '<img src="/img/recettes/'.$this->visuel.'" class="img-responsive"/>';
 		}
+		return null;
 	}
 }

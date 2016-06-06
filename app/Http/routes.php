@@ -12,6 +12,10 @@ Route::bind('recette', function($id){
 	return App\Recette::whereId($id)->first();
 });
 
+Route::bind('agenda', function($id){
+	return App\Agenda::whereId($id)->first();
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index');
 
@@ -54,5 +58,7 @@ Route::group(['prefix' => 'recettes'], function () {
 
 Route::get('agendas', 'AgendasController@index');
 Route::group(['prefix' => 'agendas'], function () {
-	Route::get('recette/{recette}', 'AgendasController@recette');
+	Route::get('recette/{agenda}/{recette}', 'AgendasController@recette');
+	Route::get('realise/{agenda}', 'AgendasController@realise');
+	Route::get('delete/{agenda}', 'AgendasController@delete');
 });

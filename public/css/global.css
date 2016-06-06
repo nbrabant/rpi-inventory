@@ -92,6 +92,11 @@ h2 {
 	font-weight: bold;
 }
 
+#calendar ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
 .modal-backdrop {
 	height: 100% !important;
 }

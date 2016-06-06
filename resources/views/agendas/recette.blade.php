@@ -6,7 +6,7 @@
 		</div>
 		<div class="modal-body">
 			<div class="col-sm-12">
-				{{ $recette->getImage() }}
+				{!! $recette->getImage() !!}
 			</div>
 			<div class="col-sm-12">
 				<div class="clearfix">
@@ -47,9 +47,10 @@
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-			<!-- @if (!$recette->realise) -->
-				<a href="" class="btn btn-primary">Recette réalisée</a>
-			<!-- @endif -->
+			@if (!$agenda->realise)
+				<a href="agendas/realise/{{ $agenda->id }}" class="btn btn-primary">Recette réalisée</a>
+				<a href="agendas/delete/{{ $agenda->id }}" class="btn btn-danger">Supprimer de l'agenda</a>
+			@endif
 		</div>
 	</div>
 </div>
