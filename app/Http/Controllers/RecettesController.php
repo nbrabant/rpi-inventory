@@ -59,10 +59,11 @@ class RecettesController extends Controller
 	                $recette->visuel = $values['visuel'];
 	                $recette->save();
 				} elseif (isset($values['imgurl']) && strlen($values['imgurl']) > 0) {
-					$filepath = public_path().'/img/recettes/'.$recette->id.'.jpg';
+					//@TODO : gestion non jpeg...
+					$filepath = public_path().'/img/recettes/'.$recette->id;
 					$result = Recette::getImageFromURL($values['imgurl'], $filepath);
 					if($result['status'] == true) {
-						$recette->visuel = $recette->id.'.jpg';
+						$recette->visuel = $recette->id.'.'.$result['extension'];
 		                $recette->save();
 					}
 				}

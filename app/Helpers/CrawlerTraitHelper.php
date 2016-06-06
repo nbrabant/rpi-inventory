@@ -8,6 +8,11 @@ trait CrawlerTraitHelper
 {
 	private $_uri = 'http://www.750g.com/recherche.htm';
 
+	private static $_mimeWhitelist = [
+		'image/jpeg',
+		'image/png'
+	];
+
 	// requête CURL recherche
 	// http://www.750g.com/recherche.htm
 
@@ -146,7 +151,7 @@ trait CrawlerTraitHelper
 	}
 
 	// $recette = App\Recette::find(1)
-	// App\Recette::getImageFromUrl('http://static.750g.com/images/auto-427/0d235217214002ffa55e7c090d1342db/cake-pomme-carotte-et-cannelle.jpeg', public_path().'/img/recettes/'.$recette->id.'.jpg')
+	// App\Recette::getImageFromUrl('http://static.750g.com/images/auto-427/0d235217214002ffa55e7c090d1342db/cake-pomme-carotte-et-cannelle.jpeg', public_path().'/img/recettes/'.$recette->id)
 	protected static function getImageFromURL($url, $filepath) {
 		if (is_null($url) OR !is_string($url) || strlen($url) == 0
 			|| is_null($filepath) OR !is_string($filepath) || strlen($filepath) == 0) {
@@ -164,11 +169,15 @@ trait CrawlerTraitHelper
 
 			$result = curl_exec($ch);
 			$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			if($resultStatus == 200) {
-				$result = file_get_contents($url);
-				$save = file_put_contents($filepath, $result);
+			$mimetype = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 
-				return ['status' => true];
+			if($resultStatus == 200 && in_array($mimetype, self::$_mimeWhitelist)) {
+				$extension = self::mimetype2Extension($mimetype);
+
+				$file = file_get_contents($url);
+				$save = file_put_contents($filepath.'.'.$extension, $file);
+
+				return ['status' => true, 'extension' => $extension];
 			}
 			return ['status' => false, 'message' => 'Erreur code : '.$resultStatus];
 		} catch (\Exception $e) {
@@ -179,6 +188,15 @@ trait CrawlerTraitHelper
 	private function domFinderByAttibuteName($xml, $content = '', $typeAttribute = 'class') {
 		$finder = new \DomXPath($xml);
 		return $finder->query("//*[contains(concat(' ', normalize-space(@$typeAttribute), ' '), ' $content ')]");
+	}
+
+	public static function mimetype2Extension($mimeType = null) {
+		if ($mimeType === 'image/jpeg') {
+			return 'jpeg';
+		} elseif($mimeType === 'image/png') {
+			return 'png';
+		}
+		return null;
 	}
 
 }
