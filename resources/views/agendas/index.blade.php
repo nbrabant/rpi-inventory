@@ -10,7 +10,7 @@
 						{{ $title }}
 					</div>
 					<div class="col-md-2">
-						<a href="/categories/add" class="btn btn-sm btn-success">
+						<a href="/agendas/add" class="btn btn-sm btn-success">
 							<span class="glyphicon glyphicon-plus"></span> Ajouter
 						</a>
 					</div>

@@ -47,6 +47,19 @@ class Recette extends Model
 		return $this->validators;
 	}
 
+	public static function getList($emptyLine = true)
+	{
+		$return = [];
+		if($emptyLine) {
+			$return['-1'] = '---';
+		}
+
+        static::get()->map(function($item) use (&$return) {
+            $return[$item->id] = $item->nom;
+        });
+        return $return;
+	}
+
 	public function getImage() {
 		if(!is_null($this->visuel) && is_file(public_path().'/img/recettes/'.$this->visuel)) {
 			return '<img src="/img/recettes/'.$this->visuel.'" class="img-responsive"/>';

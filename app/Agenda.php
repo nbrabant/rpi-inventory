@@ -15,11 +15,22 @@ class Agenda extends Model
 		'realise'
 	];
 
+	protected $validators = [
+		'recette_id' 	=> 'required|integer|exists:recettes,id',
+		'date_recette' 	=> 'required|date_format:Y-m-d',
+		'moment' 		=> 'required|in:matin,midi,soir',
+	];
+
 	protected $dates = ['date_recette'];
 
 	//hierarchical
 	public function recette() {
 		return $this->belongsTo('App\Recette');
+	}
+
+	public function getValidators()
+	{
+		return $this->validators;
 	}
 
 	//scope functions
@@ -29,5 +40,14 @@ class Agenda extends Model
 
 		$query->whereBetween('date_recette', [$startDate, $endDate]);
 		return $query;
+	}
+
+	public static function getMomentList()
+	{
+		return [
+			'matin' => 'Matin',
+			'midi' 	=> 'Midi',
+			'soir' 	=> 'Soir'
+		];
 	}
 }

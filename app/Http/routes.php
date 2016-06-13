@@ -58,7 +58,8 @@ Route::group(['prefix' => 'recettes'], function () {
 
 Route::get('agendas', 'AgendasController@index');
 Route::group(['prefix' => 'agendas'], function () {
+	Route::any('add', 'AgendasController@add');
+	Route::get('delete/{agenda}', 'AgendasController@delete');
 	Route::get('recette/{agenda}/{recette}', 'AgendasController@recette');
 	Route::get('realise/{agenda}', 'AgendasController@realise');
-	Route::get('delete/{agenda}', 'AgendasController@delete');
 });
