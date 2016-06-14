@@ -28,6 +28,7 @@ Route::group(['prefix' => 'listes-courses'], function () {
 	Route::get('changeQty/{type}/{id}', 'ListesController@changequantity');
 	Route::get('endingList', 'ListesController@endinglist');
 	Route::get('export/{type}', 'ListesController@export');
+	Route::get('generate', 'ListesController@generate');
 });
 
 Route::get('categories', 'CategoriesController@index');

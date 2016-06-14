@@ -19,7 +19,18 @@
 					{!! $calendar !!}
 
 					@if (!empty($produits))
-						<h3>Liste des ingrédients nécessaire de la semaine</h3>
+						<div class="clearfix">
+							<div class="col-md-9">
+								<h3>Liste des ingrédients nécessaire de la semaine</h3>
+							</div>
+							<div class="col-md-2 text-right marginTop15">
+								<a class="btn btn-sm btn-danger" href="/listes-courses/generate">
+									<span class="glyphicon glyphicon-shopping-cart"></span>
+									Générer la liste de course
+								</a>
+							</div>
+						</div>
+
 						<table class="table">
 							<thead>
 								<tr>

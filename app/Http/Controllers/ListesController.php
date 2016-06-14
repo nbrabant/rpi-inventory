@@ -166,4 +166,13 @@ class ListesController extends Controller {
 			}
 		}
 	}
+
+	public function generate()
+	{
+		$response = [
+			'message' => 'Fonctionnel en cours de réalisation'
+		];
+
+		return redirect(url('liste-courses'))->with('success', $response['message']);
+	}
 }
