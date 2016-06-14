@@ -1,10 +1,13 @@
 <?php
 
-class CreateListecouranteView extends Migration
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class ListecouranteView extends Migration
 {
 	public function up()
 	{
-		DB::statement("CREATE VIEW listecouranteView AS
+		DB::statement("CREATE OR REPLACE VIEW listecouranteView AS
                         SELECT
 							l.id AS liste_id,
 							c.nom AS categorie,
@@ -21,6 +24,6 @@ class CreateListecouranteView extends Migration
 
 	public function down()
     {
-        Schema::drop('listecouranteView');
+        // Schema::drop('listecouranteView');
     }
 }

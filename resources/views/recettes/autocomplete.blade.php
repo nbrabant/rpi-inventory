@@ -14,12 +14,12 @@
         $("#autocomplete").autocomplete({
             source: baseURL+"/getdata",
             minLength: 3,
-            select: function( event, ui ) {
-				if(typeof(apiCallingPage) != undefined && apiCallingPage == true)
-				{
-					$('#liste-ingredients').val($('#liste-ingredients').val() + ' ' + ui.item.value);
-				}
-				else
+            select: function( event, ui ) {		
+				// if(typeof(apiCallingPage) != undefined && apiCallingPage == true)
+				// {
+				// 	$('#liste-ingredients').val($('#liste-ingredients').val() + ' ' + ui.item.value);
+				// }
+				// else
 				{
 					// add product on liste des produits
 					var existProduct = false;
