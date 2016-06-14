@@ -9,8 +9,8 @@ class AgendaProductsView extends Migration
     {
 		DB::statement("CREATE OR REPLACE VIEW agendaProductsView AS
 						SELECT
-							p.id AS id,
-							p.nom AS nom,
+							p.id AS produit_id,
+							p.nom AS produit_nom,
 							SUM(rp.quantite) AS necessaire,
 							p.quantite AS en_stock,
 							(SUM(rp.quantite) - p.quantite) AS manquant

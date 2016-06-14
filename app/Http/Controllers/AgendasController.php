@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Agenda;
 use App\Recette;
+use App\Agendaproducts;
 use App\Helpers\Calendar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class AgendasController extends Controller
 
 		return view('agendas.index', [
 			'title'		=> 'Agendas',
-			'calendar'	=> Calendar::getInstance()->setAgendas($agenda->with('recette')->byDateInterval($dates)->get())->render()
+			'calendar'	=> Calendar::getInstance()->setAgendas($agenda->with('recette')->byDateInterval($dates)->get())->render(),
+			'produits'	=> Agendaproducts::all()
 		]);
 	}
 

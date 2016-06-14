@@ -17,6 +17,30 @@
 				</div>
 				<div class="panel-body">
 					{!! $calendar !!}
+
+					@if (!empty($produits))
+						<h3>Liste des ingrédients nécessaire de la semaine</h3>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Nom</th>
+									<th>Quantité nécessaire</th>
+									<th>Quantité en stock</th>
+									<th>Quantité manquante</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($produits as $produit)
+									<tr>
+										<td>{{ $produit->produit_nom }}</td>
+										<td>{{ $produit->necessaire }}</td>
+										<td>{{ $produit->en_stock }}</td>
+										<td>{{ $produit->manquant }}</td>
+									</tr>
+								@endforeach
+							</tbody>
+						</table>
+					@endif
 				</div>
 			</div>
 		</div>
