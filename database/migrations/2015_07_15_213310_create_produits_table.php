@@ -19,6 +19,11 @@ class CreateProduitsTable extends Migration
 			$table->text('description')->nullable();
 			$table->integer('quantite')->unsigned();
 			$table->integer('quantite_min')->unsigned()->default(0);
+			$table->enum('unite', [
+				'grammes',
+				'litre',
+				'sachet',
+			])->nullable();
 			$table->timestamps();
 
 			$table->foreign('categorie_id')

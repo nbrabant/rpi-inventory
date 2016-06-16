@@ -62,6 +62,7 @@ class ProduitsController extends Controller {
             $produit->nom			= $values['nom'];
             $produit->description	= $values['description'];
             $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
+            $produit->unite			= (strlen($values['unite']) > 0 ? $values['unite'] : null);
 
             if($produit->push() && $produit->operations()->save($operation)) {
                 return redirect(url('produits'))->with('success', 'Données mises à jour');
@@ -70,7 +71,8 @@ class ProduitsController extends Controller {
 
         return view('produits.add', [
             'title'			=> 'Ajout d\'un produit',
-            'categories'	=> Categorie::getList()
+            'categories'	=> Categorie::getList(),
+			'uniteList'		=> $produit->getUniteList()
         ]);
     }
 
@@ -88,15 +90,17 @@ class ProduitsController extends Controller {
             $produit->nom			= $values['nom'];
             $produit->description	= $values['description'];
             $produit->quantite_min	= (strlen($values['quantite_min']) > 0 ? $values['quantite_min'] : 0);
+            $produit->unite			= (strlen($values['unite']) > 0 ? $values['unite'] : null);
 			if($produit->save()) {
                 return redirect(url('produits'))->with('success', 'Données mises à jour');
             }
         }
 
         return view('produits.edit', [
-            'title'       => 'Edition d\'un produit',
-            'categories'  => Categorie::getList(),
-            'produit'     => $produit
+            'title'			=> 'Edition d\'un produit',
+            'categories'	=> Categorie::getList(),
+            'produit'   	=> $produit,
+			'uniteList'		=> $produit->getUniteList()
         ]);
     }
 

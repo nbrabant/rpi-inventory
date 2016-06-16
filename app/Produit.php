@@ -12,13 +12,15 @@ class Produit extends Eloquent {
 		'nom',
 		'description',
 		'quantite',
-		'quantite_min'
+		'quantite_min',
+		'unite'
 	];
 
 	protected $validators = [
-		'nom'			=> 'required',
-		'quantite'		=> 'required',
-		'quantite_min'	=> 'required',
+		'nom'			=> 'required|string',
+		'quantite'		=> 'integer',
+		'quantite_min'	=> 'required|integer',
+		'unite'			=> '',
 	];
 
 	//hierarchical
@@ -79,5 +81,15 @@ class Produit extends Eloquent {
 				->where('quantite_min', '>', 0)
 				->whereRaw('produits.quantite <= produits.quantite_min')
 				->get();
+	}
+
+	public function getUniteList()
+	{
+		return [
+			'' 			=> '---',
+			'grammes' 	=> 'Grammes',
+			'litre' 	=> 'Litre',
+			'sachet' 	=> 'Sachet'
+		];
 	}
 }

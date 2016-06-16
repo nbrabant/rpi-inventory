@@ -46,7 +46,14 @@
 								{!! Form::text('quantite_min', null, array('class' => 'form-control')) !!}
 							</div>
 						</div>
-					
+
+						<div class="form-group">
+							{!! Form::label('unite', 'Unité', array('class' => 'col-md-4 control-label')) !!}
+							<div class="col-md-6">
+								{!! Form::select('unite', $uniteList, null, array('class' => 'form-control')) !!}
+							</div>
+						</div>
+
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-4">
 								{!! Form::submit('Enregistrer', array('class' => 'btn btn-primary')) !!}
