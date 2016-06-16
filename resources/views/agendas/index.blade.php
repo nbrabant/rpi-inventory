@@ -24,7 +24,7 @@
 								<h3>Liste des ingrédients nécessaire de la semaine</h3>
 							</div>
 							<div class="col-md-2 text-right marginTop15">
-								<a class="btn btn-sm btn-danger" href="/listes-courses/generate">
+								<a class="btn btn-sm btn-danger" href="/listes-courses/generate" onclick="return(confirm('La génération de la liste écrasera la liste courante. Etes-vous sûr?'));">
 									<span class="glyphicon glyphicon-shopping-cart"></span>
 									Générer la liste de course
 								</a>

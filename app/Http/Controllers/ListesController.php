@@ -5,6 +5,7 @@ use App\Liste;
 use App\Ligneproduit;
 use App\Operation;
 use App\Categorie;
+use App\Agendaproducts;
 use Illuminate\Http\Request;
 use App\Trellomanager;
 
@@ -169,10 +170,19 @@ class ListesController extends Controller {
 
 	public function generate()
 	{
-		$response = [
-			'message' => 'Fonctionnel en cours de réalisation'
-		];
+		if(!empty($this->currentListe->lignesproduits)){
+			$this->currentListe->lignesproduits()->delete();
+		}
 
-		return redirect(url('liste-courses'))->with('success', $response['message']);
+		Agendaproducts::all()->map(function($produit) {
+			if($produit->manquant <= 0) {
+				continue;
+			}
+
+			$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->produit_id, 'quantite' => $produit->manquant ]);
+			$this->currentListe->lignesproduits()->save( $ligneProduit );
+		});
+
+		return redirect(url('liste-courses'))->with('success', 'La liste de course a été mise à jour');
 	}
 }
