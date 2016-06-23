@@ -13,7 +13,8 @@ class Listecourante extends Model
 		'categorie',
 		'cat_position',
 		'produit',
-		'quantite'
+		'quantite',
+		'unite',
 	];
 
     public $timestamps = false;

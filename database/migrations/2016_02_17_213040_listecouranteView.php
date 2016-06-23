@@ -13,7 +13,8 @@ class ListecouranteView extends Migration
 							c.nom AS categorie,
 							c.position AS cat_position,
 							p.nom AS produit,
-							lp.quantite AS quantite
+							lp.quantite AS quantite,
+							p.unite AS unite
                         FROM listes AS l
 						LEFT JOIN lignes_produits AS lp ON (lp.liste_id = l.id)
 						LEFT JOIN produits AS p ON (lp.produit_id = p.id)

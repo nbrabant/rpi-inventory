@@ -30,7 +30,7 @@ trait TrelloTraitHelper
 				$checklist = $this->createChecklist($card, $ligneListeCourante->categorie);
 				$categorie = $ligneListeCourante->categorie;
 			}
-			Trello::checklist()->items()->create($checklist->getId(), $ligneListeCourante->quantite.' '.$ligneListeCourante->produit);
+			Trello::checklist()->items()->create($checklist->getId(), $ligneListeCourante->quantite.' '.$ligneListeCourante->unite.' '.$ligneListeCourante->produit);
 		});
         return array('status' => true, 'message' => 'Liste exportée sur Trello avec succès.');
     }

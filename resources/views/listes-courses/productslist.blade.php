@@ -4,6 +4,7 @@
 			<th>
 				<th>Nom</th>
 				<th>Quantite</th>
+				<th>Unité / Conditionnement</th>
 				<th class="actions">Actions</th>
 			</th>
 		</thead>
@@ -23,6 +24,7 @@
 							</div>
 						</div>
 					</td>
+					<td>{{ !is_null($ligneProduit->produit->unite) ? $ligneProduit->produit->unite : '---' }}</td>
 					<td>
 						<a href="/listes-courses/delProducts/{{ $ligneProduit->id }}" class="btn btn-sm btn-danger">
 							<span class="glyphicon glyphicon-close"></span> Supprimer de la liste

@@ -25,4 +25,23 @@ class RecetteProduit extends Model
 	public function produit() {
 		return $this->belongsTo('App\Produit');
 	}
+
+	public function getUniteList()
+	{
+		return [
+			'' 					=> '---',
+			'grammes' 			=> 'Grammes',
+			'litre' 			=> 'Litre',
+			'centilitre' 		=> 'Centilitre',
+			'cuillere_soupe' 	=> 'Cuillere à Soupe',
+			'cuillere_dessert' 	=> 'Cuillere à Dessert',
+			'cuillere_cafe' 	=> 'Cuillere à Cafe',
+			'sachet' 			=> 'Sachet'
+		];
+	}
+
+	// verbose unity
+
+	// convert quantity
+	// http://tout-metz.com/recette/conversion-unite-cuisine
 }
