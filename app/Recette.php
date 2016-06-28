@@ -66,4 +66,47 @@ class Recette extends Model
 		}
 		return null;
 	}
+
+	public function syncProducts($postDatas = []) {
+		$lstToAdd = [];
+		$this->produits->map(function($produit) use(&$postDatas) {
+			// delete if product not in
+			if(!isset($postDatas['produits']) || !is_array($postDatas['produits']) || !in_array($produit->produit_id, $postDatas['produits'])) {
+				$produit->delete();
+			}
+
+			// update recette_produit row
+			if(isset($postDatas['quantite_'.$produit->produit_id]) && $postDatas['quantite_'.$produit->produit_id] > 0) { // for security
+				$produit->quantite 	= $postDatas['quantite_'.$produit->produit_id];
+				$produit->unite		= (isset($postDatas['unite_'.$produit->produit_id]) && strlen($postDatas['unite_'.$produit->produit_id]) > 0 ? $postDatas['unite_'.$produit->produit_id] : null);
+				$produit->save();
+			}
+
+			// unset all the postDatas produit where $key is $recette_produit product ID
+			foreach ($postDatas['produits'] as $key => $produitId) {
+				if($produit->produit_id == $produitId) {
+					unset($postDatas['produits'][$key]);
+				}
+			}
+		});
+
+		// after that, create the other recette_produit relation if it needed
+		if(isset($postDatas['produits']) && is_array($postDatas['produits']) && !empty($postDatas['produits'])) {
+			foreach ($postDatas['produits'] as $produitId) {
+				if(!isset($postDatas['quantite_'.$produitId]) || $postDatas['quantite_'.$produitId] <= 0) {
+					continue;
+				}
+
+				$lstToAdd[] = new RecetteProduit([
+					'produit_id'	=> $produitId,
+					'quantite'		=> $postDatas['quantite_'.$produitId],
+					'unite' 		=> (isset($postDatas['unite_'.$produitId]) && strlen($postDatas['unite_'.$produitId]) > 0 ? $postDatas['unite_'.$produitId] : null)
+				]);
+			}
+		}
+
+		if(is_array($lstToAdd) && !empty($lstToAdd)) {
+			$this->produits()->saveMany( $lstToAdd );
+		}
+	}
 }

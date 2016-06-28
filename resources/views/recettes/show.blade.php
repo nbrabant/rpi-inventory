@@ -39,7 +39,9 @@
 							@if (count($ingredients) > 0)
 							<ul>
 								@foreach ($ingredients as $ingredient)
-									<li>{{ $ingredient->quantite }} {{ $ingredient->produit->nom }}</li>
+									<li>
+										{{ $ingredient->quantite . (!is_null($ingredient->unite) ? ' ' . $ingredient->getUnite() : '') }} {{ $ingredient->produit->nom }}
+									</li>
 								@endforeach
 							</ul>
 							@endif

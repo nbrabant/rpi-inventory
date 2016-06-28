@@ -80,9 +80,10 @@
 									@foreach ($recette->produits as $produit)
 										<li id="ingredient_{{$produit->id}}" data-id="{{$produit->produit_id}}">
 											<div class="clearfix">
-												<input type="hidden" name="produits[]" value="{{$produit->produit_id}}">
-												<input class="col-sm-2" type="text" name="quantite_{{$produit->id}}" value="{{ $produit->quantite }}">
-												<span class="col-sm-10">{{ $produit->produit->nom }}</span>
+												<input type="hidden" name="produits[]" value="{{ $produit->produit_id }}">
+												<input class="col-sm-2" type="text" name="quantite_{{ $produit->produit_id }}" value="{{ $produit->quantite }}">
+												{!! Form::select('unite_'.$produit->produit_id, $uniteList, $produit->unite, array('class' => 'col-sm-2')) !!}
+												<span class="col-sm-8">{{ $produit->produit->nom }}</span>
 											</div>
 										</li>
 									@endforeach

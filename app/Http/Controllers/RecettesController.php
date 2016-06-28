@@ -39,17 +39,6 @@ class RecettesController extends Controller
 			$recette->temps_cuisson		= $values['temps_cuisson'];
 			$recette->complement		= isset($values['complement']) ? $values['complement'] : null;
 
-			$lstProduits = array();
-			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
-			{
-				foreach ($values['produits'] as $produitId) {
-					if(!isset($values['quantite_'.$produitId])) {
-						continue;
-					}
-					$lstProduits[] = new RecetteProduit([ 'produit_id' => $produitId, 'quantite' => $values['quantite_'.$produitId] ]);
-				}
-			}
-
 			if($recette->save()) {
 				if(isset($values['visuel']) && strlen($values['visuel']) > 0 && Input::file()) {
 					$image = Input::file('visuel');
@@ -68,9 +57,7 @@ class RecettesController extends Controller
 					}
 				}
 
-				if(is_array($lstProduits) && !empty($lstProduits)) {
-					$recette->produits()->saveMany( $lstProduits );
-				}
+				$recette->syncProducts($values);
 
 				if(isset($values['ajax']) && $values['ajax'] == true) {
 					return response()->json(['status' => true]);
@@ -89,6 +76,9 @@ class RecettesController extends Controller
 		if(is_null($recette) || !($recette instanceof Recette)) {
             return redirect('recettes')->with('message', 'Ligne introuvable');
         }
+
+		// eager loading
+		$recette->with('produits');
 
 		if($request->method() == 'POST') {
 			$this->validate($request, $recette->getValidators());
@@ -109,21 +99,7 @@ class RecettesController extends Controller
                 $recette->visuel = $values['visuel'];
 			}
 
-			$lstProduits = array();
-			if(isset($values['produits']) && is_array($values['produits']) && !empty($values['produits']))
-			{
-				foreach ($values['produits'] as $produitId) {
-					if(!isset($values['quantite_'.$produitId]) || $values['quantite_'.$produitId] <= 0) {
-						continue;
-					}
-
-					$lstProduits[] = new RecetteProduit([ 'produit_id' => $produitId, 'quantite' => $values['quantite_'.$produitId] ]);
-				}
-			}
-
-			if(is_array($lstProduits) && !empty($lstProduits)) {
-				$recette->produits()->saveMany( $lstProduits );
-			}
+			$recette->syncProducts($values);
 
 			if($recette->save() ) {
                 return redirect(url('recettes'))->with('success', 'Recette mise à jour');
@@ -133,6 +109,7 @@ class RecettesController extends Controller
 		return view('recettes.edit', [
             'title'		=> 'Edition d\'une recette',
 			'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js'],
+			'uniteList' => RecetteProduit::getUniteList(),
 			'recette'   => $recette
         ]);
 	}

@@ -13,6 +13,7 @@ class RecetteProduit extends Model
 		'recette_id',
 		'produit_id',
 		'quantite',
+		'unite',
 	];
 
 	public $timestamps = false;
@@ -26,18 +27,29 @@ class RecetteProduit extends Model
 		return $this->belongsTo('App\Produit');
 	}
 
-	public function getUniteList()
+	public static function getUniteList()
 	{
 		return [
 			'' 					=> '---',
 			'grammes' 			=> 'Grammes',
 			'litre' 			=> 'Litre',
 			'centilitre' 		=> 'Centilitre',
-			'cuillere_soupe' 	=> 'Cuillere à Soupe',
-			'cuillere_dessert' 	=> 'Cuillere à Dessert',
 			'cuillere_cafe' 	=> 'Cuillere à Cafe',
-			'sachet' 			=> 'Sachet'
+			'cuillere_dessert' 	=> 'Cuillere à Dessert',
+			'cuillere_soupe' 	=> 'Cuillere à Soupe',
+			'verre_liqueur' 	=> 'Verre à liqueur',
+			'verre_moutarde' 	=> 'Verre à moutarde',
+			'grand_verre' 		=> 'Grand verre',
+			'tasse_cafe' 		=> 'Tasse à café',
+			'bol' 				=> 'Bol',
+			'sachet' 			=> 'Sachet',
+			'gousse' 			=> 'Gousse',
 		];
+	}
+
+	public function getUnite()
+	{
+		return self::getUniteList()[$this->unite];
 	}
 
 	// verbose unity

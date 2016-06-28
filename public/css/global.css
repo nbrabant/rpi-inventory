@@ -105,6 +105,8 @@ h2 {
 	height: 100% !important;
 }
 .modal-dialog {
-	top: -400px;
-	width: 720px;
+    position: absolute;
+	left: 25%;
+    top: 120px;
+    width: 720px;
 }
