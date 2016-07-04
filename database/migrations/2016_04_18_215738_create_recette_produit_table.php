@@ -22,6 +22,7 @@ class CreateRecetteProduitTable extends Migration
 			$table->integer('unite', [
 				'grammes',
 				'litre',
+				'centilitre',
 				'sachet',
 				'gousse',
 				'cuilliere_cafe',
