@@ -175,12 +175,10 @@ class ListesController extends Controller {
 		}
 
 		Agendaproducts::all()->map(function($produit) {
-			if($produit->manquant <= 0) {
-				continue;
+			if($produit->manquant > 0) {
+				$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->produit_id, 'quantite' => $produit->manquant ]);
+				$this->currentListe->lignesproduits()->save( $ligneProduit );
 			}
-
-			$ligneProduit = new Ligneproduit([ 'produit_id' => $produit->produit_id, 'quantite' => $produit->manquant ]);
-			$this->currentListe->lignesproduits()->save( $ligneProduit );
 		});
 
 		return redirect(url('liste-courses'))->with('success', 'La liste de course a été mise à jour');

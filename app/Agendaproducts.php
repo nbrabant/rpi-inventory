@@ -13,7 +13,8 @@ class Agendaproducts extends Model
 		'produit_nom',
 		'necessaire',
 		'en_stock',
-		'manquant'
+		'manquant',
+		'unite',
 	];
 
     public $timestamps = false;

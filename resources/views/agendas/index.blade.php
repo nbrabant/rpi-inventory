@@ -44,9 +44,15 @@
 								@foreach ($produits as $produit)
 									<tr>
 										<td>{{ $produit->produit_nom }}</td>
-										<td>{{ $produit->necessaire }}</td>
-										<td>{{ $produit->en_stock }}</td>
-										<td>{{ $produit->manquant }}</td>
+										<td>{{ $produit->necessaire }} {{ !is_null($produit->unite) ? $produit->unite : '' }}</td>
+										<td>{{ $produit->en_stock }} {{ !is_null($produit->unite) ? $produit->unite : '' }}</td>
+										<td>
+											@if ($produit->manquant > 0)
+												{{ $produit->manquant }} {{ !is_null($produit->unite) ? $produit->unite : '' }}
+											@else
+												---
+											@endif
+										</td>
 									</tr>
 								@endforeach
 							</tbody>
