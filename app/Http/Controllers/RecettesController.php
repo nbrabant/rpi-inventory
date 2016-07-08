@@ -45,7 +45,7 @@ class RecettesController extends Controller
 					$filename  = $recette->id.'.'.$image->getClientOriginalExtension();
 					$path = public_path().'/img/recettes/'.$filename;
 					Image::make($image->getRealPath())->resize(200, 200)->save($path);
-	                $recette->visuel = $values['visuel'];
+	                $recette->visuel = $filename;
 	                $recette->save();
 				} elseif (isset($values['imgurl']) && strlen($values['imgurl']) > 0) {
 					//@TODO : gestion non jpeg...
@@ -96,7 +96,7 @@ class RecettesController extends Controller
 				$filename  = $recette->id.'.'.$image->getClientOriginalExtension();
 				$path = public_path('img/recettes/'.$filename);
 				Image::make($image->getRealPath())->resize(200, 200)->save($path);
-                $recette->visuel = $values['visuel'];
+                $recette->visuel = $filename;
 			}
 
 			$recette->syncProducts($values);
