@@ -34,6 +34,7 @@
 						$('#liste_produits').append('\
 						<li id="ingredient_'+ui.item.id+'" data-id="'+ui.item.id+'">\
 						<div class="clearfix">\
+						<a class="col-sm-2 btn btn-xs btn-sm btn-danger delete_product">supprimer</a>\
 						<input type="hidden" name="produits[]" value="'+ui.item.id+'">\
 						<input class="col-sm-2" type="text" name="quantite_'+ui.item.id+'">\
 						<select class="col-sm-2" name="unite_'+ui.item.id+'">\
@@ -52,7 +53,7 @@
 							<option value="sachet">Sachet</option>\
 							<option value="gousse">Gousse</option>\
 						</select>\
-						<span class="col-sm-8">'+ui.item.value+'</span>\
+						<span class="col-sm-6">'+ui.item.value+'</span>\
 						</div>\
 						</li>');
 					} else {
@@ -62,4 +63,10 @@
             }
         });
     });
+
+	$(document).on('click', '.delete_product', function() {
+		console.log($(this).parents('li'))
+		$(this).parents('li').remove()
+		return false
+	});
 </script>

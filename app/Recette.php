@@ -105,6 +105,7 @@ class Recette extends Model
 			}
 		}
 
+		// and finally, save
 		if(is_array($lstToAdd) && !empty($lstToAdd)) {
 			$this->produits()->saveMany( $lstToAdd );
 		}
