@@ -56,4 +56,27 @@ class RecetteProduit extends Model
 
 	// convert quantity
 	// http://tout-metz.com/recette/conversion-unite-cuisine
+	public function getQuantity()
+	{
+		if ($this->unite == 'centilitre') {
+			return $this->quantite * 0.1;
+		} elseif ($this->unite == 'cuillere_cafe') {
+			return $this->quantite * 4;
+		} elseif ($this->unite == 'cuillere_dessert') {
+			return $this->quantite * 8;
+		} elseif ($this->unite == 'cuillere_soupe') {
+			return $this->quantite * 12;
+		} elseif ($this->unite == 'verre_liqueur') {
+			return $this->quantite * 0.03;
+		} elseif ($this->unite == 'tasse_cafe') {
+			return $this->quantite * 0.1;
+		} elseif ($this->unite == 'verre_moutarde') {
+			return $this->quantite * 0.15;
+		} elseif ($this->unite == 'grand_verre') {
+			return $this->quantite * 0.25;
+		} elseif ($this->unite == 'bol') {
+			return $this->quantite * 0.35;
+		}
+		return $this->quantite;
+	}
 }

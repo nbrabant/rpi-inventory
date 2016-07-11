@@ -29,7 +29,7 @@
 							<div class="col-md-1">
 								{!! Form::checkbox('produits[]', $produit->id, array('class' => 'form-control')) !!}
 							</div>
-							{!! Form::label('produits', $produit->nom.' ('.$produit->quantite.' en stock)', array('class' => 'col-md-11 control-label')) !!}
+							{!! Form::label('produits', $produit->nom.' ('.$produit->quantite.(!is_null($produit->unite) ? ' '.$produit->unite : '').' en stock)', array('class' => 'col-md-11 control-label')) !!}
 						</div>
 					</li>
 					@endforeach

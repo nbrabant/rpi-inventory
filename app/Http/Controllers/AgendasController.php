@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Agenda;
 use App\Recette;
+use App\Operation;
 use App\Agendaproducts;
 use App\Helpers\Calendar;
 use Carbon\Carbon;
@@ -73,8 +74,15 @@ class AgendasController extends Controller
 		$agenda->realise = 1;
 		$agenda->save();
 
-		// @TODO maj des quantités produits (opérations)
-		// fe $agenda->recette->produits
+		// maj des quantités produits (opérations)
+		$agenda->recette->produits->map(function($produit) use($agenda) {
+			$operation = new Operation();
+			$operation->produit_id	= $produit->produit_id;
+			$operation->operation	= '-';
+			$operation->quantite	= $produit->getQuantity();
+			$operation->detail		= 'Recette : "'.$agenda->recette->nom.'"';
+			$operation->save();
+		});
 
 		return redirect(url('agendas'));
 	}

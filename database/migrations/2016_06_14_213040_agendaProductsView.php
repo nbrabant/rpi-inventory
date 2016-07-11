@@ -60,7 +60,8 @@ class AgendaProductsView extends Migration
 						WHERE (
 							a.date_recette
 							BETWEEN adddate(curdate(), INTERVAL 1-DAYOFWEEK(curdate()) DAY)
-							AND adddate(curdate(), INTERVAL 7-DAYOFWEEK(curdate()) DAY))");
+							AND adddate(curdate(), INTERVAL 7-DAYOFWEEK(curdate()) DAY))
+							AND a.realise = 0");
 
 		DB::statement("CREATE OR REPLACE VIEW agendaProductsView AS
 						SELECT
