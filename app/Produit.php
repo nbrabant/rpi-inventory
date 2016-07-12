@@ -17,6 +17,7 @@ class Produit extends Eloquent {
 	];
 
 	protected $validators = [
+		'categorie_id'	=> 'required|integer|exists:categories,id',
 		'nom'			=> 'required|string',
 		'quantite'		=> 'integer',
 		'quantite_min'	=> 'required|integer',

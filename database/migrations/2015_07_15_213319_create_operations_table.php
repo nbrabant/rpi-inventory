@@ -20,9 +20,9 @@ class CreateOperationsTable extends Migration
 			$table->string('detail');
 			$table->timestamps();
 
-			$table->foreign('produit_id')
-				->references('id')->on('produits')
-				->onDelete('cascade');
+			// $table->foreign('produit_id')
+			// 	->references('id')->on('produits')
+			// 	->onDelete('cascade');
 		});
     }
 

@@ -19,13 +19,13 @@ class CreateLignesproduitsTable extends Migration
 			$table->float('quantite');
 			$table->timestamps();
 
-			$table->foreign('liste_id')
-				->references('id')->on('listes')
-				->onDelete('cascade');
+			// $table->foreign('liste_id')
+			// 	->references('id')->on('listes')
+			// 	->onDelete('cascade');
 
-			$table->foreign('produit_id')
-				->references('id')->on('produits')
-				->onDelete('cascade');
+			// $table->foreign('produit_id')
+			// 	->references('id')->on('produits')
+			// 	->onDelete('cascade');
 		});
     }
 

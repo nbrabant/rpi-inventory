@@ -6,10 +6,10 @@ use Illuminate\Database\Seeder;
 class CategorieTableSeeder extends Seeder {
 
 	private $_datasToSeed = [
-		'Fruits',
-		'Légumes',
 		'Viandes',
 		'Poissons',
+		'Fruits',
+		'Légumes',
 		'Frais',
 		'Surgelés',
 		'Epicerie salée',
@@ -18,16 +18,16 @@ class CategorieTableSeeder extends Seeder {
 		'Hygiène/beauté',
 		'Entretien/nettoyage',
 		'Animalerie',
-		'Bazar/Textile',
+		'Bazar - Textile',
 	];
-			
+
 	/**
      * Run the database seeds.
      *
      * @return void
      */
     public function run() {
-		
+
 		foreach ($this->_datasToSeed as $data) {
 			Categorie::create([
 				'nom'   => $data,

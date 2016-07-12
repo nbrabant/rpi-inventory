@@ -5,45 +5,159 @@ use Illuminate\Database\Seeder;
 
 class ProduitTableSeeder extends Seeder {
 
-	private $_datasToSeed = [
-		[
-			'categorie_id' => '2',
-			'nom' => 'Pomme de terre',
-			'description' => 'Pomme de terre',
-			'quantite' => '10',
-			'quantite_min' => '5',
+	public static $categoriesProducts = [
+		1 => [
+			'Blanc de poulet' 		=> '---',
+			'Canard'  				=> '---',
+			'Viande hachée'  		=> '---',
+			'Steak'  				=> '---',
+			'Jambon'  				=> 'grammes',
+			'Bacon'  				=> 'grammes',
+			'Lardons fumés'  		=> 'grammes'
 		],
-		[
-			'categorie_id' => '4',
-			'nom' => 'Kwak',
-			'description' => 'bouteille de Kwak de 1,5 litre',
-			'quantite' => '1',
+		2 => [
+			'Saumon' 				=> '---',
+			'Colin' 				=> '---',
+			'Surimi' 				=> '---'
 		],
-		[
-			'categorie_id' => '2',
-			'nom' => 'Beurre',
-			'description' => 'Barquette de 250 grammes',
-			'quantite' => '1',
-			'quantite_min' => '1',
+		3 => [
+			'Tomate' 				=> '---',
+			'banane' 				=> '---',
+			'pomme' 				=> '---',
+			'nectarine' 			=> '---',
+			'courgette' 			=> '---',
+			'raisin sec' 			=> '---'
 		],
-		[
-			'categorie_id' => '2',
-			'nom' => 'Liquide vaisselle',
-			'description' => '',
-			'quantite' => '0',
-			'quantite_min' => '1',
+		4 => [
+			'Salade' 				=> '---',
+			'oignons' 				=> '---',
+			'poivrons' 				=> '---',
+			'Haricot vert' 			=> 'grammes',
+			'Haricot rouge' 		=> 'grammes',
+			'Ail' 					=> 'grammes'
+		],
+		5 => [
+			'brioche' 				=> '---',
+			'petit pain' 			=> '---',
+			'pain burger' 			=> '---',
+			'madeleine' 			=> '---',
+			'pain' 					=> '---',
+			'oeuf' 					=> '---',
+			'beurre' 				=> '---',
+			'camembert' 			=> '---',
+			'brie' 					=> '---',
+			'charcuterie seche' 	=> '---',
+			'yaourt' 				=> '---',
+			'mousse chocolat' 		=> '---',
+			'Maroiles' 				=> 'grammes',
+			'Crème fraiche' 		=> '---',
+			'gruyère' 				=> 'grammes',
+			'Béchamel' 				=> 'grammes',
+			'Pâte feuilletée' 		=> 'grammes',
+			'Chèvre' 				=> 'grammes',
+			'Munster' 				=> 'grammes'
+		],
+		6 => [
+			'pizza' 				=> '---',
+			'glace' 				=> '---'
+		],
+		7 => [
+			'pâtes' 				=> '---',
+			'riz' 					=> '---',
+			'haricot vert' 			=> '---',
+			'tomate pelée' 			=> '---',
+			'champignon' 			=> '---',
+			'cacahuete' 			=> '---',
+			'chips' 				=> '---',
+			'mayonnaise' 			=> '---',
+			'soupe' 				=> '---',
+			'Thon' 					=> 'grammes',
+			'Chili poudre' 			=> 'grammes',
+			'Sel' 					=> 'grammes',
+			'Poivre' 				=> 'grammes',
+			'Huile d\'olive' 		=> 'litre',
+			'Gnocchis' 				=> 'grammes',
+			'Concentré de tomate' 	=> 'grammes',
+			'Curry'					=> 'grammes'
+		],
+		8 => [
+			'confiture' 			=> '---',
+			'nutella' 				=> '---',
+			'café' 					=> '---',
+			'filtre à café' 		=> '---',
+			'cereales' 				=> '---',
+			'biscuit' 				=> '---',
+			'chocolat en poudre' 	=> '---',
+			'farine' 				=> 'grammes',
+			'sucre'					=> '---'
+		],
+		9 => [
+			'lait' 					=> 'litre',
+			'eau' 					=> 'litre',
+			'coca' 					=> 'litre',
+			'jus de fruit' 			=> 'litre',
+			'biere' 				=> '---',
+			'vin' 					=> '---',
+			'champagne'				=> '---'
+		],
+		10 => [
+			'tampon' 				=> '---',
+			'serviette' 			=> '---',
+			'savon corps' 			=> '---',
+			'shampooing' 			=> '---',
+			'brosse a dent' 		=> '---',
+			'dentifrice' 			=> '---',
+			'papier hygienique' 	=> '---',
+			'mouchoir'				=> '---'
+		],
+		11 => [
+			'sopalin' 				=> '---',
+			'lingette' 				=> '---',
+			'lessive' 				=> '---',
+			'liquide vaiselle' 		=> '---',
+			'sac poubelle' 			=> '---',
+			'desodorisant'			=> '---'
+		],
+		12 => [
+			'litiere' 				=> '---',
+			'croquettes' 			=> '---',
+			'pâté'					=> '---'
+		],
+		13 => [
+			'ampoule' 				=> '---',
+			'presse' 				=> '---',
+			'piles' 				=> '---',
+			'allumette' 			=> '---',
+			'collant' 				=> '---',
+			'chaussette'			=> '---'
 		],
 	];
-			
+
+	private $_datasToSeed = [];
+
 	/**
      * Run the database seeds.
      *
      * @return void
      */
     public function run() {
-		
+		$this->formatDataToSeed();
+
 		foreach ($this->_datasToSeed as $data) {
 			Produit::create($data);
+		}
+	}
+
+	private function formatDataToSeed() {
+		foreach (self::categoriesProducts as $categoryId => $products) {
+			foreach ($products as $name => $unite) {
+				$this->_datasToSeed[] = [
+					'categorie_id' 	=> $categoryId,
+					'nom' 			=> $name,
+					'quantite' 		=> '0',
+					'unite' 		=> ($unite !== '---' ? $unite : null),
+				];
+			}
 		}
 	}
 }
