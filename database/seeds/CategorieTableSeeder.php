@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php 
 
 use App\Categorie;
 use Illuminate\Database\Seeder;

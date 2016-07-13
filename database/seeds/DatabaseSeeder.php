@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
-use App\Categorie;
-use App\Produit;
-use App\Operation;
-use App\Liste;
-use App\Ligneproduit;
+// use App\Categorie;
+// use App\Produit;
+// use App\Operation;
+// use App\Liste;
+// use App\Ligneproduit;
 
 class DatabaseSeeder extends Seeder
 {
@@ -70,9 +70,6 @@ class DatabaseSeeder extends Seeder
 		$this->call(CategorieTableSeeder::class);
 		$this->call(ProduitTableSeeder::class);
 		$this->call(RecetteTableSeeder::class);
-
-		// factory(Produit::class, 50)->create();
-		// factory(Operation::class, 150)->create();
 
         Model::reguard();
     }

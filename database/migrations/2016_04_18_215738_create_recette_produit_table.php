@@ -19,7 +19,7 @@ class CreateRecetteProduitTable extends Migration
 			$table->integer('recette_id');
 			$table->integer('produit_id');
 			$table->integer('quantite');
-			$table->integer('unite', [
+			$table->enum('unite', [
 				'grammes',
 				'litre',
 				'centilitre',

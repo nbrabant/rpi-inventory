@@ -149,7 +149,7 @@ class ProduitTableSeeder extends Seeder {
 	}
 
 	private function formatDataToSeed() {
-		foreach (self::categoriesProducts as $categoryId => $products) {
+		foreach (self::$categoriesProducts as $categoryId => $products) {
 			foreach ($products as $name => $unite) {
 				$this->_datasToSeed[] = [
 					'categorie_id' 	=> $categoryId,

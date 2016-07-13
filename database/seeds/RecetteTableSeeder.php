@@ -23,7 +23,7 @@ class RecetteTableSeeder extends Seeder
 			'nombre_personnes' 	=> '6 personnes',
 			'temps_preparation' => 0,
 			'temps_cuisson' 	=> 0,
-			'complement' 		=> '25 cl de lait \n\n 1/4 c à c de cannelle \n\n 1 pincée de sel \n\n Du sucre glace \n\n 30g de beurre \n\n 500g de cerises type Montmorency \n\n 1 c à c d''huile neutre \n\n 4 œufs entiers \n\n 50g de sucre en poudre \n\n 125g de farine'
+			'complement' 		=> '25 cl de lait \n\n 1/4 c à c de cannelle \n\n 1 pincée de sel \n\n Du sucre glace \n\n 30g de beurre \n\n 500g de cerises type Montmorency \n\n 1 c à c d\'huile neutre \n\n 4 œufs entiers \n\n 50g de sucre en poudre \n\n 125g de farine'
 		],
 		[
 			'nom' 				=> 'Pâte bolognaise',
@@ -78,6 +78,7 @@ class RecetteTableSeeder extends Seeder
 			'temps_preparation' =>  20,
 			'temps_cuisson' 	=>  15,
 			'complement' 		=>  NULL
+		],
 		[
 			'nom' 				=> 'Pâtes au thon',
 			'type_recette' 		=> 'entrée',
