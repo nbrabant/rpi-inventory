@@ -34,7 +34,7 @@ class CreateRecetteProduitTable extends Migration
 				'tasse_cafe',
 				'grand_verre',
 				'bol',
-			]);
+			])->nullable()->default(null);
 
 			// $table->foreign('recette_id')
 			// 	->references('id')->on('recettes')

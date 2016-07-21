@@ -132,7 +132,7 @@ class RecetteProduitsTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->_datasToSeed as $datas) {
-			$produit = Produit::where('nom', 'LIKE', $datas['produit'])->get();
+			$produit = Produit::where('nom', 'LIKE', $datas['produit'])->first();
 			if(is_null($produit)) {
 				continue;
 			}
@@ -144,7 +144,7 @@ class RecetteProduitsTableSeeder extends Seeder
 			];
 
 			if(isset($datas['unite'])) {
-				$recetteProduit['unite'] = $datas['quantite'];
+				$recetteProduit['unite'] = $datas['unite'];
 			}
 
 			RecetteProduit::create($recetteProduit);

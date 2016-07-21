@@ -70,6 +70,7 @@ class DatabaseSeeder extends Seeder
 		$this->call(CategorieTableSeeder::class);
 		$this->call(ProduitTableSeeder::class);
 		$this->call(RecetteTableSeeder::class);
+		$this->call(RecetteProduitsTableSeeder::class);
 
         Model::reguard();
     }
