@@ -139,6 +139,7 @@ class RecettesController extends Controller
 			'html' => view('recettes.populate', [
 				'recipe' 	=> $recette->getDetailRecettes($request->url),
 				'title'		=> 'Ajout d\'une recette',
+				'uniteList' => RecetteProduit::getUniteList(),
 				'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js']
 			])->render()
 		]);

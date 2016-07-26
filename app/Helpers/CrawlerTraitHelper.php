@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Cache;
+use App\Produit;
+use App\RecetteProduit;
 
 trait CrawlerTraitHelper
 {
@@ -95,6 +97,7 @@ trait CrawlerTraitHelper
 			'temps_preparation'	=> '',
 			'temps_cuisson'		=> '',
 			'ingredients'		=> '',
+			'produits'			=> [],
 		];
 
 		foreach($xml->getElementsByTagName('h1') as $element) {
@@ -114,7 +117,13 @@ trait CrawlerTraitHelper
 		}
 
 		foreach($this->domFinderByAttibuteName($xml, 'ingredients', 'itemprop') as $element) {
-			$return['ingredients'] .= $element->nodeValue;
+			// populate ingredients : si produit existe, ajout d'une ligne recette_produit
+			$produit = self::feedProductLine( trim($element->nodeValue) );
+			if( $produit === false ) {
+				$return['ingredients'] .= trim($element->nodeValue)."\r\n";
+			} else {
+				$return['produits'][] = $produit;
+			}
 		}
 
 		return $return;
@@ -198,5 +207,43 @@ trait CrawlerTraitHelper
 		}
 		return null;
 	}
+
+	private static function feedProductLine($line = null) {
+		if(is_null($line) || strlen($line) == 0) {
+			return false;
+		}
+
+		$array = array_filter(explode(' ', $line), function($value) {
+			$value = preg_replace('/[0-9,.]/', '', $value);
+			if(!is_numeric($value) && strlen($value) > 2) {
+				return $value;
+			}
+		});
+
+		$produit = Produit::where('nom', 'LIKE', implode('%', $array))->first();
+		if(is_null($produit)) {
+			// $produits = Produit::where('nom', 'REGEXP', implode('|', $array))->get();
+			// foreach ($produits as $produit) {
+			// 	var_dump($produit);
+			// }
+			// // var_dump($produits);
+			// exit;
+
+			return false;
+		} else {
+			$unite = str_replace($array, '', $line);
+			$unite = preg_replace('/[0-9,.]/', '', $unite);
+			$unite = str_replace([' de ', ' '], '', $unite);
+		}
+
+		return [
+			'id' 		=> $produit->id,
+			'quantite' 	=> preg_replace('/[^0-9,.]/', '', $line),
+			'unite' 	=> RecetteProduit::verboseUnite($unite),
+			'nom' 		=> $produit->nom
+		];
+	}
+
+
 
 }

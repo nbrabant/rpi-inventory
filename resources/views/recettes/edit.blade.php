@@ -78,7 +78,7 @@
 							<ul id="liste_produits">
 								@if (count($recette->produits) > 0)
 									@foreach ($recette->produits as $produit)
-										<li id="ingredient_{{$produit->id}}" data-id="{{$produit->produit_id}}">
+										<li id="ingredient_{{ $produit->id }}" data-id="{{ $produit->produit_id }}">
 											<div class="clearfix">
 												<a class="col-sm-2 btn btn-xs btn-sm btn-danger delete_product">supprimer</a>
 												<input type="hidden" name="produits[]" value="{{ $produit->produit_id }}">

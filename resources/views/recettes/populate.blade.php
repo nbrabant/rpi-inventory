@@ -62,6 +62,26 @@
 						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control', 'id' => 'complement')) !!}
 					</div>
 
+					<div class="clearfix">
+						<legend>Liste des ingrédients</legend>
+						@include('recettes.autocomplete')
+						<ul id="liste_produits">
+							@if (count($recipe['produits']) > 0)
+								@foreach ($recipe['produits'] as $produit)
+									<li id="ingredient_{{ $produit['id'] }}" data-id="{{ $produit['id'] }}">
+										<div class="clearfix">
+											<a class="col-sm-2 btn btn-xs btn-sm btn-danger delete_product">supprimer</a>
+											<input type="hidden" name="produits[]" value="{{ $produit['id'] }}">
+											<input class="col-sm-2" type="text" name="quantite_{{ $produit['id'] }}" value="{{ $produit['quantite'] }}">
+											{!! Form::select('unite_'.$produit['id'], $uniteList, $produit['unite'], array('class' => 'col-sm-2')) !!}
+											<span class="col-sm-6">{{ $produit['nom'] }}</span>
+										</div>
+									</li>
+								@endforeach
+							@endif
+						</ul>
+					</div>
+
 					<div class="form-group">
 						<div class="col-md-6 col-md-offset-4">
 							{!! Form::submit('Enregistrer', array('class' => 'btn btn-primary', 'id' => 'sumbitRecette')) !!}
