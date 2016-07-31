@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agendaproducts extends Model
 {
-    protected $table = 'agendaproductsview';
+    protected $table = 'agendaProductsView';
 
 	protected $fillable = [
 		'produit_id',
