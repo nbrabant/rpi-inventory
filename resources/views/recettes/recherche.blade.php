@@ -23,7 +23,6 @@
 
 			<div id="result-recette" class="clearfix">
 				Liste des recettes
-
 			</div>
 
 		</div>
