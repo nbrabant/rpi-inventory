@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listecourante extends Model
 {
-	protected $table = 'listecouranteview';
+	protected $table = 'listecouranteView';
 
 	protected $fillable = [
 		'liste_id',
