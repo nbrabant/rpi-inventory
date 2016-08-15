@@ -34,7 +34,12 @@ class ProduitTableSeeder extends Seeder {
 			'poivrons' 				=> '---',
 			'Haricot vert' 			=> 'grammes',
 			'Haricot rouge' 		=> 'grammes',
-			'Ail' 					=> 'grammes'
+			'Ail' 					=> 'grammes',
+			'Courgette'				=> '',
+			'Echalote'				=> '',
+			'Poivrons rouge'		=> '',
+			'Pommes de terre'		=> '',
+			'Epinard'				=> '',
 		],
 		5 => [
 			'brioche' 				=> '---',
@@ -55,7 +60,11 @@ class ProduitTableSeeder extends Seeder {
 			'Béchamel' 				=> 'grammes',
 			'Pâte feuilletée' 		=> 'grammes',
 			'Chèvre' 				=> 'grammes',
-			'Munster' 				=> 'grammes'
+			'Munster' 				=> 'grammes',
+			'Pâte brisée'			=> '',
+			'Crevettes'				=> '',
+			'Comté'					=> '',
+			'Parmesan'				=> '',
 		],
 		6 => [
 			'pizza' 				=> '---',
@@ -78,7 +87,14 @@ class ProduitTableSeeder extends Seeder {
 			'Huile d\'olive' 		=> 'litre',
 			'Gnocchis' 				=> 'grammes',
 			'Concentré de tomate' 	=> 'grammes',
-			'Curry'					=> 'grammes'
+			'Curry'					=> 'grammes',
+			'Ciboulette'			=> '',
+			'Moutarde'				=> '',
+			'Aneth'					=> '',
+			'MaÏs'					=> '',
+			'Chapelure'				=> '',
+			'Thym'					=> '',
+			'Maizena'				=> '',
 		],
 		8 => [
 			'confiture' 			=> '---',
