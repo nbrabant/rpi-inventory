@@ -4,64 +4,6 @@ use App\Produit;
 use App\RecetteProduit;
 use Illuminate\Database\Seeder;
 
-// (2, 1, 1, 2, NULL),
-// (1, 1, 15, 1, NULL),
-// (4, 1, 72, 50, 'grammes'),
-
-// (31, 2, 21, 25, 'centilitre'),
-// (33, 2, 22, 4, NULL),
-// (32, 2, 23, 30, 'grammes'),
-// (35, 2, 47, 125, 'grammes'),
-// (34, 2, 48, 50, 'grammes'),
-
-// (38, 3, 3, 450, 'grammes'),
-// (39, 3, 15, 1, NULL),
-// (37, 3, 31, 300, 'grammes'),
-
-// (40, 4, 9, 4, NULL),
-// (41, 4, 75, 4, NULL),
-
-// (42, 5, 32, 1, 'grand_verre'),
-// (43, 5, 77, 50, 'centilitre'),
-// (44, 5, 78, 1, NULL),
-
-// (47, 6, 3, 400, 'grammes'),
-// (45, 6, 15, 1, NULL),
-// (49, 6, 34, 1, NULL),
-// (48, 6, 80, 400, 'grammes'),
-// (50, 6, 81, 2, 'cuillere_cafe'),
-// (46, 6, 82, 1, NULL),
-
-// (55, 7, 22, 2, NULL),
-// (52, 7, 75, 3, NULL),
-// (53, 7, 35, 1, NULL),
-// (51, 7, 86, 1, NULL),
-// (54, 7, 87, 1, NULL),
-
-// (59, 8, 22, 1, NULL),
-// (60, 8, 73, 3, 'cuillere_soupe'),
-// (56, 8, 88, 600, 'grammes'),
-// (57, 8, 89, 200, 'grammes'),
-// (58, 8, 90, 150, 'grammes'),
-
-// (63, 9, 15, 1, NULL),
-// (61, 9, 31, 400, 'grammes'),
-// (65, 9, 73, 1, 'verre_moutarde'),
-// (66, 9, 76, 1, NULL),
-// (62, 9, 78, 1, 'grammes'),
-// (64, 9, 91, 1, NULL),
-
-// (67, 10, 1, 300, 'grammes'),
-// (68, 10, 15, 2, NULL),
-// (70, 10, 85, 1, 'cuillere_soupe'),
-// (69, 10, 92, 2, 'cuillere_cafe'),
-
-// (74, 11, 22, 4, NULL);
-// (73, 11, 35, 1, NULL),
-// (72, 11, 73, 2, 'cuillere_soupe'),
-// (71, 11, 93, 200, 'grammes'),
-
-
 class RecetteProduitsTableSeeder extends Seeder
 {
 
@@ -122,6 +64,74 @@ class RecetteProduitsTableSeeder extends Seeder
 		[ 'recette_id' => 11, 'produit' => 'champignon', 'quantite' => '1' ],
 		[ 'recette_id' => 11, 'produit' => 'Créme fraiche', 'quantite' => '1', 'unite' => 'cuillere_soupe' ],
 		[ 'recette_id' => 11, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		[ 'recette_id' => 12, 'produit' => 'Pâte brisée', 'quantite' => '1' ],
+		[ 'recette_id' => 12, 'produit' => 'Saumon', 'quantite' => '1' ],
+		[ 'recette_id' => 12, 'produit' => 'Crème fraiche', 'quantite' => '20', 'unite' => 'centilitre' ],
+		[ 'recette_id' => 12, 'produit' => 'oeuf', 'quantite' => '3' ],
+		[ 'recette_id' => 12, 'produit' => 'Ciboulette', 'quantite' => '1' ],
+
+		[ 'recette_id' => 13, 'produit' => 'Courgette', 'quantite' => '4' ],
+		[ 'recette_id' => 13, 'produit' => 'Crème fraiche', 'quantite' => '15', 'unite' => 'centilitre' ],
+		[ 'recette_id' => 13, 'produit' => 'oeuf', 'quantite' => '1' ],
+		[ 'recette_id' => 13, 'produit' => 'gruyère', 'quantite' => '100', 'unite' => 'grammes' ],
+
+		[ 'recette_id' => 14, 'produit' => 'Blanc de poulet', 'quantite' => '4' ],
+		[ 'recette_id' => 14, 'produit' => 'Moutarde', 'quantite' => '2' ],
+		[ 'recette_id' => 14, 'produit' => 'Crème fraiche', 'quantite' => '6' ],
+
+		// (58, 15, 44, 200, 'grammes'),
+		// (59, 15, 8, 2, NULL),
+		// (60, 15, 36, 10, 'centilitre'),
+		[ 'recette_id' => 15, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (61, 16, 100, 1, NULL),
+		// (62, 16, 28, 3, NULL),
+		// (63, 16, 36, 250, 'grammes'),
+		// (64, 16, 7, 150, 'grammes'),
+		[ 'recette_id' => 16, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (65, 17, 45, 200, 'grammes'),
+		// (66, 17, 105, 1, NULL),
+		// (67, 17, 53, 1, NULL),
+		// (68, 17, 11, 3, NULL),
+		// (69, 17, 28, 2, NULL),
+		// (70, 17, 57, 2, ''),
+		[ 'recette_id' => 17, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (71, 18, 11, 4, NULL),
+		// (72, 18, 3, 220, 'grammes'),
+		// (73, 18, 18, 2, NULL),
+		// (74, 18, 106, 1, NULL),
+		// (75, 18, 22, 1, NULL),
+		// (76, 18, 107, 2, ''),
+		// (77, 18, 57, 2, ''),
+		[ 'recette_id' => 18, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (78, 19, 109, 200, 'grammes'),
+		// (79, 19, 19, 1, NULL),
+		// (80, 19, 108, 1, NULL),
+		// (81, 19, 45, 125, 'grammes'),
+		// (82, 19, 60, 1, ''),
+		[ 'recette_id' => 19, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (83, 20, 110, 1000, 'grammes'),
+		// (84, 20, 22, 7, NULL),
+		[ 'recette_id' => 20, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (85, 21, 112, 60, 'grammes'),
+		// (86, 21, 70, 30, 'centilitre'),
+		// (87, 21, 28, 3, NULL),
+		// (88, 21, 113, 20, 'grammes'),
+		[ 'recette_id' => 21, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
+
+		// (89, 22, 39, 1, NULL),
+		// (90, 22, 114, 250, 'grammes'),
+		// (91, 22, 18, 1, NULL),
+		// (92, 22, 36, 20, 'centilitre'),
+		// (93, 22, 28, 2, NULL),
+		// (94, 22, 115, 60, 'grammes');
+		[ 'recette_id' => 22, 'produit' => 'Lardons fumés', 'quantite' => '200', 'unite' => 'grammes' ],
 	];
 
     /**
