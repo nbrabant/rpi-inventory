@@ -89,7 +89,7 @@ class RecetteTableSeeder extends Seeder
 			'complement' 		=> NULL
 		],
 		[
-			'nom' 				=> 'Poulet au curry ',
+			'nom' 				=> 'Poulet au curry',
 			'type_recette' 		=> 'entrée',
 			'instructions' 		=> '<p>Emincer les oignons, les faire revenir dans une sauteuse avec l&#39;huile d&#39;olive.<br />\r\nUne fois les oignons colorés, faire revenir les blancs de poulet avec le curry pendant 5 minutes. Ajouter un peu d&#39;eau et laisser mijoter 20 minutes.<br />\r\nServir avec du riz blanc ou des <a href="http://www.marmiton.org/magazine/tendances-gourmandes_pommes-de-terre_1.aspx">pommes de terre</a> vapeur.<br />\r\n&nbsp;</p>',
 			'nombre_personnes' 	=> '2',
@@ -105,7 +105,106 @@ class RecetteTableSeeder extends Seeder
 			'temps_preparation' => 10,
 			'temps_cuisson' 	=> 10,
 			'complement' 		=> NULL
-		]
+		],
+		[
+			'nom' 				=> 'Quiche au saumon',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Faites cuire le pav&eacute; de saumon au four eh 6 (180&deg;) pendant 10 minutes.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-quiche-au-saumon#xG45LJEDgHAjjLBR.99</li>\r\n	<li>Etalez la p&acirc;te bris&eacute;e dans un moule &agrave; tarte recouvert de papier cuisson. Piquez la p&acirc;te avec une fourchette et faites la cuire &agrave; blanc 10 minutes.</li>\r\n	<li>Emiettez grossi&egrave;rement le saumon sur le fond de tarte.</li>\r\n	<li>Dans un bol, m&eacute;langez les oeufs avec la cr&egrave;me fra&icirc;che et la ciboulette cisel&eacute;e. Poivrez. Versez sur le saumon.</li>\r\n	<li>Enfournez 30 minutes th 6/7 (200&deg;). Servez cette quiche avec une salade.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 20,
+			'temps_cuisson' 	=> 50,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Courgettes geainées',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Lavez et coupez les courgettes dans le sens de la longueur. Retirez la chair des courgettes &agrave; l&#39;aide d&#39;une cuill&egrave;re.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-courgettes-gratinees#clBeboUG8hEh6M5d.99</li>\r\n	<li>Faites revenir la chair des courgettes dans une casserole avec un filet d&#39;huile d&#39;olive. Ajoutez la cr&egrave;me et l&#39;oeuf battu. Salez, poivrez et m&eacute;langez.</li>\r\n	<li>Garnissez les courgettes de cette farce et recouvrez de gruy&egrave;re r&acirc;p&eacute;. Enfournez th 7 (210&deg;) 20 minutes.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 20,
+			'temps_cuisson' 	=> 35,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Escalope de poulet à la moutarde',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Faites cuire &agrave; feu moyen les escalopes de poulet dans une po&ecirc;le avec une noisette de beurre.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-escalope-de-poulet-a-la-moutarde#4jHvv2jw2AuaAh8e.99</li>\r\n	<li>Dans un bol, m&eacute;langez la cr&egrave;me fra&icirc;che, la moutarde et le poivre.</li>\r\n	<li>Dans une petite casserole, faites chauffer quelques instants la sauce &agrave; feu doux.</li>\r\n	<li>Nappez les escalopes de poulet de sauce.</li>\r\n	<li>Servez les escalopes chaudes avec des p&acirc;tes, des pommes noisette ou du riz.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 15,
+			'temps_cuisson' 	=> 15,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Pâtes au saumon fumé',
+			'type_recette' 		=>  'entrée',
+			'instructions' 		=>  '<ul>\r\n	<li>Faites cuire les p&acirc;tes dans une casserole d&#39;eau bouillante avec un filet d&#39;huile d&#39;olive une dizaine de minutes.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-pates-au-saumon-fume#b7OzR2YXslq2CwD5.99</li>\r\n	<li>Pendant ce temps, coupez le saumon fum&eacute; en morceaux.</li>\r\n	<li>Egouttez les p&acirc;tes. Reversez-les dans la casserole puis ajoutez sur feu doux la cr&egrave;me fra&icirc;che et le saumon fum&eacute;.</li>\r\n	<li>M&eacute;langez le tout et poivrer. Parsemez d&#39;un peu d&#39;aneth puis servez bien chaud.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=>  '2',
+			'temps_preparation' =>  10,
+			'temps_cuisson' 	=>  12,
+			'complement' 		=>  NULL
+		],
+		[
+			'nom' 				=> 'Quiche lorraine',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Pr&eacute;chauffez votre four &agrave; 200&deg;C, th 6/7.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-quiche-lorraine#qaehioFSi9qS5lR7.99</li>\r\n	<li>Placez la p&acirc;te bris&eacute;e dans un plat &agrave; tarte pr&eacute;alablement beurr&eacute; et piquez le fond avec une fourchette.</li>\r\n	<li>Dans une po&ecirc;le, faites dorer les lardons.</li>\r\n	<li>Pendant ce temps, m&eacute;langer les oeufs entiers (jaunes et blancs) avec la cr&egrave;me fra&icirc;che et le gruy&egrave;re rap&eacute;.</li>\r\n	<li>Ajoutez les lardons &agrave; la pr&eacute;paration, poivrez et ajoutez une pinc&eacute;e de noix de muscade r&acirc;p&eacute;e.</li>\r\n	<li>Versez le tout dans le plat &agrave; tarte, sur la p&acirc;te, puis enfournez 30 minutes.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 10,
+			'temps_cuisson' 	=> 30,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Salade de riz',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Faites cuire le riz dans une casserole d&#39;eau bouillante le temps indiqu&eacute; sur l&#39;emballage, &eacute;gouttez le et passez-le sous l&#39;eau froide.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-salade-de-riz#g8u2oxegFfjfW87O.99</li>\r\n	<li>Egouttez le mais et le thon et ajoutez-les dans un saladier avec le riz.</li>\r\n	<li>Faites cuire les oeufs dans une casserole d&#39;eau 13 minutes puis passez les sous l&#39;eau froide, &eacute;caillez-les, coupez-les en morceaux et ajoutez les &agrave; la salade.</li>\r\n	<li>Lavez, &eacute;p&eacute;pinez et coupez les tomates en d&eacute;s puis ajoutez-les au saladier.</li>\r\n	<li>Dans un bol, m&eacute;langez l&#39;huile et le vinaigre puis m&eacute;langez la vinaigrette avec la salade de riz.</li>\r\n	<li>Salez, poivrez puis r&eacute;server au r&eacute;frig&eacute;rateur au moins 1 heure avant de servir.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 10,
+			'temps_cuisson' 	=> 10,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Tomates farcies',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Pr&eacute;chauffez votre four th 6 (180&deg;C). Hachez l&#39;oignon, l&#39;&eacute;chalote ainsi que l&#39;ail et faites-les revenir dans l&#39;huile d&#39;olive, dans une po&ecirc;le.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-tomates-farcies#67MY4yjEgxJMu9T2.99</li>\r\n	<li>Sortez les condiments de la po&ecirc;le et ajoutez la viande hach&eacute;e et la chapelure. Salez et poivrez.</li>\r\n	<li>Lavez les tomates et d&eacute;capitez les (gnark!!!) sur 1 cm de hauteur. Enlevez la chair et les p&eacute;pins pour les vider puis remplissez les de farce.</li>\r\n	<li>Enfournez environ 45 minutes sans le haut de la tomate.</li>\r\n	<li>5 minutes avant la fin de cuisson, ajoutez le couvercle sur les tomates.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '2',
+			'temps_preparation' => 15,
+			'temps_cuisson' 	=> 45,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Riz au curry et crevettes',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Faite cuire le riz dans une casserole d&#39;eau bouillante sal&eacute;e.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-riz-au-curry-et-crevettes#XS5gSR7IoHVVJZAC.99</li>\r\n	<li>Pendant ce temps, lavez, &eacute;p&eacute;pinez et coupez les morceaux de poivrons en d&eacute;s.</li>\r\n	<li>Faites les revenir dans une casserole avec un filet d&#39;huile d&#39;olive pendant une dizaine de minutes.</li>\r\n	<li>Ajoutez les crevettes d&eacute;cortiqu&eacute;es et poursuivez la cuisson 2 minutes.</li>\r\n	<li>Egouttez le riz, reversez-le dans la casserole et ajoutez-y les l&eacute;gumes.</li>\r\n	<li>Saupoudrez de curry et versez un filet d&#39;huile d&#39;olive. Salez, poivrez et servez chaud.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '2',
+			'temps_preparation' => 10,
+			'temps_cuisson' 	=> 20,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Pommes de terre sautées',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>&Eacute;pluchez les pommes de terre, coupez-les en gros morceaux puis faites les cuire dans une casserole d&#39;eau pendant 15 minutes.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-pommes-de-terre-sautees#IfyH3FXLg3ZVgBDg.99</li>\r\n	<li>Pendant ce temps, &eacute;pluchez les gousses d&#39;ail et hachez-les. Faites revenir l&#39;ail &agrave; la po&ecirc;le dans 15 g de beurre et un filet d&#39;huile d&#39;olive.</li>\r\n	<li>Egouttez les pommes de terre et ajoutez les dans la po&ecirc;le pour les faire rissoler 10 minutes, en les retournant fr&eacute;quemment.</li>\r\n	<li>Salez, poivrez et saupoudrez de thym.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 10,
+			'temps_cuisson' 	=> 30,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Soufflé au fromage',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Dans un bol, d&eacute;layez la Ma&iuml;zena dans 2 cuill&egrave;res &agrave; soupe de lait.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-souffle-au-fromage#b8lDq40U7MmJekHo.99</li>\r\n	<li>Dans une casserole, versez le reste du lait, salez, poivrez, saupoudrez de muscade et portez &agrave; &eacute;bullition. Incorporez la Ma&iuml;zena et remuer sur feu doux pour que la pr&eacute;paration &eacute;paississe.</li>\r\n	<li>S&eacute;parez les blancs et les jaunes d&#39;oeufs. Retirez la casserole du feu et ajoutez les jaunes d&#39;oeufs et le fromage r&acirc;p&eacute;. M&eacute;langez.</li>\r\n	<li>Montez les blancs d&#39;oeufs en neige avec une pinc&eacute;e de sel et incorporez-les &agrave; la pr&eacute;paration.</li>\r\n	<li>Versez le tout dans un moule &agrave; souffl&eacute; et enfournez 30 minutes th 6 (180&deg;).</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 10,
+			'temps_cuisson' 	=> 30,
+			'complement' 		=> NULL
+		],
+		[
+			'nom' 				=> 'Quiche aux épinards',
+			'type_recette' 		=> 'entrée',
+			'instructions' 		=> '<ul>\r\n	<li>Lavez les feuilles d&#39;&eacute;pinards. Epluchez et &eacute;mincez l&#39;oignon.</li>\r\n	<br />\r\n	<li>En savoir plus sur http://www.unjourunerecette.fr/recette-quiche-epinards#REUm3i8uI82H1W4z.99</li>\r\n	<li>Faites fondre une noisette de beurre dans une casserole et faites-y revenir l&#39;oignon &eacute;minc&eacute; pendant 5 minutes. Ajoutez les feuilles d&#39;&eacute;pinards et poursuivez la cuisson 3 minutes.</li>\r\n	<li>Dans un bol, m&eacute;langez les oeufs battus avec la cr&egrave;me fra&icirc;che et le parmesan. Salez et poivrez.</li>\r\n	<li>Etalez la p&acirc;te feuillet&eacute;e dans un moule &agrave; quiche et faites-la cuire &agrave; blanc 10 minutes au four th 5/6 (160&deg;).</li>\r\n	<li>Recouvrez le fond de tarte d&#39;&eacute;pinards et d&#39;oignons. Versez la pr&eacute;paration &agrave; la cr&egrave;me fra&icirc;che dessus et enfournez th 6 (180&deg;) pendant 25 minutes.</li>\r\n</ul>\r\n',
+			'nombre_personnes' 	=> '4',
+			'temps_preparation' => 15,
+			'temps_cuisson' 	=> 40,
+			'complement' 		=> NULL
+		],
 	];
 
     /**
