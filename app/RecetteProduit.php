@@ -34,9 +34,9 @@ class RecetteProduit extends Model
 			'grammes' 			=> 'Grammes',
 			'litre' 			=> 'Litre',
 			'centilitre' 		=> 'Centilitre',
-			'cuillere_cafe' 	=> 'Cuillere à Cafe',
-			'cuillere_dessert' 	=> 'Cuillere à Dessert',
-			'cuillere_soupe' 	=> 'Cuillere à Soupe',
+			'cuilliere_cafe' 	=> 'Cuillere à Cafe',
+			'cuilliere_dessert' => 'Cuillere à Dessert',
+			'cuilliere_soupe' 	=> 'Cuillere à Soupe',
 			'verre_liqueur' 	=> 'Verre à liqueur',
 			'verre_moutarde' 	=> 'Verre à moutarde',
 			'grand_verre' 		=> 'Grand verre',
@@ -60,11 +60,11 @@ class RecetteProduit extends Model
 	{
 		if ($this->unite == 'centilitre') {
 			return $this->quantite * 0.1;
-		} elseif ($this->unite == 'cuillere_cafe') {
+		} elseif ($this->unite == 'cuilliere_cafe') {
 			return $this->quantite * 4;
-		} elseif ($this->unite == 'cuillere_dessert') {
+		} elseif ($this->unite == 'cuilliere_dessert') {
 			return $this->quantite * 8;
-		} elseif ($this->unite == 'cuillere_soupe') {
+		} elseif ($this->unite == 'cuilliere_soupe') {
 			return $this->quantite * 12;
 		} elseif ($this->unite == 'verre_liqueur') {
 			return $this->quantite * 0.03;
@@ -93,11 +93,11 @@ class RecetteProduit extends Model
 		} elseif( in_array( strtolower($unite), ['cl', 'centilitres']) ) {
 			return 'centilitre';
 		} elseif( in_array( strtolower($unite), ['cuillère à café', 'cuillères à café', 'cuillère café', 'cuillères café']) ) {
-			return 'cuillere_cafe';
+			return 'cuilliere_cafe';
 		} elseif( in_array( strtolower($unite), ['cuillère à dessert', 'cuillère à dessert', 'cuillère dessert', 'cuillère dessert']) ) {
-			return 'cuillere_dessert';
+			return 'cuilliere_dessert';
 		} elseif( in_array( strtolower($unite), ['cuillère à soupe', 'cuillères à soupe', 'cuillère soupe', 'cuillères soupe']) ) {
-			return 'cuillere_soupe';
+			return 'cuilliere_soupe';
 		} elseif( in_array( strtolower($unite), ['verre à liqueur', 'verres à liqueur', 'verre liqueur', 'verres liqueur']) ) {
 			return 'verre_liqueur';
 		} elseif( in_array( strtolower($unite), ['verre à moutarde', 'verres à moutarde', 'verre moutarde', 'verres moutarde']) ) {

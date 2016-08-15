@@ -28,7 +28,6 @@ class CreateRecetteProduitTable extends Migration
 				'cuilliere_cafe',
 				'cuilliere_dessert',
 				'cuilliere_soupe',
-				'cuilliere_soupe',
 				'verre_liqueur',
 				'verre_moutarde',
 				'tasse_cafe',
