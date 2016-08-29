@@ -1,50 +1,21 @@
-.bold {
-	font-weight: bold;
-}
 
-h2 {
-	margin-top: 0px;
-}
 
-.marginTop15 {
-	margin-top: 15px;
-}
 
-#outOfStock {
-	margin-top: 20px;
-}
-#outOfStock ul {
-	padding-left: 0;
-	list-style-type: none;
-}
-#outOfStock ul li > div {
-	margin-bottom: 3px;
-}
-#outOfStock .form-horizontal .control-label {
-	text-align: left;
-	padding: 0;
-}
 
-#liste-courses {
-	margin-top: 20px;
-}
 
-#liste-courses h3 {
-	margin-top:	0px;
-}
 
-.btn-adding .btn {
-	padding: 1px 8px;
-	min-width: 27px;
+.modal-backdrop {
+	height: 100% !important;
 }
-
-#outofstock_form {
-	height: auto;
-	overflow: hidden;
-}
-
-#outofstock_form.masqued {
-	height: 0;
+.modal-dialog {
+    position: absolute;
+	top: 50px;
+	left: 0;
+    width: 80%;
+	height: 100%;
+	z-index: 10000;
+	overflow-y: auto;
+	margin: 0 10%;
 }
 
 #sortable {
@@ -68,6 +39,47 @@ h2 {
 #sortable > li .btn {
 	color: #fff;
 }
+
+
+
+#outOfStock {
+	margin-top: 20px;
+}
+#outOfStock ul {
+	padding-left: 0;
+	list-style-type: none;
+}
+#outOfStock ul li > div {
+	margin-bottom: 3px;
+}
+#outOfStock .form-horizontal .control-label {
+	text-align: left;
+	padding: 0;
+}
+
+
+/*
+.marginTop15 {
+	margin-top: 15px;
+}
+
+
+
+.btn-adding .btn {
+	padding: 1px 8px;
+	min-width: 27px;
+}
+
+#outofstock_form {
+	height: auto;
+	overflow: hidden;
+}
+
+#outofstock_form.masqued {
+	height: 0;
+}
+
+
 
 #admin-recette #liste_produits {
 	list-style-type: none;
@@ -136,4 +148,4 @@ h2 {
 	.modal-dialog {
 		max-height: 800px;
 	}
-}
+}*/
