@@ -21,6 +21,9 @@ class ListesController extends Controller {
 	public function index() {
         return view('listes-courses.index', [
             'title'			=> 'Liste de courses',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
             'liste'			=> $this->currentListe,
             'produits'		=> Produit::getOutOfStockProducts($this->currentListe->getProductListIds()),
 			'trello_token'	=> config('services.trello.client_token'),
@@ -105,6 +108,10 @@ class ListesController extends Controller {
 
         return view('listes-courses.product_add', [
             'title'			=> 'Ajout d\'un produit à la liste',
+			'breadcrumb'	=> [
+				'Accueil' => url(),
+				'Liste de courses' => url().'/liste-courses'
+			],
             'categories'	=> Categorie::getList()
         ]);
 	}

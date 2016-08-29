@@ -57,22 +57,32 @@ $(document).on('click', '.populate-recipe', function() {
 });
 
 $(document).on('click', '#sumbitRecette', function() {
+
+	// here! complete submitted  repice
+	// http://stackoverflow.com/questions/8151267/jquery-how-can-i-select-a-hidden-field
+
+	var datas = {
+		ajax 				: true,
+		nom					: $('#nom').val(),
+		imgurl				: $('#imgurl').val(),
+		instructions		: $('#instructions').val(),
+		nombre_personnes	: $('#nombre_personnes').val(),
+		temps_preparation	: $('#temps_preparation').val(),
+		temps_cuisson		: $('#temps_cuisson').val(),
+		complement			: $('#complement').val()
+	};
+
+	// produits[]
+	// quantite_'.$produit->produit_id
+	// unite_'.$produit->produit_id
+
 	$.ajax({
 		type:  "POST",
 		url:   "/recettes/add",
 		async: true,
 		cache: false,
 		dataType: "json",
-		data: {
-			ajax 				: true,
-			nom					: $('#nom').val(),
-			imgurl				: $('#imgurl').val(),
-			instructions		: $('#instructions').val(),
-			nombre_personnes	: $('#nombre_personnes').val(),
-			temps_preparation	: $('#temps_preparation').val(),
-			temps_cuisson		: $('#temps_cuisson').val(),
-			complement			: $('#complement').val()
-		},
+		data: datas,
 		beforeSend: function() {
 			$('#result-recette').html('<div class="alert alert-warning">Recherche en cours</div>');
 		},

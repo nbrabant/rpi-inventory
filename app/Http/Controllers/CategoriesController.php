@@ -11,6 +11,12 @@ class CategoriesController extends Controller {
 	{
 		return view('categories.index', [
 			'title'     	=> 'Catégories',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
+			'btnHeading'	=> [
+				'Ajouter' => '<a href="/categories/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
+			],
 			'categories'	=> $categorie->byPosition()->get(),
 			'js_files'		=> ['category.js']
 		]);
@@ -21,6 +27,10 @@ class CategoriesController extends Controller {
 	{
 		return view('categories.show', [
 			'title'     => 'Catégorie : '.$categorie->nom,
+			'breadcrumb'	=> [
+				'Accueil' => url(),
+				'Agenda'  => url().'/recettes',
+			],
 			'categorie'	=> $categorie,
 			'produits'	=> Produit::where('categorie_id', $categorie->id)->get()
 		]);
@@ -41,7 +51,11 @@ class CategoriesController extends Controller {
 		}
 
 		return view('categories.add', [
-			'title'         => 'Ajout d\'une catégorie'
+			'title'         => 'Ajout d\'une catégorie',
+			'breadcrumb'	=> [
+				'Accueil' => url(),
+				'Catégories'  => url().'/categories',
+			],
 		]);
 	}
 
@@ -60,6 +74,10 @@ class CategoriesController extends Controller {
 
         return view('categories.edit', [
             'title'         => 'Edition d\'une catégorie',
+			'breadcrumb'	=> [
+				'Accueil' => url(),
+				'Catégories'  => url().'/categories',
+			],
             'categorie'     => $categorie
         ]);
     }

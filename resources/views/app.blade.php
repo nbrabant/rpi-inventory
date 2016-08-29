@@ -6,15 +6,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-	<link href="/css/app.css" rel="stylesheet">
-	<link href="/css/global.css" rel="stylesheet">
+	<!-- jQuery -->
+    <script src="/js/jquery.min.js"></script>
 
-	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min.js"></script>
 
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery-ui.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="/js/plugins/morris/raphael.min.js"></script>
+    <!-- <script src="/js/plugins/morris/morris.min.js"></script>
+    <script src="/js/plugins/morris/morris-data.js"></script> -->
 
 	@if (isset($js_files) && is_array($js_files) && !empty($js_files))
 		@foreach ($js_files as $js_file)
@@ -22,9 +23,21 @@
 		@endforeach
 	@endif
 
-	<link href="/css/jquery-ui.min.css" rel="stylesheet">
+	<!-- <link href="/css/app.css" rel="stylesheet"> -->
+	<!-- <link href="/css/global.css" rel="stylesheet"> -->
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/sb-admin.css" rel="stylesheet">
+	<link href="/css/plugins/morris.css" rel="stylesheet">
+
+	<!-- Fonts -->
+	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
+
+
+	<!-- <link href="/css/jquery-ui.min.css" rel="stylesheet">
 	<link href="/css/jquery-ui.structure.min.css" rel="stylesheet">
-	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet">
+	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet"> -->
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,11 +51,14 @@
 	</script>
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
+
+	<div id="wrapper">
+
+		<!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 					<span class="sr-only">Toggle Navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -51,51 +67,91 @@
 				<a class="navbar-brand" href="/">Rpi Inventory</a>
 			</div>
 
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
+			<ul class="nav navbar-right top-nav">
+
+			</ul>
+
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
 					<li class="dropdown">
-						<a href="/liste-courses">Liste de courses</a>
+						<a href="/liste-courses">
+							<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Etat des stocks <span class="caret"></span>
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-stock">
+							<i class="fa fa-fw fa-dropbox"></i> Etat des stocks <i class="fa fa-fw fa-caret-down"></i>
 						</a>
-						<ul class="dropdown-menu">
+						<ul id="dropdown-stock" class="collapse">
 							<li><a href="/categories">Catégories</a></li>
 							<li><a href="/produits">Produits</a></li>
 							<li><a href="/consomation">Consomation</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Recettes <span class="caret"></span>
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-recipe">
+							<i class="fa fa-fw fa-cutlery"></i> Recettes <i class="fa fa-fw fa-caret-down"></i>
 						</a>
-						<ul class="dropdown-menu">
+						<ul id="dropdown-recipe" class="collapse">
 							<li><a href="/recettes">Liste des recettes</a></li>
 							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							Agenda <span class="caret"></span>
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-agenda">
+							<i class="fa fa-fw fa-calendar"></i> Agenda <i class="fa fa-fw fa-caret-down"></i>
 						</a>
-						<ul class="dropdown-menu">
+						<ul id="dropdown-agenda" class="collapse">
 							<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
+		</nav>
+
+		<div id="page-wrapper">
+			<div class="container-fluid">
+				<div class="row">
+			        <div class="col-sm-12">
+			            {!! App\Helpers\Messages::render() !!}
+			        </div>
+			    </div>
+
+				<div class="row">
+					<div class="page-header clearfix">
+						<div class="col-md-6">
+							@if (isset($title))
+								<h1>{{ $title }}</h1>
+							@endif
+						</div>
+						<div class="col-md-6">
+							@if (isset($btnHeading))
+								@foreach ($btnHeading as $btn)
+									{!! $btn !!}
+								@endforeach
+							@endif
+						</div>
+					</div>
+
+					<ol class="breadcrumb">
+						@if (isset($breadcrumb))
+							@foreach ($breadcrumb as $label => $uri)
+		                        <li><a href="{{$uri}}">{{$label}}</a></li>
+							@endforeach
+						@endif
+						<li class="active">{{$title}}</li>
+					</ol>
+				</div>
+
+				<div class="row">
+					@yield('content')
+				</div>
+			</div>
 		</div>
-	</nav>
 
-	<div class="row">
-        <div class="col-sm-12">
-            {!! App\Helpers\Messages::render() !!}
-        </div>
-    </div>
-
-	@yield('content')
+	</div>
 
 	<div id="myModal"></div>
+
 </body>
 </html>

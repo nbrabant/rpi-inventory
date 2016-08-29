@@ -59,11 +59,6 @@
 
 					<div class="clearfix">
 						<legend>Liste des ingrédients</legend>
-						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control', 'id' => 'complement')) !!}
-					</div>
-
-					<div class="clearfix">
-						<legend>Liste des ingrédients</legend>
 						@include('recettes.autocomplete')
 						<ul id="liste_produits">
 							@if (count($recipe['produits']) > 0)
@@ -80,6 +75,11 @@
 								@endforeach
 							@endif
 						</ul>
+					</div>
+
+					<div class="clearfix">
+						<legend>Liste des ingrédients à clarifier</legend>
+						{!! Form::textarea('complement', (isset($recipe) ? $recipe['ingredients'] : null), array('class' => 'form-control', 'id' => 'complement')) !!}
 					</div>
 
 					<div class="form-group">

@@ -13,6 +13,12 @@ class RecettesController extends Controller
 	public function index(Recette $recette) {
         return view('recettes.index', [
             'title'     => 'Liste des recettes',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
+			'btnHeading'	=> [
+				'Ajouter' => '<a href="/recettes/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
+			],
             'recettes'  => $recette->all()
         ]);
     }
@@ -20,6 +26,10 @@ class RecettesController extends Controller
 	public function show(Recette $recette) {
 		return view('recettes.show', [
             'title'     	=> $recette->nom,
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Recettes' => url().'/recettes',
+			],
             'recette'		=> $recette,
 			'ingredients' 	=> $recette->produits
         ]);
@@ -68,6 +78,10 @@ class RecettesController extends Controller
 
 		return view('recettes.add', [
             'title'			=> 'Ajout d\'une recette',
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Recettes' => url().'/recettes',
+			],
 			'js_files'		=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js']
         ]);
 	}
@@ -108,6 +122,10 @@ class RecettesController extends Controller
 
 		return view('recettes.edit', [
             'title'		=> 'Edition d\'une recette',
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Recettes' => url().'/recettes',
+			],
 			'js_files'	=> ['plugins/ckeditor/ckeditor.js', 'ckediitor_init.js'],
 			'uniteList' => RecetteProduit::getUniteList(),
 			'recette'   => $recette
@@ -118,6 +136,9 @@ class RecettesController extends Controller
 	{
 		return view('recettes.recherche', [
             'title' 	=> 'Rechercher une recette 750g.com',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
 			'js_files' 	=> ['recettes.js']
         ]);
 	}

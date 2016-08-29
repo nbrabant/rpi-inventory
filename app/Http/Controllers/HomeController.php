@@ -32,7 +32,9 @@ class HomeController extends Controller {
 		 * météo
 		 */
 
-		return view('home');
+		return view('home', [
+			'title'			=> 'Home',
+		]);
 	}
 
 }

@@ -38,7 +38,7 @@
 				@if (count($operations) > 0)
 					<h1>Liste des opérations</h1>
 
-					<table class="table">
+					<table class="table table-bordered table-hover">
 						<thead>
 							<th>
 								<th>Date</th>

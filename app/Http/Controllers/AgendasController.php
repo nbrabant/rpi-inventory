@@ -22,7 +22,13 @@ class AgendasController extends Controller
 		$calendar = new Calendar($dates);
 
 		return view('agendas.index', [
-			'title'		=> 'Agendas',
+			'title'			=> 'Agendas',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
+			'btnHeading'	=> [
+				'Ajouter' => '<a href="/agendas/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
+			],
 			'calendar'	=> Calendar::getInstance()->setAgendas($agenda->with('recette')->byDateInterval($dates)->get())->render(),
 			'produits'	=> Agendaproducts::all()
 		]);
@@ -47,6 +53,10 @@ class AgendasController extends Controller
 
 		return view('agendas.add', [
 			'title' 		=> 'Planification d\'une recette',
+			'breadcrumb'	=> [
+				'Accueil' => url(),
+				'Agenda'  => url().'/agendas',
+			],
 			'js_files'		=> ['bootstrap-datepicker.js', 'agendas.js'],
 			'css_files'		=> ['bootstrap-datepicker.min.css'],
 			'listeRecettes' => Recette::getList(),

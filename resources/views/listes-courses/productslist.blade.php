@@ -1,5 +1,5 @@
 @if (count($liste->lignesproduits) > 0)
-	<table class="table">
+	<table class="table table-bordered table-hover">
 		<thead>
 			<th>
 				<th>Nom</th>

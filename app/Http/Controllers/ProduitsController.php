@@ -11,9 +11,15 @@ class ProduitsController extends Controller {
 
     public function index(Produit $produit) {
         return view('produits.index', [
-            'title'     => 'Administration des produits',
-            'produits'  => $produit->all(),
-            'categories'  => Categorie::byPosition()->get()
+            'title'     	=> 'Administration des produits',
+			'breadcrumb'	=> [
+				'Accueil' => url()
+			],
+			'btnHeading'	=> [
+				'Ajouter' => '<a href="/produits/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
+			],
+            'produits'  	=> $produit->all(),
+            'categories'  	=> Categorie::byPosition()->get()
         ]);
     }
 
@@ -39,7 +45,11 @@ class ProduitsController extends Controller {
 		}
 
 		return view('produits.show', [
-			'title'			=> 'Produit : '.$produit->nom,
+			'title'			=> $produit->nom,
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Produits' => url().'/produits',
+			],
 			'produit'		=> $produit,
 			'operations'	=> $produit->operations()->orderBy('created_at', 'desc')->get()
 		]);
@@ -71,6 +81,10 @@ class ProduitsController extends Controller {
 
         return view('produits.add', [
             'title'			=> 'Ajout d\'un produit',
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Produits' => url().'/produits',
+			],
             'categories'	=> Categorie::getList(),
 			'uniteList'		=> $produit->getUniteList()
         ]);
@@ -98,6 +112,10 @@ class ProduitsController extends Controller {
 
         return view('produits.edit', [
             'title'			=> 'Edition d\'un produit',
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Produits' => url().'/produits',
+			],
             'categories'	=> Categorie::getList(),
             'produit'   	=> $produit,
 			'uniteList'		=> $produit->getUniteList()
@@ -124,7 +142,10 @@ class ProduitsController extends Controller {
 
 	public function consomation(Request $request) {
 		return view('consomation.index', [
-			'title'       => 'Etat des consomations',
+			'title'       => 'Etat des consomations','breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Produits' => url().'/produits',
+			],
 		]);
 	}
 
@@ -132,6 +153,11 @@ class ProduitsController extends Controller {
 	{
 		$return = view('consomation.productdetails', [
 			'title'			=> 'Produit : '.$produit->nom,
+			'breadcrumb'	=> [
+				'Accueil'  => url(),
+				'Produits' => url().'/produits',
+				'Produits' => url().'/produits/'.$produit->id,
+			],
 			'produit' 		=> $produit,
 			'operations'	=> $produit->operations()->orderBy('created_at', 'desc')->get()
 		])->render();
