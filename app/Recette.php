@@ -47,7 +47,7 @@ class Recette extends Model
 		return $this->validators;
 	}
 
-	public static function getList($emptyLine = true)
+	public static function getList($emptyLine = false)
 	{
 		$return = [];
 		if($emptyLine) {

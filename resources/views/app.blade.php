@@ -32,6 +32,12 @@
 	<link href="/css/plugins/morris.css" rel="stylesheet">
 	<link href="/css/global.css" rel="stylesheet">
 
+	@if (isset($css_files) && is_array($css_files) && !empty($css_files))
+		@foreach ($css_files as $css_file)
+			<link href="/css/{{$css_file}}" rel="stylesheet">
+		@endforeach
+	@endif
+
 	<!-- Fonts -->
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->

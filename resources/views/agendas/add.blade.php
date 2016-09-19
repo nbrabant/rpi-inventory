@@ -19,7 +19,7 @@
 		<div class="form-group">
 			{!! Form::label('recette', 'Recette', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::select('recette_id', $listeRecettes, null, array('class' => 'form-control')) !!}
+				{!! Form::select('recette_id', $listeRecettes, null, array('class' => 'form-control select2')) !!}
 			</div>
 		</div>
 

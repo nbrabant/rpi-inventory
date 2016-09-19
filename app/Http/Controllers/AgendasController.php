@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 
 class AgendasController extends Controller
 {
+	private $js_files 	= ['bootstrap-datepicker.js', 'select2.min.js', 'agendas.js'];
+	private $css_files 	= ['bootstrap-datepicker.min.css', 'select2.css'];
+
 	public function index(Agenda $agenda, Request $request)
 	{
 		$dates = [
@@ -57,8 +60,8 @@ class AgendasController extends Controller
 				'Accueil' => url(),
 				'Agenda'  => url().'/agendas',
 			],
-			'js_files'		=> ['bootstrap-datepicker.js', 'agendas.js'],
-			'css_files'		=> ['bootstrap-datepicker.min.css'],
+			'js_files'		=> $this->js_files,
+			'css_files'		=> $this->css_files,
 			'listeRecettes' => Recette::getList(),
 			'listeMoments' 	=> Agenda::getMomentList(),
 		]);
