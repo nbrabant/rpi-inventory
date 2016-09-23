@@ -26,10 +26,12 @@
 		<div class="form-group">
 			{!! Form::label('date_recette', 'Date recette', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('date_recette', null, array('class' => 'form-control datepicker')) !!}
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar"></span>
-				</span>
+				<div class="input-group">
+					{!! Form::text('date_recette', null, array('class' => 'form-control datepicker')) !!}
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
 			</div>
 		</div>
 

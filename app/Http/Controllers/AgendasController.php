@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class AgendasController extends Controller
 {
 	private $js_files 	= ['bootstrap-datepicker.js', 'select2.min.js', 'agendas.js'];
-	private $css_files 	= ['bootstrap-datepicker.min.css', 'select2.css'];
+	private $css_files 	= ['datepicker.css', 'select2.css'];
 
 	public function index(Agenda $agenda, Request $request)
 	{
