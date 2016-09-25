@@ -63,11 +63,7 @@
 			});
 
 			$('#show-outofstock').click(function() {
-				if($('#outofstock_form').hasClass('masqued')) {
-					$('#outofstock_form').removeClass('masqued');
-				} else {
-					$('#outofstock_form').addClass('masqued');
-				}
+				$('#outofstock_form').toggle(500);
 				return false;
 			});
 		});
