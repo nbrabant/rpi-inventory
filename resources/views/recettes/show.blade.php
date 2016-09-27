@@ -25,6 +25,7 @@
 				<div class="col-md-5 bold">Temps de cuisson</div>
 				<div class="col-md-6">{{ $recette->temps_cuisson }}</div>
 			</div>
+
 			@if (count($ingredients) > 0 || !is_null($recette->complement))
 				<div id="liste_produits" class="box clearfix">
 					<div class="col-md-12 bold">Liste des ingrédients</div>
@@ -38,16 +39,20 @@
 					</ul>
 					@endif
 					@if (!is_null($recette->complement))
-						{{ $recette->complement }}
+						{!! $recette->complement !!}
 					@endif
 				</div>
 			@endif
+
 		</div>
 	</div>
-	<div class="clearfix">
-		{!! $recette->instructions !!}
+
+	<div class="panel panel-default clearfix">
+		<div class="panel-body">
+			{!! $recette->instructions !!}
+		</div>
 	</div>
-	
+
 </div>
 
 @endsection

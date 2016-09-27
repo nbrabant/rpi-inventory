@@ -37,14 +37,16 @@
 							</ul>
 							@endif
 							@if (!is_null($recette->complement))
-								{{ $recette->complement }}
+								{!! $recette->complement !!}
 							@endif
 						</div>
 					@endif
 				</div>
 			</div>
-			<div class="clearfix">
-				{!! $recette->instructions !!}
+			<div class="panel panel-default clearfix">
+				<div class="panel-body">
+					{!! $recette->instructions !!}
+				</div>
 			</div>
 		</div>
 		<div class="modal-footer">
