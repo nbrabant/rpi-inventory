@@ -18,6 +18,13 @@
     <!-- <script src="/js/plugins/morris/morris.min.js"></script>
     <script src="/js/plugins/morris/morris-data.js"></script> -->
 
+	<script type="text/javascript" src="/js/plugins/mmenu/jquery.mmenu.all.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('nav#menu').mmenu();
+		});
+	</script>
+
 	@if (isset($js_files) && is_array($js_files) && !empty($js_files))
 		@foreach ($js_files as $js_file)
 			<script src="/js/{{$js_file}}"></script>
@@ -30,6 +37,7 @@
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/sb-admin.css" rel="stylesheet">
 	<link href="/css/plugins/morris.css" rel="stylesheet">
+	<link href="/css/plugins/jquery.mmenu.all.css" rel="stylesheet">
 	<link href="/css/global.css" rel="stylesheet">
 
 	@if (isset($css_files) && is_array($css_files) && !empty($css_files))
@@ -57,62 +65,12 @@
 </head>
 <body>
 
-	<div id="wrapper">
+	<div id="page">
 
-		<!-- Navigation -->
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">Rpi Inventory</a>
-			</div>
-
-			<ul class="nav navbar-right top-nav">
-
-			</ul>
-
-			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav side-nav">
-					<li class="dropdown">
-						<a href="/liste-courses">
-							<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-stock">
-							<i class="fa fa-fw fa-dropbox"></i> Etat des stocks <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-stock" class="collapse">
-							<li><a href="/categories">Catégories</a></li>
-							<li><a href="/produits">Produits</a></li>
-							<li><a href="/consomation">Consomation</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-recipe">
-							<i class="fa fa-fw fa-cutlery"></i> Recettes <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-recipe" class="collapse">
-							<li><a href="/recettes">Liste des recettes</a></li>
-							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-agenda">
-							<i class="fa fa-fw fa-calendar"></i> Agenda <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-agenda" class="collapse">
-							<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</nav>
+		<div class="header">
+			<a href="#menu"><span></span></a>
+			Rpi Inventory
+		</div>
 
 		<div id="page-wrapper">
 			<div class="container-fluid">
@@ -153,6 +111,85 @@
 				</div>
 			</div>
 		</div>
+
+
+		<!-- Navigation -->
+        <nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+			<!-- <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Rpi Inventory</a>
+			</div> -->
+
+			<ul class="nav navbar-right top-nav">
+				<li><a href="#">Accueil</a></li>
+				<li><a href="/liste-courses">
+						<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
+				</li>
+				<li><span><i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</span>
+					<ul>
+						<li><a href="/categories">Catégories</a></li>
+						<li><a href="/produits">Produits</a></li>
+						<li><a href="/consomation">Consomation</a></li>
+					</ul>
+				</li>
+				<li><span><i class="fa fa-fw fa-cutlery"></i> Recettes</span>
+					<ul>
+						<li><a href="/recettes">Liste des recettes</a></li>
+						<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
+					</ul>
+				</li>
+				<li><span><i class="fa fa-fw fa-calendar"></i> Agenda</span>
+					<ul>
+						<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav side-nav">
+					<li class="dropdown">
+						<a href="/liste-courses">
+							<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-stock">
+							<i class="fa fa-fw fa-dropbox"></i> Etat des stocks <i class="fa fa-fw fa-caret-down"></i>
+						</a>
+						<ul id="dropdown-stock" class="collapse">
+							<li><a href="/categories">Catégories</a></li>
+							<li><a href="/produits">Produits</a></li>
+							<li><a href="/consomation">Consomation</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-recipe">
+							<i class="fa fa-fw fa-cutlery"></i> Recettes <i class="fa fa-fw fa-caret-down"></i>
+						</a>
+						<ul id="dropdown-recipe" class="collapse">
+							<li><a href="/recettes">Liste des recettes</a></li>
+							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-agenda">
+							<i class="fa fa-fw fa-calendar"></i> Agenda <i class="fa fa-fw fa-caret-down"></i>
+						</a>
+						<ul id="dropdown-agenda" class="collapse">
+							<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+
 
 	</div>
 

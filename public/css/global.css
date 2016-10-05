@@ -1,8 +1,6 @@
-
-
-
-
-
+body {
+	margin-top: 0;
+}
 
 .modal-backdrop {
 	height: 100% !important;
@@ -57,6 +55,73 @@
 	padding: 0;
 }
 
+
+
+.header, .footer {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 40px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 50px;
+}
+
+.header a:before, .header a:after {
+    content: '';
+    display: block;
+    background: #fff;
+    height: 2px;
+}
+
+.header a {
+    display: block;
+    width: 50px;
+    height: 40px;
+    padding: 11px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.header a span {
+    background: #fff;
+    color: #fff;
+    display: block;
+    height: 2px;
+    margin: 6px 0;
+}
+
+.mm-menu.mm-offcanvas {
+	min-width: 140px;
+}
+
+.mm-panels>.mm-panel>.mm-listview:first-child,
+.mm-panels>.mm-panel>.mm-navbar+.mm-listview {
+    width: 100%;
+}
+
+.mm-panels>.mm-panel>.mm-listview {
+    margin: 0;
+}
+
+.mm-listview>li,
+.mm-listview>li .mm-next,
+.mm-listview>li .mm-next:before,
+.mm-listview>li:after {
+	width: 100%;
+}
+
+.mm-listview>li>span:hover,
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+	color: #000;
+	background-color: #999;
+}
 
 /*
 .marginTop15 {
