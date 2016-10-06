@@ -127,7 +127,7 @@
 			</div> -->
 
 			<ul class="nav navbar-right top-nav">
-				<li><a href="#">Accueil</a></li>
+				<li><a href="/">Accueil</a></li>
 				<li><a href="/liste-courses">
 						<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
 				</li>
