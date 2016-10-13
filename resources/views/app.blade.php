@@ -50,8 +50,6 @@
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
 
-
-
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -115,23 +113,12 @@
 
 		<!-- Navigation -->
         <nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-
-			<!-- <div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">Rpi Inventory</a>
-			</div> -->
-
 			<ul class="nav navbar-right top-nav">
 				<li><a href="/">Accueil</a></li>
 				<li><a href="/liste-courses">
 						<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
 				</li>
-				<li><span><i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</span>
+				<li><span><i class="fa fa-fw fa-dropbox"></i> Etat des stocks</span>
 					<ul>
 						<li><a href="/categories">Catégories</a></li>
 						<li><a href="/produits">Produits</a></li>
@@ -150,46 +137,7 @@
 					</ul>
 				</li>
 			</ul>
-
-			<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav side-nav">
-					<li class="dropdown">
-						<a href="/liste-courses">
-							<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-stock">
-							<i class="fa fa-fw fa-dropbox"></i> Etat des stocks <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-stock" class="collapse">
-							<li><a href="/categories">Catégories</a></li>
-							<li><a href="/produits">Produits</a></li>
-							<li><a href="/consomation">Consomation</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-recipe">
-							<i class="fa fa-fw fa-cutlery"></i> Recettes <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-recipe" class="collapse">
-							<li><a href="/recettes">Liste des recettes</a></li>
-							<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="javascript:;" data-toggle="collapse" data-target="#dropdown-agenda">
-							<i class="fa fa-fw fa-calendar"></i> Agenda <i class="fa fa-fw fa-caret-down"></i>
-						</a>
-						<ul id="dropdown-agenda" class="collapse">
-							<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
 		</nav>
-
-
 
 	</div>
 
