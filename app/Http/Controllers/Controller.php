@@ -15,7 +15,7 @@ abstract class Controller extends BaseController {
 	public function getView($file = '', $datas = [])
 	{
 		$agent = new Agent();
-		if ($agent->isTablet() && View::exists('tablette.'.$file)) {
+		if (($agent->isTablet() || $agent->match('midori')) && View::exists('tablette.'.$file)) {
 			$this->viewName = 'tablette.'.$file;
 		} elseif ($agent->isMobile() && View::exists('mobile.'.$file)) {
 			$this->viewName = 'mobile.'.$file;
