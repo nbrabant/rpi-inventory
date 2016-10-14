@@ -24,7 +24,7 @@ class AgendasController extends Controller
 
 		$calendar = new Calendar($dates);
 
-		return view('agendas.index', [
+		return $this->getView('agendas.index', [
 			'title'			=> 'Agendas',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -54,7 +54,7 @@ class AgendasController extends Controller
 			}
 		}
 
-		return view('agendas.add', [
+		return $this->getView('agendas.add', [
 			'title' 		=> 'Planification d\'une recette',
 			'breadcrumb'	=> [
 				'Accueil' => url(),
@@ -69,7 +69,7 @@ class AgendasController extends Controller
 
 	public function recette(Agenda $agenda, Recette $recette, Request $request)
 	{
-		$return =  view('agendas.recette', [
+		$return =  $this->getView('agendas.recette', [
 			'title'     	=> $recette->nom,
             'agenda'		=> $agenda,
             'recette'		=> $recette,

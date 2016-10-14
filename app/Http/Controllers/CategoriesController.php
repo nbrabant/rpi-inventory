@@ -9,7 +9,7 @@ class CategoriesController extends Controller {
 	/* liste catégories */
 	public function index(Categorie $categorie)
 	{
-		return view('categories.index', [
+		return $this->getView('categories.index', [
 			'title'     	=> 'Catégories',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -25,7 +25,7 @@ class CategoriesController extends Controller {
 	/* produits de la catégorie */
 	public function show(Categorie $categorie)
 	{
-		return view('categories.show', [
+		return $this->getView('categories.show', [
 			'title'     => 'Catégorie : '.$categorie->nom,
 			'breadcrumb'	=> [
 				'Accueil' => url(),
@@ -50,7 +50,7 @@ class CategoriesController extends Controller {
 			}
 		}
 
-		return view('categories.add', [
+		return $this->getView('categories.add', [
 			'title'         => 'Ajout d\'une catégorie',
 			'breadcrumb'	=> [
 				'Accueil' => url(),
@@ -72,7 +72,7 @@ class CategoriesController extends Controller {
 			}
 		}
 
-        return view('categories.edit', [
+        return $this->getView('categories.edit', [
             'title'         => 'Edition d\'une catégorie',
 			'breadcrumb'	=> [
 				'Accueil' => url(),

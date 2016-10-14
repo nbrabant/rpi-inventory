@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ProduitsController extends Controller {
 
     public function index(Produit $produit) {
-        return view('produits.index', [
+        return $this->getView('produits.index', [
             'title'     	=> 'Administration des produits',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -44,7 +44,7 @@ class ProduitsController extends Controller {
             }
 		}
 
-		return view('produits.show', [
+		return $this->getView('produits.show', [
 			'title'			=> $produit->nom,
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -79,7 +79,7 @@ class ProduitsController extends Controller {
             }
         }
 
-        return view('produits.add', [
+        return $this->getView('produits.add', [
             'title'			=> 'Ajout d\'un produit',
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -110,7 +110,7 @@ class ProduitsController extends Controller {
             }
         }
 
-        return view('produits.edit', [
+        return $this->getView('produits.edit', [
             'title'			=> 'Edition d\'un produit',
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -141,7 +141,7 @@ class ProduitsController extends Controller {
 	}
 
 	public function consomation(Request $request) {
-		return view('consomation.index', [
+		return $this->getView('consomation.index', [
 			'title'       => 'Etat des consomations','breadcrumb'	=> [
 				'Accueil'  => url(),
 				'Produits' => url().'/produits',
@@ -151,7 +151,7 @@ class ProduitsController extends Controller {
 
 	public function consomationDetails(Produit $produit, Request $request)
 	{
-		$return = view('consomation.productdetails', [
+		$return = $this->getView('consomation.productdetails', [
 			'title'			=> 'Produit : '.$produit->nom,
 			'breadcrumb'	=> [
 				'Accueil'  => url(),

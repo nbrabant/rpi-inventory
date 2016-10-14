@@ -11,7 +11,8 @@
 		"barryvdh/laravel-dompdf": "0.6.*",
 		"guzzlehttp/guzzle": "~5.3|~6.0",
 		"gregoriohc/laravel-trello": "0.2",
-		"intervention/image": "2.*"
+		"intervention/image": "2.*",
+        "jenssegers/agent": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -19,7 +19,7 @@ class ListesController extends Controller {
 	}
 
 	public function index() {
-        return view('listes-courses.index', [
+        return $this->getView('listes-courses.index', [
             'title'			=> 'Liste de courses',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -60,7 +60,7 @@ class ListesController extends Controller {
 			if(isset($values['ajaxCall']) && $values['ajaxCall'] == true) {
 				return response()->json([
 					'status' 	=> true,
-					'html'		=> (string)view('listes-courses.productslist', [
+					'html'		=> (string)$this->getView('listes-courses.productslist', [
 						'liste' => $this->currentListe
 					])
 				]);
@@ -106,7 +106,7 @@ class ListesController extends Controller {
 			return redirect(url('liste-courses'))->with('success', 'Données mises à jour');
         }
 
-        return view('listes-courses.product_add', [
+        return $this->getView('listes-courses.product_add', [
             'title'			=> 'Ajout d\'un produit à la liste',
 			'breadcrumb'	=> [
 				'Accueil' => url(),

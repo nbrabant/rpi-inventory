@@ -11,7 +11,7 @@ class RecettesController extends Controller
 	private $js_files = ['plugins/ckeditor/ckeditor.js', 'recettes.js'];
 
 	public function index(Recette $recette) {
-        return view('recettes.index', [
+        return $this->getView('recettes.index', [
             'title'     => 'Liste des recettes',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -24,7 +24,7 @@ class RecettesController extends Controller
     }
 
 	public function show(Recette $recette) {
-		return view('recettes.show', [
+		return $this->getView('recettes.show', [
             'title'     	=> $recette->nom,
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -76,7 +76,7 @@ class RecettesController extends Controller
             }
 		}
 
-		return view('recettes.add', [
+		return $this->getView('recettes.add', [
             'title'			=> 'Ajout d\'une recette',
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -120,7 +120,7 @@ class RecettesController extends Controller
             }
 		}
 
-		return view('recettes.edit', [
+		return $this->getView('recettes.edit', [
             'title'		=> 'Edition d\'une recette',
 			'breadcrumb'	=> [
 				'Accueil'  => url(),
@@ -134,7 +134,7 @@ class RecettesController extends Controller
 
 	public function recherche(Recette $recette, Request $request)
 	{
-		return view('recettes.recherche', [
+		return $this->getView('recettes.recherche', [
             'title' 	=> 'Rechercher une recette 750g.com',
 			'breadcrumb'	=> [
 				'Accueil' => url()
@@ -149,7 +149,7 @@ class RecettesController extends Controller
 
 		return response()->json([
 			'status' => true,
-			'html' => view('recettes.searchresult', ['recipes' => $recipes])->render()
+			'html' => $this->getView('recettes.searchresult', ['recipes' => $recipes])->render()
 		]);
 	}
 
@@ -157,7 +157,7 @@ class RecettesController extends Controller
 	{
 		return response()->json([
 			'status' => true,
-			'html' => view('recettes.populate', [
+			'html' => $this->getView('recettes.populate', [
 				'recipe' 	=> $recette->getDetailRecettes($request->url),
 				'title'		=> 'Ajout d\'une recette',
 				'uniteList' => RecetteProduit::getUniteList(),

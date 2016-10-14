@@ -32,7 +32,7 @@ class HomeController extends Controller {
 		 * météo
 		 */
 
-		return view('home', [
+		return $this->getView('home', [
 			'title'			=> 'Home',
 		]);
 	}
