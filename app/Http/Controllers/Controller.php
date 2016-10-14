@@ -23,9 +23,9 @@ abstract class Controller extends BaseController {
 			$this->viewName = 'desktop.'.$file;
 		}
 
-		// if (View::exists('tablette.'.$file)) {
-		// 	$this->viewName = 'tablette.'.$file;
-		// }
+		if (View::exists('tablette.'.$file)) {
+			$this->viewName = 'tablette.'.$file;
+		}
 
 		return view($this->viewName, $datas);
 	}

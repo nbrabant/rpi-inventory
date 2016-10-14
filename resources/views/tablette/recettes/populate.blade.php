@@ -59,7 +59,7 @@
 
 					<div class="clearfix">
 						<legend>Liste des ingrédients</legend>
-						@include('recettes.autocomplete')
+						@include('tablette.recettes.autocomplete')
 						<ul id="liste_produits">
 							@if (count($recipe['produits']) > 0)
 								@foreach ($recipe['produits'] as $produit)

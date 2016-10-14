@@ -1,4 +1,4 @@
-@extends('app')
+@extends('tablette.app')
 
 @section('content')
 
@@ -71,7 +71,7 @@
 				</div>
 			@endif
 
-			@include('recettes.autocomplete')
+			@include('tablette.recettes.autocomplete')
 			<ul id="liste_produits">
 				@if (count($recette->produits) > 0)
 					@foreach ($recette->produits as $produit)

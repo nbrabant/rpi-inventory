@@ -63,7 +63,7 @@
 
 		<div class="clearfix">
 			<legend>Liste des ingrédients</legend>
-			@include('recettes.autocomplete')
+			@include('tablette.recettes.autocomplete')
 			<ul id="liste_produits"></ul>
 		</div>
 

@@ -5,8 +5,8 @@
 <div class="col-md-12">
 	<div class="panel panel-default">
 		<div class="panel-heading clearfix">
-			@include('listes-courses.autocomplete')
-			@include('listes-courses.outofstock')
+			@include('tablette.listes-courses.autocomplete')
+			@include('tablette.listes-courses.outofstock')
 		</div>
 
 		<div class="panel-body">
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div id="liste-courses-products">
-				@include('listes-courses.productslist')
+				@include('tablette.listes-courses.productslist')
 			</div>
 		</div>
 	</div>
