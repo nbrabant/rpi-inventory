@@ -67,7 +67,7 @@
 	<div id="page">
 
 		<div class="header">
-			<a href="#menu"><span class="fa fa-home"></span></a>
+			<a href="/"><span class="fa fa-home"></span></a>
 			Rpi Inventory
 		</div>
 
