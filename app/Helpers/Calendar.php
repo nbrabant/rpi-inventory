@@ -57,7 +57,7 @@ class Calendar
 
 	public function render()
 	{
-		return view('agendas.calendar', [
+		return view('calendar', [
 			'days' 	=> $this->processDays(),
 		]);
 	}

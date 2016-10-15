@@ -111,35 +111,6 @@
 			</div>
 		</div>
 
-
-		<!-- Navigation -->
-        <!-- <nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<ul class="nav navbar-right top-nav">
-				<li><a href="/">Accueil</a></li>
-				<li><a href="/liste-courses">
-						<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</a>
-				</li>
-				<li><span><i class="fa fa-fw fa-dropbox"></i> Etat des stocks</span>
-					<ul>
-						<li><a href="/categories">Catégories</a></li>
-						<li><a href="/produits">Produits</a></li>
-						<li><a href="/consomation">Consomation</a></li>
-					</ul>
-				</li>
-				<li><span><i class="fa fa-fw fa-cutlery"></i> Recettes</span>
-					<ul>
-						<li><a href="/recettes">Liste des recettes</a></li>
-						<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
-					</ul>
-				</li>
-				<li><span><i class="fa fa-fw fa-calendar"></i> Agenda</span>
-					<ul>
-						<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav> -->
-
 	</div>
 
 	<div id="myModal"></div>
