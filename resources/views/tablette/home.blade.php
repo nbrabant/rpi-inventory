@@ -36,27 +36,13 @@
 
 <div class="col-sm-4">
 
-	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" onload="twAjusteHeure(evt)">
 		<title>Horloge analogique SVG</title>
 		<desc>Affiche l’heure en Temps universel coordonné (UTC).</desc>
 		<defs>
 			<line id="oHeure" x1="100" y1="100" x2="100" y2="45" style="stroke-width: 6px; stroke: white;"/>
 			<line id="oMinute" x1="100" y1="100" x2="100" y2="15" style="stroke-width: 4px; stroke: white;"/>
 			<line id="oSeconde" x1="100" y1="100" x2="100" y2="5" style="stroke-width: 2px; stroke: red;"/>
-			<script type="text/javascript">
-
-					function twAjusteHeure(e) {
-						var d = new Date();
-						var s = d.getSeconds();
-						var m = d.getMinutes() + s / 60;
-						var h = d.getHours() + m / 60;
-						var svg = e.target.ownerDocument;
-						svg.getElementById("oSeconde").setAttribute("transform", "rotate(" + (s * 6) + ", 100, 100)");
-						svg.getElementById("oMinute").setAttribute("transform", "rotate(" + (m * 6) + ", 100, 100)");
-						svg.getElementById("oHeure").setAttribute("transform", "rotate(" + (h * 30) + ", 100, 100)");
-					}
-
-			</script>
 		</defs>
 		<g>
 			<circle id="circle" style="stroke: white; fill: transparent;" cx="100" cy="100" r="100"/>
@@ -89,6 +75,21 @@
 			</use>
 		</g>
 	</svg>
+
+	<script type="text/javascript">
+
+		function twAjusteHeure(e) {
+			var d = new Date();
+			var s = d.getSeconds();
+			var m = d.getMinutes() + s / 60;
+			var h = d.getHours() + m / 60;
+			var svg = e.target.ownerDocument;
+			svg.getElementById("oSeconde").setAttribute("transform", "rotate(" + (s * 6) + ", 100, 100)");
+			svg.getElementById("oMinute").setAttribute("transform", "rotate(" + (m * 6) + ", 100, 100)");
+			svg.getElementById("oHeure").setAttribute("transform", "rotate(" + (h * 30) + ", 100, 100)");
+		}
+
+	</script>
 
 </div>
 
