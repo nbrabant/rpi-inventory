@@ -7,27 +7,27 @@
 	<ul id="home_links">
 		<li>
 			<a href="/agendas" class="home_link">
-				<i class="fa fa-fw fa-calendar"></i> Agenda
+				<span><i class="fa fa-fw fa-calendar"></i> Agenda</span>
 			</a>
 		</li>
 		<li>
 			<a href="/recettes" class="home_link">
-				<i class="fa fa-fw fa-cutlery"></i> Recettes
+				<span><i class="fa fa-fw fa-cutlery"></i> Recettes</span>
 			</a>
 		</li>
 		<li>
 			<a href="/liste-courses" class="home_link">
-				<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses
+				<span><i class="fa fa-fw fa-shopping-cart"></i> Liste de courses</span>
 			</a>
 		</li>
 		<li>
 			<a href="/produits" class="home_link">
-				<i class="fa fa-fw fa-cutlery"></i> Produits
+				<span><i class="fa fa-fw fa-cutlery"></i> Produits</span>
 			</a>
 		</li>
 		<li>
 			<a href="/consomation" class="home_link">
-				<i class="fa fa-fw fa-dropbox"></i> Consomation
+				<span><i class="fa fa-fw fa-dropbox"></i> Consomation</span>
 			</a>
 		</li>
 	</ul>

@@ -28,15 +28,24 @@ body {
 }
 
 #home_links > li {
-	border-radius: 10px;
+	border-radius: 8px;
 	border: solid 1px #fff;
-	height: 40px;
+	height: 50px;
 	margin-bottom: 5px;
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
 #home_links > li > a {
 	color: #fff;
+	width: 100%;
+	display: block;
+	padding-top: 10px;
+}
+
+#home_links > li > a > span {
+	margin-left: 10px;
+	margin-top: 10px;
+	font-size: 20px;
 }
 
 .home_link {
