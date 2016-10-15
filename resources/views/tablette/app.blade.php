@@ -35,10 +35,11 @@
 	<link href="/css/jquery-ui.structure.min.css" rel="stylesheet">
 	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet">
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/sb-admin.css" rel="stylesheet">
-	<link href="/css/plugins/morris.css" rel="stylesheet">
+	<!-- <link href="/css/sb-admin.css" rel="stylesheet"> -->
+	<!-- <link href="/css/plugins/morris.css" rel="stylesheet"> -->
 	<link href="/css/plugins/jquery.mmenu.all.css" rel="stylesheet">
-	<link href="/css/global.css" rel="stylesheet">
+	<link href="/css/tablette.css" rel="stylesheet">
+	<!-- <link href="/css/global.css" rel="stylesheet"> -->
 
 	@if (isset($css_files) && is_array($css_files) && !empty($css_files))
 		@foreach ($css_files as $css_file)
@@ -66,7 +67,7 @@
 	<div id="page">
 
 		<div class="header">
-			<a href="#menu"><span></span></a>
+			<a href="#menu"><span class="fa fa-home"></span></a>
 			Rpi Inventory
 		</div>
 
@@ -79,7 +80,7 @@
 			    </div>
 
 				<div class="row">
-					<div class="page-header clearfix">
+					<!-- <div class="page-header clearfix">
 						<div class="col-md-6">
 							@if (isset($title))
 								<h1>{{ $title }}</h1>
@@ -92,16 +93,16 @@
 								@endforeach
 							@endif
 						</div>
-					</div>
+					</div> -->
 
-					<ol class="breadcrumb">
+					<!-- <ol class="breadcrumb">
 						@if (isset($breadcrumb))
 							@foreach ($breadcrumb as $label => $uri)
 		                        <li><a href="{{$uri}}">{{$label}}</a></li>
 							@endforeach
 						@endif
 						<li class="active">{{$title}}</li>
-					</ol>
+					</ol> -->
 				</div>
 
 				<div class="row">
@@ -112,7 +113,7 @@
 
 
 		<!-- Navigation -->
-        <nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- <nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<ul class="nav navbar-right top-nav">
 				<li><a href="/">Accueil</a></li>
 				<li><a href="/liste-courses">
@@ -137,7 +138,7 @@
 					</ul>
 				</li>
 			</ul>
-		</nav>
+		</nav> -->
 
 	</div>
 
