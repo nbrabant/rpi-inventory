@@ -33,6 +33,10 @@ body {
 	height: 100%;
 }
 
+.panel {
+	background-color: transparent;
+}
+
 /* header */
 .header, .footer {
     box-sizing: border-box;
@@ -98,6 +102,11 @@ body {
 }
 
 /* produits */
+#product_bloc {
+	color: #fff;
+	margin-bottom: 10px;
+}
+
 .categorie_produits td.nom {
 	width: 50%;
 }

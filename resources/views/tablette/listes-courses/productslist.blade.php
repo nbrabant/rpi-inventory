@@ -1,17 +1,16 @@
 @if (count($liste->lignesproduits) > 0)
 	<table class="table table-bordered table-hover">
 		<thead>
-			<th>
+			<tr>
 				<th>Nom</th>
 				<th>Quantite</th>
 				<th>Unité / Conditionnement</th>
 				<th class="actions">Actions</th>
-			</th>
+			</tr>
 		</thead>
 		<tbody>
 			@foreach ($liste->lignesproduits as $ligneProduit)
 				<tr>
-					<td></td>
 					<td>{{ $ligneProduit->produit->nom }}</td>
 					<td>
 						<div class="clearfix">

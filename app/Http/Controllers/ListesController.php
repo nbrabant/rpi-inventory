@@ -24,6 +24,11 @@ class ListesController extends Controller {
 			'breadcrumb'	=> [
 				'Accueil' => url()
 			],
+			'linkHeading'	=> [
+				'file-pdf-o' => 'listes-courses/export/pdf',
+				'trello' => 'listes-courses/export/trello',
+				'times' => 'listes-courses/endingList',
+			],
             'liste'			=> $this->currentListe,
             'produits'		=> Produit::getOutOfStockProducts($this->currentListe->getProductListIds()),
 			'trello_token'	=> config('services.trello.client_token'),
