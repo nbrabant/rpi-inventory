@@ -6,13 +6,12 @@
 
 	@if (count($categories) > 0)
 		@foreach ($categories as $categorie)
-			<table class="table table-bordered table-hover">
+			<table class="table table-bordered table-hover table-striped categorie_produits">
 				<thead>
 					<tr>
-						<th colspan="4">{{$categorie->nom}}</th>
+						<th colspan="3">{{$categorie->nom}}</th>
 					</tr>
 					<tr>
-						<th></th>
 						<th>Nom</th>
 						<th>Etat du stock</th>
 						<th class="actions">Actions</th>
@@ -22,18 +21,22 @@
 					@if (count($categorie->produits) > 0)
 						@foreach ($categorie->produits as $produit)
 							<tr>
-								<td>{{ $produit->id }}</td>
-								<td>{{ $produit->nom }}</td>
-								<td class="{{ $produit->getStatus() }}">{{ $produit->quantite }}</td>
-								<td>
-									<a href="/produits/show/{{ $produit->id }}" class="btn btn-xs btn-primary">
-										<span class="glyphicon glyphicon-eye-open"></span> Voir les opérations sur le produits
+								<td class="nom">
+									<a href="/produits/show/{{ $produit->id }}" class="full_size_link">
+										<div>{{ $produit->nom }}</div>
 									</a>
+								</td>
+								<td class="stock {{ $produit->getStatus() }}">
+									<a href="/produits/show/{{ $produit->id }}" class="full_size_link">
+										<div>{{ $produit->quantite }}</div>
+									</a>
+								</td>
+								<td class="actions">
 									<a href="/produits/edit/{{ $produit->id }}" class="btn btn-xs btn-info">
-										<span class="glyphicon glyphicon-edit"></span> Editer
+										<span class="fa fa-edit"></span> Edition
 									</a>
 									<a href="/produits/addToCart/{{ $produit->id }}" class="btn btn-xs btn-success">
-										<span class="glyphicon glyphicon-edit"></span> Ajouter à la liste courante
+										<span class="fa fa-plus"></span> Ajouter à la liste courante
 									</a>
 								</td>
 							</tr>

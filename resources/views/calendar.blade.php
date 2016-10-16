@@ -1,6 +1,6 @@
 <div class="table-responsive">
 
-	<table id="calendar" class="table table-bordered table-hover">
+	<table id="calendar" class="table table-bordered table-hover table-striped">
 		<thead>
 			<tr>
 				<th width="10%"></th>

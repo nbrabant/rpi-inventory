@@ -19,6 +19,9 @@ class RecettesController extends Controller
 			'btnHeading'	=> [
 				'Ajouter' => '<a href="/recettes/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
 			],
+			'linkHeading'	=> [
+				'plus' => '/recettes/add'
+			],
             'recettes'  => $recette->all()
         ]);
     }

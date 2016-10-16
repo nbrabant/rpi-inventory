@@ -32,6 +32,10 @@ class AgendasController extends Controller
 			'btnHeading'	=> [
 				'Ajouter' => '<a href="/agendas/add" class="btn btn-sm btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Ajouter</a>'
 			],
+			'linkHeading'	=> [
+				'plus' => '/agendas/add',
+				'trello' => '/listes-courses/generate',
+			],
 			'calendar'	=> Calendar::getInstance()->setAgendas($agenda->with('recette')->byDateInterval($dates)->get())->render(),
 			'produits'	=> Agendaproducts::all()
 		]);

@@ -66,8 +66,21 @@
 
 	<div id="page">
 
-		<div class="header">
+		<div class="header clearfix">
 			<a href="/"><span class="fa fa-home"></span> Rpi Inventory</a>
+			@if (isset($title))
+				- {{ $title }}
+			@endif
+
+			@if (isset($linkHeading))
+				<div id="headingLinks" class="pull-right text-right">
+					@foreach ($linkHeading as $key => $link)
+						<a href="{!! $link !!}">
+							<span class="fa fa-{{ $key }}"></span>
+						</a>
+					@endforeach
+				</div>
+			@endif
 		</div>
 
 		<div id="page-wrapper">
@@ -77,32 +90,6 @@
 			            {!! App\Helpers\Messages::render() !!}
 			        </div>
 			    </div>
-
-				<div class="row">
-					<!-- <div class="page-header clearfix">
-						<div class="col-md-6">
-							@if (isset($title))
-								<h1>{{ $title }}</h1>
-							@endif
-						</div>
-						<div class="col-md-6">
-							@if (isset($btnHeading))
-								@foreach ($btnHeading as $btn)
-									{!! $btn !!}
-								@endforeach
-							@endif
-						</div>
-					</div> -->
-
-					<!-- <ol class="breadcrumb">
-						@if (isset($breadcrumb))
-							@foreach ($breadcrumb as $label => $uri)
-		                        <li><a href="{{$uri}}">{{$label}}</a></li>
-							@endforeach
-						@endif
-						<li class="active">{{$title}}</li>
-					</ol> -->
-				</div>
 
 				<div class="row">
 					@yield('content')
