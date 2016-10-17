@@ -1,7 +1,7 @@
 <div id="autocomplete_form" class="clearfix">
 	<h2>Rechercher un produit</h2>
 	<div class="clearfix">
-		{!! Form::open(array('class' => 'col-sm-8 form-horizontal', 'url' => 'listes-courses/addProducts')) !!}
+		{!! Form::open(array('class' => 'col-md-8 form-horizontal', 'url' => 'listes-courses/addProducts')) !!}
 		<div class="form-group">
 			{!! Form::label('produits', 'Saisir des premières lettres du produit', array('class' => 'col-md-6 control-label')) !!}
 			<div class="col-md-6">
