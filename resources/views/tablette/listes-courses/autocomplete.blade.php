@@ -9,11 +9,7 @@
 			</div>
 		</div>
 		{!! Form::close() !!}
-		<div id="no-result" class="col-sm-3">
-			<a href="/listes-courses/createproduits" class="btn btn-sm btn-success">
-				<span class="glyphicon glyphicon-plus"></span> Ajouter un produit inexistant à la liste
-			</a>
-		</div>
+		<div id="no-result" class="col-sm-3"></div>
 	</div>
 </div>
 

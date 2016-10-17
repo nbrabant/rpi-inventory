@@ -25,6 +25,7 @@ class ListesController extends Controller {
 				'Accueil' => url()
 			],
 			'linkHeading'	=> [
+				'plus' => '/listes-courses/createproduits',
 				'file-pdf-o' => 'listes-courses/export/pdf',
 				'trello' => 'listes-courses/export/trello',
 				'times' => 'listes-courses/endingList',
