@@ -116,3 +116,37 @@ body {
 .categorie_produits td.actions {
 	width: 30%;
 }
+
+/* out of stock panel */
+#outOfStock {
+	background-color: rgba(255,255,255,0.2);
+    border-radius: 7px;
+	border: solid 1px #fff;
+}
+
+#outOfStock #links {
+	list-style-type: none;
+	padding-left: 0;
+	margin-top: 20px;
+}
+
+#outOfStock #links > a {
+    position: relative;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border: solid 2px #fff;
+	border-radius: 15px;
+	margin-right: 5px;
+	color: #fff;
+}
+
+#outOfStock #links > a > span {
+	position: absolute;
+	top: 7px;
+	left: 7px;
+}
+
+#outofstock-form {
+	list-style-type: none;
+}

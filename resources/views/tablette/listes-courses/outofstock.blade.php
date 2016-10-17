@@ -4,32 +4,27 @@
 			<div class="col-sm-8">
 				<h2>{!!count($produits)!!} produits en rupture de stock : </h2>
 			</div>
-			<div class="col-sm-4">
-				<a href="#" id="show-outofstock" class="btn btn-sm btn-default pull-right">Voir la liste</a>
+			<div id="links" class="col-sm-4 pull-right text-right">
+				<a href="#" id="btn-check" class="hide">
+					<span class="glyphicon glyphicon-check"></span>
+				</a>
+				<a href="#" id="btn-uncheck">
+					<span class="glyphicon glyphicon-unchecked"></span>
+				</a>
+				<a href="#" id="show-outofstock">
+					<span class="fa fa-eye-slash"></span>
+				</a>
 			</div>
 		</div>
 
 		<div id="outofstock_form" class="clearfix masqued">
-			<div class="clearfix">
-				<div class="col-sm-4">
-					<a href="#" id="btn-check" class="btn btn-sm btn-success">
-						<span class="glyphicon glyphicon-check"></span> Tout cocher
-					</a>
-					<a href="#" id="btn-uncheck" class="btn btn-sm btn-success">
-						<span class="glyphicon glyphicon-unchecked"></span> Tout décocher
-					</a>
-				</div>
-			</div>
-
 			{!! Form::open(array('class' => 'form-horizontal', 'url' => 'listes-courses/addProducts')) !!}
 				<ul id="outofstock-form">
 					@foreach ($produits as $produit)
 					<li class="col-sm-6">
 						<div class="form-group">
-							<div class="col-md-1">
-								{!! Form::checkbox('produits[]', $produit->id, array('class' => 'form-control')) !!}
-							</div>
-							{!! Form::label('produits', $produit->nom.' ('.$produit->quantite.(!is_null($produit->unite) ? ' '.$produit->unite : '').' en stock)', array('class' => 'col-md-11 control-label')) !!}
+							{!! Form::checkbox('produits[]', $produit->id, array('class' => 'form-control')) !!}
+							{!! Form::label('produits', $produit->nom.' ('.$produit->quantite.(!is_null($produit->unite) ? ' '.$produit->unite : '').' en stock)', array('class' => 'control-label')) !!}
 						</div>
 					</li>
 					@endforeach
@@ -52,6 +47,8 @@
 						$(this).click();
 					}
 				});
+				$('#btn-check').addClass('hide');
+				$('#btn-uncheck').removeClass('hide');
 				return false;
 			});
 
@@ -59,11 +56,18 @@
 				$('#outofstock-form input').each(function(){
 					$(this).attr('checked', false);
 				});
+				$('#btn-uncheck').addClass('hide');
+				$('#btn-check').removeClass('hide');
 				return false;
 			});
 
 			$('#show-outofstock').click(function() {
 				$('#outofstock_form').toggle(500);
+				if ($('#show-outofstock span').hasClass('fa-eye')) {
+					$('#show-outofstock span').removeClass('fa-eye').addClass('fa-eye-slash')
+				} else {
+					$('#show-outofstock span').removeClass('fa-eye-slash').addClass('fa-eye')
+				}
 				return false;
 			});
 		});
