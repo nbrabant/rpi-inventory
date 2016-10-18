@@ -13,12 +13,15 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
 
-	<!-- Keyboard -->
-	<script src="/js/plugins/keyboard/jquery.keyboard.js"></script>
-	<script src="/js/plugins/keyboard/jquery.keyboard.extension-typing.min.js"></script>
-	<script src="/js/plugins/keyboard/jquery.keyboard.extension-autocomplete.min.js"></script>
-	<script src="/js/plugins/keyboard/jquery.keyboard.extension-caret.min.js"></script>
-	<script src="/js/keyboard.js"></script>
+
+	@if (isset($userAgent) && $userAgent->match('midori'))
+		<!-- Keyboard -->
+		<script src="/js/plugins/keyboard/jquery.keyboard.js"></script>
+		<script src="/js/plugins/keyboard/jquery.keyboard.extension-typing.min.js"></script>
+		<script src="/js/plugins/keyboard/jquery.keyboard.extension-autocomplete.min.js"></script>
+		<script src="/js/plugins/keyboard/jquery.keyboard.extension-caret.min.js"></script>
+		<script src="/js/keyboard.js"></script>
+	@endif
 
 	@if (isset($js_files) && is_array($js_files) && !empty($js_files))
 		@foreach ($js_files as $js_file)
