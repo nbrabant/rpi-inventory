@@ -3,7 +3,7 @@
 		<div class="form-group">
 			{!! Form::label('produits', 'Saisir des premières lettres de l\'ingrédient', array('class' => 'col-md-6 control-label')) !!}
 			<div class="col-md-6">
-				{!! Form::text('produit', '', array('id' => 'autocomplete', 'class' => 'form-control text-keyboard')) !!}
+				{!! Form::text('produit', '', array('id' => 'autocomplete', 'class' => 'form-control autocomplete-keyboard')) !!}
 			</div>
 		</div>
 	</div>

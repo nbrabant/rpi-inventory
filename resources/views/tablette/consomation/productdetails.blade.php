@@ -82,7 +82,7 @@
 		<div class="form-group">
 			{!! Form::label('quantite', 'Quantité', array('class' => 'col-md-4 control-label')) !!}
 			<div class="col-md-6">
-				{!! Form::text('quantite', null, array('class' => 'form-control text-keyboard')) !!}
+				{!! Form::text('quantite', null, array('class' => 'form-control number-keyboard')) !!}
 			</div>
 		</div>
 

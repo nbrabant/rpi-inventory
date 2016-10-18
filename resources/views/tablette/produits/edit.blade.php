@@ -40,7 +40,7 @@
 		<div class="form-group">
 			{!! Form::label('quantite_min', 'Quantité minimum', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('quantite_min', null, array('class' => 'form-control text-keyboard')) !!}
+				{!! Form::text('quantite_min', null, array('class' => 'form-control number-keyboard')) !!}
 			</div>
 		</div>
 

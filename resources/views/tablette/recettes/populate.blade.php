@@ -46,14 +46,14 @@
 					<div class="form-group">
 						{!! Form::label('temps_preparation', 'Temps de preparation', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('temps_preparation', (isset($recipe) ? $recipe['temps_preparation'] : null), array('class' => 'form-control text-keyboard', 'id' => 'temps_preparation')) !!}
+							{!! Form::text('temps_preparation', (isset($recipe) ? $recipe['temps_preparation'] : null), array('class' => 'form-control number-keyboard', 'id' => 'temps_preparation')) !!}
 						</div>
 					</div>
 
 					<div class="form-group">
 						{!! Form::label('temps_cuisson', 'Temps de cuisson', array('class' => 'col-md-4 control-label')) !!}
 						<div class="col-md-6">
-							{!! Form::text('temps_cuisson', (isset($recipe) ? $recipe['temps_cuisson'] : null), array('class' => 'form-control text-keyboard', 'id' => 'temps_cuisson')) !!}
+							{!! Form::text('temps_cuisson', (isset($recipe) ? $recipe['temps_cuisson'] : null), array('class' => 'form-control number-keyboard', 'id' => 'temps_cuisson')) !!}
 						</div>
 					</div>
 
@@ -67,7 +67,7 @@
 										<div class="clearfix">
 											<a class="col-sm-2 btn btn-xs btn-sm btn-danger delete_product">supprimer</a>
 											<input type="hidden" name="produits[]" value="{{ $produit['id'] }}">
-											<input class="col-sm-2 text-keyboard" type="text" name="quantite_{{ $produit['id'] }}" value="{{ $produit['quantite'] }}">
+											<input class="col-sm-2 number-keyboard" type="text" name="quantite_{{ $produit['id'] }}" value="{{ $produit['quantite'] }}">
 											{!! Form::select('unite_'.$produit['id'], $uniteList, $produit['unite'], array('class' => 'col-sm-2')) !!}
 											<span class="col-sm-6">{{ $produit['nom'] }}</span>
 										</div>

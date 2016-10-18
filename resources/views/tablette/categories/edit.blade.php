@@ -25,7 +25,7 @@
 		<div class="form-group">
 			{!! Form::label('position', 'Position', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('position', null, array('class' => 'form-control text-keyboard')) !!}
+				{!! Form::text('position', null, array('class' => 'form-control number-keyboard')) !!}
 			</div>
 		</div>
 
