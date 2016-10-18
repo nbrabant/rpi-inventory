@@ -23,7 +23,7 @@ abstract class Controller extends BaseController {
 			$this->viewName = 'desktop.'.$file;
 		}
 
-		$data['userAgent'] = $agent;
+		$datas['userAgent'] = $agent;
 
 		return view($this->viewName, $datas);
 	}
