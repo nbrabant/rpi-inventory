@@ -5,7 +5,7 @@
 		<div class="form-group">
 			{!! Form::label('produits', 'Saisir des premières lettres du produit', array('class' => 'col-md-6 control-label')) !!}
 			<div class="col-md-6">
-				{!! Form::text('produit', '', array('id' => 'autocomplete', 'class' => 'form-control')) !!}
+				{!! Form::text('produit', '', array('id' => 'autocomplete', 'class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 		{!! Form::close() !!}

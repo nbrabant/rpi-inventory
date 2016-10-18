@@ -13,17 +13,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="/js/plugins/morris/raphael.min.js"></script>
-    <!-- <script src="/js/plugins/morris/morris.min.js"></script>
-    <script src="/js/plugins/morris/morris-data.js"></script> -->
-
-	<script type="text/javascript" src="/js/plugins/mmenu/jquery.mmenu.all.min.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			$('nav#menu').mmenu();
-		});
-	</script>
+	<!-- Keyboard -->
+	<script src="/js/plugins/keyboard/jquery.keyboard.js"></script>
+	<script src="/js/keyboard.js"></script>
 
 	@if (isset($js_files) && is_array($js_files) && !empty($js_files))
 		@foreach ($js_files as $js_file)
@@ -35,11 +27,9 @@
 	<link href="/css/jquery-ui.structure.min.css" rel="stylesheet">
 	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet">
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
-	<!-- <link href="/css/sb-admin.css" rel="stylesheet"> -->
-	<!-- <link href="/css/plugins/morris.css" rel="stylesheet"> -->
-	<link href="/css/plugins/jquery.mmenu.all.css" rel="stylesheet">
+	<link href="/css/plugins/keyboard-dark.min.css" rel="stylesheet">
+
 	<link href="/css/tablette.css" rel="stylesheet">
-	<!-- <link href="/css/global.css" rel="stylesheet"> -->
 
 	@if (isset($css_files) && is_array($css_files) && !empty($css_files))
 		@foreach ($css_files as $css_file)
@@ -49,15 +39,7 @@
 
 	<!-- Fonts -->
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<!-- <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'> -->
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-	<!-- Scripts -->
 	<script type="text/javascript">
 		var baseURL = '{{URL::to('/')}}'
 	</script>

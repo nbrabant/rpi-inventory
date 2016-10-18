@@ -26,21 +26,21 @@
 		<div class="form-group">
 			{!! Form::label('nom', 'Nom', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('nom', null, array('class' => 'form-control')) !!}
+				{!! Form::text('nom', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('description', 'Description', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::textarea('description', null, array('class' => 'form-control')) !!}
+				{!! Form::textarea('description', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('quantite_min', 'Quantité minimum', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('quantite_min', null, array('class' => 'form-control')) !!}
+				{!! Form::text('quantite_min', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 

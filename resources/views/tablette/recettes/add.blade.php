@@ -19,7 +19,7 @@
 		<div class="form-group">
 			{!! Form::label('nom', 'Nom', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('nom', null, array('class' => 'form-control')) !!}
+				{!! Form::text('nom', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
@@ -43,21 +43,21 @@
 		<div class="form-group">
 			{!! Form::label('nombre_personnes', 'Nombre de personnes', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('nombre_personnes', null, array('class' => 'form-control')) !!}
+				{!! Form::text('nombre_personnes', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('temps_preparation', 'Temps de preparation', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('temps_preparation', null, array('class' => 'form-control')) !!}
+				{!! Form::text('temps_preparation', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
 			{!! Form::label('temps_cuisson', 'Temps de cuisson', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('temps_cuisson', null, array('class' => 'form-control')) !!}
+				{!! Form::text('temps_cuisson', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 

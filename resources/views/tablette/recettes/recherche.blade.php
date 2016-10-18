@@ -11,7 +11,7 @@
 		<div class="panel-heading clearfix">
 			<div class="clearfix">
 				<legend>Saisir le nom de la recette ou une liste d'ingrédients</legend>
-				{!! Form::text('ingredients', null, array('id' => 'liste-ingredients', 'class' => 'form-control')) !!}
+				{!! Form::text('ingredients', null, array('id' => 'liste-ingredients', 'class' => 'form-control text-keyboard')) !!}
 				{!! Form::button('Rechercher', array('id' => 'search-recettes', 'class' => 'form-control btn btn-primary')) !!}
 			</div>
 		</div>

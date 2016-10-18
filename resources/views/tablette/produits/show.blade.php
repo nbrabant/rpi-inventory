@@ -82,14 +82,14 @@
 	<div class="form-group">
 		{!! Form::label('quantite', 'Quantité', array('class' => 'col-md-3 control-label')) !!}
 		<div class="col-md-9">
-			{!! Form::text('quantite', null, array('class' => 'form-control')) !!}
+			{!! Form::text('quantite', null, array('class' => 'form-control text-keyboard')) !!}
 		</div>
 	</div>
 
 	<div class="form-group">
 		{!! Form::label('detail', 'Détail', array('class' => 'col-md-3 control-label')) !!}
 		<div class="col-md-9">
-			{!! Form::text('detail', null, array('class' => 'form-control')) !!}
+			{!! Form::text('detail', null, array('class' => 'form-control text-keyboard')) !!}
 		</div>
 	</div>
 

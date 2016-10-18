@@ -19,13 +19,13 @@
 		<div class="form-group">
 			{!! Form::label('nom', 'Nom', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('nom', null, array('class' => 'form-control')) !!}
+				{!! Form::text('nom', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 		<div class="form-group">
 			{!! Form::label('position', 'Position', array('class' => 'col-md-3 control-label')) !!}
 			<div class="col-md-9">
-				{!! Form::text('position', null, array('class' => 'form-control')) !!}
+				{!! Form::text('position', null, array('class' => 'form-control text-keyboard')) !!}
 			</div>
 		</div>
 
