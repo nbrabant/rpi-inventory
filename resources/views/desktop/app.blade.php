@@ -35,6 +35,7 @@
 	<link href="/css/jquery-ui.structure.min.css" rel="stylesheet">
 	<link href="/css/jquery-ui.theme.min.css" rel="stylesheet">
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
+
 	<link href="/css/sb-admin.css" rel="stylesheet">
 	<link href="/css/plugins/morris.css" rel="stylesheet">
 	<link href="/css/plugins/jquery.mmenu.all.css" rel="stylesheet">
