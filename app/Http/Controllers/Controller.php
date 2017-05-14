@@ -25,7 +25,8 @@ abstract class Controller extends BaseController {
 
 		$datas['userAgent'] = $agent;
 
-		return view($this->viewName, $datas);
+		// return view($this->viewName, $datas);
+		return view('layout', $datas);
 	}
 
 }
