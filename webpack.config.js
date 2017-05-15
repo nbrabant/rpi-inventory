@@ -84,38 +84,7 @@ module.exports = {
 	plugins: plugins,
 
 	output: {
-		path: path.resolve(__dirname, 'public'),
+		path: path.resolve(__dirname, 'public/build'),
 		filename: 'private.bundle.js',
 	},
 };
-
-// var config = require(path.join(__dirname, 'webpack-common'))
-
-// for (var i = 0; i < config.length; ++i) {
-//     withSourceMap = false
-//
-//     config[i].plugins.unshift(new webpack.DefinePlugin({
-//         'process.env': {
-//             'NODE_ENV': JSON.stringify('development'),
-//         }
-//     }))
-//
-//     for (var j = 0; j < config[i].module.loaders.length; ++j) {
-//         if (config[i].module.loaders[j].hasOwnProperty('loader')) {
-//             if (config[i].module.loaders[j].loader === 'css' || config[i].module.loaders[j].loader === 'sass') {
-//                 config[i].module.loaders[j].loader += '?sourceMap'
-//             }
-//         } else if (config[i].module.loaders[j].hasOwnProperty('loaders')) {
-//             for (var k = 0; k < config[i].module.loaders[j].loaders.length; ++k) {
-//                 if (config[i].module.loaders[j].loaders[k] === 'css' || config[i].module.loaders[j].loaders[k] === 'sass') {
-//                     config[i].module.loaders[j].loaders[k] += '?sourceMap'
-//                 }
-//             }
-//         }
-//     }
-//
-//     config[i].devtool = 'source-map'
-//
-// }
-
-// module.exports = config

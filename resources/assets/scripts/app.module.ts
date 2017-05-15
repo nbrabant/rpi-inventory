@@ -8,6 +8,8 @@ import { routes } from './app.routing';
 
 // components
 import { AppComponent } from './app.component';
+import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
+import { MenuBar } from "./components/ui/menubar/menubar.component";
 
 @NgModule({
 	imports: [
@@ -18,7 +20,10 @@ import { AppComponent } from './app.component';
             useHash: true
         })
 	],
-	declarations: [],
+	declarations: [
+		AppComponent,
+		ProgressBar
+	],
 	providers: [],
 	bootstrap:[
         AppComponent
