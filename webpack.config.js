@@ -27,27 +27,33 @@ let plugins = [
 	),
 	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ExtractTextPlugin('styles/app-[hash].css'),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //     name: 'vendor'
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: ['main', 'vendor', 'polyfills']
+    }),
     new ManifestPlugin({
         fileName: 'rev-manifest.json'
 	})
 ];
 
 module.exports = {
-	resolve: {
-		modules: [
-			"node_modules"
-		],
-		extensions: [".js", ".json", ".ts", ".css"],
+	entry: {
+		polyfills: 	path.resolve(__dirname, 'resources/assets/scripts/core', 'polyfills.ts'),
+		vendor: 	path.resolve(__dirname, 'resources/assets/scripts/core', 'vendor.ts') //,
+		// main: 		path.resolve(__dirname, 'resources/assets/scripts', 'main.ts')
+		// , styles:	'./resources/assets/less/app.less'
 	},
 
-	entry: [
-		'./resources/assets/scripts/core/vendor.ts',
-		'./resources/assets/scripts/main.ts',
-		'./resources/assets/less/app.less'
-	],
+	stats: {
+        children: false
+	},
+
+	externals: {
+        'jquery': 'jQuery'
+	},
+
+	resolve: {
+		extensions: [".js", ".ts"],
+	},
 
 	module: {
         rules: [
@@ -56,28 +62,29 @@ module.exports = {
 		        loaders: [
 		          	{
 			            loader: 'awesome-typescript-loader',
-			            options: { configFileName: path.resolve(__dirname, 'resources/assets/scripts/config', 'tsconfig.json') }
+			            options: {
+							configFileName: path.resolve(__dirname, 'resources/assets/scripts/config', 'tsconfig.json')
+						}
 		          	} , 'angular2-template-loader'
 		        ]
-		  	},
-			{
+		 	}, {
 		        test: /\.html$/,
 		        loader: 'html-loader'
-		    },
-		    {
+		    }, {
 		        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
 		        loader: 'file-loader?name=assets/[name].[hash].[ext]'
-		    },
-			{
+		    }, {
 			    test: /\.css$/,
 				// exclude: path.resolve(__dirname, 'app'),
-			    loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
-			},
-	      	{
+			    loader: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader?sourceMap'
+				})
+			}, {
 		        test: /\.css$/,
 		        // include: path.resolve(__dirname, 'app'),
 		        loader: 'raw-loader'
-	      	}
+	    	}
 		],
     },
 
@@ -86,5 +93,6 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'public/build'),
 		filename: 'private.bundle.js',
+		// chunkFilename: 'js/chunks/[name].[chunkhash].js'
 	},
 };
