@@ -7,6 +7,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var ManifestPlugin = require('webpack-manifest-plugin');
 var webpack = require('webpack');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 let plugins = [
 	new WebpackNotifierPlugin(),
 	new CleanWebpackPlugin([
@@ -16,7 +18,10 @@ let plugins = [
 		'public/fonts/hashed'
 	]),
     new webpack.ProvidePlugin({
-        '__decorate': 'typescript-decorate',
+		$: 'jquery',
+        'jQuery': 'jquery',
+        'window.jQuery': 'jquery',
+		'__decorate': 'typescript-decorate',
         '__extends': 'typescript-extends',
         '__param': 'typescript-param',
         '__metadata': 'typescript-metadata'
@@ -27,9 +32,9 @@ let plugins = [
 	),
 	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new ExtractTextPlugin('styles/app-[hash].css'),
-    new webpack.optimize.CommonsChunkPlugin({
-        name: ['main', 'vendor', 'polyfills']
-    }),
+	new webpack.optimize.CommonsChunkPlugin({
+		names: ['main', 'vendor', 'polyfills']
+	}),
     new ManifestPlugin({
         fileName: 'rev-manifest.json'
 	})
@@ -38,17 +43,15 @@ let plugins = [
 module.exports = {
 	entry: {
 		polyfills: 	path.resolve(__dirname, 'resources/assets/scripts/core', 'polyfills.ts'),
-		vendor: 	path.resolve(__dirname, 'resources/assets/scripts/core', 'vendor.ts') //,
-		// main: 		path.resolve(__dirname, 'resources/assets/scripts', 'main.ts')
-		// , styles:	'./resources/assets/less/app.less'
+		vendor: 	path.resolve(__dirname, 'resources/assets/scripts/core', 'vendor.ts'),
+		main: 		path.resolve(__dirname, 'resources/assets/scripts', 'main.ts'),
+		style: 		path.resolve(__dirname, 'resources/assets/scss', 'app.scss')
 	},
+
+	devtool: isProduction ? 'source-map' : false,
 
 	stats: {
         children: false
-	},
-
-	externals: {
-        'jquery': 'jQuery'
 	},
 
 	resolve: {
@@ -63,36 +66,37 @@ module.exports = {
 		          	{
 			            loader: 'awesome-typescript-loader',
 			            options: {
-							configFileName: path.resolve(__dirname, 'resources/assets/scripts/config', 'tsconfig.json')
+							configFileName: path.resolve(__dirname, 'tsconfig.json')
 						}
 		          	} , 'angular2-template-loader'
 		        ]
 		 	}, {
-		        test: /\.html$/,
-		        loader: 'html-loader'
-		    }, {
-		        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-		        loader: 'file-loader?name=assets/[name].[hash].[ext]'
-		    }, {
-			    test: /\.css$/,
+				test: /\.html$/,
+				loader: 'html-loader'
+			}, {
+				test: /\.scss$/,
 				// exclude: path.resolve(__dirname, 'app'),
-			    loader: ExtractTextPlugin.extract({
+				loader: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: 'css-loader?sourceMap'
 				})
 			}, {
-		        test: /\.css$/,
-		        // include: path.resolve(__dirname, 'app'),
-		        loader: 'raw-loader'
-	    	}
+                test: /\.(gif|png|jpg|jpeg|svg)($|\?)/,
+                loaders: 'url?limit=10000&name=images/hashed/[name].[hash].[ext]',
+                exclude: /node_modules/
+            }, {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                loader: 'url?limit=10000&name=fonts/hashed/[name].[hash].[ext]',
+                exclude: /node_modules/
+			}
 		],
     },
 
 	plugins: plugins,
 
 	output: {
-		path: path.resolve(__dirname, 'public/build'),
-		filename: 'private.bundle.js',
-		// chunkFilename: 'js/chunks/[name].[chunkhash].js'
-	},
+        path: path.resolve(__dirname, 'public/build'),
+        filename: 'js/[name].[chunkhash].js',
+        chunkFilename: 'js/chunks/[name].[chunkhash].js'
+	}
 };

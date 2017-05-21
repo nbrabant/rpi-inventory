@@ -8,8 +8,10 @@ import { routes } from './app.routing';
 
 // components
 import { AppComponent } from './app.component';
-// import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
-// import { MenuBar } from "./components/ui/menubar/menubar.component";
+import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
+import { MenuBar } from "./components/ui/menubar/menubar.component";
+
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 @NgModule({
 	imports: [
@@ -22,8 +24,9 @@ import { AppComponent } from './app.component';
 	],
 	declarations: [
 		AppComponent,
-		// ProgressBar,
-		// MenuBar
+		ProgressBar,
+		MenuBar,
+		DashboardComponent
 	],
 	providers: [],
 	bootstrap:[
