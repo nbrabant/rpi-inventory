@@ -1,6 +1,6 @@
-<nav id="menu" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav id="menu" class="navbar navbar-inverse navbar-fixed-left" role="navigation">
 	<ul class="nav navbar-right top-nav">
-		<li><a href="/">Accueil</a></li>
+		<li><a [routerLink]="['/']">Accueil</a></li>
 		<li>
 			<a href="/liste-courses">
 				<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses
@@ -8,7 +8,7 @@
 		</li>
 		<li><span><i class="fa fa-fw fa-dropbox"></i> Etat des stocks</span>
 			<ul>
-				<li><a href="/categories">Catégories</a></li>
+				<li><a [routerLink]="['/categories']">Catégories</a></li>
 				<li><a href="/produits">Produits</a></li>
 				<li><a href="/consomation">Consomation</a></li>
 			</ul>

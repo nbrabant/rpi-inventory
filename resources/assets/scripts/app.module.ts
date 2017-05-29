@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
 import { MenuBar } from "./components/ui/menubar/menubar.component";
 
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 @NgModule({
 	imports: [
@@ -25,8 +24,7 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 	declarations: [
 		AppComponent,
 		ProgressBar,
-		MenuBar,
-		DashboardComponent
+		MenuBar
 	],
 	providers: [],
 	bootstrap:[
