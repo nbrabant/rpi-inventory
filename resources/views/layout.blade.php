@@ -33,6 +33,6 @@
 <script src="{{ elixir('polyfills.js', '') }}"></script>
 <script src="{{ elixir('vendor.js', '') }}"></script>
 <script src="{{ elixir('main.js', '') }}"></script>
-<script src="{{ elixir('style.css', '') }}"></script>
+<script src="{{ elixir('style.js', '') }}"></script>
 
 </html>

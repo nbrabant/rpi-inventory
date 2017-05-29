@@ -75,19 +75,20 @@ module.exports = {
 				loader: 'html-loader'
 			}, {
 				test: /\.scss$/,
-				// exclude: path.resolve(__dirname, 'app'),
-				loader: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader?sourceMap'
-				})
+				loaders: ['style-loader', 'css-loader', 'sass-loader']
 			}, {
                 test: /\.(gif|png|jpg|jpeg|svg)($|\?)/,
                 loaders: 'url?limit=10000&name=images/hashed/[name].[hash].[ext]',
                 exclude: /node_modules/
-            }, {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-                loader: 'url?limit=10000&name=fonts/hashed/[name].[hash].[ext]',
-                exclude: /node_modules/
+			}, {
+				test: /\.(woff|woff2?|ttf|eot|svg)$/,
+				loader: 'file-loader',
+				query: {
+                    name: '[name].[ext]',
+                }
+			}, {
+				test: /bootstrap\/dist\/js\/umd\//,
+				loader: 'imports?jQuery=jquery'
 			}
 		],
     },
