@@ -6,10 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routing';
 
-// components
+// ui components
 import { AppComponent } from './app.component';
 import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
 import { MenuBar } from "./components/ui/menubar/menubar.component";
+
+// app components
+import { DashboardComponent } from "./components/app/dashboard/dashboard.component";
+import { CategoriesComponent } from "./components/app/categories/categories.component";
 
 
 @NgModule({
@@ -24,7 +28,9 @@ import { MenuBar } from "./components/ui/menubar/menubar.component";
 	declarations: [
 		AppComponent,
 		ProgressBar,
-		MenuBar
+		MenuBar,
+		DashboardComponent,
+		CategoriesComponent
 	],
 	providers: [],
 	bootstrap:[
