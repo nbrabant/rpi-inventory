@@ -1,28 +1,58 @@
-<nav id="menu" class="navbar navbar-inverse navbar-fixed-left" role="navigation">
-	<ul class="nav navbar-right top-nav">
-		<li><a [routerLink]="['/']">Accueil</a></li>
-		<li>
-			<a href="/liste-courses">
-				<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses
-			</a>
-		</li>
-		<li><span><i class="fa fa-fw fa-dropbox"></i> Etat des stocks</span>
-			<ul>
-				<li><a [routerLink]="['/categories']">Catégories</a></li>
-				<li><a href="/produits">Produits</a></li>
-				<li><a href="/consomation">Consomation</a></li>
-			</ul>
-		</li>
-		<li><span><i class="fa fa-fw fa-cutlery"></i> Recettes</span>
-			<ul>
-				<li><a href="/recettes">Liste des recettes</a></li>
-				<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
-			</ul>
-		</li>
-		<li><span><i class="fa fa-fw fa-calendar"></i> Agenda</span>
-			<ul>
-				<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
-			</ul>
-		</li>
-	</ul>
-</nav>
+<div class="left_col scroll-view">
+
+	<div class="navbar nav_title" style="border: 0;">
+		<a class="site_title" [routerLink]="['/']">
+			<i class="fa fa-paw"></i>
+			<span>Rpi inventory</span>
+		</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+		<ul class="nav side-menu">
+			<li><a [routerLink]="['/']">Accueil</a></li>
+			<li>
+				<a href="/liste-courses">
+					<i class="fa fa-fw fa-shopping-cart"></i> Liste de courses
+				</a>
+			</li>
+			<li menulink>
+				<a class="dropdown">
+					<span class="fa fa-fw fa-dropbox"></span>
+					Etat des stocks
+					<span class="fa fa-chevron-down"></span>
+				</a>
+				<ul class="nav child_menu">
+					<li><a [routerLink]="['/categories']">Catégories</a></li>
+					<li><a href="/produits">Produits</a></li>
+					<li><a href="/consomation">Consomation</a></li>
+				</ul>
+			</li>
+			<li menulink>
+				<a class="dropdown">
+					<i class="fa fa-fw fa-cutlery"></i>
+					Recettes
+					<span class="fa fa-chevron-down"></span>
+				</a>
+				<ul class="nav child_menu">
+					<li><a href="/recettes">Liste des recettes</a></li>
+					<li><a href="/recettes/recherche">Rechercher une recette à partir d'ingrédients</a></li>
+				</ul>
+			</li>
+			<li menulink>
+				<a class="dropdown">
+					<i class="fa fa-fw fa-calendar"></i>
+					Agenda
+					<span class="fa fa-chevron-down"></span>
+				</a>
+				<ul class="nav child_menu">
+					<li><a href="/agendas">Gérer les recettes de la semaine</a></li>
+				</ul>
+			</li>
+		</ul>
+
+	</div>
+
+</div>

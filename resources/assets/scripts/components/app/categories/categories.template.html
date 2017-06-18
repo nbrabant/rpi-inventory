@@ -1,3 +1,20 @@
-<menubar></menubar>
+<div class="clearfix">
 
-Catégories
+	<h1>{{title}}</h1>
+	<ul id="sortable" class="categories">
+		<li *ngFor="let category of categories" class="ui-state-default clearfix">
+			<div class="col-sm-1">
+				<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+			</div>
+			<div class="col-sm-7">
+				{{ category.id }} - {{ category.nom }}
+			</div>
+			<div class="col-sm-4">
+				<a href="/categories/edit/{{ category.id }}" class="btn btn-sm btn-info">
+					<span class="glyphicon glyphicon-edit"></span> Editer
+				</a>
+			</div>
+		</li>
+	</ul>
+
+</div>

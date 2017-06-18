@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     'selector': 'app',
-    'template': `<router-outlet></router-outlet>`
+    'template': require('./app.template.html')
 })
 export class AppComponent {
     constructor () {}

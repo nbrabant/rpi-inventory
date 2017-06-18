@@ -2,30 +2,30 @@
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Categorie extends Eloquent {
+class Category extends Eloquent {
 
     protected $table = 'categories';
 
 	//columns
-    protected $fillable = [
-		'nom',
-		'position'
-	];
+    // protected $fillable = [
+	// 	'nom',
+	// 	'position'
+	// ];
 
-	protected $validators = [
-		'nom' 		=> 'required',
-		'position' 	=> 'required',
-	];
+	// protected $validators = [
+	// 	'nom' 		=> 'required',
+	// 	'position' 	=> 'required',
+	// ];
 
     //hierarchical
 	public function produits() {
 		return $this->hasMany('App\Produit');
 	}
 
-	public function getValidators()
-	{
-		return $this->validators;
-	}
+	// public function getValidators()
+	// {
+	// 	return $this->validators;
+	// }
 
 	//scope functions
 	public function scopeByPosition($query, $order = 'ASC') {

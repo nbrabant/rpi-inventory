@@ -19,7 +19,7 @@
     >
 </head>
 
-<body>
+<body class="nav-md">
 	<app>
 		<div class="loading-placeholder-wrapper">
 		    <div class="loading-placeholder-inner-wrapper">

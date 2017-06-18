@@ -3,11 +3,11 @@
 Route::get('', 'Assets@getIndex');
 
 Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
-	Route::get('/', 'Assets@getIndex');
-    Route::get('back/private.built.js', 'Assets@getBuildJs');
-    Route::get('back/private.built.js.map', 'Assets@getBuildJsMap');
+	// Route::get('/', 'Assets@getIndex');
+    // Route::get('back/private.built.js', 'Assets@getBuildJs');
+    // Route::get('back/private.built.js.map', 'Assets@getBuildJsMap');
 
-	Route::resource('categories', 	'CategoriesController');
+	Route::resource('categories', 	'Categories');
 });
 
 // Route::bind('categorie', function ($id) {
