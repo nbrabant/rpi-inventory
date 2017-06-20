@@ -81,11 +81,8 @@ module.exports = {
                 loaders: 'url?limit=10000&name=images/hashed/[name].[hash].[ext]',
                 exclude: /node_modules/
 			}, {
-				test: /\.(woff|woff2?|ttf|eot|svg)$/,
-				loader: 'file-loader',
-				query: {
-                    name: '[name].[ext]',
-                }
+				test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+    			use: "url-loader?limit=100000"
 			}, {
 				test: /bootstrap\/dist\/js\/umd\//,
 				loader: 'imports?jQuery=jquery'
