@@ -8,6 +8,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
     // Route::get('back/private.built.js.map', 'Assets@getBuildJsMap');
 
 	Route::resource('categories', 	'Categories');
+	Route::resource('products', 	'Products');
 });
 
 // Route::bind('categorie', function ($id) {

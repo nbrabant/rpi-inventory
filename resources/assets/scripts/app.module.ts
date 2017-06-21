@@ -19,9 +19,11 @@ import { MenulinkDirective } from "./components/ui/menubar/menulink.directive";
 // app components
 import { DashboardComponent } from "./components/app/dashboard/dashboard.component";
 import { CategoriesComponent } from "./components/app/categories/categories.component";
+import { ProductsComponent } from "./components/app/products/products.component";
 
 // app services
 import { CategoryService } from "./services/category.service";
+import { ProductService } from "./services/product.service";
 
 
 
@@ -41,10 +43,12 @@ import { CategoryService } from "./services/category.service";
 		MenuBar,
 		MenulinkDirective,
 		DashboardComponent,
-		CategoriesComponent
+		CategoriesComponent,
+		ProductsComponent
 	],
 	providers: [
-		CategoryService
+		CategoryService,
+		ProductService
 	],
 	bootstrap:[
         AppComponent

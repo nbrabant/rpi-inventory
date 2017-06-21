@@ -8,14 +8,14 @@ import { Category } from '../class/category';
 @Injectable()
 export class CategoryService {
 
-	private categoriesUrl = 'api/categories';  // URL to web api
+	private apiUrl = 'api/categories';  // URL to web api
 
     constructor (private http: Http) {
         this.http = http;
 	}
 
 	getCategories(): Promise<Category> {
-		return this.http.get(this.categoriesUrl)
+		return this.http.get(this.apiUrl)
 			.toPromise()
 			.then(response => response.json().data as Category);
 			// .catch(this.handleError);

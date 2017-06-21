@@ -18,8 +18,8 @@ class Category extends Eloquent {
 	// ];
 
     //hierarchical
-	public function produits() {
-		return $this->hasMany('App\Produit');
+	public function products() {
+		return $this->hasMany('App\Product');
 	}
 
 	// public function getValidators()
