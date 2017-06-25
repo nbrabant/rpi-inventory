@@ -29,8 +29,8 @@
 					<span class="fa fa-chevron-down"></span>
 				</a>
 				<ul class="nav child_menu">
-					<li><a [routerLink]="['/categories']" [routerLinkActive]="active">Catégories</a></li>
-					<li><a [routerLink]="['/products']" [routerLinkActive]="active">Produits</a></li>
+					<li><a [routerLink]="['/categories']">Catégories</a></li>
+					<li><a [routerLink]="['/products']">Produits</a></li>
 					<li><a href="/consomation">Consomation</a></li>
 				</ul>
 			</li>

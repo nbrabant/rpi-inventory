@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NavbarModule } from './components/ui/navbar';
 
 import { routes } from './app.routing';
 
@@ -11,10 +12,10 @@ import { routes } from './app.routing';
 import { AppComponent } from './app.component';
 import { AppContainer } from './components/ui/app-container/app-container.component';
 import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component";
-import { MenuBar } from "./components/ui/menubar/menubar.component";
+// import { MenuBar } from "./components/ui/menubar/menubar.component";
 
 // app directives
-import { MenulinkDirective } from "./components/ui/menubar/menulink.directive";
+// import { MenulinkDirective } from "./components/ui/menubar/menulink.directive";
 
 // app components
 import { DashboardComponent } from "./components/app/dashboard/dashboard.component";
@@ -32,6 +33,7 @@ import { ProductService } from "./services/product.service";
         BrowserModule,
         FormsModule,
         HttpModule,
+		NavbarModule,
         RouterModule.forRoot(routes, {
             useHash: true
         })
@@ -40,8 +42,8 @@ import { ProductService } from "./services/product.service";
 		AppComponent,
 		AppContainer,
 		ProgressBar,
-		MenuBar,
-		MenulinkDirective,
+		// MenuBar,
+		// MenulinkDirective,
 		DashboardComponent,
 		CategoriesComponent,
 		ProductsComponent

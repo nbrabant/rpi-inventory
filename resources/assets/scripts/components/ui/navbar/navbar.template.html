@@ -1,0 +1,22 @@
+<nav class="navbar left_col scroll-view"
+	[attr.aria-expanded]="!isCollapsed" [ngClass]="{collapse: isCollapsed}">
+
+	<div class="navbar nav_title" style="border: 0;">
+		<a class="site_title" [routerLink]="['/']">
+			<i class="fa fa-paw"></i>
+			<span>Rpi inventory</span>
+		</a>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+		<tree-view
+			[root]="true"
+			[menuItems]="menuItems">
+		</tree-view>
+
+	</div>
+
+</nav>
