@@ -7,7 +7,7 @@
 		routerLinkActive="active"
 		[routerLinkActiveOptions]="{exact: true}">
 			<span class="fa fa-fw {{menuItem.icon}}"></span> {{menuItem.name}}
-			<span *ngIf="menuItem.children" class="fa fa-chevron-down"></span>
+			<span *ngIf="menuItem.children" class="fa fa-chevron-right"></span>
 		</a>
 
 		<tree-view *ngIf="menuItem.children"

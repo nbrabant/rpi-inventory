@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Product } from '../../../class/product';
+import { Product, Products } from '../../../class/product';
 import { ProductService } from '../../../services/product.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
 	/**
      * @type {Product}
      */
-    products: Product[];
+    products: Products;
 
 	constructor (
         @Inject(Router) router: Router,

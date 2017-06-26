@@ -1,4 +1,4 @@
-export class Product {
+export interface Product {
 	id: number;
 	categorie_id: number;
 	nom: string;
@@ -7,3 +7,5 @@ export class Product {
 	quantite_min: string;
 	unite: string;
 }
+
+export declare type Products = Product[];

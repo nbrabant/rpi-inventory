@@ -12,10 +12,10 @@ export class TreeViewDirective {
 	@Input() myHidden: boolean;
 
 	ngOnInit() {
-		console.log(
-			this.myHidden,
-			this.el
-		)
+		// console.log(
+		// 	this.myHidden,
+		// 	this.el
+		// )
 	}
 
 	@HostListener('click') onMouseEnter() {

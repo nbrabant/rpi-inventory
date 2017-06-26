@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Category } from '../../../class/category';
+import { Category, Categories } from '../../../class/category';
 import { CategoryService } from '../../../services/category.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class CategoriesComponent implements OnInit {
 	/**
      * @type {Category}
      */
-    categories: Category[];
+    categories: Categories;
 
 	constructor (
         @Inject(Router) router: Router,
@@ -29,10 +29,10 @@ export class CategoriesComponent implements OnInit {
         this.router = router;
 	}
 
-	getCategories() {
+	getCategories(): void {
 		this.categoryService
 			.getCategories()
-	  		.then(categories => this.categories = categories);
+			.then(categories => this.categories = categories);
 	}
 
 	ngOnInit(): void {

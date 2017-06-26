@@ -26,7 +26,7 @@ import { ProductsComponent } from "./components/app/products/products.component"
 import { CategoryService } from "./services/category.service";
 import { ProductService } from "./services/product.service";
 
-
+declare var Promise: any;
 
 @NgModule({
 	imports: [
