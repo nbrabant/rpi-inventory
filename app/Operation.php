@@ -16,7 +16,7 @@ class Operation extends Eloquent {
 
 	//hierarchical
 	public function produit() {
-		return $this->belongsTo('App\Produit');
+		return $this->belongsTo('App\Product');
 	}
 
 	public function sumProductQuantity() {

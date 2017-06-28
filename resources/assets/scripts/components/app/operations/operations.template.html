@@ -1,0 +1,30 @@
+<div class="clearfix">
+
+	<h1>{{title}}</h1>
+
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Détail</th>
+				<th>Type d'opération</th>
+				<th>Quantité</th>
+				<th class="actions">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let operation of operations">
+				<td>{{ operation.created_at }}</td>
+				<td>{{ operation.detail }}</td>
+				<td>{{ operation.operation == '+' ? 'ajout' : 'retrait' }}</td>
+				<td>{{ operation.quantite }}</td>
+				<td>
+					<a href="/categories/edit/{{ operation.id }}" class="btn btn-sm btn-info">
+						<span class="glyphicon glyphicon-edit"></span> Editer
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

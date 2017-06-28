@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from "./components/app/dashboard/dashboard.component";
 import { CategoriesComponent } from "./components/app/categories/categories.component";
 import { ProductsComponent } from "./components/app/products/products.component";
+import { OperationsComponent } from "./components/app/operations/operations.component";
 
 
 export const routes: Routes = [
@@ -19,9 +20,8 @@ export const routes: Routes = [
 		path: 'products',
 		component: ProductsComponent
 	}, {
-		// @TODO
         path: 'stocks',
-        component: ProductsComponent
+        component: OperationsComponent
 	}, {
 		// @TODO
 		path: 'recettes',

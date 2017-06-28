@@ -21,10 +21,12 @@ import { ProgressBar } from "./components/ui/progress-bar/progress-bar.component
 import { DashboardComponent } from "./components/app/dashboard/dashboard.component";
 import { CategoriesComponent } from "./components/app/categories/categories.component";
 import { ProductsComponent } from "./components/app/products/products.component";
+import { OperationsComponent } from "./components/app/operations/operations.component";
 
 // app services
 import { CategoryService } from "./services/category.service";
 import { ProductService } from "./services/product.service";
+import { OperationService } from "./services/operation.service";
 
 declare var Promise: any;
 
@@ -46,11 +48,13 @@ declare var Promise: any;
 		// MenulinkDirective,
 		DashboardComponent,
 		CategoriesComponent,
-		ProductsComponent
+		ProductsComponent,
+		OperationsComponent
 	],
 	providers: [
 		CategoryService,
-		ProductService
+		ProductService,
+		OperationService
 	],
 	bootstrap:[
         AppComponent

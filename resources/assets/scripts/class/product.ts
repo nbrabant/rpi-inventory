@@ -6,6 +6,7 @@ export interface Product {
 	quantite: string;
 	quantite_min: string;
 	unite: string;
+	// readonly category: string;
 }
 
 export declare type Products = Product[];

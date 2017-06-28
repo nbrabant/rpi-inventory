@@ -9,6 +9,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'Api'], function () {
 
 	Route::resource('categories', 	'Categories');
 	Route::resource('products', 	'Products');
+	Route::resource('operations', 	'Operations');
 });
 
 // Route::bind('categorie', function ($id) {
