@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Image;
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\CrawlerTraitHelper;
 
-class Recette extends Model
+class Recipe extends Model
 {
 	use CrawlerTraitHelper;
 
