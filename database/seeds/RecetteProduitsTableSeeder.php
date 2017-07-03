@@ -1,10 +1,10 @@
 <?php
 
-use App\Produit;
-use App\RecetteProduit;
+use App\Model\Product;
+use App\Model\RecipeProduct;
 use Illuminate\Database\Seeder;
 
-class RecetteProduitsTableSeeder extends Seeder
+class RecipeProductsTableSeeder extends Seeder
 {
 
 	private $_datasToSeed = [
@@ -134,7 +134,7 @@ class RecetteProduitsTableSeeder extends Seeder
     public function run()
     {
         foreach ($this->_datasToSeed as $datas) {
-			$produit = Produit::where('nom', 'LIKE', $datas['produit'])->first();
+			$produit = Product::where('nom', 'LIKE', $datas['produit'])->first();
 			if(is_null($produit)) {
 				continue;
 			}
@@ -149,7 +149,7 @@ class RecetteProduitsTableSeeder extends Seeder
 				$recetteProduit['unite'] = $datas['unite'];
 			}
 
-			RecetteProduit::create($recetteProduit);
+			RecipeProduct::create($recetteProduit);
 		}
     }
 }
