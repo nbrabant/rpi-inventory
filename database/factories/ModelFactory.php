@@ -11,26 +11,14 @@
 |
 */
 
-//$factory->define(App\User::class, function ($faker) {
-//    return [
-//        'name' => $faker->name,
-//        'email' => $faker->email,
-//        'password' => str_random(10),
-//        'remember_token' => str_random(10),
-//    ];
-//});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\User::class, function (Faker\Generator $faker) {
+    static $password;
 
-$factory->define(App\Categorie::class, function ($faker) {
-	return [
-		'nom' => rand(1, 12)
-	];
-});
-
-$factory->define(App\Operation::class, function ($faker) {
-	return [
-		'produit_id'	=> rand(1, 50),
-		'quantite'		=> rand(0, 5),
-		'operation'		=> ((rand(1, 10) % 2) == 1 ? '+' : '-'),
-		'detail'		=> str_random( rand(5, 32) )
-	];
+    return [
+        'name' => $faker->name,
+        'email' => $faker->unique()->safeEmail,
+        'password' => $password ?: $password = bcrypt('secret'),
+        'remember_token' => str_random(10),
+    ];
 });
