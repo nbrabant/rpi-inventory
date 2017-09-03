@@ -1,6 +1,12 @@
 <template>
-    <div class="container">
-        <div class="row">
+    <div class="wrapper">
+
+        <html-sidebar></html-sidebar>
+
+        <div class="main-panel">
+
+            <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
+
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Example Component</div>
@@ -10,6 +16,8 @@
                     </div>
                 </div>
             </div>
+
+            <html-pagefooter></html-pagefooter>
         </div>
     </div>
 </template>
@@ -18,6 +26,18 @@
     export default {
         mounted() {
             console.log('Component mounted.')
-        }
+        },
+
+        data: function() {
+            return {
+                breadcrumbs: [],
+            }
+        },
+
+        events: {
+            'set-breadcrumbs': function (msg) {
+                this.breadcrumbs = msg
+            }
+        },
     }
 </script>
