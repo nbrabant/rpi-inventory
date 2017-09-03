@@ -1,5 +1,222 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+:root {
+  --red-lightest: #fcebec;
+  --red-lighter: #e69a9c;
+  --red-light: #ff5439;
+  --red: #e83134;
+  --red-dark: #a32324;
+  --red-darker: #63010e;
+  --red-darkest: #3d0109;
+  --orange-lightest: #ffe5ca;
+  --orange-lighter: #f5b180;
+  --orange-light: #e77636;
+  --orange: #e14a0c;
+  --orange-dark: #711f03;
+  --orange-darker: #581902;
+  --orange-darkest: #391102;
+  --yellow-lightest: #f7e8d4;
+  --yellow-lighter: #f7d1a1;
+  --yellow-light: #f6d169;
+  --yellow: #fbbd1a;
+  --yellow-dark: #b06f1c;
+  --yellow-darker: #734d00;
+  --yellow-darkest: #422c00;
+  --blue-lightest: #e5f4f8;
+  --blue-lighter: #a7dceb;
+  --blue-light: #0faace;
+  --blue: #13869e;
+  --blue-dark: #11727f;
+  --blue-darker: #202f53;
+  --blue-darkest: #262835;
+  --green-lightest: #cce9e5;
+  --green-lighter: #bfe3de;
+  --green-light: #a9d6d0;
+  --green: #5ebbae;
+  --green-dark: #40988c;
+  --green-darker: #287368;
+  --green-darkest: #13463f;
+  --gray-lightest: #ededf5;
+  --gray-lighter: #cdcdda;
+  --gray-light: #afb3bd;
+  --gray: #ababbb;
+  --gray-dark: #53575e;
+  --gray-darker: #23272f;
+  --gray-darkest: #1a1e25;
+  --color: #fff;
+  --dashboard-background-color: var(--gray-darkest);
+  --tile-background-color: var(--gray-darker);
+}
+
+:root {
+  --grid-gap: 1.5vw;
+  --grid-padding: 1vw;
+}
+
+:root {
+  --font-family: 'Raleway', sans-serif;
+  --font-weight: 400;
+  --font-weight-light: 400;
+  --font-weight-bold: 600;
+  --font-weight-black: 900;
+  --font-size-base: 1.5vw;
+  --font-size-xxs: .65rem;
+  --font-size-xs: .8rem;
+  --font-size-s: .9rem;
+  --font-size-default: 1rem;
+  --font-size-m: 1.1rem;
+  --font-size-l: 2rem;
+  --font-size-xl: 3rem;
+  --font-size-xxl: 4rem;
+}
+
+.h-background-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: calc(5vh + 5vw);
+  background-repeat: no-repeat;
+  opacity: .2;
+}
+
+.h-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-position: center;
+  background-size: 1em;
+  background-repeat: no-repeat;
+  content: '';
+  vertical-align: middle;
+}
+
+.h-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+* {
+  position: relative;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-weight: var(--font-weight);
+  font-style: normal;
+  font-size: var(--font-size-base);
+  font-family: var(--font-family);
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  margin-bottom: .5em;
+  color: var(--gray-light);
+  text-transform: uppercase;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-m);
+}
+
+h2 {
+  font-weight: var(--font-weight-black);
+}
+
+li {
+  padding: .35vh 0;
+  border-bottom: solid 2px rgba(255, 255, 255, 0.2);
+}
+
+.dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  padding: var(--grid-gap);
+  width: 100%;
+  height: 100%;
+  background-color: var(--dashboard-background-color);
+  color: var(--color);
+  grid-gap: var(--grid-gap);
+}
+
+.tile {
+  overflow: hidden;
+  padding: var(--grid-padding);
+  border-radius: .25vw;
+  background-color: var(--tile-background-color);
+  color: white;
+  text-shadow: 1px 1px 1px var(--tile-background-color);
+}
+
+.tile--blue {
+  --tile-background-color: var(--blue-darker);
+}
+
+.tile--green {
+  --tile-background-color: var(--green-darker);
+}
+
+.tile--orange {
+  --tile-background-color: var(--orange);
+}
+
+.tile--overflow:after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 1px;
+  -webkit-box-shadow: 0 0 0.5em 0.5em var(--tile-background-color);
+          box-shadow: 0 0 0.5em 0.5em var(--tile-background-color);
+  content: '';
+}
+
+.tile--red {
+  --tile-background-color: var(--red);
+}
+
+.tile--transparent {
+  --tile-background-color: var(--dashboard-background-color);
+  border: solid 1px var(--tile-background-color);
+}
+
+.tile--yellow {
+  --tile-background-color: var(--yellow);
+  color: black;
+}
+
+.tile > * {
+  height: 100%;
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
