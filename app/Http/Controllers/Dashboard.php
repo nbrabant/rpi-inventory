@@ -10,14 +10,4 @@ class Dashboard extends Controller
     {
         return view('layout');
     }
-
-    public function getBuildJs()
-    {
-        // return response()->download(base_path('public/build/private.built.js'));
-    }
-
-    public function getBuildJsMap()
-    {
-        // return response()->download(base_path('public/build/private.built.js'));
-    }
 }

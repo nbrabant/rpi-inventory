@@ -14,18 +14,18 @@
     </head>
 
     <body>
-
-        @yield('content')
+        <div id="app">
+            <dashboard>
+                <div class="loading-placeholder-wrapper">
+                    <div class="loading-placeholder-inner-wrapper">
+                        <span class="loading-placeholder">Loading...</span>
+                    </div>
+                </div>
+            </dashboard>
+        </div>
 
         <script src="{{ mix('js/app.js') }}"></script>
 
-        <app>
-            <div class="loading-placeholder-wrapper">
-                <div class="loading-placeholder-inner-wrapper">
-                    <span class="loading-placeholder">Loading...</span>
-                </div>
-            </div>
-        </app>
     </body>
 
 </html>
