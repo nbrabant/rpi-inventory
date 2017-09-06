@@ -2,8 +2,6 @@
 import VueRouter from 'vue-router';
 Vue.use(VueRouter)
 
-import DashboardIndex from './../components/app/dashboard/Index.vue';
-
 // Configure vue-router
 var router = new VueRouter({
     linkActiveClass: 'active',
@@ -23,7 +21,7 @@ var router = new VueRouter({
                 {
                     name: 'dashboard',
                     path: '/',
-                    component: DashboardIndex
+                    component: require('./../components/app/dashboard/Index.vue')
                 }
             ]
         }

@@ -6,10 +6,6 @@ var webpack = require('webpack')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .version()
 
-    // .options({
-    //     processCssUrls: false,
-    // })
-
     .webpackConfig({
 
         entry: [
@@ -20,10 +16,9 @@ var webpack = require('webpack')
             './resources/assets/js/init/vue-router.js',
             // 'scripts/init/vue-directives.js',
             // 'scripts/init/vue-filters.js',
-            // 'scripts/init/vue-resources.js',
             './resources/assets/js/app.js',
-            // './resources/assets/js/boostrap.js',
             './resources/assets/sass/app.scss',
+            'font-awesome/scss/font-awesome.scss',
         ],
 
         module: {
