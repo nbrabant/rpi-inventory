@@ -3,14 +3,18 @@ import './bootstrap.js';
 
 import Echo from 'laravel-echo';
 import Vue from 'vue';
-// import VueRouter from 'vue-router';
 
 import App from './components/app/App';
 
+import router from './init/vue-router'
 
 new Vue({
 
     el: '#app',
+
+    router: router,
+
+    use: VueRouter,
 
     components: {
         App
@@ -22,4 +26,4 @@ new Vue({
         this.echo = new Echo(options);
     },
 
-});
+}).$mount('#app');

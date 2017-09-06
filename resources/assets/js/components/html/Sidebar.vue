@@ -11,11 +11,11 @@
             </div>
 
             <ul class="nav">
-                <li v-for="route in routes" v-link-active>
-                    <a v-link="route.route">
+                <li v-for="route in routes">
+                    <router-link :to="{ name: route.route }">
                         <i :class="'fa fa-' + route.icon"></i>
                         <p>{{ route.title }}</p>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
 
@@ -34,7 +34,7 @@
             return {
                 routes: [
                     {
-                        route: '/dashboard',
+                        route: 'dashboard',
                         title: 'Tableau de bord',
                         icon: 'pie-chart',
                     },

@@ -1,20 +1,8 @@
 const { mix } = require('laravel-mix');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
 var webpack = require('webpack')
 
-mix
-    .js('resources/assets/js/app.js', 'public/js')
+ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .version()
 
@@ -29,12 +17,13 @@ mix
             'vue-router',
             './resources/assets/js/plugins/light-bootstrap-dashboard.js',
             './resources/assets/js/init/vue-components.js',
-            './resources/assets/js/app.js',
-            './resources/assets/sass/app.scss',
+            './resources/assets/js/init/vue-router.js',
             // 'scripts/init/vue-directives.js',
             // 'scripts/init/vue-filters.js',
             // 'scripts/init/vue-resources.js',
-            // 'scripts/init/vue-router.js',
+            './resources/assets/js/app.js',
+            // './resources/assets/js/boostrap.js',
+            './resources/assets/sass/app.scss',
         ],
 
         module: {
