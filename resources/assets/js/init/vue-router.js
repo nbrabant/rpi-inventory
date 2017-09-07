@@ -24,6 +24,19 @@ var router = new VueRouter({
                     component: require('./../components/app/dashboard/Index.vue')
                 }
             ]
+        },
+        {
+            path: '/categories',
+            component : {
+                template: '<div><template-index route="/categories" title="Catégories" icon="list-alt"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'categories',
+                    path: '/',
+                    component: require('./../components/app/categories/List.vue')
+                }
+            ]
         }
     ]
 });

@@ -21,9 +21,9 @@ new Vue({
     },
 
     created() {
-        let options = {};
-
-        this.echo = new Echo(options);
+        // let options = {};
+        //
+        // this.echo = new Echo(options);
     },
 
 }).$mount('#app');

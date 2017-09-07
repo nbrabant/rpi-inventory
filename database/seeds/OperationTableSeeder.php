@@ -1,6 +1,6 @@
 <?php
 
-use App\Operation;
+use App\Models\Operation;
 use Illuminate\Database\Seeder;
 
 class OperationTableSeeder extends Seeder {

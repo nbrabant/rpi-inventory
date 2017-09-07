@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Image;
 use Illuminate\Database\Eloquent\Model;
-use App\Helpers\CrawlerTraitHelper;
+// use App\Helpers\CrawlerTraitHelper;
 
 class Recipe extends Model
 {
-	use CrawlerTraitHelper;
+	// use CrawlerTraitHelper;
 
 	protected $table = 'recettes';
 

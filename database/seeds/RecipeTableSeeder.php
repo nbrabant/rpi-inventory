@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Recipe;
+use App\Models\Recipe;
 use Illuminate\Database\Seeder;
 
 class RecipeTableSeeder extends Seeder

@@ -1,5 +1,6 @@
 const { mix } = require('laravel-mix');
 
+var path = require('path')
 var webpack = require('webpack')
 
  mix.js('resources/assets/js/app.js', 'public/js')
@@ -42,9 +43,6 @@ var webpack = require('webpack')
                 // moment: 'moment',
                 Vue: 'vue',
                 VueRouter: 'vue-router',
-                // RestCore: 'scripts/rest/core.js',
-                // RestList: 'scripts/rest/list.js',
-                // RestShow: 'scripts/rest/show.js',
             }),
         ],
 

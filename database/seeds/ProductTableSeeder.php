@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\Product;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class ProductTableSeeder extends Seeder {
@@ -171,7 +171,7 @@ class ProductTableSeeder extends Seeder {
 					'categorie_id' 	=> $categoryId,
 					'nom' 			=> $name,
 					'quantite' 		=> '0',
-					'unite' 		=> ($unite !== '---' ? $unite : null),
+					'unite' 		=> null, //($unite !== '---' ? $unite : null),
 				];
 			}
 		}

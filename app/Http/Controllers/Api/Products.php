@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers\Api;
 
-use App\Product;
+use App\Models\Product;
 use App\Http\Controllers\RestController;
 use Illuminate\Http\Request;
 

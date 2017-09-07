@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use App\Helpers\TrelloTraitHelper;
+// use App\Helpers\TrelloTraitHelper;
 
 class Liste extends Eloquent
 {
-	use TrelloTraitHelper;
+	// use TrelloTraitHelper;
 
 	protected $table = 'listes';
 

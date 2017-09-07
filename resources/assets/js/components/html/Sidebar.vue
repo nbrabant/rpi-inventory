@@ -37,6 +37,11 @@
                         title: 'Tableau de bord',
                         icon: 'pie-chart',
                     },
+                    {
+                        route: 'categories',
+                        title: 'Categories',
+                        icon: 'list-alt',
+                    },
                 ]
             }
         }
