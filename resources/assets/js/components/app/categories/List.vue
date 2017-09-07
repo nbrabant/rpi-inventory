@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="category in list.data" v-link="{ path: category.id, append: true }">
+                    <tr v-for="category in item.data" v-link="{ path: category.id, append: true }">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
                         <td>{{ category.updated_at }}</td>
@@ -35,10 +35,10 @@
 
         </div>
 
-        <!-- <html-pagination v-if="item.current_page"
+        <html-pagination v-if="item.current_page"
             :current.sync="item.current_page"
             :last="item.last_page"
-            :total="item.total"></html-pagination> -->
+            :total="item.total"></html-pagination>
 
     </div>
 
@@ -51,7 +51,7 @@
 
         data() {
             return {
-                list: [],
+                item: [],
                 category: {
                     id: '',
                     ordre: ''
@@ -62,14 +62,12 @@
         mounted() {
             this.fetchTaskList()
             console.log('Component Category list mounted.')
-
-            console.log(this.list);
         },
 
         methods: {
             fetchTaskList() {
                 axios.get('api/categories').then((res) => {
-                    this.list = res.data;
+                    this.item = res.data;
                 });
             },
         },
