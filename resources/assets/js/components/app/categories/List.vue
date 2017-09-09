@@ -47,22 +47,18 @@
 
 <script>
 
-    import RestList from './../../../rest/list'
-    var axios = require('axios');
+    import {RestList} from './../../services/list'
 
-    export default {
+    export const vm = RestList.extend({
 
         data() {
             return {
-                item: [],
                 category: {
                     id: '',
                     ordre: ''
                 }
             };
         },
-
-        mixins: [RestList],
 
         mounted() {
             this.fetchList()
@@ -72,26 +68,11 @@
             title: function () {
                 return this.item.id ? this.item.name : 'Nouvelle catégorie'
             },
-            parentRoute: function () {
-                return this.$route.path.split('/').slice(0, -1).join('/')
-            },
         },
 
-        methods: {
-            fetchList() {
-                axios.get('api/categories').then((res) => {
-                    this.item = res.data;
-                });
-            },
-        },
+    })
 
-        // route: {
-        //     data: function () {
-        //         this.$dispatch('set-breadcrumbs', [])
-        //     },
-        // },
-
-    }
+    export default vm
 
 </script>
 
