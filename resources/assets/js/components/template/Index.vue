@@ -1,8 +1,21 @@
 
 <template>
 
-    <div>
-        <router-view></router-view>
+    <div class="wrapper">
+
+        <html-sidebar></html-sidebar>
+
+        <div class="main-panel">
+            <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
+
+            <div class="content clearfix">
+                <router-view></router-view>
+            </div>
+
+            <html-pagefoot></html-pagefoot>
+
+        </div>
+            
     </div>
 
 </template>

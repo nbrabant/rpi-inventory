@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="sidebar" data-color="blue" data-image="back/sidebar.jpg">
+    <div class="sidebar" data-color="blue">
         <div class="sidebar-wrapper">
 
             <div class="logo">

@@ -1,4 +1,6 @@
+
 <template>
+
     <div class="wrapper">
 
         <html-sidebar></html-sidebar>
@@ -7,11 +9,14 @@
 
             <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
 
-            <router-view></router-view>
+            <div class="content clearfix">
+                <router-view></router-view>
+            </div>
 
             <html-pagefooter></html-pagefooter>
         </div>
     </div>
+    
 </template>
 
 <script>
@@ -33,5 +38,5 @@
             }
         },
     }
-    
+
 </script>

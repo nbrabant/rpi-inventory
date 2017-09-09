@@ -41,4 +41,9 @@ var router = new VueRouter({
     ]
 });
 
-export default router
+// start routing
+new Vue({
+    el: '#app',
+    router: router,
+    render: h => h('router-view')
+})

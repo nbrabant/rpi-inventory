@@ -4,7 +4,7 @@
     <div class="card">
 
         <html-cardheader newtitle="Nouvelle catégorie"
-            :backroute="'parentRoute'"
+            :backroute="parentRoute"
             title="Catégories"
             subtitle="Liste des catégories organisant les produits"></html-cardheader>
 
@@ -28,7 +28,7 @@
                     <tr v-for="category in item.data" v-link="{ path: category.id, append: true }">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
-                        <td>{{ category.updated_at }}</td>
+                        <td>{{ category.updated_at | datetime }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,6 +47,8 @@
 
 <script>
 
+    import RestList from './../../../rest/list'
+
     export default {
 
         data() {
@@ -59,13 +61,23 @@
             };
         },
 
+        mixins: [RestList],
+
         mounted() {
-            this.fetchTaskList()
-            console.log('Component Category list mounted.')
+            this.fetchList()
+        },
+
+        computed: {
+            title: function () {
+                return this.item.id ? this.item.name : 'Nouvelle catégorie'
+            },
+            parentRoute: function () {
+                return this.$route.path.split('/').slice(0, -1).join('/')
+            },
         },
 
         methods: {
-            fetchTaskList() {
+            fetchList() {
                 axios.get('api/categories').then((res) => {
                     this.item = res.data;
                 });
