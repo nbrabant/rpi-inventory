@@ -48,6 +48,7 @@
 <script>
 
     import RestList from './../../../rest/list'
+    var axios = require('axios');
 
     export default {
 

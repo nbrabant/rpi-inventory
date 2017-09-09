@@ -12,10 +12,10 @@
                 <router-view></router-view>
             </div>
 
-            <html-pagefoot></html-pagefoot>
+            <html-pagefooter></html-pagefooter>
 
         </div>
-            
+
     </div>
 
 </template>
@@ -31,6 +31,12 @@
             'title',
             'icon',
         ],
+
+        data: function() {
+            return {
+                breadcrumbs: [],
+            }
+        },
 
         route: {
             data: function () {
