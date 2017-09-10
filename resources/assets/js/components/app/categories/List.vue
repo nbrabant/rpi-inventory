@@ -5,6 +5,7 @@
 
         <html-cardheader newtitle="Nouvelle catégorie"
             :backroute="parentRoute"
+            :newurl="newurl"
             title="Catégories"
             subtitle="Liste des catégories organisant les produits"></html-cardheader>
 
@@ -25,11 +26,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="category in item.data" v-link="{ path: category.id, append: true }">
+                    <router-link :to="'categories/' + category.id" tag="tr" v-for="category in item.data" :key="category.id">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
                         <td>{{ category.updated_at | datetime }}</td>
-                    </tr>
+                    </router-link>
                 </tbody>
             </table>
 
@@ -52,22 +53,7 @@
     export const vm = RestList.extend({
 
         data() {
-            return {
-                category: {
-                    id: '',
-                    ordre: ''
-                }
-            };
-        },
-
-        mounted() {
-            this.fetchList()
-        },
-
-        computed: {
-            title: function () {
-                return this.item.id ? this.item.name : 'Nouvelle catégorie'
-            },
+            return {};
         },
 
     })

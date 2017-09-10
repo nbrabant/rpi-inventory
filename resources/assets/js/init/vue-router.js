@@ -35,6 +35,10 @@ var router = new VueRouter({
                     name: 'categories',
                     path: '/',
                     component: require('./../components/app/categories/List.vue')
+                },
+                {
+                    path: 'categories/:id',
+                    component: require('./../components/app/categories/Show.vue')
                 }
             ]
         }

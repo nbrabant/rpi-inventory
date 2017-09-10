@@ -1,7 +1,8 @@
 
 import {HTTP} from './http-common'
+import {RestCore} from './core'
 
-export const RestList = Vue.extend({
+export const RestList = RestCore.extend({
 
     abstract: true,
 
@@ -14,25 +15,46 @@ export const RestList = Vue.extend({
         }
     },
 
+    mounted: function() {
+        this.triggerRestGet(this.endpoint)
+    },
+
     computed: {
-        endpoint: function () {
-            // return this.$route.path.split('/').slice(-1)[0]
-            return this.$route.name
+        newurl: function () {
+            return { path: 'create', append: true }
         },
-        parentRoute: function () {
-            return this.$route.path.split('/').slice(0, -1).join('/')
+        endpoint: function () {
+            return this.$route.path.split('/').slice(-2)[0]
         },
     },
 
     methods: {
-        fetchList() {
-            HTTP.get(this.endpoint, querystring.stringify())
-                .then(response => {
-                    this.item = response.data
-                })
-                .catch(e => {
-                    this.errors.push(e)
-                })
+        prepareRestGet: function (route, params, item) {
+            if (this.item.current_page) {
+                item.page = this.item.current_page
+            }
+            if (this.sortCol && this.sortDir) {
+                item.sortCol = this.sortCol
+                item.sortDir = this.sortDir
+            }
+            if (this.search) {
+                item.search = this.search
+                for (field in item.search) {
+                    if (item.search[field].options !== undefined) {
+                        delete(item.search[field].options)
+                    }
+                }
+            }
+            this.cacheRestQuery('triggerRestGet', route, params, item);
+        },
+    },
+
+    events: {
+        'sort-changed': function () {
+            this.fetchList()
+        },
+        'pagination-changed': function () {
+            this.fetchList()
         },
     },
 

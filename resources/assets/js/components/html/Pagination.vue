@@ -85,7 +85,7 @@
             goTo: function (page) {
                 if (page != this.current) {
                     this.current = page
-                    this.$dispatch('pagination-changed')
+                    this.$emit('pagination-changed')
                 }
             }
         },

@@ -2,36 +2,36 @@
 
     <div class="header">
 
-        <a v-if="newtitle" v-link="newurl" class="btn btn-fill btn-success pull-right">
+        <router-link v-if="newurl" :to="newurl" tag="a" class="btn btn-fill btn-success pull-right">
             <i class="fa fa-plus"></i>
             {{ newtitle }}
-        </a>
+        </router-link>
 
-        <a v-if="deletetitle" v-on:click="confirmDelete" class="btn btn-fill btn-warning pull-right">
+        <router-link v-if="deletetitle" v-on:click="confirmDelete" :to="newurl" tag="a" class="btn btn-fill btn-warning pull-right">
             <i class="fa fa-trash"></i>
             {{ deletetitle }}
-        </a>
+        </router-link>
 
-        <a v-if="exporttitle && exporturl" :href="exporturl" class="btn btn-fill btn-default pull-right">
+        <router-link v-if="exporttitle && exporturl" :to="exporturl" class="btn btn-fill btn-default pull-right">
             <i class="fa fa-download"></i>
             {{ exporttitle }}
-        </a>
+        </router-link>
 
-        <a v-if="actionurl && actiontitle" v-link="{ path: actionurl }" class="btn btn-fill btn-primary pull-right">
+        <router-link v-if="actionurl && actiontitle" :to="actionurl" class="btn btn-fill btn-primary pull-right">
             <i :class="'fa fa-' + actionicon"></i>
             {{ actiontitle }}
-        </a>
+        </router-link>
 
-        <a v-if="fronturl && fronttitle" target="_blank" :href="fronturl" class="btn btn-fill btn-primary pull-right">
+        <router-link v-if="fronturl && fronttitle" target="_blank" :to="fronturl" class="btn btn-fill btn-primary pull-right">
             <i :class="'fa fa-' + fronticon"></i>
             {{ fronttitle }}
-        </a>
+        </router-link>
 
         <h4 class="title">
-            <a v-if="backroute" v-link="backroute" title="Retour">
+            <router-link v-if="backroute" :to="backroute" tag="a" title="Retour">
                 <i class="fa fa-chevron-left"></i>
-            </a>
-            {{ title | truncate }}
+            </router-link>
+            {{ title }}
         </h4>
 
         <p v-if="subtitle" class="category">
@@ -51,7 +51,7 @@
         props: {
             newtitle: {},
             newurl: {
-                default: function () { return { path: 'create', append: true } },
+                default: false,
             },
             deletetitle: {},
             backroute: {},
@@ -69,7 +69,7 @@
 
         methods: {
             confirmDelete: function () {
-                this.$dispatch('confirm-delete')
+                this.$emit('confirm-delete')
             },
         },
 

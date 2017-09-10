@@ -21,7 +21,7 @@
     export default {
         route: {
             data: function () {
-                this.$dispatch('set-breadcrumbs', [])
+                this.$emit('set-breadcrumbs', [])
             },
         },
     }
