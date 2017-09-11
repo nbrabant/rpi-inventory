@@ -217,6 +217,10 @@ li {
   height: 100%;
 }
 
+.header > a {
+  z-index: 1;
+}
+
 /*      light colors         */
 
 @keyframes spin {
