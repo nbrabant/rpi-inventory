@@ -14,19 +14,13 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th name="id">
-                            ID
-                        </th>
-                        <th name="nom">
-                            Nom
-                        </th>
-                        <th name="updated_at">
-                            Dernière modification
-                        </th>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Dernière modification</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <router-link :to="'categories/' + category.id" tag="tr" v-for="category in item.data" :key="category.id">
+                    <router-link :to="{ name: singularName, params: { id: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
                         <td>{{ category.updated_at | datetime }}</td>
@@ -53,7 +47,9 @@
     export const vm = RestList.extend({
 
         data() {
-            return {};
+            return {
+                singularName: 'category'
+            };
         },
 
     })

@@ -21,7 +21,7 @@ export const RestList = RestCore.extend({
 
     computed: {
         newurl: function () {
-            return { path: 'create', append: true }
+            return { name: this.singularName, params: {id: 'create'} }
         },
         endpoint: function () {
             return this.$route.path.split('/').slice(-2)[0]
