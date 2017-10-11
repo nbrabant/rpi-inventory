@@ -8,10 +8,10 @@ var router = new VueRouter({
     hashbang: false,
     saveScrollPosition: true,
     routes: [
-        {
-            path: '*',
-            redirect: { name: 'dashboard' }
-        },
+        // {
+        //     path: '*',
+        //     redirect: { name: 'dashboard' }
+        // },
         {
             path: '/dashboard',
             component : {
@@ -37,8 +37,8 @@ var router = new VueRouter({
                     component: require('./../components/app/categories/List.vue')
                 },
                 {
-                    name: 'category',
-                    path: 'categories/:id',
+                    name: 'categories.show',
+                    path: ':id',
                     component: require('./../components/app/categories/Show.vue')
                 }
             ]

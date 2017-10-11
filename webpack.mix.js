@@ -52,8 +52,8 @@ var webpack = require('webpack')
                 moment: 'moment',
                 Vue: 'vue',
                 VueRouter: 'vue-router',
-                RestCore: './resources/assets/js/rest/core.js',
-                RestList: './resources/assets/js/rest/list.js',
+                // RestCore: './resources/assets/js/rest/core.js',
+                // RestList: './resources/assets/js/rest/list.js',
             }),
         ],
 

@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <router-link :to="{ name: singularName, params: { id: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
+                    <router-link :to="{ path: 'categories.show', params: { id: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
                         <td>{{ category.updated_at | datetime }}</td>
@@ -47,9 +47,7 @@
     export const vm = RestList.extend({
 
         data() {
-            return {
-                singularName: 'category'
-            };
+            return {};
         },
 
     })

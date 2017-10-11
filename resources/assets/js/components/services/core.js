@@ -54,7 +54,8 @@ export const RestCore = Vue.extend({
 
     computed: {
         parentRoute: function () {
-            return this.$route.path.split('/').slice(0, -1).join('/')
+// console.log(this.$route.path, this.$route.path.split('/'));
+            return this.$route.path.split('/').slice(0, -1).join('/') + '/'
         },
     },
 
