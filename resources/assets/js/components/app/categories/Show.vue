@@ -43,7 +43,7 @@
 
     import {RestShow} from './../../services/show'
 
-    export const vm = RestShow.extend({
+    export default RestShow.extend({
 
         computed: {
             title: function () {
@@ -52,7 +52,5 @@
         }
 
     })
-
-    export default vm
 
 </script>
