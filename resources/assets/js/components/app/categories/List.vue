@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <router-link :to="{ name: 'category', params: { categoryId: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
+                    <router-link :to="{ name: 'category', params: { id: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
                         <td>{{ category.id }}</td>
                         <td>{{ category.nom }}</th>
                         <td>{{ category.updated_at | datetime }}</td>

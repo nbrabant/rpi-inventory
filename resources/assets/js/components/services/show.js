@@ -42,7 +42,7 @@ export const RestShow = RestCore.extend({
     },
 
     mounted: function() {
-        this.triggerRestGet(this.endpoint)
+        this.triggerRestGet(this.endpoint, {id: this.$route.params.id}, this.item)
     },
 
     methods: {
@@ -55,7 +55,7 @@ export const RestShow = RestCore.extend({
             }
         },
 
-        prepareRestGet: function (route, params, item) {
+        prepareRestGet: function (route, item, params) {
             this.cacheRestQuery('triggerRestGet', route, params, item);
         },
 

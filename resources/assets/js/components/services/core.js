@@ -84,6 +84,11 @@ export const RestCore = Vue.extend({
         },
 
         getResource: function(route, params, item) {
+            for (var key in params) {
+                if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
+                    route += '/' + params[key]
+                }
+            }
             return HTTP.get(route, querystring.stringify(params))
         },
 
@@ -97,6 +102,7 @@ export const RestCore = Vue.extend({
         },
 
         triggerRestGet: function (route, params, item) {
+            $('.content').css('opacity', 0.25)
             if (item === undefined) {
                 item = {}
             }
@@ -110,12 +116,14 @@ export const RestCore = Vue.extend({
                 });
         },
         successRestGet: function (response) {
+            $('.content').css('opacity', 1)
             if (response.data instanceof Array && response.data.length === 0) {
                 response.data = {}
             }
             this.item = response.data
         },
         errorRestGet: function(response) {
+            $('.content').css('opacity', 1)
             if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
