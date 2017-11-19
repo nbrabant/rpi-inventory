@@ -22,7 +22,7 @@ export const RestShow = RestCore.extend({
         },
         submitIcon: function () {
             return {
-                'fa': this.restState !== null,
+                'fa': this.restState === undefined || this.restState !== null,
                 'fa-circle-o-notch': this.restState === 'process',
                 'fa-spin': this.restState === 'process',
                 'fa-check': this.restState === 'success',
@@ -33,7 +33,7 @@ export const RestShow = RestCore.extend({
             return {
                 'btn': true,
                 'btn-fill': true,
-                'btn-primary': this.restState === null,
+                'btn-primary': this.restState === undefined || this.restState === null,
                 'btn-info': this.restState === 'process',
                 'btn-success': this.restState === 'success',
                 'btn-danger': this.restState === 'error',
