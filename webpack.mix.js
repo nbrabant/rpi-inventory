@@ -18,6 +18,7 @@ var webpack = require('webpack')
             'vue-router',
             'axios',
             'querystring',
+            'sweetalert',
             './resources/assets/js/plugins/light-bootstrap-dashboard.js',
             './resources/assets/js/init/vue-components.js',
             './resources/assets/js/init/vue-router.js',
@@ -48,12 +49,10 @@ var webpack = require('webpack')
                 'window.jQuery': 'jquery',
                 axios: 'axios',
                 querystring: 'querystring',
-                // intl: 'intl',
                 moment: 'moment',
                 Vue: 'vue',
                 VueRouter: 'vue-router',
-                // RestCore: './resources/assets/js/rest/core.js',
-                // RestList: './resources/assets/js/rest/list.js',
+                swal: 'sweetalert'
             }),
         ],
 
