@@ -9,7 +9,7 @@ export const RestShow = RestCore.extend({
     data: function() {
         return {
             item: {},
-            errors: [],
+            errors: {},
         }
     },
 
@@ -49,8 +49,10 @@ export const RestShow = RestCore.extend({
 
         submitForm: function () {
             if (this.item.id) {
+console.log('update');
                 this.triggerRestUpdate(this.endpoint, {id: this.item.id}, this.item)
             } else {
+console.log('update');
                 this.triggerRestSave(this.endpoint, {}, this.item)
             }
         },

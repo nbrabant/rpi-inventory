@@ -54,7 +54,6 @@ export const RestCore = Vue.extend({
 
     computed: {
         parentRoute: function () {
-// console.log(this.$route.path, this.$route.path.split('/'));
             return this.$route.path.split('/').slice(0, -1).join('/') + '/'
         },
     },
@@ -133,8 +132,7 @@ export const RestCore = Vue.extend({
 
         triggerRestSave: function (route, params, item) {
             this.prepareRestSave(route, params, item)
-            this.getResource(route, params)
-                .save(item)
+            HTTP.post(route, item, params)
                 .then(response => {
                     this.successRestSave(response)
                 }).catch(response => {
@@ -143,7 +141,7 @@ export const RestCore = Vue.extend({
         },
         prepareRestSave: function (route, params, item) {
             this.cacheRestQuery('triggerRestSave', route, params, item);
-            this.$set('errors', {})
+            this.$set(this.errors, {})
             this.restState = 'process'
         },
         successRestSave: function (response) {
@@ -157,15 +155,20 @@ export const RestCore = Vue.extend({
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], null, 'error')
+                swal(this.statusTexts[response.status], 'Erreur', 'error')
             }
         },
 
         triggerRestUpdate: function (route, params, item) {
-            item._method = 'PUT'
+console.log(params);
+            for (var key in params) {
+                if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
+                    route += '/' + params[key]
+                }
+            }
+
             this.prepareRestUpdate(route, params, item)
-            this.getResource(route, params)
-                .save(item)
+            HTTP.put(route, item, params)
                 .then(response => {
                     this.successRestUpdate(response)
                 }).catch(response => {
@@ -174,7 +177,7 @@ export const RestCore = Vue.extend({
         },
         prepareRestUpdate: function (route, params, item) {
             this.cacheRestQuery('triggerRestUpdate', route, params, item);
-            this.$set('errors', {})
+            this.$set(this.errors, {})
             this.restState = 'process'
         },
         successRestUpdate: function (response) {
@@ -188,7 +191,7 @@ export const RestCore = Vue.extend({
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], null, 'error')
+                swal(this.statusTexts[response.response.status], 'Erreur', 'error')
             }
         },
 
