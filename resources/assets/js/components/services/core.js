@@ -49,6 +49,7 @@ export const RestCore = Vue.extend({
                 520: 'Unknow error',
                 555: 'Ressource non supprimable',
             },
+            restState: null,
         }
     },
 
