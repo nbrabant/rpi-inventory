@@ -30,7 +30,6 @@ export const RestShow = RestCore.extend({
             }
         },
         submitBtn: function () {
-console.log(this.restState);
             return {
                 'btn': true,
                 'btn-fill': true,
