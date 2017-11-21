@@ -17,7 +17,8 @@
 
                 <div class="col-md-12">
                     <form-text label="Nom"
-                        :item.sync="item.nom"
+                        v-model="item.nom"
+                        :item="item.nom"
                         :error="errors.nom"></form-text>
                 </div>
 

@@ -7,7 +7,16 @@
             {{ label }}
         </label>
 
-        <input type="text" class="form-control" v-model="item" :disabled="disabled" :placeholder="placeholder" :size="size" :debounce="debounce">
+        <input
+            type="text"
+            class="form-control"
+            :value="item"
+            @input="updateItem($event.target.value)"
+            :disabled="disabled"
+            :placeholder="placeholder"
+            :size="size"
+            :debounce="debounce"
+            ref="input">
 
         <span class="help-block">{{ error }}</span>
 
@@ -30,6 +39,11 @@
 
         props: ['debounce', 'label', 'item', 'error', 'disabled', 'placeholder', 'size', 'id'],
 
+        methods: {
+            updateItem: function(item) {
+                this.$emit('input', item);
+            }
+        },
     }
 
 </script>

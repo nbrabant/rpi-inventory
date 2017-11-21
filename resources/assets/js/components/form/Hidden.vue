@@ -3,7 +3,10 @@
 
     <div class="form-group">
 
-        <input type="hidden" class="form-control" v-model="item">
+        <input
+            type="hidden"
+            class="form-control"
+            v-model="item">
 
     </div>
 

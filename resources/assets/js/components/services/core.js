@@ -105,8 +105,13 @@ export const RestCore = Vue.extend({
             if (item === undefined) {
                 item = {}
             }
+            for (var key in params) {
+                if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
+                    route += '/' + params[key]
+                }
+            }
             this.prepareRestGet(route, params, item)
-            this.getResource(route, params, item)
+            HTTP.get(route, querystring.stringify(params))
                 .then(response => {
                     this.successRestGet(response)
                 })
@@ -160,7 +165,6 @@ export const RestCore = Vue.extend({
         },
 
         triggerRestUpdate: function (route, params, item) {
-console.log(params);
             for (var key in params) {
                 if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
                     route += '/' + params[key]
@@ -181,17 +185,19 @@ console.log(params);
             this.restState = 'process'
         },
         successRestUpdate: function (response) {
-            this.$set('item', response.data)
+console.log('success update request', response);
+            // this.$set('item', response.data)
             this.restState = 'success'
         },
         errorRestUpdate: function(response) {
+console.log('error update request', response);
             this.restState = 'error'
             if (response.status === 422) {
                 this.setErrors(response.data)
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.response.status], 'Erreur', 'error')
+                // swal(this.statusTexts[response.status], 'Erreur', 'error')
             }
         },
 
@@ -217,7 +223,7 @@ console.log(params);
                 .then(response => {
                     this.successRestDelete(response)
                 }).catch(response => {
-                    console.log(response)
+console.log('error delete request', response)
                     this.errorRestDelete(response)
                 });
         },
