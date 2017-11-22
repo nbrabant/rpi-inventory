@@ -41,6 +41,23 @@ var router = new VueRouter({
                     component: require('./../components/app/categories/Show.vue')
                 }
             ]
+        },
+        {
+            path: '/products',
+            component : {
+                template: '<div><template-index route="/products" title="Produits" icon="list-alt"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'products',
+                    path: '/',
+                    component: require('./../components/app/products/List.vue')
+                }, {
+                    name: 'product',
+                    path: ':id',
+                    component: require('./../components/app/products/Show.vue')
+                }
+            ]
         }
     ]
 });

@@ -18,14 +18,6 @@ class Product extends Eloquent {
 		'unite'
 	];
 
-	// protected $validators = [
-	// 	'categorie_id'	=> 'required|integer|exists:categories,id',
-	// 	'nom'			=> 'required|string',
-	// 	'quantite'		=> 'integer',
-	// 	'quantite_min'	=> 'required|integer',
-	// 	'unite'			=> '',
-	// ];
-
 	//hierarchical
 	public function category() {
 		return $this->belongsTo('App\Category');
@@ -49,11 +41,6 @@ class Product extends Eloquent {
 			$query->whereNotIn('id', $ids);
 		}
 		return $query;
-	}
-
-	public function getValidators()
-	{
-		return $this->validators;
 	}
 
 	public static function getList($withoutId = null, $emptyLine = true) {
@@ -94,5 +81,14 @@ class Product extends Eloquent {
 			'litre' 	=> 'Litre',
 			'sachet' 	=> 'Sachet'
 		];
+	}
+
+	public function toArray()
+	{
+		$datas = parent::toArray();
+
+		$datas['status'] = $this->getStatus();
+
+		return $datas;
 	}
 }

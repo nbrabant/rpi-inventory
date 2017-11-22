@@ -42,6 +42,16 @@
                         title: 'Categories',
                         icon: 'list-alt',
                     },
+                    {
+                        route: 'products',
+                        title: 'Produits',
+                        icon: 'list-alt',
+                    },
+                    {
+                        route: 'consumption',
+                        title: 'Consommation',
+                        icon: 'list-alt',
+                    },
                 ]
             }
         }
