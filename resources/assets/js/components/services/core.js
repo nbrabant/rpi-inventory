@@ -225,13 +225,22 @@ export const RestCore = Vue.extend({
         },
         triggerRestDelete: function (route, params) {
             this.prepareRestDelete(route, params)
-            this.getResource(route, params)
-                .delete()
+
+            for (var key in params) {
+                if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
+                    route += '/' + params[key]
+                }
+            }
+
+            HTTP.delete(route, item, params)
                 .then(response => {
                     this.successRestDelete(response)
                 }).catch(response => {
-console.log('error delete request', response)
-                    this.errorRestDelete(response)
+                    if (response.response) {
+                        this.errorRestDelete(response.response)
+                    } else {
+                        this.errorRestDelete(response)
+                    }
                 });
         },
         prepareRestDelete: function (route, params) {
