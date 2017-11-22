@@ -13,4 +13,16 @@ class Categories extends RestController
 		'position' 	=> 'required|integer',
 	];
 
+	/**
+	 * @override create method
+	 *
+	 * @return Category object
+	 */
+	public function create()
+    {
+        $model = static::MODEL;
+
+        return new $model(['position' => 255]);
+    }
+
 }

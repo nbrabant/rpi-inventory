@@ -96,7 +96,7 @@ export const RestCore = Vue.extend({
             for (var key in errors) {
                 if (errors.hasOwnProperty(key)) {
                     var textKey = key.replace(/\.([0-9])+\./g, "[$1].").replace(/\.([0-9])+/g, "[$1]");
-                    this.$set('errors.'+textKey, errors[key])
+                    Vue.set(this.errors, textKey, errors[key][0])
                 }
             }
         },
@@ -142,22 +142,26 @@ export const RestCore = Vue.extend({
                 .then(response => {
                     this.successRestSave(response)
                 }).catch(response => {
-                    this.errorRestSave(response)
+                    if (response.response) {
+                        this.errorRestSave(response.response)
+                    } else {
+                        this.errorRestSave(response)
+                    }
                 });
         },
         prepareRestSave: function (route, params, item) {
             this.cacheRestQuery('triggerRestSave', route, params, item);
-            this.$set(this.errors, {})
+            this.errors = {}
             this.restState = 'process'
         },
         successRestSave: function (response) {
-            this.$set('item', response.data)
+            this.item = response.data;
             this.restState = 'success'
         },
         errorRestSave: function(response) {
             this.restState = 'error'
             if (response.status === 422) {
-                this.setErrors(response.data)
+                this.setErrors(response.data.errors)
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
@@ -177,28 +181,30 @@ export const RestCore = Vue.extend({
                 .then(response => {
                     this.successRestUpdate(response)
                 }).catch(response => {
-                    this.errorRestUpdate(response)
+                    if (response.response) {
+                        this.errorRestUpdate(response.response)
+                    } else {
+                        this.errorRestUpdate(response)
+                    }
                 });
         },
         prepareRestUpdate: function (route, params, item) {
             this.cacheRestQuery('triggerRestUpdate', route, params, item);
-            this.$set(this.errors, {})
+            this.errors = {}
             this.restState = 'process'
         },
         successRestUpdate: function (response) {
-console.log('success update request', response);
-            // this.$set('item', response.data)
+            this.item = response.data;
             this.restState = 'success'
         },
         errorRestUpdate: function(response) {
-console.log('error update request', response);
             this.restState = 'error'
             if (response.status === 422) {
-                this.setErrors(response.data)
+                this.setErrors(response.data.errors)
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                // swal(this.statusTexts[response.status], 'Erreur', 'error')
+                swal(this.statusTexts[response.status], 'Erreur', 'error')
             }
         },
 

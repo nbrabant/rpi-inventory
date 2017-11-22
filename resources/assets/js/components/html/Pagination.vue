@@ -9,7 +9,7 @@
             <div class="col-sm-4">
                 {{ total > 0 ? total : 'Aucun' }} enregistrement{{ total > 1 ? 's' : '' }}
                 <template v-if="last > 0 && first != last">
-                    - Page {{ current }} sur {{ last }}
+                    - Page {{ selected }} sur {{ last }}
                 </template>
             </div>
             <div class="col-sm-8">
@@ -17,7 +17,7 @@
                     <li v-on:click="goTo(previous)" aria-label="Prédédent" class="btn btn-info">
                         <span aria-hidden="true">&laquo;</span>
                     </li>
-                    <li v-on:click="goTo(page)" class="btn btn-info" v-for="page in pagination" v-bind:class="{'active': page == current, 'btn-fill': page == current}">
+                    <li v-on:click="goTo(page)" class="btn btn-info" v-for="page in pagination" v-bind:class="{'active': page == selected, 'btn-fill': page == selected}">
                         {{ page }}
                     </li>
                     <li v-on:click="goTo(next)" aria-label="Suivant" class="btn btn-info">
@@ -36,36 +36,44 @@
 
     export default {
 
-        props: [
-            'current',
-            'last',
-            'total',
-        ],
+        props: {
+            current: {
+                type: Number,
+            },
+            last: {
+                type: Number,
+            },
+            total: {
+                type: Number,
+            },
+        },
 
         data: function() {
             return {
+                selected: this.current,
                 first: 1,
                 length: 8,
             }
         },
+
         computed: {
             min: function () {
                 return Math.max(
-                    Math.min(this.current - parseInt((this.length - 1) / 2), this.last - this.length + 1),
+                    Math.min(this.selected - parseInt((this.length - 1) / 2), this.last - this.length + 1),
                     this.first
                 )
             },
             max: function () {
                 return Math.min(
-                    Math.max(this.current + parseInt((this.length - 1) / 2), this.length),
+                    Math.max(this.selected + parseInt((this.length - 1) / 2), this.length),
                     this.last
                 )
             },
             previous: function() {
-                return this.current > 1 ? this.current - 1 : 1;
+                return this.selected > 1 ? this.selected - 1 : 1;
             },
             next: function() {
-                return this.current < this.max ? this.current + 1 : this.max
+                return this.selected < this.max ? this.selected + 1 : this.max
             },
             pagination: function () {
                 var links = new Array()
@@ -81,13 +89,14 @@
                 return links
             },
         },
+
         methods: {
             goTo: function (page) {
-                if (page != this.current) {
-                    this.current = page
-                    this.$emit('pagination-changed')
+                if (page != this.selected) {
+                    this.selected = page
+                    this.$emit('pagination-changed', page)
                 }
-            }
+            },
         },
     }
 

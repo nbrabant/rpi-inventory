@@ -53,7 +53,8 @@ export const RestList = RestCore.extend({
         'sort-changed': function () {
             this.triggerRestGet(this.endpoint)
         },
-        'pagination-changed': function () {
+        'pagination-changed': function (page) {
+console.log(page);
             this.triggerRestGet(this.endpoint)
         },
     },
