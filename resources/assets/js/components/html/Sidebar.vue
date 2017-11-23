@@ -45,12 +45,12 @@
                     {
                         route: 'products',
                         title: 'Produits',
-                        icon: 'list-alt',
+                        icon: 'shopping-cart',
                     },
                     {
                         route: 'consumption',
                         title: 'Consommation',
-                        icon: 'list-alt',
+                        icon: 'tachometer',
                     },
                 ]
             }

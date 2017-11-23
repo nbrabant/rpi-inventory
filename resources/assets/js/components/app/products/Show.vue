@@ -29,6 +29,15 @@
                         :error="errors.quantite_min"></form-text>
                 </div>
 
+                <div class="col-md-12">
+                    <form-select label="Unité"
+                        :options="unites"
+                        v-model="item.unite"
+                        :item="item.unite"
+                        withEmptyOption="true"
+                        :error="errors.unite"></form-select>
+                </div>
+
             </div>
 
         </div>
@@ -52,6 +61,16 @@
     import {RestShow} from './../../services/show'
 
     export default RestShow.extend({
+
+        data: function() {
+            return {
+                unites: [
+                    {key: 'grammes', value: 'Grammes'},
+        			{key: 'litre', value: 'Litre'},
+        			{key: 'sachet', value: 'Sachet'},
+                ]
+            }
+        },
 
         computed: {
             title: function () {

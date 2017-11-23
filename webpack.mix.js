@@ -19,6 +19,7 @@ var webpack = require('webpack')
             'axios',
             'querystring',
             'sweetalert',
+            'select2',
             './resources/assets/js/plugins/light-bootstrap-dashboard.js',
             './resources/assets/js/init/vue-components.js',
             './resources/assets/js/init/vue-router.js',

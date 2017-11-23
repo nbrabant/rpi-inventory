@@ -14,7 +14,7 @@ class Products extends RestController
 		'description'	=> 'required|string',
 		'quantite'		=> 'required|integer',
 		'quantite_min'	=> 'required|integer',
-		'unite'			=> 'required|integer',
+		'unite'			=> 'string|in:grammes,litre,sachet',
 	];
 
 }

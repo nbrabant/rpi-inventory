@@ -11,7 +11,7 @@ Vue.component('html-pagination',        require('../components/html/Pagination.v
 // Vue.component('form-datepicker',        require('../components/form/Datepicker.vue'))
 // Vue.component('form-percentage',        require('../components/form/Percentage.vue'))
 // Vue.component('form-price',             require('../components/form/Price.vue'))
-// Vue.component('form-select',            require('../components/form/Select.vue'))
+Vue.component('form-select',            require('../components/form/Select.vue'))
 Vue.component('form-text',              require('../components/form/Text.vue'))
 // Vue.component('form-textarea',          require('../components/form/Textarea.vue'))
 Vue.component('form-hidden',            require('../components/form/Hidden.vue'))
