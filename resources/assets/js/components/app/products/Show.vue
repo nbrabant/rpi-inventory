@@ -16,10 +16,26 @@
             <div class="content clearfix">
 
                 <div class="col-md-12">
+                    <form-select label="Catégorie"
+                        :options="categories"
+                        v-model="item.categorie_id"
+                        :item="item.categorie_id"
+                        withEmptyOption="true"
+                        :error="errors.categorie_id"></form-select>
+                </div>
+
+                <div class="col-md-12">
                     <form-text label="Nom"
                         v-model="item.nom"
                         :item="item.nom"
                         :error="errors.nom"></form-text>
+                </div>
+
+                <div class="col-md-12">
+                    <form-textarea label="Description"
+                        v-model="item.description"
+                        :item="item.description"
+                        :error="errors.description"></form-textarea>
                 </div>
 
                 <div class="col-md-12">
@@ -68,16 +84,20 @@
                     {key: 'grammes', value: 'Grammes'},
         			{key: 'litre', value: 'Litre'},
         			{key: 'sachet', value: 'Sachet'},
-                ]
+                ],
+                categories: []
             }
+        },
+
+        mounted() {
+            this.getRelatedResource('categories', 'id', 'nom')
         },
 
         computed: {
             title: function () {
                 return this.item.id ? this.item.nom : 'Nouveau produit'
             },
-        }
-
+        },
     })
 
 </script>

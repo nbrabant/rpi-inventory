@@ -7,23 +7,15 @@
             {{ label }}
         </label>
 
-        <select
-            type="select"
+        <textarea
             class="form-control"
+            rows="5"
             :value="item"
             @input="updateItem($event.target.value)"
-            v-model="item"
             :disabled="disabled"
             :placeholder="placeholder"
             :debounce="debounce"
-            ref="input">
-
-            <option v-if="withEmptyOption">---</option>
-            <option v-for="option in options" :value="option.key">
-                {{ option.value }}
-            </option>
-
-        </select>
+            ref="input"></textarea>
 
         <span class="help-block">{{ error }}</span>
 
@@ -31,18 +23,18 @@
 
 </template>
 
+
+
 <script>
 
     export default {
-
-        props: ['debounce', 'label', 'item', 'error', 'disabled', 'options', 'withEmptyOption', 'placeholder'],
+        props: ['debounce', 'label', 'item', 'error', 'disabled', 'placeholder'],
 
         methods: {
             updateItem: function(item) {
                 this.$emit('input', item);
             }
         },
-
     }
 
 </script>

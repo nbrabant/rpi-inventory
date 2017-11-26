@@ -67,6 +67,12 @@ export const RestCore = Vue.extend({
 
     methods: {
 
+        toCamelCase: function(str) {
+            return str.replace(/-/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
+                return index == 0 ? letter.toLowerCase() : letter.toUpperCase();
+            }).replace(/\s+/g, '');
+        },
+
         cacheRestQuery: function(method, route, params, item) {
             this.cached_method = method
             this.cached_route = route
@@ -83,13 +89,36 @@ export const RestCore = Vue.extend({
             this[method](route, params, item)
         },
 
-        getResource: function(route, params, item) {
-            for (var key in params) {
-                if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
-                    route += '/' + params[key]
-                }
+        getRelatedResource: function(route, keyKey, valueKey, sortCol, sortDir, setVar) {
+            var params = { fields: keyKey+','+valueKey, limit: 'full' }
+            params.sortCol = sortCol ? sortCol : valueKey
+            params.sortDir = sortDir ? sortDir : 'asc'
+
+            if (!setVar) {
+                var setVar = this.toCamelCase(route)
             }
-            return HTTP.get(route, querystring.stringify(params))
+
+            var options = []
+
+            HTTP.get(route, querystring.stringify(params))
+                .then(function(response) {
+                    if (!response.data instanceof Object || !response.data.data instanceof Array) {
+                        return
+                    }
+
+
+                    for (var key in response.data.data) {
+                        options.push({
+                            key: response.data.data[key][keyKey],
+                            value: response.data.data[key][valueKey],
+                        })
+                    }
+
+                }).catch(function(response) {
+                    console.log(response)
+                });
+
+            Vue.set(this, setVar, options)
         },
 
         setErrors: function(errors) {
