@@ -81,6 +81,7 @@
         data: function() {
             return {
                 unites: [
+                    {key: 'piece', value: 'Pièce'},
                     {key: 'grammes', value: 'Grammes'},
         			{key: 'litre', value: 'Litre'},
         			{key: 'sachet', value: 'Sachet'},

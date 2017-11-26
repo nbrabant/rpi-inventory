@@ -12,9 +12,19 @@ class Products extends RestController
 		'categorie_id'	=> 'required|integer',
 		'nom' 			=> 'required|string',
 		'description'	=> 'required|string',
-		'quantite'		=> 'required|integer',
 		'quantite_min'	=> 'required|integer',
-		'unite'			=> 'string|in:grammes,litre,sachet',
+		'unite'			=> 'string|in:piece,grammes,litre,sachet',
 	];
 
+	/**
+	 * @override create method
+	 *
+	 * @return Product object
+	 */
+	public function create()
+	{
+		$model = static::MODEL;
+
+		return new $model(['quantite' => 0]);
+	}
 }
