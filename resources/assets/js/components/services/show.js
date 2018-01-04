@@ -1,5 +1,5 @@
 
-import {HTTP} from './http-common'
+// import {HTTP} from './http-common'
 import {RestCore} from './core'
 
 export const RestShow = RestCore.extend({

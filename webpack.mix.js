@@ -2,6 +2,16 @@ const { mix } = require('laravel-mix');
 
 var path = require('path')
 var webpack = require('webpack')
+var fs = require('fs')
+
+var nodeModules = {};
+fs.readdirSync('node_modules')
+  .filter(function(x) {
+    return ['.bin'].indexOf(x) === -1;
+  })
+  .forEach(function(mod) {
+    nodeModules[mod] = 'commonjs ' + mod;
+  });
 
  mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
@@ -16,7 +26,7 @@ var webpack = require('webpack')
         entry: [
             'vue',
             'vue-router',
-            'axios',
+            'request-promise',
             'querystring',
             'sweetalert',
             'select2',
@@ -43,12 +53,15 @@ var webpack = require('webpack')
             ],
         },
 
+        externals: nodeModules,
+
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 'jQuery': 'jquery',
                 'window.jQuery': 'jquery',
-                axios: 'axios',
+                fs: 'fs',
+                rp: 'request-promise',
                 querystring: 'querystring',
                 moment: 'moment',
                 Vue: 'vue',

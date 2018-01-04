@@ -1,5 +1,5 @@
 
-import {HTTP} from './http-common'
+// import {HTTP} from './http-common'
 
 export const RestCore = Vue.extend({
 
@@ -100,23 +100,22 @@ export const RestCore = Vue.extend({
 
             var options = []
 
-            HTTP.get(route, querystring.stringify(params))
-                .then(function(response) {
-                    if (!response.data instanceof Object || !response.data.data instanceof Array) {
-                        return
-                    }
-
-
-                    for (var key in response.data.data) {
-                        options.push({
-                            key: response.data.data[key][keyKey],
-                            value: response.data.data[key][valueKey],
-                        })
-                    }
-
-                }).catch(function(response) {
-                    console.log(response)
-                });
+            // HTTP.get(route, querystring.stringify(params))
+            //     .then(function(response) {
+            //         if (!response.data instanceof Object || !response.data.data instanceof Array) {
+            //             return
+            //         }
+            //
+            //         for (var key in response.data.data) {
+            //             options.push({
+            //                 key: response.data.data[key][keyKey],
+            //                 value: response.data.data[key][valueKey],
+            //             })
+            //         }
+            //
+            //     }).catch(function(response) {
+            //         console.log(response)
+            //     });
 
             Vue.set(this, setVar, options)
         },
@@ -135,13 +134,20 @@ export const RestCore = Vue.extend({
             if (item === undefined) {
                 item = {}
             }
+
             for (var key in params) {
                 if (params.hasOwnProperty(key) && key.charAt(0) != '_') {
-                    route += '/' + params[key]
+                    if (key == 'id') {
+                        route += '/' + params[key]
+                    } else {
+                        // route += '{/' + key + '}'
+                    }
                 }
             }
+
             this.prepareRestGet(route, params, item)
-            HTTP.get(route, querystring.stringify(params))
+
+            HTTP.get(route, {params: params})
                 .then(response => {
                     this.successRestGet(response)
                 })
@@ -167,16 +173,16 @@ export const RestCore = Vue.extend({
 
         triggerRestSave: function (route, params, item) {
             this.prepareRestSave(route, params, item)
-            HTTP.post(route, item, params)
-                .then(response => {
-                    this.successRestSave(response)
-                }).catch(response => {
-                    if (response.response) {
-                        this.errorRestSave(response.response)
-                    } else {
-                        this.errorRestSave(response)
-                    }
-                });
+            // HTTP.post(route, item, params)
+            //     .then(response => {
+            //         this.successRestSave(response)
+            //     }).catch(response => {
+            //         if (response.response) {
+            //             this.errorRestSave(response.response)
+            //         } else {
+            //             this.errorRestSave(response)
+            //         }
+            //     });
         },
         prepareRestSave: function (route, params, item) {
             this.cacheRestQuery('triggerRestSave', route, params, item);
@@ -206,16 +212,16 @@ export const RestCore = Vue.extend({
             }
 
             this.prepareRestUpdate(route, params, item)
-            HTTP.put(route, item, params)
-                .then(response => {
-                    this.successRestUpdate(response)
-                }).catch(response => {
-                    if (response.response) {
-                        this.errorRestUpdate(response.response)
-                    } else {
-                        this.errorRestUpdate(response)
-                    }
-                });
+            // HTTP.put(route, item, params)
+            //     .then(response => {
+            //         this.successRestUpdate(response)
+            //     }).catch(response => {
+            //         if (response.response) {
+            //             this.errorRestUpdate(response.response)
+            //         } else {
+            //             this.errorRestUpdate(response)
+            //         }
+            //     });
         },
         prepareRestUpdate: function (route, params, item) {
             this.cacheRestQuery('triggerRestUpdate', route, params, item);
@@ -261,16 +267,16 @@ export const RestCore = Vue.extend({
                 }
             }
 
-            HTTP.delete(route, item, params)
-                .then(response => {
-                    this.successRestDelete(response)
-                }).catch(response => {
-                    if (response.response) {
-                        this.errorRestDelete(response.response)
-                    } else {
-                        this.errorRestDelete(response)
-                    }
-                });
+            // HTTP.delete(route, item, params)
+            //     .then(response => {
+            //         this.successRestDelete(response)
+            //     }).catch(response => {
+            //         if (response.response) {
+            //             this.errorRestDelete(response.response)
+            //         } else {
+            //             this.errorRestDelete(response)
+            //         }
+            //     });
         },
         prepareRestDelete: function (route, params) {
             this.cacheRestQuery('triggerRestDelete', route, params);
