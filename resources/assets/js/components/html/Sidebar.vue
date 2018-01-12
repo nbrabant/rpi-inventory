@@ -48,7 +48,7 @@
                         icon: 'shopping-cart',
                     },
                     {
-                        route: 'consumption',
+                        route: 'consumptions',
                         title: 'Consommation',
                         icon: 'tachometer',
                     },

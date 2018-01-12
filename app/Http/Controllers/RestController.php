@@ -212,7 +212,7 @@ abstract class RestController extends Controller
      */
     protected function handleSearchParameters(QueryBuilder $query, Request $request)
     {
-        if (! $request->search || ! is_array($request->search)) {
+        if (!$request->search || !is_array($request->search)) {
             return $query;
         }
 

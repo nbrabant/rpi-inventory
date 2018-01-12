@@ -21,5 +21,6 @@ use Illuminate\Http\Request;
 Route::group(['namespace' => 'Api'], function () {
     Route::resource('categories', 	'Categories');
 	Route::resource('products', 	'Products');
+	Route::resource('consumptions', 'Consumptions',    ['only' => ['index']]);
 // 	Route::resource('operations', 	'Operations');
 });

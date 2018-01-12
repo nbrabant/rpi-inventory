@@ -1,5 +1,5 @@
 
-// import {HTTP} from './http-common'
+import {HTTP} from './http-common'
 import {RestCore} from './core'
 
 export const RestList = RestCore.extend({
@@ -47,6 +47,11 @@ export const RestList = RestCore.extend({
             }
             this.cacheRestQuery('triggerRestGet', route, params, item);
         },
+
+        pagination: function(page) {
+            // this.item.current_page = page;
+            this.triggerRestGet(this.endpoint, {}, this.item)
+        }
     },
 
     events: {
@@ -54,8 +59,7 @@ export const RestList = RestCore.extend({
             this.triggerRestGet(this.endpoint)
         },
         'pagination-changed': function (page) {
-console.log(page);
-            this.triggerRestGet(this.endpoint)
+            this.triggerRestGet(this.endpoint, {}, this.item)
         },
     },
 

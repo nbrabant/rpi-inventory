@@ -1,7 +1,7 @@
 
-// import {HTTP} from './http-common'
+import {HTTP} from './http-common'
 
-export const RestCore = Vue.extend({
+module.exports = Vue.extend({
 
     abstract: true,
 

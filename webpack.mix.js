@@ -1,17 +1,9 @@
+'use strict'
+
 const { mix } = require('laravel-mix');
 
 var path = require('path')
 var webpack = require('webpack')
-var fs = require('fs')
-
-var nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(function(x) {
-    return ['.bin'].indexOf(x) === -1;
-  })
-  .forEach(function(mod) {
-    nodeModules[mod] = 'commonjs ' + mod;
-  });
 
  mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
@@ -26,7 +18,7 @@ fs.readdirSync('node_modules')
         entry: [
             'vue',
             'vue-router',
-            'request-promise',
+            'axios',
             'querystring',
             'sweetalert',
             'select2',
@@ -35,7 +27,9 @@ fs.readdirSync('node_modules')
             './resources/assets/js/init/vue-router.js',
             './resources/assets/js/init/vue-filters.js',
             // 'scripts/init/vue-directives.js',
-            // './resources/assets/js/rest/core.js',
+            './resources/assets/js/components/services/core.js',
+            './resources/assets/js/components/services/list.js',
+            './resources/assets/js/components/services/show.js',
             // './resources/assets/js/rest/list.js',
             './resources/assets/sass/app.scss',
             'font-awesome/scss/font-awesome.scss',
@@ -53,20 +47,20 @@ fs.readdirSync('node_modules')
             ],
         },
 
-        externals: nodeModules,
-
         plugins: [
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 'jQuery': 'jquery',
                 'window.jQuery': 'jquery',
-                fs: 'fs',
-                rp: 'request-promise',
+                axios: 'axios',
                 querystring: 'querystring',
                 moment: 'moment',
                 Vue: 'vue',
                 VueRouter: 'vue-router',
-                swal: 'sweetalert'
+                swal: 'sweetalert',
+                RestCore: 'components/services/core',
+                RestList: 'components/services/list',
+                RestShow: 'components/services/show',
             }),
         ],
 
