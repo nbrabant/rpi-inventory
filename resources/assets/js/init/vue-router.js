@@ -59,19 +59,19 @@ var router = new VueRouter({
                 }
             ]
         },
-        {
-            path: '/consumptions',
-            component : {
-                template: '<div><template-index route="/consumption" title="Consommation" icon="tachometer"></template-index></div>',
-            },
-            children: [
-                {
-                    name: 'consumptions',
-                    path: '/',
-                    component: require('./../components/app/consumptions/List.vue')
-                }
-            ]
-        }
+        // {
+        //     path: '/consumptions',
+        //     component : {
+        //         template: '<div><template-index route="/consumption" title="Consommation" icon="tachometer"></template-index></div>',
+        //     },
+        //     children: [
+        //         {
+        //             name: 'consumptions',
+        //             path: '/',
+        //             component: require('./../components/app/consumptions/List.vue')
+        //         }
+        //     ]
+        // }
     ]
 });
 

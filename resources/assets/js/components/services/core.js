@@ -1,5 +1,6 @@
 
-import {HTTP} from './http-common'
+// import {HTTP} from './http-common'
+var HTTP = {}
 
 module.exports = Vue.extend({
 
