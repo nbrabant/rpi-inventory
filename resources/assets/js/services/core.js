@@ -1,7 +1,4 @@
 
-// import {HTTP} from './http-common'
-var HTTP = {}
-
 module.exports = Vue.extend({
 
     abstract: true,

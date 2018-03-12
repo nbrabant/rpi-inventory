@@ -42,8 +42,6 @@
 
 <script>
 
-    import {RestShow} from './../../services/show'
-
     export default RestShow.extend({
 
         computed: {

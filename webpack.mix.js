@@ -17,6 +17,7 @@ var webpack = require('webpack')
 
         entry: [
             'vue',
+            'vuex',
             'vue-router',
             'axios',
             'querystring',
@@ -26,11 +27,8 @@ var webpack = require('webpack')
             './resources/assets/js/init/vue-components.js',
             './resources/assets/js/init/vue-router.js',
             './resources/assets/js/init/vue-filters.js',
+            './resources/assets/js/init/vue-services.js',
             // 'scripts/init/vue-directives.js',
-            './resources/assets/js/components/services/core.js',
-            './resources/assets/js/components/services/list.js',
-            './resources/assets/js/components/services/show.js',
-            // './resources/assets/js/rest/list.js',
             './resources/assets/sass/app.scss',
             'font-awesome/scss/font-awesome.scss',
         ],
@@ -56,11 +54,9 @@ var webpack = require('webpack')
                 querystring: 'querystring',
                 moment: 'moment',
                 Vue: 'vue',
+                Vuex: 'vuex',
                 VueRouter: 'vue-router',
                 swal: 'sweetalert',
-                RestCore: 'components/services/core',
-                RestList: 'components/services/list',
-                RestShow: 'components/services/show',
             }),
         ],
 

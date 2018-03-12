@@ -1,8 +1,5 @@
 
-// import {HTTP} from './http-common'
-import {RestCore} from './core'
-
-export const RestList = RestCore.extend({
+module.exports = RestCore.extend({
 
     abstract: true,
 

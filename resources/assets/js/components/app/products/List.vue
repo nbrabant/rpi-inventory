@@ -44,8 +44,6 @@
 
 <script>
 
-    import {RestList} from './../../services/list'
-
     export default RestList.extend({
 
         data() {
