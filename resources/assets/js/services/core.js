@@ -55,6 +55,14 @@ module.exports = Vue.extend({
         parentRoute: function () {
             return this.$route.path.split('/').slice(0, -1).join('/') + '/'
         },
+        HTTP: function() {
+            return axios.create({
+                baseURL: 'api/',
+                headers: {
+                    Authorization: 'Bearer {token}'
+                }
+            })
+        }
     },
 
     watch: {
@@ -98,7 +106,7 @@ module.exports = Vue.extend({
 
             var options = []
 
-            // HTTP.get(route, querystring.stringify(params))
+            // this.HTTP.get(route, querystring.stringify(params))
             //     .then(function(response) {
             //         if (!response.data instanceof Object || !response.data.data instanceof Array) {
             //             return
@@ -145,7 +153,7 @@ module.exports = Vue.extend({
 
             this.prepareRestGet(route, params, item)
 
-            HTTP.get(route, {params: params})
+            this.HTTP.get(route, {params: params})
                 .then(response => {
                     this.successRestGet(response)
                 })
@@ -171,7 +179,7 @@ module.exports = Vue.extend({
 
         triggerRestSave: function (route, params, item) {
             this.prepareRestSave(route, params, item)
-            // HTTP.post(route, item, params)
+            // this.HTTP.post(route, item, params)
             //     .then(response => {
             //         this.successRestSave(response)
             //     }).catch(response => {
@@ -210,7 +218,7 @@ module.exports = Vue.extend({
             }
 
             this.prepareRestUpdate(route, params, item)
-            // HTTP.put(route, item, params)
+            // this.HTTP.put(route, item, params)
             //     .then(response => {
             //         this.successRestUpdate(response)
             //     }).catch(response => {
@@ -265,7 +273,7 @@ module.exports = Vue.extend({
                 }
             }
 
-            // HTTP.delete(route, item, params)
+            // this.HTTP.delete(route, item, params)
             //     .then(response => {
             //         this.successRestDelete(response)
             //     }).catch(response => {
