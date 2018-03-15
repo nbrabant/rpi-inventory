@@ -1,28 +1,51 @@
-<?php  namespace App\Http\Controllers\Api;
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Models\Category;
-use App\Http\Controllers\RestController;
-use Illuminate\Http\Request;
+use App\Services\Category\CategoryCommandService;
+use App\Services\Category\CategoryQueryService;
 
-class Categories extends RestController
+class Categories extends Controller
 {
-	const MODEL = Category::class;
 
-	protected $validation = [
-		'nom' 		=> 'required|string',
-		'position' 	=> 'required|integer',
-	];
-
-	/**
-	 * @override create method
-	 *
-	 * @return Category object
-	 */
-	public function create()
+	public function __construct(CategoryCommandService $category_command_service, CategoryQueryService $category_query_service)
     {
-        $model = static::MODEL;
+        $this->category_command_service = $category_command_service;
+        $this->category_query_service = $category_query_service;
+    }
 
-        return new $model(['position' => 255]);
+	public function index(Request $request)
+    {
+        return $this->category_query_service->getCategories($request);
+    }
+
+	public function create(Request $request)
+    {
+        return $this->category_command_service->initializeCategory($request);
+    }
+
+	public function store(Request $request)
+    {
+        return $this->category_command_service->createCategory($request);
+    }
+
+	public function show(Request $request, $id)
+    {
+        return $this->category_query_service->getCategory($id, $request);
+    }
+
+	public function update(Request $request, $id)
+    {
+        return $this->category_command_service->updateCategory($id, $request);
+    }
+
+	public function destroy($id)
+    {
+        return $this->category_command_service->destroyCategory($id);
     }
 
 }
