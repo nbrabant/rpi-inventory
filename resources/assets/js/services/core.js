@@ -106,22 +106,22 @@ module.exports = Vue.extend({
 
             var options = []
 
-            // this.HTTP.get(route, querystring.stringify(params))
-            //     .then(function(response) {
-            //         if (!response.data instanceof Object || !response.data.data instanceof Array) {
-            //             return
-            //         }
-            //
-            //         for (var key in response.data.data) {
-            //             options.push({
-            //                 key: response.data.data[key][keyKey],
-            //                 value: response.data.data[key][valueKey],
-            //             })
-            //         }
-            //
-            //     }).catch(function(response) {
-            //         console.log(response)
-            //     });
+            this.HTTP.get(route, querystring.stringify(params))
+                .then(function(response) {
+                    if (!response.data instanceof Object || !response.data.data instanceof Array) {
+                        return
+                    }
+
+                    for (var key in response.data.data) {
+                        options.push({
+                            key: response.data.data[key][keyKey],
+                            value: response.data.data[key][valueKey],
+                        })
+                    }
+
+                }).catch(function(response) {
+                    console.log(response)
+                });
 
             Vue.set(this, setVar, options)
         },
@@ -179,16 +179,16 @@ module.exports = Vue.extend({
 
         triggerRestSave: function (route, params, item) {
             this.prepareRestSave(route, params, item)
-            // this.HTTP.post(route, item, params)
-            //     .then(response => {
-            //         this.successRestSave(response)
-            //     }).catch(response => {
-            //         if (response.response) {
-            //             this.errorRestSave(response.response)
-            //         } else {
-            //             this.errorRestSave(response)
-            //         }
-            //     });
+            this.HTTP.post(route, item, params)
+                .then(response => {
+                    this.successRestSave(response)
+                }).catch(response => {
+                    if (response.response) {
+                        this.errorRestSave(response.response)
+                    } else {
+                        this.errorRestSave(response)
+                    }
+                });
         },
         prepareRestSave: function (route, params, item) {
             this.cacheRestQuery('triggerRestSave', route, params, item);
@@ -218,16 +218,16 @@ module.exports = Vue.extend({
             }
 
             this.prepareRestUpdate(route, params, item)
-            // this.HTTP.put(route, item, params)
-            //     .then(response => {
-            //         this.successRestUpdate(response)
-            //     }).catch(response => {
-            //         if (response.response) {
-            //             this.errorRestUpdate(response.response)
-            //         } else {
-            //             this.errorRestUpdate(response)
-            //         }
-            //     });
+            this.HTTP.patch(route, item, params)
+                .then(response => {
+                    this.successRestUpdate(response)
+                }).catch(response => {
+                    if (response.response) {
+                        this.errorRestUpdate(response.response)
+                    } else {
+                        this.errorRestUpdate(response)
+                    }
+                });
         },
         prepareRestUpdate: function (route, params, item) {
             this.cacheRestQuery('triggerRestUpdate', route, params, item);
@@ -273,16 +273,16 @@ module.exports = Vue.extend({
                 }
             }
 
-            // this.HTTP.delete(route, item, params)
-            //     .then(response => {
-            //         this.successRestDelete(response)
-            //     }).catch(response => {
-            //         if (response.response) {
-            //             this.errorRestDelete(response.response)
-            //         } else {
-            //             this.errorRestDelete(response)
-            //         }
-            //     });
+            this.HTTP.delete(route, item, params)
+                .then(response => {
+                    this.successRestDelete(response)
+                }).catch(response => {
+                    if (response.response) {
+                        this.errorRestDelete(response.response)
+                    } else {
+                        this.errorRestDelete(response)
+                    }
+                });
         },
         prepareRestDelete: function (route, params) {
             this.cacheRestQuery('triggerRestDelete', route, params);
