@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Category;
-use App\Services\Category\CategoryCommandService;
-use App\Services\Category\CategoryQueryService;
+use App\Services\Stock\Category\CategoryCommandService;
+use App\Services\Stock\Category\CategoryQueryService;
 
 class Categories extends Controller
 {

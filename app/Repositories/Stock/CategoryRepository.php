@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Stock;
 
 use Carbon\Carbon;
+use App\Repositories\Repository;
 
 class CategoryRepository extends Repository
 {

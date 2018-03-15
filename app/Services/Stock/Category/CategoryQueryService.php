@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Category;
+namespace App\Services\Stock\Category;
 
 use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
-use App\Repositories\CategoryRepository as Category;
+use App\Repositories\Stock\CategoryRepository as Category;
 
 class CategoryQueryService
 {
