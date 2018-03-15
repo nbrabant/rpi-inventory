@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Category;
 use App\Services\Stock\Category\CategoryCommandService;
 use App\Services\Stock\Category\CategoryQueryService;
 
