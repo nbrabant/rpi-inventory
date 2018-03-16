@@ -118,7 +118,7 @@ module.exports = Vue.extend({
                             value: response.data.data[key][valueKey],
                         })
                     }
-
+console.log(options);
                 }).catch(function(response) {
                     console.log(response)
                 });

@@ -1,17 +1,24 @@
-<?php namespace App\Http\Controllers\Api;
+<?php
 
-use App\Models\Product;
-use App\Http\Controllers\RestController;
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Consumptions extends RestController
-{
-    const MODEL = Product::class;
+use App\Services\Stock\Product\ProductCommandService;
+use App\Services\Stock\Product\ProductQueryService;
 
-    protected $validation = [];
+class Consumptions extends Controller
+{
+    public function __construct(ProductCommandService $product_command_service, ProductQueryService $product_query_service)
+    {
+        $this->product_command_service = $product_command_service;
+        $this->product_query_service = $product_query_service;
+    }
 
     public function index(Request $request)
     {
         return [];
     }
+    
 }

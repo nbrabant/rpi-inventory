@@ -13,7 +13,7 @@ Vue.component('html-pagination',        require('../components/html/Pagination.v
 // Vue.component('form-price',             require('../components/form/Price.vue'))
 Vue.component('form-select',            require('../components/form/Select.vue'))
 Vue.component('form-text',              require('../components/form/Text.vue'))
-// Vue.component('form-autocomplete',      require('../components/form/Autocomplete.vue'))
+Vue.component('form-autocomplete',      require('../components/form/Autocomplete.vue'))
 Vue.component('form-textarea',          require('../components/form/Textarea.vue'))
 Vue.component('form-hidden',            require('../components/form/Hidden.vue'))
 // Vue.component('form-wysiwyg',           require('../components/form/Wysiwyg.vue'))
