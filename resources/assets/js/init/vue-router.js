@@ -34,11 +34,11 @@ var router = new VueRouter({
                 {
                     name: 'categories',
                     path: '/',
-                    component: require('./../components/app/categories/List.vue')
+                    component: require('./../components/app/products/categories/List.vue')
                 }, {
                     name: 'category',
                     path: ':id',
-                    component: require('./../components/app/categories/Show.vue')
+                    component: require('./../components/app/products/categories/Show.vue')
                 }
             ]
         },
@@ -51,11 +51,11 @@ var router = new VueRouter({
                 {
                     name: 'products',
                     path: '/',
-                    component: require('./../components/app/products/List.vue')
+                    component: require('./../components/app/products/products/List.vue')
                 }, {
                     name: 'product',
                     path: ':id',
-                    component: require('./../components/app/products/Show.vue')
+                    component: require('./../components/app/products/products/Show.vue')
                 }
             ]
         },
