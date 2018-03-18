@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="form-group" v-bind:class="{'open':openSuggestion}">
+    <div class="form-group" v-bind:class="{ open : openSuggestion }">
 
         <label v-if="label">
             {{ label }}
@@ -12,16 +12,22 @@
             class="form-control"
             :value="item"
             @input="updateValue($event.target.value)"
-            @keydown.enter = 'enter'
-            @keydown.down = 'down'
-            @keydown.up = 'up'>
+            :placeholder="placeholder"
+            @keydown.enter="enter"
+            @keydown.down="down"
+            @keydown.up="up"
+            ref="input" />
+
+        <form-hidden
+
+            ></form-hidden>
 
         <ul class="dropdown-menu" style="width:100%">
             <li v-for="(suggestion, index) in matches"
                 v-bind:class="{'active': isActive(index)}"
                 @click="suggestionClick(index)">
 
-                <a href="#">{{ suggestion.key }} <small>{{ suggestion.value }}</small></a>
+                <a href="#">{{ suggestion.value }}</a>
             </li>
         </ul>
 
@@ -33,7 +39,7 @@
 
     export default {
 
-        props: ['label', 'item', 'suggestions', 'selection'],
+        props: ['label', 'item', 'suggestions', 'selection', 'placeholder'],
 
         data () {
             return {
@@ -46,15 +52,18 @@
             // Filtering the suggestion based on the input
             matches () {
                 return this.suggestions.filter((obj) => {
-console.log(obj);
-                    // return obj.key.indexOf(this.item) >= 0
+                    if (this.item == undefined || this.item == '') {
+                        return false;
+                    }
+
+                    return obj.value.toLowerCase().indexOf(this.item.toLowerCase()) >= 0
                 })
             },
 
             openSuggestion () {
                 return this.selection !== '' &&
-                this.matches.length !== 0 &&
-                this.open === true
+                    this.matches.length !== 0 &&
+                    this.open === true
             }
         },
 
@@ -65,12 +74,15 @@ console.log(obj);
                     this.open = true
                     this.current = 0
                 }
-                this.$emit('input', item)
+
+                this.item = item
+                // this.$emit('input', item)
             },
 
             // When enter key pressed on the input
             enter () {
-                this.$emit('input', this.matches[this.current].key)
+                this.item = this.matches[this.current].value;
+                // this.$emit('input', this.matches[this.current].key)
                 this.open = false
             },
 
@@ -95,7 +107,8 @@ console.log(obj);
 
             // When one of the suggestion is clicked
             suggestionClick (index) {
-                this.$emit('input', this.matches[index].key)
+                this.item = this.matches[index].value
+                // this.$emit('input', this.matches[index].key)
                 this.open = false
             }
 

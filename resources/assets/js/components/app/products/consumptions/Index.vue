@@ -9,7 +9,9 @@
             <div class="col-md-11">
                 <form-autocomplete
                     :suggestions="products"
-                    v-model="selection"></form-autocomplete>
+                    v-model="selection"
+                    placeholder="Saisir le produit"
+                    ></form-autocomplete>
             </div>
 
             <div class="col-md-1">
@@ -28,14 +30,16 @@
 
         data: function() {
             return {
-                selection: '',
+                selection: {
+                    key: '',
+                    value: ''
+                },
                 products: []
             };
         },
 
         mounted() {
             this.getRelatedResource('products', 'id', 'nom')
-console.log(this.products);            
         },
 
         computed: {
