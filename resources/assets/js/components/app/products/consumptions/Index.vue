@@ -6,16 +6,21 @@
 
         <div class="content clearfix">
 
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <form-autocomplete
                     :suggestions="products"
+                    :itemKey="selectionKey"
                     v-model="selection"
                     placeholder="Saisir le produit"
                     ></form-autocomplete>
             </div>
 
-            <div class="col-md-1">
-                Rechercher
+            <div class="col-md-2">
+                <form-button
+                    label="Rechercher"
+                    :onClick="searchConsumptions"
+                    :disabled="isDisabled"
+                ></form-button>
             </div>
 
         </div>
@@ -30,10 +35,8 @@
 
         data: function() {
             return {
-                selection: {
-                    key: '',
-                    value: ''
-                },
+                selection: '',
+                selectionKey: '',
                 products: []
             };
         },
@@ -43,8 +46,16 @@
         },
 
         computed: {
-            title: function () {
-                return 'Consommations'
+            isDisabled: function () {
+console.log(this.selectedKey);
+
+                return this.selectionKey.length <= 0
+            },
+        },
+
+        methods: {
+            searchConsumptions() {
+                console.log('Button clicked')
             }
         }
 

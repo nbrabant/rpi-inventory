@@ -11,16 +11,13 @@
             type="text"
             class="form-control"
             :value="item"
+            :itemKey="itemKey"
             @input="updateValue($event.target.value)"
             :placeholder="placeholder"
             @keydown.enter="enter"
             @keydown.down="down"
             @keydown.up="up"
             ref="input" />
-
-        <form-hidden
-
-            ></form-hidden>
 
         <ul class="dropdown-menu" style="width:100%">
             <li v-for="(suggestion, index) in matches"
@@ -39,7 +36,7 @@
 
     export default {
 
-        props: ['label', 'item', 'suggestions', 'selection', 'placeholder'],
+        props: ['label', 'item', 'itemKey', 'suggestions', 'selection', 'placeholder'],
 
         data () {
             return {
@@ -108,6 +105,7 @@
             // When one of the suggestion is clicked
             suggestionClick (index) {
                 this.item = this.matches[index].value
+                this.itemKey = this.matches[index].key
                 // this.$emit('input', this.matches[index].key)
                 this.open = false
             }

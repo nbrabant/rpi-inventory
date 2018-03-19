@@ -8,10 +8,10 @@ var router = new VueRouter({
     hashbang: false,
     saveScrollPosition: true,
     routes: [
-        // {
-        //     path: '*',
-        //     redirect: { name: 'dashboard' }
-        // },
+        {
+            path: '*',
+            redirect: { name: 'dashboard' }
+        },
         {
             path: '/dashboard',
             component : {

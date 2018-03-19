@@ -7,6 +7,7 @@ Vue.component('html-cardfooter',        require('../components/html/CardFooter.v
 Vue.component('html-pagination',        require('../components/html/Pagination.vue'))
 
 // Form components
+Vue.component('form-button',            require('../components/form/Button.vue'))
 // Vue.component('form-checkbox',          require('../components/form/Checkbox.vue'))
 // Vue.component('form-datepicker',        require('../components/form/Datepicker.vue'))
 // Vue.component('form-percentage',        require('../components/form/Percentage.vue'))
