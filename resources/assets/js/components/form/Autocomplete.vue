@@ -11,7 +11,6 @@
             type="text"
             class="form-control"
             :value="item"
-            :itemKey="itemKey"
             @input="updateValue($event.target.value)"
             :placeholder="placeholder"
             @keydown.enter="enter"
@@ -36,7 +35,7 @@
 
     export default {
 
-        props: ['label', 'item', 'itemKey', 'suggestions', 'selection', 'placeholder'],
+        props: ['label', 'item', 'suggestions', 'selection', 'placeholder'],
 
         data () {
             return {
@@ -73,13 +72,11 @@
                 }
 
                 this.item = item
-                // this.$emit('input', item)
             },
 
             // When enter key pressed on the input
             enter () {
                 this.item = this.matches[this.current].value;
-                // this.$emit('input', this.matches[this.current].key)
                 this.open = false
             },
 
@@ -105,9 +102,12 @@
             // When one of the suggestion is clicked
             suggestionClick (index) {
                 this.item = this.matches[index].value
-                this.itemKey = this.matches[index].key
-                // this.$emit('input', this.matches[index].key)
+                this.$emit('updateSelection', {
+                    key: this.matches[index].key,
+                })
                 this.open = false
+
+                return false;
             }
 
         }

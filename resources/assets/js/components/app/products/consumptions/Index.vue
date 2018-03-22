@@ -9,10 +9,10 @@
             <div class="col-md-10">
                 <form-autocomplete
                     :suggestions="products"
-                    :itemKey="selectionKey"
                     v-model="selection"
+                    v-on:updateSelection="updateSelection"
                     placeholder="Saisir le produit"
-                    ></form-autocomplete>
+                ></form-autocomplete>
             </div>
 
             <div class="col-md-2">
@@ -36,7 +36,7 @@
         data: function() {
             return {
                 selection: '',
-                selectionKey: '',
+                selectedKey: '',
                 products: []
             };
         },
@@ -47,17 +47,22 @@
 
         computed: {
             isDisabled: function () {
-console.log(this.selectedKey);
-
-                return this.selectionKey.length <= 0
+                return this.selectedKey == undefined || this.selectedKey == ''
             },
         },
 
         methods: {
             searchConsumptions() {
-                console.log('Button clicked')
+                if (this.isDisabled) {
+                    return;
+                }
+
+                
+            },
+            updateSelection: function(payload) {
+                this.selectedKey = payload.key
             }
-        }
+        },
 
     })
 
