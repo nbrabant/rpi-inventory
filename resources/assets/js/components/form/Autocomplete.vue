@@ -10,18 +10,20 @@
         <input
             type="text"
             class="form-control"
-            :value="item"
+            v-model="display"
             @input="updateValue($event.target.value)"
             :placeholder="placeholder"
             @keydown.enter="enter"
             @keydown.down="down"
             @keydown.up="up"
             ref="input" />
+        <input :name="name" type="hidden" :value="value">
 
         <ul class="dropdown-menu" style="width:100%">
-            <li v-for="(suggestion, index) in matches"
-                v-bind:class="{'active': isActive(index)}"
-                @click="suggestionClick(index)">
+            <li v-for="(suggestion, key) in matches"
+                :key="key"
+                v-bind:class="{'active': isActive(key)}"
+                @click.prevent="select(suggestion)">
 
                 <a href="#">{{ suggestion.value }}</a>
             </li>
@@ -35,10 +37,35 @@
 
     export default {
 
-        props: ['label', 'item', 'suggestions', 'selection', 'placeholder'],
+        props: {
+            label: {
+                type: String
+            },
+            suggestions: {
+                type: Array,
+                required: true
+            },
+            placeholder: {
+                default: 'Rechercher'
+            },
+            initialValue: {
+                type: [String, Number]
+            },
+            initialDisplay: {
+                type: String
+            },
+            name: {
+                type: String
+            },
+        },
+        // ['selection'],
 
         data () {
             return {
+                value: null,
+                display: null,
+                selectedId: null,
+                selectedDisplay: null,
                 open: false,
                 current: 0
             }
@@ -47,12 +74,12 @@
         computed: {
             // Filtering the suggestion based on the input
             matches () {
-                return this.suggestions.filter((obj) => {
-                    if (this.item == undefined || this.item == '') {
-                        return false;
-                    }
+                if (this.display == undefined || this.display == '') {
+                    return [];
+                }
 
-                    return obj.value.toLowerCase().indexOf(this.item.toLowerCase()) >= 0
+                return this.suggestions.filter((obj) => {
+                    return obj.value.toLowerCase().indexOf(this.display.toLowerCase()) >= 0
                 })
             },
 
@@ -60,23 +87,23 @@
                 return this.selection !== '' &&
                     this.matches.length !== 0 &&
                     this.open === true
-            }
+            },
         },
 
         methods: {
             // Triggered the input event to cascade the updates to parent component
-            updateValue (item) {
+            updateValue (value) {
                 if (this.open === false) {
                     this.open = true
                     this.current = 0
                 }
 
-                this.item = item
+                this.value = value
             },
 
             // When enter key pressed on the input
             enter () {
-                this.item = this.matches[this.current].value;
+                this.value = this.matches[this.current].value;
                 this.open = false
             },
 
@@ -100,17 +127,32 @@
             },
 
             // When one of the suggestion is clicked
-            suggestionClick (index) {
-                this.item = this.matches[index].value
+            select (object) {
+                if (!object) {
+                    return
+                }
+
+                this.display = object.value
+                this.value = (this.matches && object[this.matches]) ? object[this.matches] : object.key
+                this.$emit('input', this.value)
+                this.close()
+
                 this.$emit('updateSelection', {
-                    key: this.matches[index].key,
+                    key: this.value
                 })
+            },
+
+            close () {
                 this.open = false
-
-                return false;
             }
+        },
 
+        mounted() {
+            this.value = this.initialValue
+            this.display = this.initialDisplay
+            this.selectedDisplay = this.initialDisplay
         }
+
     }
 
 </script>
