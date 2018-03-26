@@ -7,7 +7,7 @@
 
             <div class="content clearfix">
 
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <form-autocomplete
                         :suggestions="products"
                         v-model="selection"
@@ -16,19 +16,11 @@
                     ></form-autocomplete>
                 </div>
 
-                <div class="col-md-2">
-                    <form-button
-                        label="Rechercher"
-                        :onClick="searchConsumptions"
-                        :disabled="isDisabled"
-                    ></form-button>
-                </div>
-
             </div>
         </div>
 
         <ShowProduct
-            :product="product">
+            :productId="productId">
         </ShowProduct>
     </div>
 
@@ -43,9 +35,8 @@
         data: function() {
             return {
                 selection: '',
-                selectedKey: '',
                 products: [],
-                product: null
+                productId: null
             };
         },
 
@@ -60,15 +51,8 @@
         },
 
         methods: {
-            searchConsumptions() {
-                if (this.isDisabled) {
-                    return;
-                }
-
-                this.triggerRestGet('products', {'id': this.selectedKey}, this)
-            },
             updateSelection: function(payload) {
-                this.selectedKey = payload.key
+                this.productId = payload.key
             }
         },
 

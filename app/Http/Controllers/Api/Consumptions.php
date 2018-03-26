@@ -20,5 +20,10 @@ class Consumptions extends Controller
     {
         return [];
     }
+
+    public function show(Request $request, $id)
+    {
+        return $this->product_query_service->getProduct($id, $request);
+    }
     
 }

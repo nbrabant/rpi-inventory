@@ -4,7 +4,9 @@
     <div class="card">
 
         <div class="content clearfix">
-            <div v-if="product">
+            <div v-if="productId">
+                <input v-model="productId" type="hidden">
+                <div>{{ item.nom }}</div>
                 toto
             </div>
             <div v-else>
@@ -20,19 +22,29 @@
 
     module.exports = RestShow.extend({
 
-        props: ['product'],
+        props: ['productId'],
 
-        computed: {
-            endpoint: function () {
-                if (this.product == null) return
+        // computed: {
+        //     endpoint: function () {
+        //         if (this.productId == null) return
+        //
+        //         return this.$route.path.split('/').slice(-2, -1)[0] + '/' + this.productId
+        //     }
+        // },
 
-                return this.$route.path.split('/').slice(-2, -1)[0] + '/' + this.product.id
+        watch: {
+            productId: function() {
+                if (this.productId == null) return null
+// console.log(this.productId);
+                this.triggerRestGet(this.endpoint, {id: this.productId}, this.item)
             }
         },
 
-        mounted: function() {
-            // this.triggerRestGet(this.endpoint, {id: this.$route.params.id}, this.item)
-        },
+        methods: {
+            getProduct: function() {
+
+            }
+        }
 
     })
 
