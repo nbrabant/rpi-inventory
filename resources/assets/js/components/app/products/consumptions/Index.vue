@@ -69,6 +69,7 @@
             },
             updateSelection: function(payload) {
                 this.selectedKey = payload.key
+                this.selection = payload.value
             }
         },
 
