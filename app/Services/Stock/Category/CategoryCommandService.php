@@ -12,7 +12,7 @@ class CategoryCommandService
     private $category;
 
 	protected $validation = [
-        'nom' 		=> 'required|string|unique:categories,nom',
+        'name' 		=> 'required|string|unique:categories,nom',
 		'position' 	=> 'required|integer',
 	];
 
@@ -41,7 +41,7 @@ class CategoryCommandService
 
     public function updateCategory($id, Request $request)
     {
-        $this->validation['nom'] .= ',' . $id;
+        $this->validation['name'] .= ',' . $id;
 
         $validator = Validator::make($request->all(), $this->validation);
 

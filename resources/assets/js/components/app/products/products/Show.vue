@@ -18,17 +18,17 @@
                 <div class="col-md-12">
                     <form-select label="Catégorie"
                         :options="categories"
-                        v-model="item.categorie_id"
-                        :item="item.categorie_id"
+                        v-model="item.category_id"
+                        :item="item.category_id"
                         withEmptyOption="true"
-                        :error="errors.categorie_id"></form-select>
+                        :error="errors.category_id"></form-select>
                 </div>
 
                 <div class="col-md-12">
                     <form-text label="Nom"
-                        v-model="item.nom"
-                        :item="item.nom"
-                        :error="errors.nom"></form-text>
+                        v-model="item.name"
+                        :item="item.name"
+                        :error="errors.name"></form-text>
                 </div>
 
                 <div class="col-md-12">
@@ -40,18 +40,18 @@
 
                 <div class="col-md-12">
                     <form-text label="Quantité minimum"
-                        v-model="item.quantite_min"
-                        :item="item.quantite_min"
-                        :error="errors.quantite_min"></form-text>
+                        v-model="item.min_quantity"
+                        :item="item.min_quantity"
+                        :error="errors.min_quantity"></form-text>
                 </div>
 
                 <div class="col-md-12">
                     <form-select label="Unité"
                         :options="unites"
-                        v-model="item.unite"
-                        :item="item.unite"
+                        v-model="item.unit"
+                        :item="item.unit"
                         withEmptyOption="true"
-                        :error="errors.unite"></form-select>
+                        :error="errors.unit"></form-select>
                 </div>
 
             </div>
@@ -91,12 +91,12 @@
         },
 
         mounted() {
-            this.getRelatedResource('categories', 'id', 'nom')
+            this.getRelatedResource('categories', 'id', 'name')
         },
 
         computed: {
             title: function () {
-                return this.item.id ? this.item.nom : 'Nouveau produit'
+                return this.item.id ? this.item.name : 'Nouveau produit'
             },
         },
     })

@@ -23,8 +23,8 @@
                 <tbody>
                     <router-link :to="{ name: 'product', params: { id: product.id } }" tag="tr" v-for="product in item.data" :key="product.id">
                         <td>{{ product.id }}</td>
-                        <td>{{ product.nom }}</th>
-                        <td :class="product.status">{{ product.quantite }}</th>
+                        <td>{{ product.name }}</th>
+                        <td :class="product.status">{{ product.quantity }}</th>
                         <td>{{ product.updated_at | datetime }}</td>
                     </router-link>
                 </tbody>

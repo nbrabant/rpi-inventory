@@ -17,9 +17,9 @@
 
                 <div class="col-md-12">
                     <form-text label="Nom"
-                        v-model="item.nom"
-                        :item="item.nom"
-                        :error="errors.nom"></form-text>
+                        v-model="item.name"
+                        :item="item.name"
+                        :error="errors.name"></form-text>
                 </div>
 
             </div>
@@ -46,7 +46,7 @@
 
         computed: {
             title: function () {
-                return this.item.id ? this.item.nom : 'Nouvelle catégorie'
+                return this.item.id ? this.item.name : 'Nouvelle catégorie'
             },
         }
 

@@ -41,7 +41,7 @@
         },
 
         mounted() {
-            this.getRelatedResource('products', 'id', 'nom')
+            this.getRelatedResource('products', 'id', 'name')
         },
 
         computed: {

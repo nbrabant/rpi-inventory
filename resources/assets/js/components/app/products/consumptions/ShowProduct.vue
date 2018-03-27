@@ -6,7 +6,7 @@
         <div class="content clearfix">
             <div v-if="productId">
                 <input v-model="productId" type="hidden">
-                <div>{{ item.nom }}</div>
+                <div>{{ item.name }}</div>
                 toto
             </div>
             <div v-else>

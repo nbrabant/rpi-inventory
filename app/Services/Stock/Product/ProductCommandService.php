@@ -12,11 +12,11 @@ class ProductCommandService
     private $product;
 
     protected $validation = [
-        'categorie_id'	=> 'required|integer',
-		'nom' 			=> 'required|string|unique:produits,nom',
+        'category_id'	=> 'required|integer',
+		'name' 			=> 'required|string|unique:produits,nom',
 		'description'	=> 'required|string',
-		'quantite_min'	=> 'required|integer',
-		'unite'			=> 'string|in:piece,grammes,litre,sachet',
+		'min_quantity'	=> 'required|integer',
+		'unit'			=> 'string|in:piece,grammes,litre,sachet',
 	];
 
     public function __construct(Product $product)
@@ -44,7 +44,7 @@ class ProductCommandService
 
     public function updateProduct($id, Request $request)
     {
-        $this->validation['nom'] .= ',' . $id;
+        $this->validation['name'] .= ',' . $id;
 
         $validator = Validator::make($request->all(), $this->validation);
 
