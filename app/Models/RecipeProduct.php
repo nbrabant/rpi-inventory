@@ -8,10 +8,10 @@ class RecipeProduit extends Model
 {
 	//columns
     protected $fillable = [
-		'recette_id',
-		'produit_id',
-		'quantite',
-		'unite',
+		'recipe_id',
+		'product_id',
+		'quantity',
+		'unit',
 	];
 
 	public $timestamps = false;

@@ -168,10 +168,10 @@ class ProductTableSeeder extends Seeder {
 		foreach (self::$categoriesProducts as $categoryId => $products) {
 			foreach ($products as $name => $unite) {
 				$this->_datasToSeed[] = [
-					'categorie_id' 	=> $categoryId,
-					'nom' 			=> $name,
-					'quantite' 		=> '0',
-					'unite' 		=> null, //($unite !== '---' ? $unite : null),
+					'category_id' 	=> $categoryId,
+					'name' 			=> $name,
+					'quantity' 		=> '0',
+					'unit'	 		=> null, //($unite !== '---' ? $unite : null),
 				];
 			}
 		}

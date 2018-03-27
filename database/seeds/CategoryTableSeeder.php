@@ -30,7 +30,7 @@ class CategoryTableSeeder extends Seeder {
 
 		foreach ($this->_datasToSeed as $data) {
 			Category::create([
-				'nom'   => $data,
+				'name'   => $data,
 			]);
 		}
 	}

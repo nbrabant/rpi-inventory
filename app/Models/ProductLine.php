@@ -10,9 +10,9 @@ class Ligneproduit extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'liste_id',
-		'produit_id',
-		'quantite'
+		'cart_id',
+		'product_id',
+		'quantity'
 	];
 
 	//hierarchical

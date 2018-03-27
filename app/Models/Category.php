@@ -8,7 +8,7 @@ class Category extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'nom',
+		'name',
 		'position'
 	];
 
@@ -32,7 +32,7 @@ class Category extends Eloquent {
 		}
 
         static::get()->map(function($item) use (&$return) {
-            $return[$item->id] = $item->nom;
+            $return[$item->id] = $item->name;
         });
         return $return;
 	}

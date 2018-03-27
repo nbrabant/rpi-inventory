@@ -10,8 +10,8 @@ class Operation extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'produit_id',
-		'quantite',
+		'product_id',
+		'quantity',
 		'operation',
 		'detail'
 	];
@@ -24,12 +24,12 @@ class Operation extends Eloquent {
 	public function sumProductQuantity() {
 		$count = 0;
 
-		$operations = self::where('produit_id', $this->produit_id)->get();
+		$operations = self::where('product_id', $this->product_id)->get();
 		foreach ($operations as $operation) {
 			if($operation->operation === '+') {
-				$count += $operation->quantite;
+				$count += $operation->quantity;
 			} else {
-				$count -= $operation->quantite;
+				$count -= $operation->quantity;
 			}
 		}
 

@@ -9,7 +9,7 @@ class Agendaproducts extends Model
     protected $table = 'agendaProductsView';
 
 	protected $fillable = [
-		'produit_id',
+		'product_id',
 		'produit_nom',
 		'necessaire',
 		'en_stock',

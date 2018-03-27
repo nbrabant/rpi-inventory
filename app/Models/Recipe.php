@@ -12,13 +12,13 @@ class Recipe extends Model
 
 	//columns
     protected $fillable = [
-		'nom',
-		'type_recette',
-		'visuel',
+		'name',
+		'recipe_type',
+		'visual',
 		'instructions',
-		'nombre_personnes',
-		'temps_preparation',
-		'temps_cuisson',
+		'number_people',
+		'preparation_time',
+		'cooking_time',
 		'complement',
 	];
 
@@ -50,14 +50,14 @@ class Recipe extends Model
 		}
 
         static::get()->map(function($item) use (&$return) {
-            $return[$item->id] = $item->nom;
+            $return[$item->id] = $item->name;
         });
         return $return;
 	}
 
 	public function getImage() {
-		if(!is_null($this->visuel) && is_file(public_path().'/img/recettes/'.$this->visuel)) {
-			return '<img src="/img/recettes/'.$this->visuel.'" class="img-responsive"/>';
+		if(!is_null($this->visual) && is_file(public_path().'/img/recettes/'.$this->visual)) {
+			return '<img src="/img/recettes/'.$this->visual.'" class="img-responsive"/>';
 		}
 		return null;
 	}
@@ -66,20 +66,20 @@ class Recipe extends Model
 		$lstToAdd = [];
 		$this->produits->map(function($produit) use(&$postDatas) {
 			// delete if product not in
-			if(!isset($postDatas['produits']) || !is_array($postDatas['produits']) || !in_array($produit->produit_id, $postDatas['produits'])) {
+			if(!isset($postDatas['produits']) || !is_array($postDatas['produits']) || !in_array($produit->product_id, $postDatas['produits'])) {
 				$produit->delete();
 			}
 
 			// update recette_produit row
-			if(isset($postDatas['quantite_'.$produit->produit_id]) && $postDatas['quantite_'.$produit->produit_id] > 0) { // for security
-				$produit->quantite 	= $postDatas['quantite_'.$produit->produit_id];
-				$produit->unite		= (isset($postDatas['unite_'.$produit->produit_id]) && strlen($postDatas['unite_'.$produit->produit_id]) > 0 ? $postDatas['unite_'.$produit->produit_id] : null);
+			if(isset($postDatas['quantite_'.$produit->product_id]) && $postDatas['quantite_'.$produit->product_id] > 0) { // for security
+				$produit->quantite 	= $postDatas['quantite_'.$produit->product_id];
+				$produit->unite		= (isset($postDatas['unite_'.$produit->product_id]) && strlen($postDatas['unite_'.$produit->product_id]) > 0 ? $postDatas['unite_'.$produit->product_id] : null);
 				$produit->save();
 			}
 
 			// unset all the postDatas produit where $key is $recette_produit product ID
 			foreach ($postDatas['produits'] as $key => $produitId) {
-				if($produit->produit_id == $produitId) {
+				if($produit->product_id == $produitId) {
 					unset($postDatas['produits'][$key]);
 				}
 			}
@@ -93,7 +93,7 @@ class Recipe extends Model
 				}
 
 				$lstToAdd[] = new RecetteProduit([
-					'produit_id'	=> $produitId,
+					'product_id'	=> $produitId,
 					'quantite'		=> $postDatas['quantite_'.$produitId],
 					'unite' 		=> (isset($postDatas['unite_'.$produitId]) && strlen($postDatas['unite_'.$produitId]) > 0 ? $postDatas['unite_'.$produitId] : null)
 				]);

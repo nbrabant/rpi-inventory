@@ -9,10 +9,10 @@ class Planning extends Model
 {
 	//columns
     protected $fillable = [
-		'recette_id',
-		'date_recette',
+		'recipe_id',
+		'date_recipe',
 		'moment',
-		'realise'
+		'finished'
 	];
 
 	protected $validators = [
@@ -21,7 +21,7 @@ class Planning extends Model
 		'moment' 		=> 'required|in:matin,midi,soir',
 	];
 
-	protected $dates = ['date_recette'];
+	protected $dates = ['date_recipe'];
 
 	//hierarchical
 	public function recipe() {
@@ -33,7 +33,7 @@ class Planning extends Model
 		$startDate 	= isset($dates['startAt']) ? $dates['startAt'] : Carbon::now()->startOfWeek();
 		$endDate 	= isset($dates['endAt']) ? $dates['endAt'] : Carbon::now()->endOfWeek();
 
-		$query->whereBetween('date_recette', [$startDate, $endDate]);
+		$query->whereBetween('date_recipe', [$startDate, $endDate]);
 		return $query;
 	}
 

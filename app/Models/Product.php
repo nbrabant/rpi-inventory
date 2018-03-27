@@ -8,11 +8,11 @@ class Product extends Eloquent {
 
 	//columns
     protected $fillable = [
-		'categorie_id',
-		'nom',
+		'category_id',
+		'name',
 		'description',
-		'quantite',
-		'quantite_min',
+		'quantity',
+		'min_quantity',
 		'unite'
 	];
 
@@ -54,7 +54,7 @@ class Product extends Eloquent {
 		}
 
 		static::without($withoutId)->get()->map(function($item) use (&$return) {
-            $return[$item->id] = $item->nom;
+            $return[$item->id] = $item->name;
         });
 
 		return $return;
@@ -62,9 +62,9 @@ class Product extends Eloquent {
 
 	public function getStatus()
 	{
-		if ($this->quantite_min == 0 || $this->quantite > $this->quantite_min) {
+		if ($this->min_quantity == 0 || $this->quantity > $this->min_quantity) {
 			return 'alert-success';
-		} elseif ($this->quantite == $this->quantite_min) {
+        } elseif ($this->quantity == $this->min_quantity) {
 			return 'alert-warning';
 		}
 		return 'alert-danger';
@@ -74,8 +74,8 @@ class Product extends Eloquent {
 	public static function getOutOfStockProducts($withoutIds = [])
 	{
 		return self::withoutIds($withoutIds)
-				->where('quantite_min', '>', 0)
-				->whereRaw('produits.quantite <= produits.quantite_min')
+				->where('min_quantity', '>', 0)
+				->whereRaw('products.quantity <= products.min_quantity')
 				->get();
 	}
 

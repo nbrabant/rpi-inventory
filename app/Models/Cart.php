@@ -11,7 +11,7 @@ class Cart extends Eloquent
 
 	//columns
     protected $fillable = [
-		'termine',
+		'finished',
 		'trello_card_id'
 	];
 
@@ -27,7 +27,7 @@ class Cart extends Eloquent
 
 	public function getProductListIds()
 	{
-		return $this->lignesproduits()->lists('produit_id')->toArray();
+		return $this->lignesproduits()->lists('product_id')->toArray();
 	}
 
 	public function getProductsOrderedByCategory()
