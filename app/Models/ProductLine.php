@@ -16,21 +16,21 @@ class Ligneproduit extends Eloquent {
 	];
 
 	//hierarchical
-	public function liste()
+	public function cart()
 	{
-		return $this->belongsTo('App\Liste');
+		return $this->belongsTo('App\Cart');
 	}
 
-	public function produit()
+	public function product()
 	{
-		return $this->belongsTo('App\Produit');
+		return $this->belongsTo('App\Product');
 	}
 
 	public function scopeCategoryByPosition($query)
 	{
 		return $query->with([
-			'produit',
-			'produit.categorie' => function($query) {
+			'product',
+			'product.category' => function($query) {
 				$query->orderBy('position', 'ASC');
 			}
 		]);

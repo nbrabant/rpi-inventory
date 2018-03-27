@@ -24,18 +24,18 @@
 
         props: ['productId'],
 
-        // computed: {
-        //     endpoint: function () {
-        //         if (this.productId == null) return
-        //
-        //         return this.$route.path.split('/').slice(-2, -1)[0] + '/' + this.productId
-        //     }
-        // },
+        computed: {
+            endpoint: function () {
+                if (this.productId == null) return
+
+                return this.$route.path.split('/').slice(-2, -1)[0]
+            }
+        },
 
         watch: {
             productId: function() {
                 if (this.productId == null) return null
-// console.log(this.productId);
+
                 this.triggerRestGet(this.endpoint, {id: this.productId}, this.item)
             }
         },

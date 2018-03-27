@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Product extends Eloquent {
 
-	protected $table = 'produits';
-
 	//columns
     protected $fillable = [
 		'categorie_id',
@@ -19,31 +17,37 @@ class Product extends Eloquent {
 	];
 
 	//hierarchical
-	public function category() {
-		return $this->belongsTo('App\Category');
+	public function category()
+	{
+		return $this->belongsTo('App\Models\Category');
 	}
 
-	public function operations() {
-		return $this->hasMany('App\Operation');
+	public function operations()
+	{
+		return $this->hasMany('App\Models\Operation');
 	}
 
-	public function lignesproduits() {
-		return $this->hasMany('App\Ligneproduit');
+	public function productLine()
+	{
+		return $this->hasMany('App\Models\ProductLine');
 	}
 
-	public function recettes() {
-		return $this->hasMany('App\RecetteProduit');
+	public function recipes()
+	{
+		return $this->hasMany('App\Models\RecipeProduct');
 	}
 
-	//scope functions
-	public function scopeWithoutIds($query, $ids = []) {
-		if(is_array($ids) && !empty($ids)){
+	// scope functions
+	public function scopeWithoutIds($query, $ids = [])
+	{
+		if (is_array($ids) && !empty($ids)) {
 			$query->whereNotIn('id', $ids);
 		}
 		return $query;
 	}
 
-	public static function getList($withoutId = null, $emptyLine = true) {
+	public static function getList($withoutId = null, $emptyLine = true)
+	{
 		$return = [];
 		if($emptyLine) {
 			$return['-1'] = '---';
@@ -56,8 +60,9 @@ class Product extends Eloquent {
 		return $return;
 	}
 
-	public function getStatus() {
-		if($this->quantite_min == 0 || $this->quantite > $this->quantite_min) {
+	public function getStatus()
+	{
+		if ($this->quantite_min == 0 || $this->quantite > $this->quantite_min) {
 			return 'alert-success';
 		} elseif ($this->quantite == $this->quantite_min) {
 			return 'alert-warning';
@@ -66,7 +71,8 @@ class Product extends Eloquent {
 	}
 
 	// récup des produits avec stock > stock mini hors produit dans la liste
-	public static function getOutOfStockProducts($withoutIds = []) {
+	public static function getOutOfStockProducts($withoutIds = [])
+	{
 		return self::withoutIds($withoutIds)
 				->where('quantite_min', '>', 0)
 				->whereRaw('produits.quantite <= produits.quantite_min')

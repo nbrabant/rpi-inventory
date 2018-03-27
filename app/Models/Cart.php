@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 // use App\Helpers\TrelloTraitHelper;
 
-class Liste extends Eloquent
+class Cart extends Eloquent
 {
 	// use TrelloTraitHelper;
-
-	protected $table = 'listes';
 
 	//columns
     protected $fillable = [
@@ -18,9 +16,9 @@ class Liste extends Eloquent
 	];
 
 	//hierarchical
-	public function lignesproduits()
+	public function productLines()
 	{
-		return $this->hasMany('App\Ligneproduit');
+		return $this->hasMany('App\ProductLine');
 	}
 
 	public function listecourante() {
@@ -35,8 +33,8 @@ class Liste extends Eloquent
 	public function getProductsOrderedByCategory()
 	{
 		return $this->lignesproduits()->with([
-			'produit',
-			'produit.categorie' => function($query) {
+			'product',
+			'product.category' => function($query) {
 				$query->orderBy('position', 'ASC');
 			}
 		])->get();

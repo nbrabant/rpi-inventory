@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Agenda extends Model
+class Planning extends Model
 {
 	//columns
     protected $fillable = [
@@ -24,13 +24,8 @@ class Agenda extends Model
 	protected $dates = ['date_recette'];
 
 	//hierarchical
-	public function recette() {
-		return $this->belongsTo('App\Recette');
-	}
-
-	public function getValidators()
-	{
-		return $this->validators;
+	public function recipe() {
+		return $this->belongsTo('App\Recipe');
 	}
 
 	//scope functions

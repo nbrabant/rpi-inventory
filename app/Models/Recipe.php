@@ -10,8 +10,6 @@ class Recipe extends Model
 {
 	// use CrawlerTraitHelper;
 
-	protected $table = 'recettes';
-
 	//columns
     protected $fillable = [
 		'nom',
@@ -34,17 +32,14 @@ class Recipe extends Model
 	];
 
 	//hierarchical
-	public function agendas() {
-		return $this->hasMany('App\Agenda');
-	}
-
-	public function produits() {
-		return $this->hasMany('App\RecetteProduit');
-	}
-
-	public function getValidators()
+	public function plannings()
 	{
-		return $this->validators;
+		return $this->hasMany('App\Planning');
+	}
+
+	public function products()
+	{
+		return $this->hasMany('App\RecipeProduct');
 	}
 
 	public static function getList($emptyLine = false)

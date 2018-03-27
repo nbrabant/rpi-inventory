@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RecipeProduit extends Model
 {
-	protected $table = 'recettes_produits';
-
 	//columns
     protected $fillable = [
 		'recette_id',
@@ -19,12 +17,14 @@ class RecipeProduit extends Model
 	public $timestamps = false;
 
 	//hierarchical
-	public function recette() {
-		return $this->belongsTo('App\Recette');
+	public function recipe()
+	{
+		return $this->belongsTo('App\Recipe');
 	}
 
-	public function produit() {
-		return $this->belongsTo('App\Produit');
+	public function product()
+	{
+		return $this->belongsTo('App\Product');
 	}
 
 	public static function getUniteList()
@@ -116,4 +116,5 @@ class RecipeProduit extends Model
 
 		return $unite;
 	}
+
 }

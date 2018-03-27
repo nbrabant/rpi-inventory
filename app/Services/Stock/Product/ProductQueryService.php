@@ -25,4 +25,11 @@ class ProductQueryService
         return $this->product->find($id, $request);
     }
 
+    public function getProductWithConsumptions($id, Request $request)
+    {
+        $this->product->setWithRelation('operations');
+
+        return $this->product->find($id, $request);
+    }
+
 }

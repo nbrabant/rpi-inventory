@@ -17,7 +17,7 @@ class Operation extends Eloquent {
 	];
 
 	//hierarchical
-	public function produit() {
+	public function product() {
 		return $this->belongsTo('App\Product');
 	}
 
