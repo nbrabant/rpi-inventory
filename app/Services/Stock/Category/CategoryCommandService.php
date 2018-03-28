@@ -12,7 +12,7 @@ class CategoryCommandService
     private $category;
 
 	protected $validation = [
-        'name' 		=> 'required|string|unique:categories,nom',
+        'name' 		=> 'required|string|unique:categories,name',
 		'position' 	=> 'required|integer',
 	];
 

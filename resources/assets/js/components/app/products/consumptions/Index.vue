@@ -29,6 +29,8 @@
 <script>
 
     import ShowProduct from './ShowProduct.vue'
+    import ShowOperation from './ShowOperation.vue'
+    import AddConsumption from './AddConsumption.vue'
 
     export default RestCore.extend({
 
@@ -57,7 +59,9 @@
         },
 
         components: {
-            ShowProduct
+            ShowProduct,
+            ShowOperation,
+            AddConsumption
         },
 
     })
