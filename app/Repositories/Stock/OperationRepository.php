@@ -5,16 +5,14 @@ namespace App\Repositories\Stock;
 use Carbon\Carbon;
 use App\Repositories\Repository;
 
-class CategoryRepository extends Repository
+class OperationRepository extends Repository
 {
     public function model() {
-        return \App\Models\Category::class;
+        return \App\Models\Operation::class;
     }
 
     public function initialize()
     {
-        return new $this->model([
-            'position' => 255,
-        ]);
+        return new $this->model();
     }
 }

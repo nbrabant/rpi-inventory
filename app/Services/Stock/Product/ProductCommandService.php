@@ -5,11 +5,14 @@ namespace App\Services\Stock\Product;
 use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
 use App\Repositories\Stock\ProductRepository as Product;
+use App\Repositories\Stock\OperationRepository as Operation;
 use Validator;
 
 class ProductCommandService
 {
     private $product;
+
+    private $operation;
 
     protected $validation = [
         'category_id'	=> 'required|integer',
@@ -19,9 +22,10 @@ class ProductCommandService
 		'unit'			=> 'string|in:piece,grammes,litre,sachet',
 	];
 
-    public function __construct(Product $product)
+    public function __construct(Product $product, Operation $operation)
     {
         $this->product = $product;
+        $this->operation = $operation;
     }
 
     public function initializeProduct(Request $request)
@@ -60,6 +64,16 @@ class ProductCommandService
     public function destroyProduct($id)
     {
         return $this->product->destroy($id);
+    }
+
+    public function initializeOperation(Request $request)
+    {
+        return $this->operation->initialize();
+    }
+
+    public function saveOperation(Request $request)
+    {
+        # code...
     }
 
 }

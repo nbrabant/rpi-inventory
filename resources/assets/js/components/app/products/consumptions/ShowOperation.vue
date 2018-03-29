@@ -24,7 +24,9 @@
 
 <script>
 
-    module.exports = RestCore.extend({
+    export default RestCore.extend({
+
+        name: 'ShowOperation',
 
         props: ['operation'],
 

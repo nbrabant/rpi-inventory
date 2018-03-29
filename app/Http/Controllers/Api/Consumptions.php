@@ -21,6 +21,16 @@ class Consumptions extends Controller
         return [];
     }
 
+    public function create(Request $request)
+    {
+        return $this->product_command_service->initializeOperation($request);
+    }
+
+    public function store(Request $request)
+    {
+        return $this->product_command_service->saveOperation($request);
+    }
+
     public function show(Request $request, $id)
     {
         return $this->product_query_service->getProductWithConsumptions($id, $request);

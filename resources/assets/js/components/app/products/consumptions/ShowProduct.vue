@@ -19,7 +19,9 @@
                 <div class="clearfix" v-if="hasOperations">
                     <html-cardheader title="Liste des opérations"></html-cardheader>
 
-                    <!-- <show-consumption></show-consumption> -->
+                    <show-add-operation
+                        :productId="productId">
+                    </show-add-operation>
 
                     <show-operation v-for="(operation, key) in item.operations"
                         :key="key"
@@ -39,7 +41,10 @@
 
 <script>
 
-    module.exports = RestShow.extend({
+    import ShowOperation from './ShowOperation.vue'
+    import ShowAddOperation from './ShowAddOperation.vue'
+
+    export default RestShow.extend({
 
         props: ['productId'],
 
@@ -65,6 +70,11 @@
 
                 this.triggerRestGet(this.endpoint, {id: this.productId}, this.item)
             }
+        },
+
+        components: {
+            ShowOperation,
+            ShowAddOperation,
         },
 
     })
