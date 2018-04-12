@@ -68,12 +68,42 @@ class ProductCommandService
 
     public function initializeOperation(Request $request)
     {
-        return $this->operation->initialize();
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator->errors(), 401);
+        }
+
+        $operation = $this->operation->initialize();
+
+        $operation->fill($request->only('product_id'));
+
+        return $operation;
     }
 
     public function saveOperation(Request $request)
     {
-        # code...
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required|integer',
+            'quantity' => 'required|integer',
+            'operation' => 'required|in:+,-',
+            'detail' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator->errors(), 401);
+        }
+
+        $attributes = $request->only([
+            'product_id',
+            'quantity',
+            'operation',
+            'detail',
+        ]);
+
+        return $this->operation->create($attributes);
     }
 
 }

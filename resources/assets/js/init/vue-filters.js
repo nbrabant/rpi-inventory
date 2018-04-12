@@ -102,3 +102,12 @@ Vue.filter('str_slug_fr', function (str) {
 
     return str;
 })
+
+Vue.filter('type-operation', function(str) {
+    if (str === '+') {
+        return 'Ajout'
+    } else if (str === '-') {
+        return 'Retrait'
+    }
+    return str;
+})
