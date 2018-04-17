@@ -38,6 +38,11 @@
                         icon: 'pie-chart',
                     },
                     {
+                        route: 'carts',
+                        title: 'Liste de courses',
+                        icon: 'shopping-cart',
+                    },
+                    {
                         route: 'categories',
                         title: 'Categories',
                         icon: 'list-alt',

@@ -26,6 +26,19 @@ var router = new VueRouter({
             ]
         },
         {
+            path: '/carts',
+            component : {
+                template: '<div><template-index route="/carts" title="Liste de course" icon="shopping-cart"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'carts',
+                    path: '/',
+                    component: require('./../components/app/carts/Index.vue')
+                }
+            ]
+        },
+        {
             path: '/categories',
             component : {
                 template: '<div><template-index route="/categories" title="Catégories" icon="list-alt"></template-index></div>',
@@ -71,7 +84,7 @@ var router = new VueRouter({
                     component: require('./../components/app/products/consumptions/Index.vue')
                 }
             ]
-        }
+        },
     ]
 });
 

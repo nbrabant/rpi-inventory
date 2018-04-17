@@ -18,7 +18,7 @@ class Cart extends Eloquent
 	//hierarchical
 	public function productLines()
 	{
-		return $this->hasMany('App\ProductLine');
+		return $this->hasMany('App\Models\ProductLine');
 	}
 
 	public function listecourante() {

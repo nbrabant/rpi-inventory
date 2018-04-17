@@ -4,9 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
-class Ligneproduit extends Eloquent {
-
-	protected $table = 'lignes_produits';
+class ProductLine extends Eloquent {
 
 	//columns
     protected $fillable = [
