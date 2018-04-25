@@ -28,7 +28,7 @@
 
     import ShowCart from './ShowCart.vue'
 
-    export default RestCore.extend({
+    export default RestShow.extend({
 
         data: function() {
             return {
@@ -46,11 +46,20 @@
             isDisabled: function () {
                 return this.selectedKey == undefined || this.selectedKey == ''
             },
+            endpoint: function () {
+                return;
+            },
         },
 
         methods: {
             updateSelection: function(payload) {
                 this.productId = payload.key
+                this.item.product_id = payload.key
+                this.item.quantity = 0
+
+                this.triggerRestSave(this.$route.path.split('/').slice(-2, -1)[0], {}, this.item)
+
+                // and finally, bind item to list
             }
         },
 

@@ -39,4 +39,5 @@ class Cart extends Eloquent
 			}
 		])->get();
 	}
+
 }

@@ -19,7 +19,7 @@ use Illuminate\Http\Request;
 //
 //
 Route::group(['namespace' => 'Api'], function () {
-    Route::resource('carts', 	    'Carts');
+    Route::resource('carts', 	    'Carts',           ['only' => ['show', 'store']]);
     Route::resource('categories', 	'Categories');
 	Route::resource('products', 	'Products');
 	Route::resource('consumptions', 'Consumptions',    ['only' => ['index', 'create', 'store', 'show']]);

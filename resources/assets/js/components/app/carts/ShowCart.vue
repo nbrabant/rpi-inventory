@@ -18,9 +18,9 @@
                     </thead>
                     <tbody>
                         <tr v-for="product in item.product_lines" :key="product.id">
-                            <td>{{ product.name }}</td>
+                            <td>{{ product.product.name }}</td>
                             <td>{{ product.quantity }}</td>
-                            <td>{{ product.name }}</td>
+                            <td>{{ product.product.unit }}</td>
                             <td>Actions</td>
                         </tr>
                     </tbody>

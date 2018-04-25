@@ -16,9 +16,9 @@ class Carts extends Controller
         $this->cart_query_service = $cart_query_service;
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        return [];
+        return $this->cart_command_service->attachProduct($request);
     }
 
     public function show(Request $request, $id)
