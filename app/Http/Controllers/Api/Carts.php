@@ -26,4 +26,9 @@ class Carts extends Controller
         return $this->cart_query_service->getCurrent($request);
     }
 
+    public function destroy(Request $request)
+    {
+        return $this->cart_command_service->removeProduct($request);
+    }
+
 }

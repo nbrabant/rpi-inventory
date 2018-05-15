@@ -21,7 +21,12 @@
                             <td>{{ product.product.name }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.product.unit }}</td>
-                            <td>Actions</td>
+                            <td>
+                                <button v-on:click="removeLine(product)" class="btn btn-fill btn-warning pull-right">
+                                    <i class="fa fa-trash"></i>
+                                    Supprimer
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -45,6 +50,16 @@
             },
             hasProductLines: function () {
                 return this.item.product_lines != undefined && this.item.product_lines.length > 0;
+            }
+        },
+
+        methods: {
+            removeLine(product) {
+                this.confirmRestDelete("Suppression du panier de courses", this.endpoint, {
+
+                })
+
+                // and finally, remove item from list
             }
         }
 

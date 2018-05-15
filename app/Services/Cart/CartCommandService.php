@@ -35,14 +35,25 @@ class CartCommandService
         }
 
         $attributes = $request->only(['product_id', 'quantity']);
-Log::info($attributes);
+
         $cart = $this->cart->getCurrentOrCreate($request);
-        // $cart->productLines()->create($attributes);
+        $cart->productLines()->create($attributes);
 
         return $cart;
     }
 
     // update product
+
+    // remove product
+    public function removeProduct(Request $request)
+    {
+
+        $cart = $this->cart->getCurrentOrCreate($request);
+        $cart->productLines() ;
+
+        return $cart;
+    }
+
     // send cart to trello
     // export to pdf
 

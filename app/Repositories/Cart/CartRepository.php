@@ -30,9 +30,9 @@ class CartRepository extends Repository
 
     public function cartHasProduct($product_id)
     {
-        $product = ProductLine::with('cart')
+        $product = ProductLine::join('carts', 'carts.id', '=', 'product_lines.cart_id')
             ->where('product_id', $product_id)
-            ->where('cart.finished', 0)
+            ->where('carts.finished', 0)
             ->first();
 
         return (bool)($product && $product instanceof ProductLine);

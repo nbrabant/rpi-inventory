@@ -200,6 +200,7 @@ module.exports = Vue.extend({
         },
         errorRestSave: function(response) {
             this.restState = 'error'
+console.log(response);
             if (response.status === 422) {
                 this.setErrors(response.data.errors)
             } else if (response.status === 401) {
@@ -250,16 +251,21 @@ module.exports = Vue.extend({
 
         confirmRestDelete: function (text, route, params) {
             var component = this
-            swal({
+            swal("Êtes-vous sûr ?", {
                 title: "Êtes-vous sûr ?",
                 text: this.$options.filters.truncate(text, 70),
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Oui, supprimer !",
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            }, function() {
+                icon: "warning",
+                buttons: {
+                    cancel: "Non",
+                    confirm: {
+                        text: "Oui, supprimer !",
+                        value: "confirm",
+                        closeModal: false,
+                    }
+                },
+            }).then((value) => {
+                if (!value) return;
+
                 component.triggerRestDelete(route, params)
             });
         },
@@ -272,7 +278,7 @@ module.exports = Vue.extend({
                 }
             }
 
-            this.HTTP.delete(route, item, params)
+            this.HTTP.delete(route, this.item, params)
                 .then(response => {
                     this.successRestDelete(response)
                 }).catch(response => {
