@@ -55,8 +55,8 @@
 
         methods: {
             removeLine(product) {
-                this.confirmRestDelete("Suppression du panier de courses", this.endpoint, {
-
+                this.confirmRestDelete("Suppression du produit du panier de courses", this.endpoint, {
+                    'product_id': product.id
                 })
 
                 // and finally, remove item from list

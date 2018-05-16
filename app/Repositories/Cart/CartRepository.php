@@ -38,4 +38,21 @@ class CartRepository extends Repository
         return (bool)($product && $product instanceof ProductLine);
     }
 
+    public function associateProduct(Request $request, $attributes)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+        $cart->productLines()->create($attributes);
+
+        return $cart;
+    }
+
+    public function dissociateProduct(Request $request, $product_id)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+
+        $productLine = $cart->productLines()->where('product_id', $product_id)->delete();
+
+        return $cart;
+    }
+
 }

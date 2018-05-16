@@ -5,10 +5,10 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Repositories\Cart\CartRepository as Cart;
 
-class NotInCart implements Rule
+class IsInCart implements Rule
 {
     private $repository;
-
+    
     /**
      * Create a new rule instance.
      *
@@ -28,7 +28,7 @@ class NotInCart implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !$this->repository->cartHasProduct($value);
+        return $this->repository->cartHasProduct($value);
     }
 
     /**
@@ -38,6 +38,6 @@ class NotInCart implements Rule
      */
     public function message()
     {
-        return 'Ce produit est déjà dans la liste de courses.';
+        return 'Ce produit n\'est pas dans la liste de courses.';
     }
 }

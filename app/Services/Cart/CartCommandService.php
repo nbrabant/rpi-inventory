@@ -8,6 +8,7 @@ use App\Repositories\Cart\CartRepository as Cart;
 use App\Repositories\Cart\CartProductRepository as CartProduct;
 use Validator;
 use App\Rules\NotInCart;
+use App\Rules\IsInCart;
 
 use Illuminate\Support\Facades\Log;
 
@@ -36,22 +37,23 @@ class CartCommandService
 
         $attributes = $request->only(['product_id', 'quantity']);
 
-        $cart = $this->cart->getCurrentOrCreate($request);
-        $cart->productLines()->create($attributes);
-
-        return $cart;
+        return $this->cart->associateProduct($request, $attributes);
     }
 
     // update product
 
     // remove product
-    public function removeProduct(Request $request)
+    public function removeProduct(Request $request, $product_id)
     {
+        $validator = Validator::make(['product_id' => $product_id], [
+            'product_id' => ['required', 'integer', new IsInCart]
+        ]);
 
-        $cart = $this->cart->getCurrentOrCreate($request);
-        $cart->productLines() ;
+        if ($validator->fails()) {
+            throw new ValidationException($validator->errors(), 401);
+        }
 
-        return $cart;
+        return $this->cart->dissociateProduct($request, $product_id);
     }
 
     // send cart to trello
