@@ -13,7 +13,7 @@
                             <td>Nom</td>
                             <td>Quantité</td>
                             <td>Unité / Conditionnement</td>
-                            <td>Actions</td>
+                            <td class="pull-right">Actions</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,7 +21,7 @@
                             <td>{{ product.product.name }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.product.unit }}</td>
-                            <td>
+                            <td class="pull-right">
                                 <button v-on:click="removeLine(product)" class="btn btn-fill btn-warning pull-right">
                                     <i class="fa fa-trash"></i>
                                     Supprimer

@@ -13,7 +13,7 @@ class Product extends Eloquent {
 		'description',
 		'quantity',
 		'min_quantity',
-		'unite'
+		'unit'
 	];
 
 	//hierarchical
