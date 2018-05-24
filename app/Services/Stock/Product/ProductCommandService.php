@@ -35,11 +35,7 @@ class ProductCommandService
 
     public function createProduct(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->validation);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
+        $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
@@ -50,11 +46,7 @@ class ProductCommandService
     {
         $this->validation['name'] .= ',' . $id;
 
-        $validator = Validator::make($request->all(), $this->validation);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
+        $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
@@ -68,13 +60,7 @@ class ProductCommandService
 
     public function initializeOperation(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required|integer',
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
+        $request->validate(['product_id' => 'required|integer']);
 
         $operation = $this->operation->initialize();
 
@@ -85,16 +71,12 @@ class ProductCommandService
 
     public function saveOperation(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'product_id' => 'required|integer',
             'quantity' => 'required|integer',
             'operation' => 'required|in:+,-',
             'detail' => 'string',
         ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
 
         $attributes = $request->only([
             'product_id',

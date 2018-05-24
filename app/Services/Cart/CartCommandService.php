@@ -26,14 +26,10 @@ class CartCommandService
     // add product
     public function attachProduct(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'product_id' => ['required', 'integer', new NotInCart],
             'quantity' => 'required|integer'
         ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
 
         $attributes = $request->only(['product_id', 'quantity']);
 

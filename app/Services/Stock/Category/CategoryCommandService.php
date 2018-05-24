@@ -28,11 +28,7 @@ class CategoryCommandService
 
     public function createCategory(Request $request)
     {
-        $validator = Validator::make($request->all(), $this->validation);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
+        $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
@@ -43,11 +39,7 @@ class CategoryCommandService
     {
         $this->validation['name'] .= ',' . $id;
 
-        $validator = Validator::make($request->all(), $this->validation);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
+        $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
