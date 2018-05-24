@@ -37,6 +37,17 @@ class CartCommandService
     }
 
     // update product
+    public function updateProduct(Request $request, $product_id)
+    {
+        $request->validate([
+            'product_id' => ['required', 'integer', new IsInCart],
+            'quantity' => 'required|integer'
+        ]);
+
+        $attributes = $request->only(['product_id', 'quantity']);
+
+        return $this->cart->updateProduct($request, $attributes);
+    }
 
     // remove product
     public function removeProduct(Request $request, $product_id)

@@ -55,4 +55,15 @@ class CartRepository extends Repository
         return $cart;
     }
 
+    public function updateProduct(Request $request, $attributes)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+
+        $productLine = $cart->productLines()->where('product_id', $product_id);
+        $productLine->fill($attributes);
+        $productLine->save();
+
+        return $cart;
+    }
+
 }
