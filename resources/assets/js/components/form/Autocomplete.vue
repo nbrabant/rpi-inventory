@@ -19,6 +19,8 @@
             ref="input" />
         <input :name="name" type="hidden" :value="value">
 
+        <span class="help-block">{{ error }}</span>
+
         <ul class="dropdown-menu" style="width:100%">
             <li v-for="(suggestion, key) in matches"
                 :key="key"
@@ -57,6 +59,9 @@
             name: {
                 type: String
             },
+            error: {
+                type: String
+            }
         },
         // ['selection'],
 

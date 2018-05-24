@@ -13,6 +13,7 @@
                         v-model="selection"
                         v-on:updateSelection="updateSelection"
                         placeholder="Saisir le produit"
+                        :error="errors.product_id"
                     ></form-autocomplete>
                 </div>
 
