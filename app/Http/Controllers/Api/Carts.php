@@ -26,6 +26,11 @@ class Carts extends Controller
         return $this->cart_query_service->getCurrent($request);
     }
 
+    public function update(Request $request, $id)
+    {
+        return $this->cart_command_service->updateProduct($request, $id);
+    }
+
     public function destroy(Request $request, $product_id)
     {
         return $this->cart_command_service->removeProduct($request, $product_id);

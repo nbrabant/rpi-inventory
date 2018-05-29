@@ -200,7 +200,6 @@ module.exports = Vue.extend({
         },
         errorRestSave: function(response) {
             this.restState = 'error'
-console.log(response);
             if (response.status === 422) {
                 this.setErrors(response.data.errors)
             } else if (response.status === 401) {
@@ -216,7 +215,7 @@ console.log(response);
                     route += '/' + params[key]
                 }
             }
-
+            
             this.prepareRestUpdate(route, params, item)
             this.HTTP.patch(route, item, params)
                 .then(response => {

@@ -5,7 +5,6 @@ namespace App\Services\Cart;
 use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
 use App\Repositories\Cart\CartRepository as Cart;
-use App\Repositories\Cart\CartProductRepository as CartProduct;
 use Validator;
 use App\Rules\NotInCart;
 use App\Rules\IsInCart;
@@ -15,8 +14,6 @@ use Illuminate\Support\Facades\Log;
 class CartCommandService
 {
     private $cart;
-
-    private $cartProduct;
 
     public function __construct(Cart $cart)
     {
@@ -37,7 +34,7 @@ class CartCommandService
     }
 
     // update product
-    public function updateProduct(Request $request, $product_id)
+    public function updateProduct(Request $request, $cart_id)
     {
         $request->validate([
             'product_id' => ['required', 'integer', new IsInCart],
@@ -46,7 +43,7 @@ class CartCommandService
 
         $attributes = $request->only(['product_id', 'quantity']);
 
-        return $this->cart->updateProduct($request, $attributes);
+        return $this->cart->updateProduct($request, $attributes, $attributes['product_id']);
     }
 
     // remove product

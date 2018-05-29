@@ -43,6 +43,21 @@ class CartRepository extends Repository
         $cart = $this->getCurrentOrCreate($request);
         $cart->productLines()->create($attributes);
 
+        $cart->load('productLines');
+
+        return $cart;
+    }
+
+    public function updateProduct(Request $request, $attributes, $product_id)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+
+        $productLine = $cart->productLines()->where('product_id', $product_id)->first();
+        $productLine->fill($attributes);
+        $productLine->save();
+
+        $cart->load('productLines');
+
         return $cart;
     }
 
@@ -52,16 +67,7 @@ class CartRepository extends Repository
 
         $productLine = $cart->productLines()->where('product_id', $product_id)->delete();
 
-        return $cart;
-    }
-
-    public function updateProduct(Request $request, $attributes)
-    {
-        $cart = $this->getCurrentOrCreate($request);
-
-        $productLine = $cart->productLines()->where('product_id', $product_id);
-        $productLine->fill($attributes);
-        $productLine->save();
+        $cart->load('productLines');
 
         return $cart;
     }

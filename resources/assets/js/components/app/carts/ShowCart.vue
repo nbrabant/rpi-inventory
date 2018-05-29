@@ -19,10 +19,18 @@
                     <tbody>
                         <tr v-for="product in item.product_lines" :key="product.id">
                             <td>{{ product.product.name }}</td>
-                            <td>{{ product.quantity }}</td>
+                            <td>
+                                <form-text
+                                    v-model="product.quantity"
+                                    :item="product.quantity"
+                                    :error="errors.quantity"></form-text>
+                            </td>
                             <td>{{ product.product.unit }}</td>
                             <td class="pull-right">
-                                <button v-on:click="removeLine(product)" class="btn btn-fill btn-warning pull-right">
+                                <button v-on:click="updateLine(product)" class="btn btn-fill btn-primary">
+                                    Modifier
+                                </button>
+                                <button v-on:click="removeLine(product)" class="btn btn-fill btn-warning">
                                     <i class="fa fa-trash"></i>
                                     Supprimer
                                 </button>
@@ -56,10 +64,15 @@
         methods: {
             removeLine(product) {
                 this.confirmRestDelete("Suppression du produit du panier de courses", this.endpoint, {
-                    'product_id': product.id
+                    'product_id': product.product_id
                 })
 
                 // and finally, remove item from list
+            },
+            updateLine(product) {
+                this.triggerRestUpdate(this.endpoint, {
+                    cart_id: product.cart_id
+                }, product)
             }
         }
 
