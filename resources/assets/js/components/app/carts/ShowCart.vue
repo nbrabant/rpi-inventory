@@ -68,6 +68,8 @@
                 })
 
                 // and finally, remove item from list
+                // let idx = this.item.product_lines.findIndex(i => i.product_id === product.product_id)
+                // this.item.product_lines.splice(idx, 1)
             },
             updateLine(product) {
                 this.triggerRestUpdate(this.endpoint, {

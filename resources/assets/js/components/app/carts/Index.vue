@@ -61,7 +61,8 @@
                 this.triggerRestSave(this.$route.path.split('/').slice(-2, -1)[0], {}, this.item)
 
                 // and finally, bind item to list
-            }
+                location.reload();
+            },
         },
 
         components: {

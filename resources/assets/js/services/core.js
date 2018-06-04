@@ -215,7 +215,7 @@ module.exports = Vue.extend({
                     route += '/' + params[key]
                 }
             }
-            
+
             this.prepareRestUpdate(route, params, item)
             this.HTTP.patch(route, item, params)
                 .then(response => {
@@ -292,8 +292,11 @@ module.exports = Vue.extend({
             this.cacheRestQuery('triggerRestDelete', route, params);
         },
         successRestDelete: function (response) {
-            swal("Supprimé !", "L'enregistrement a correctement été supprimé.", "success");
-            this.$router.go(this.parentRoute)
+            swal("Supprimé !", "L'enregistrement a correctement été supprimé.", "success")
+            .then((value) => {
+                // this.$router.go(this.parentRoute)
+                location.reload()
+            });
         },
         errorRestDelete: function(response) {
             if (response.status === 401) {
