@@ -82,6 +82,10 @@ var router = new VueRouter({
                     name: 'consumptions',
                     path: '/',
                     component: require('./../components/app/products/consumptions/Index.vue')
+                }, {
+                    name: 'consumptions-by-products',
+                    path: 'product/:product_id',
+                    component: require('./../components/app/products/consumptions/List.vue')
                 }
             ]
         },

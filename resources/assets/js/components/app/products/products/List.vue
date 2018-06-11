@@ -18,6 +18,7 @@
                         <th>Nom</th>
                         <th>Etat du stock</th>
                         <th>Dernière modification</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,12 @@
                         <td>{{ product.name }}</th>
                         <td :class="product.status">{{ product.quantity }}</th>
                         <td>{{ product.updated_at | datetime }}</td>
+                        <td>
+                            <router-link :to="{ name: 'consumptions-by-products', params: { product_id: product.id } }" tag="a" class="btn btn-primary">
+                                <span class="fa fa-eye"></span>
+                                Voir les opérations
+                            </router-link>
+                        </td>
                     </router-link>
                 </tbody>
             </table>

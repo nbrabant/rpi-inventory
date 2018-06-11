@@ -70,8 +70,6 @@
 
     </form>
 
-    <!-- @TODO : ADD operations -->
-
 </template>
 
 <script>
