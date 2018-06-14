@@ -77,6 +77,8 @@
         methods: {
             submitForm: function () {
                 this.triggerRestSave('consumptions', {}, this.item)
+
+                // @TODO : on response, bind the new element to the parent component
             },
         }
 

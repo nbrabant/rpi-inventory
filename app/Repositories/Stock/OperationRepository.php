@@ -17,4 +17,16 @@ class OperationRepository extends Repository
             'detail' => ''
         ]);
     }
+
+    public function countQuantityByProduct($productId, $count = 0)
+    {
+        $this->model
+            ->where('product_id', $productId)
+            ->get()
+            ->map(function($item, $key) use(&$count) {
+                $count = ($item->operation === '+') ? ($count + $item->quantity) : ($count - $item->quantity);
+            });
+
+        return $count;
+    }
 }
