@@ -71,12 +71,12 @@
 
             this.item.product_id = this.productId
 
-            this.triggerRestGet(this.$route.path.split('/').slice(-2, -1)[0] + '/create', {product_id: this.productId}, this.item)
+            this.triggerRestGet('consumptions/create', {product_id: this.productId}, this.item)
         },
 
         methods: {
             submitForm: function () {
-                this.triggerRestSave(this.$route.path.split('/').slice(-2, -1)[0], {}, this.item)
+                this.triggerRestSave('consumptions', {}, this.item)
             },
         }
 

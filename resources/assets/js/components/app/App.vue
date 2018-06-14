@@ -16,14 +16,14 @@
             <html-pagefooter></html-pagefooter>
         </div>
     </div>
-    
+
 </template>
 
 <script>
 
     export default {
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         },
 
         data: function() {

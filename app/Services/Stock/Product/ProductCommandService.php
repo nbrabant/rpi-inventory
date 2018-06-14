@@ -75,7 +75,7 @@ class ProductCommandService
             'product_id' => 'required|integer',
             'quantity' => 'required|integer',
             'operation' => 'required|in:+,-',
-            'detail' => 'string',
+            'detail' => 'required|string',
         ]);
 
         $attributes = $request->only([

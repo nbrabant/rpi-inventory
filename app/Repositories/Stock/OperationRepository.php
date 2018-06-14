@@ -13,6 +13,8 @@ class OperationRepository extends Repository
 
     public function initialize()
     {
-        return new $this->model();
+        return new $this->model([
+            'detail' => ''
+        ]);
     }
 }

@@ -6,8 +6,7 @@
         <div class="card">
 
             <html-cardheader :backroute="parentRoute"
-            title="Consommation par produits"></html-cardheader>
-
+                title="Consommation par produits"></html-cardheader>
 
             <div class="clearfix">
                 <div class="col-sm-12">
@@ -37,6 +36,8 @@
         <div class="card">
 
             <div class="content table-responsive table-full-width">
+
+                <html-cardheader title="Liste des opérations"></html-cardheader>
 
                 <table class="table table-hover table-striped">
 
@@ -69,7 +70,7 @@
 
         </div>
 
-        <div class="card">
+        <div class="card" v-if="item.id">
 
             <show-add-operation
                 :productId="item.id">
@@ -78,8 +79,6 @@
         </div>
 
     </div>
-
-
 
 </template>
 
