@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
+use App\Services\Stock\Product\ProductCommandService as ProductCommandService;
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
+        'App\Events\Operation' => [
             'App\Listeners\EventListener',
         ],
     ];
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        // \App\Models\Operation::created(function($operation) {
+        //     $service = new ProductCommandService();
+        //     $service->updateProductStockQuantity($operation->product_id);
+        // });
     }
 }

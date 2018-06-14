@@ -88,4 +88,12 @@ class ProductCommandService
         return $this->operation->create($attributes);
     }
 
+    public function updateProductStockQuantity($id)
+    {
+        $product = $this->product->find($id);
+        $product->quantity = $this->operation->countQuantityByProduct($id);
+
+        return $product->save();
+    }
+
 }
