@@ -11,7 +11,7 @@
 
         <div class="card">
 
-            <html-cardheader title="Informations de la catégorie"></html-cardheader>
+            <html-cardheader title="Informations de la recette"></html-cardheader>
 
             <div class="content clearfix">
 
@@ -46,7 +46,7 @@
 
         computed: {
             title: function () {
-                return this.item.id ? this.item.name : 'Nouvelle catégorie'
+                return this.item.id ? this.item.name : 'Nouvelle recette'
             },
         }
 

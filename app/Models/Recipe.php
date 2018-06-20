@@ -22,15 +22,6 @@ class Recipe extends Model
 		'complement',
 	];
 
-	protected $validators = [
-		'nom'				=> 'required',
-		'instructions'		=> 'required',
-		'nombre_personnes'	=> 'required|string|max:64',
-		'temps_preparation'	=> 'integer',
-		'temps_cuisson'		=> 'integer',
-		'complement'		=> 'string',
-	];
-
 	//hierarchical
 	public function plannings()
 	{
@@ -39,7 +30,7 @@ class Recipe extends Model
 
 	public function products()
 	{
-		return $this->hasMany('App\RecipeProduct');
+		return $this->hasMany('App\Models\RecipeProduct');
 	}
 
 	public static function getList($emptyLine = false)

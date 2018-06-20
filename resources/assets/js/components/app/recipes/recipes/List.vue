@@ -25,8 +25,8 @@
                     <router-link :to="{ name: 'recipe', params: { id: recipe.id } }" tag="tr" v-for="recipe in item.data" :key="recipe.id">
                         <td>{{ recipe.id }}</td>
                         <td>{{ recipe.name }}</th>
-                        <td>{{ recipe.name }}</th>
-                        <td>{{ recipe.name }}</th>
+                        <td>{{ recipe.number_people }}</th>
+                        <td>{{ recipe.preparation_time }}</th>
                         <td>
                             <router-link :to="{ name: 'show-recipe', params: { id: recipe.id } }" tag="a" class="btn btn-primary">
                                 <span class="fa fa-eye"></span>
