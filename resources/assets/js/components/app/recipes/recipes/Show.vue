@@ -22,6 +22,54 @@
                         :error="errors.name"></form-text>
                 </div>
 
+                <div class="col-md-4">
+                    <form-text label="Nombre de personnes"
+                    v-model="item.number_people"
+                    :item="item.number_people"
+                    :error="errors.number_people"></form-text>
+                </div>
+
+                <div class="col-md-4">
+                    <form-text label="Temps de préparation"
+                    v-model="item.preparation_time"
+                    :item="item.preparation_time"
+                    :error="errors.preparation_time"></form-text>
+                </div>
+
+                <div class="col-md-4">
+                    <form-text label="Temps de cuisson"
+                    v-model="item.cooking_time"
+                    :item="item.cooking_time"
+                    :error="errors.cooking_time"></form-text>
+                </div>
+
+<!--
+<div class="form-group">
+	{!! Form::label('visuel', 'Visuel', array('class' => 'col-md-3 control-label')) !!}
+	<div class="col-md-9">
+		{!! Form::file('visuel') !!}
+		<p class="help-block">
+			Format de fichier autorisé : JPG / PNG
+		</p>
+	</div>
+</div>
+-->
+
+                <div class="col-md-12">
+                    <form-textarea label="Instructions"
+                        v-model="item.instructions"
+                        :item="item.instructions"
+                        :error="errors.instructions"></form-textarea>
+                </div>
+
+<!--
+<div class="clearfix">
+	<legend>Liste des ingrédients</legend>
+	@include('desktop.recettes.autocomplete')
+    <ul id="liste_produits"></ul> <-- component recipe product list
+</div>
+-->
+
             </div>
 
         </div>

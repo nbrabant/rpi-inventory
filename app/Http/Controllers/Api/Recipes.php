@@ -32,7 +32,7 @@ class Recipes extends Controller
         return $this->recipe_command_service->createRecipe($request);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
         return $this->recipe_query_service->getRecipe($id, $request);
     }
