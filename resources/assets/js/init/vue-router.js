@@ -89,6 +89,23 @@ var router = new VueRouter({
                 }
             ]
         },
+        {
+            path: '/recipes',
+            component : {
+                template: '<div><template-index route="/recipe" title="Recettes" icon="cutlery"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'recipes',
+                    path: '/',
+                    component: require('./../components/app/recipes/recipes/List.vue')
+                }, {
+                    name: 'recipe',
+                    path: ':id',
+                    component: require('./../components/app/recipes/recipes/Show.vue')
+                }
+            ]
+        }
     ]
 });
 

@@ -57,6 +57,11 @@
                         title: 'Consommation',
                         icon: 'tachometer',
                     },
+                    {
+                        route: 'recipes',
+                        title: 'Recettes',
+                        icon: 'cutlery',
+                    },
                 ]
             }
         }
