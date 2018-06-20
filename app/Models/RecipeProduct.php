@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RecipeProduit extends Model
+class RecipeProduct extends Model
 {
 	//columns
     protected $fillable = [

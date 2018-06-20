@@ -15,7 +15,7 @@ class Recipe extends Model
 		'name',
 		'recipe_type',
 		'visual',
-		'instructions',
+		'instructions', // @TODO : split instructions into recipe_steps
 		'number_people',
 		'preparation_time',
 		'cooking_time',
