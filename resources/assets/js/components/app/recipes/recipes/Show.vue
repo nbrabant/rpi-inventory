@@ -24,23 +24,23 @@
 
                 <div class="col-md-4">
                     <form-text label="Nombre de personnes"
-                    v-model="item.number_people"
-                    :item="item.number_people"
-                    :error="errors.number_people"></form-text>
+                        v-model="item.number_people"
+                        :item="item.number_people"
+                        :error="errors.number_people"></form-text>
                 </div>
 
                 <div class="col-md-4">
                     <form-text label="Temps de préparation"
-                    v-model="item.preparation_time"
-                    :item="item.preparation_time"
-                    :error="errors.preparation_time"></form-text>
+                        v-model="item.preparation_time"
+                        :item="item.preparation_time"
+                        :error="errors.preparation_time"></form-text>
                 </div>
 
                 <div class="col-md-4">
                     <form-text label="Temps de cuisson"
-                    v-model="item.cooking_time"
-                    :item="item.cooking_time"
-                    :error="errors.cooking_time"></form-text>
+                        v-model="item.cooking_time"
+                        :item="item.cooking_time"
+                        :error="errors.cooking_time"></form-text>
                 </div>
 
 <!--
@@ -62,16 +62,14 @@
                         :error="errors.instructions"></form-textarea>
                 </div>
 
-<!--
-<div class="clearfix">
-	<legend>Liste des ingrédients</legend>
-	@include('desktop.recettes.autocomplete')
-    <ul id="liste_produits"></ul> <-- component recipe product list
-</div>
--->
-
             </div>
 
+        </div>
+
+        <div class="card">
+            <list-product
+                :products="item.products"
+                ></list-product>
         </div>
 
         <div class="card">
@@ -90,13 +88,19 @@
 
 <script>
 
+    import ListProduct from './ListProduct.vue'
+
     export default RestShow.extend({
 
         computed: {
             title: function () {
                 return this.item.id ? this.item.name : 'Nouvelle recette'
             },
-        }
+        },
+
+        components: {
+            ListProduct,
+        },
 
     })
 

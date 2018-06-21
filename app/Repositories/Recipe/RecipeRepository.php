@@ -15,4 +15,10 @@ class RecipeRepository extends Repository
     {
         return new $this->model();
     }
+
+    public function find($id, $columns = array('*'))
+    {
+        return $this->model->with(['products', 'products.product'])->findOrFail($id);
+    }
+
 }

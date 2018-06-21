@@ -47,10 +47,10 @@
 
                     <tbody>
                         <tr v-for="operation in item.operations" :key="operation.id">
-                            <th>{{ operation.created_at }}</th>
-                            <th>{{ operation.detail }}</th>
-                            <th>{{ operation.operation | type-operation }}</th>
-                            <th>{{ operation.quantity }}</th>
+                            <td>{{ operation.created_at }}</td>
+                            <td>{{ operation.detail }}</td>
+                            <td>{{ operation.operation | type-operation }}</td>
+                            <td>{{ operation.quantity }}</td>
                         </tr>
                     </tbody>
 

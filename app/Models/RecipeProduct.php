@@ -19,12 +19,12 @@ class RecipeProduct extends Model
 	//hierarchical
 	public function recipe()
 	{
-		return $this->belongsTo('App\Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
 	public function product()
 	{
-		return $this->belongsTo('App\Product');
+		return $this->belongsTo('App\Models\Product');
 	}
 
 	public static function getUniteList()
@@ -116,5 +116,7 @@ class RecipeProduct extends Model
 
 		return $unite;
 	}
+
+    // @TODO : toArray override
 
 }
