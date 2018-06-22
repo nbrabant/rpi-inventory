@@ -103,6 +103,10 @@ var router = new VueRouter({
                     name: 'recipe',
                     path: ':id',
                     component: require('./../components/app/recipes/recipes/Show.vue')
+                }, {
+                    name: 'show-recipe',
+                    path: ':id',
+                    component: require('./../components/app/recipes/recipes/Show.vue')
                 }
             ]
         }

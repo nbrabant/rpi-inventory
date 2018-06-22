@@ -67,7 +67,7 @@
         </div>
 
         <div class="card">
-            <list-product
+            <list-product v-if="item.products"
                 :products="item.products"
                 ></list-product>
         </div>

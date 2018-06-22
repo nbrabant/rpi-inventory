@@ -18,7 +18,7 @@ class RecipeRepository extends Repository
 
     public function find($id, $columns = array('*'))
     {
-        return $this->model->with(['products', 'products.product'])->findOrFail($id);
+        return $this->model->with(['products'])->findOrFail($id);
     }
 
 }

@@ -18,7 +18,7 @@
                         <th>Nom</th>
                         <th>Nb personnes</th>
                         <th>Temps cuisson</th>
-                        <th>Actions</th>
+                        <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +28,7 @@
                         <td>{{ recipe.number_people }}</th>
                         <td>{{ recipe.preparation_time }}</th>
                         <td>
-                            <router-link :to="{ name: 'show-recipe', params: { id: recipe.id } }" tag="a" class="btn btn-primary">
+                            <router-link :to="{ name: 'show-recipe', params: { id: recipe.id } }" tag="a" class="btn btn-primary pull-right">
                                 <span class="fa fa-eye"></span>
                                 Voir la recette
                             </router-link>

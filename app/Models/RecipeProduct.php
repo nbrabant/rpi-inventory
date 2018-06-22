@@ -117,6 +117,14 @@ class RecipeProduct extends Model
 		return $unite;
 	}
 
-    // @TODO : toArray override
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['product_name'] = $this->product->name ?? '';
+        $array['product_quantity'] = $this->quantity . ' ' . $this->getQuantity();
+
+        return $array;
+    }
 
 }

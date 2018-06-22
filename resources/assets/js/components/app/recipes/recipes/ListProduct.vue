@@ -13,21 +13,26 @@
                     <tr>
                         <th>Nom</th>
                         <th>Quantité</th>
-                        <th>Actions</th>
+                        <th>Unité</th>
+                        <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr v-for="product in item.products" :key="product.id">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> -->
+                    <tr v-for="product in products" :key="product.id">
+                        <td>{{ product.product_name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.unit }}</td>
+                        <td>
+                            <a href="#" class="btn btn-danger pull-right" v-on:click="removeFromList()">
+                                <span class="fa fa-close"></span>
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
         </div>
-
-        <!-- product selection (autocomplete) -->
 
     </div>
 
@@ -37,11 +42,23 @@
 
     export default RestList.extend({
 
-        // props: ['products'],
+        props: ['products'],
 
         data() {
             return {};
         },
+
+        computed: {
+            endpoint: function() {
+                return;
+            }
+        },
+
+        methods: {
+            removeFromList: function() {
+                console.log('test');
+            }
+        }
 
     })
 
