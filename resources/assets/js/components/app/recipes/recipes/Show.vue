@@ -15,11 +15,19 @@
 
             <div class="content clearfix">
 
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <form-text label="Nom"
                         v-model="item.name"
                         :item="item.name"
                         :error="errors.name"></form-text>
+                </div>
+
+                <div class="col-md-4">
+                    <form-select label="Type de recette"
+                        :options="recipe_types"
+                        v-model="item.recipe_type"
+                        :item="item.recipe_type"
+                        :error="errors.recipe_type"></form-select>
                 </div>
 
                 <div class="col-md-4">
@@ -30,14 +38,14 @@
                 </div>
 
                 <div class="col-md-4">
-                    <form-text label="Temps de préparation"
+                    <form-text label="Temps de préparation (minutes)"
                         v-model="item.preparation_time"
                         :item="item.preparation_time"
                         :error="errors.preparation_time"></form-text>
                 </div>
 
                 <div class="col-md-4">
-                    <form-text label="Temps de cuisson"
+                    <form-text label="Temps de cuisson (minutes)"
                         v-model="item.cooking_time"
                         :item="item.cooking_time"
                         :error="errors.cooking_time"></form-text>
@@ -55,6 +63,7 @@
 </div>
 -->
 
+                <!-- @TODO : change to steps functionnal -->
                 <div class="col-md-12">
                     <form-textarea label="Instructions"
                         v-model="item.instructions"
@@ -67,9 +76,9 @@
         </div>
 
         <div class="card">
-            <list-product v-if="item.products"
+            <list-product
                 :products="item.products"
-                ></list-product>
+                :errors="errors"></list-product>
         </div>
 
         <div class="card">
@@ -96,6 +105,20 @@
             title: function () {
                 return this.item.id ? this.item.name : 'Nouvelle recette'
             },
+            recipe_types: function() {
+                return [
+                    {key: "entrée", value: "Entrée"},
+                    {key: "plat", value: "Plat"},
+                    {key: "dessert", value: "Dessert"},
+                ];
+            }
+        },
+
+        methods: {
+            removeProduct: function(product) {
+                var index = this.item.products.indexOf(product)
+                this.item.products.splice(index, 1)
+            }
         },
 
         components: {

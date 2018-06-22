@@ -6,14 +6,24 @@ use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
 use App\Repositories\Recipe\RecipeRepository as Recipe;
 use Validator;
+use Illuminate\Support\Facades\Log;
 
 class RecipeCommandService
 {
     private $recipe;
 
 	protected $validation = [
-        'name' 		=> 'required|string|unique:categories,name',
-		'position' 	=> 'required|integer',
+        'name'                  => 'required|string',
+        'recipe_type'           => 'required|in:entrée,plat,dessert',
+		'instructions'          => 'required|string',
+		'number_people'         => 'required|string|max:64',
+		'preparation_time'      => 'integer',
+		'cooking_time'          => 'integer',
+		'complement'            => 'nullable|string',
+        'products.*.product_id' => 'integer',
+        'products.*.quantity'   => 'integer',
+        // @TODO : define validation rule for product unit?
+        'products.*.unit'       => 'nullable|string|in:grammes,litre,centilitre,cuilliere_cafe,cuilliere_dessert,cuilliere_soupe,verre_liqueur,verre_moutarde,grand_verre,tasse_cafe,bol,sachet,gousse',
 	];
 
     public function __construct(Recipe $recipe)
@@ -37,8 +47,6 @@ class RecipeCommandService
 
     public function updateRecipe($id, Request $request)
     {
-        $this->validation['name'] .= ',' . $id;
-
         $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
