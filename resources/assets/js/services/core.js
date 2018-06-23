@@ -119,7 +119,7 @@ module.exports = Vue.extend({
                         })
                     }
                 }).catch(function(response) {
-                    console.log(response)
+                    // console.log('catch',response)
                 });
 
             Vue.set(this, setVar, options)

@@ -143,7 +143,8 @@
                 this.close()
 
                 this.$emit('updateSelection', {
-                    key: this.value
+                    key: this.value,
+                    value: this.display
                 })
             },
 

@@ -77,7 +77,7 @@
 
         <div class="card">
             <list-product
-                :products="item.products"
+                :recipeProducts="item.products"
                 :errors="errors"></list-product>
         </div>
 
@@ -118,6 +118,9 @@
             removeProduct: function(product) {
                 var index = this.item.products.indexOf(product)
                 this.item.products.splice(index, 1)
+            },
+            addProduct: function(product) {
+                this.item.products.push(product)
             }
         },
 

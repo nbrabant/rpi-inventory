@@ -8,7 +8,7 @@
 
         <div class="content table-responsive table-full-width">
 
-            <table class="table table-hover table-striped" v-if="products">
+            <table class="table table-hover table-striped" v-if="recipeProducts">
                 <thead>
                     <tr>
                         <th>Nom</th>
@@ -18,7 +18,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="product in products" :key="product.id">
+                    <tr v-for="product in recipeProducts" :key="product.id">
                         <td>{{ product.product_name }}</td>
                         <td>
                             <form-text
@@ -46,7 +46,7 @@
         </div>
 
         <div class="col-md-12">
-            <form-autocomplete
+            <form-autocomplete v-if="products"
                 :suggestions="products"
                 v-model="selection"
                 v-on:updateSelection="updateSelection"
@@ -62,7 +62,7 @@
 
     export default RestList.extend({
 
-        props: ['products', 'errors'],
+        props: ['recipeProducts', 'errors'],
 
         data() {
             return {
@@ -106,10 +106,18 @@
                 this.$parent.removeProduct(product);
             },
             updateSelection: function(payload) {
-console.log(payload);
-                product = {
-                    product_id: payload.key
+                var exists = this.recipeProducts.filter(function(elem) {
+                    if (elem.product_id == payload.key) return elem;
+                });
+
+                if (exists.length > 0) return;
+
+                let product = {
+                    product_id: payload.key,
+                    product_name: payload.value,
                 }
+
+                this.$parent.addProduct(product)
             }
         }
 
