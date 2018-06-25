@@ -82,11 +82,11 @@ class RecipeProduct extends Model
 
 	public static function verboseUnite($unite = '')
 	{
-		if($arrayName = array_key_exists(strtolower($unite), self::getUniteList())) {
+		if ($arrayName = array_key_exists(strtolower($unite), self::getUniteList())) {
 			return $unite;
 		}
 
-		if( in_array( strtolower($unite), ['g', 'grs', 'gramme']) ) {
+		if ( in_array( strtolower($unite), ['g', 'grs', 'gramme']) ) {
 			return 'grammes';
 		} elseif ( in_array( strtolower($unite), ['l', 'litres']) ) {
 			return 'litre';
