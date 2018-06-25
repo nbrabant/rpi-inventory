@@ -33,6 +33,11 @@ class Recipe extends Model
 		return $this->hasMany('App\Models\RecipeProduct');
 	}
 
+    public function steps()
+	{
+		return $this->hasMany('App\Models\RecipeStep');
+	}
+
 	public static function getList($emptyLine = false)
 	{
 		$return = [];
@@ -53,6 +58,7 @@ class Recipe extends Model
 		return null;
 	}
 
+    // @TODO : remove this
 	public function getStepsAttribute()
 	{
 		$return = [];

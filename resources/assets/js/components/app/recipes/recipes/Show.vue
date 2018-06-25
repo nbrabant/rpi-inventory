@@ -77,8 +77,14 @@
 
         <div class="card">
             <list-product
-                :recipeProducts="item.products"
-                :errors="errors"></list-product>
+            :recipeProducts="item.products"
+            :errors="errors"></list-product>
+        </div>
+
+        <div class="card">
+            <list-steps
+                :recipeSteps="item.steps"
+                :errors="errors"></list-steps>
         </div>
 
         <div class="card">
@@ -98,6 +104,7 @@
 <script>
 
     import ListProduct from './ListProduct.vue'
+    import ListSteps from './ListSteps.vue'
 
     export default RestShow.extend({
 
@@ -115,17 +122,29 @@
         },
 
         methods: {
+            addProduct: function(product) {
+                this.item.products.push(product)
+            },
             removeProduct: function(product) {
                 var index = this.item.products.indexOf(product)
                 this.item.products.splice(index, 1)
             },
-            addProduct: function(product) {
-                this.item.products.push(product)
+            addStep: function() {
+                this.item.steps.push({
+                    name: '',
+                    instruction: '',
+                    position: 255
+                });
+            },
+            removeStep: function(step) {
+                var index = this.item.steps.indexOf(step)
+                this.item.steps.splice(index, 1)
             }
         },
 
         components: {
             ListProduct,
+            ListSteps,
         },
 
     })

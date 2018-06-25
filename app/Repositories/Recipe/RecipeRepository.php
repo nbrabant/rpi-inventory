@@ -10,7 +10,7 @@ use Illuminate\Support\Facade\Log;
 
 class RecipeRepository extends Repository
 {
-    protected $with = ['products'];
+    protected $with = ['products', 'steps'];
 
     public function model() {
         return \App\Models\Recipe::class;
@@ -25,6 +25,7 @@ class RecipeRepository extends Repository
     {
         $object = $this->model->create($attributes);
         $this->syncProducts($object, reset($attributes['products']));
+
 
         return $object->load($this->with);
     }
@@ -87,5 +88,10 @@ class RecipeRepository extends Repository
 			$recipe->products()->saveMany($listToAdd);
 		}
 	}
+
+    protected function syncSteps(Recipe $recipe, array $steps = [])
+    {
+        // code...
+    }
 
 }
