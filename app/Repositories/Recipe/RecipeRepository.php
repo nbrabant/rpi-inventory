@@ -5,8 +5,7 @@ namespace App\Repositories\Recipe;
 use Carbon\Carbon;
 use App\Repositories\Repository;
 use \App\Models\Recipe as Recipe;
-
-use Illuminate\Support\Facade\Log;
+use \App\Helpers\ParseHelper;
 
 class RecipeRepository extends Repository
 {
@@ -25,7 +24,7 @@ class RecipeRepository extends Repository
     {
         $object = $this->model->create($attributes);
         $this->syncProducts($object, reset($attributes['products']));
-
+        $this->syncSteps($object, reset($attributes['steps']));
 
         return $object->load($this->with);
     }
@@ -38,6 +37,7 @@ class RecipeRepository extends Repository
 
         $object = $this->model->findOrFail($id);
         $this->syncProducts($object, reset($attributes['products']));
+        $this->syncSteps($object, reset($attributes['steps']));
         $object->fill($attributes)->save();
 
         $object->load($this->with);
@@ -46,13 +46,7 @@ class RecipeRepository extends Repository
     }
 
     public function syncProducts(Recipe $recipe, array $products = []) {
-        // map $postdatas to productlist
-        $productsList = [];
-        foreach ($products as $column => $values) {
-            foreach ($values as $key => $value) {
-                @$productsList[$key][$column] = $value;
-            }
-        };
+        $productsList = ParseHelper::arrayRequestToArray($products);
 
         $recipe->products->map(function($recipeProduct) use(&$productsList) {
             $found = array_filter($productsList, function($product) use($recipeProduct) {
@@ -91,7 +85,41 @@ class RecipeRepository extends Repository
 
     protected function syncSteps(Recipe $recipe, array $steps = [])
     {
-        // code...
+        $stepsList = ParseHelper::arrayRequestToArray($steps);
+
+        $recipe->steps->map(function($recipeStep) use(&$stepsList) {
+            $found = array_filter($stepsList, function($step) use($recipeStep) {
+                return $step['id'] == $recipeStep->id;
+            });
+
+            // delete if product not in
+			if (empty($found)) {
+                $recipeStep->delete();
+                return true;
+            }
+
+			// update recette_produit row
+			$recipeStep->fill(reset($found));
+            $recipeStep->save();
+
+			// unset all the postDatas produit where $key is $recette_produit product ID
+			$stepsList = array_filter($stepsList, function($step) use($recipeStep) {
+                return $step['id'] != $recipeStep->id;
+            });
+        });
+
+        // after that, create the other recette_produit relation if it needed
+        $listToAdd = [];
+        foreach ($stepsList as $step) {
+            if ($step['name']) {
+                $listToAdd[] = new \App\Models\RecipeStep($step);
+            }
+        };
+
+		// and finally, save
+		if (is_array($listToAdd) && !empty($listToAdd)) {
+			$recipe->steps()->saveMany($listToAdd);
+		}
     }
 
 }

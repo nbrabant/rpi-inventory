@@ -22,11 +22,6 @@
             {{ actiontitle }}
         </router-link>
 
-        <router-link v-if="fronturl && fronttitle" target="_blank" :to="fronturl" class="btn btn-fill btn-primary pull-right">
-            <i :class="'fa fa-' + fronticon"></i>
-            {{ fronttitle }}
-        </router-link>
-
         <h4 class="title">
             <router-link v-if="backroute" :to="backroute" tag="a" title="Retour">
                 <i class="fa fa-chevron-left"></i>
@@ -62,9 +57,6 @@
             actionurl: {},
             actiontitle: {},
             actionicon: 'exchange',
-            fronttitle: {},
-            fronturl: {},
-            fronticon: 'eye',
         },
 
         methods: {
@@ -81,5 +73,9 @@
     a.btn
     {
         margin-left: 20px;
+    }
+    button.btn
+    {
+        z-index: 1;
     }
 </style>

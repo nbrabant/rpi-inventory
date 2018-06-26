@@ -57,17 +57,4 @@ class Recipe extends Model
 		}
 		return null;
 	}
-
-    // @TODO : remove this
-	public function getStepsAttribute()
-	{
-		$return = [];
-		foreach (explode("\r", str_replace(['<p>', '</p>'], "\r", $this->instructions)) as $step) {
-			if (strlen(trim($step)) > 0) {
-				$return[] = $step;
-			}
-		}
-
-		return $return;
-	}
 }

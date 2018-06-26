@@ -24,6 +24,7 @@ class RecipeCommandService
         'products.*.quantity'   => 'integer',
         // @TODO : define validation rule for product unit?
         'products.*.unit'       => 'nullable|string|in:grammes,litre,centilitre,cuilliere_cafe,cuilliere_dessert,cuilliere_soupe,verre_liqueur,verre_moutarde,grand_verre,tasse_cafe,bol,sachet,gousse',
+        'steps.*.id'            => 'nullable|integer',
         'steps.*.name'          => 'string',
         'steps.*.instruction'   => 'string',
         'steps.*.position'      => 'integer|max:255',
