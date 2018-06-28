@@ -12522,3 +12522,13 @@ button.close {
   }
 }
 
+.slide-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.slide-content {
+  text-align: justify;
+}
+

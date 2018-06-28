@@ -100,11 +100,11 @@ var router = new VueRouter({
                     path: '/',
                     component: require('./../components/app/recipes/recipes/List.vue')
                 }, {
-                    name: 'recipe',
-                    path: ':id',
-                    component: require('./../components/app/recipes/recipes/Show.vue')
-                }, {
                     name: 'show-recipe',
+                    path: ':id',
+                    component: require('./../components/app/recipes/recipes/View.vue')
+                }, {
+                    name: 'recipe',
                     path: ':id',
                     component: require('./../components/app/recipes/recipes/Show.vue')
                 }

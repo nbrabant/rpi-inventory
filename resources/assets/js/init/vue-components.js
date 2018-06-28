@@ -5,6 +5,7 @@ Vue.component('html-pagefooter',        require('../components/html/PageFooter.v
 Vue.component('html-cardheader',        require('../components/html/CardHeader.vue'))
 Vue.component('html-cardfooter',        require('../components/html/CardFooter.vue'))
 Vue.component('html-pagination',        require('../components/html/Pagination.vue'))
+Vue.component('html-slider',            require('../components/html/Slider.vue'))
 
 // Form components
 Vue.component('form-button',            require('../components/form/Button.vue'))

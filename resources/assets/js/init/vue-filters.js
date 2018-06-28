@@ -111,3 +111,33 @@ Vue.filter('type-operation', function(str) {
     }
     return str;
 })
+
+Vue.filter('type-recette', function(str) {
+    if (str == 'entree') {
+        return 'Entrée';
+    } else if (str === 'plat') {
+        return 'Plat';
+    } else if (str === 'dessert') {
+        return 'Dessert';
+    }
+    return str;
+})
+
+Vue.filter('convert-time', function(time) {
+    if (time / 60 < 1) {
+        return time + ' minutes';
+    }
+
+    return time
+});
+
+Vue.filter('people', function(str) {
+    if (str == undefined) {
+        return '';
+    }
+
+    if (str.indexOf('personne') > 0) {
+        return str;
+    }
+    return str + ' personne' + (str > 1 ? 's' : '');
+});
