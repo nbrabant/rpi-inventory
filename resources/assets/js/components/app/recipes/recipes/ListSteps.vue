@@ -39,9 +39,9 @@
 
                         <div class="col-md-12">
                             <form-textarea label="Instructions"
-                            v-model="step.instruction"
-                            :item="step.instruction"
-                            :error="errors.instruction"></form-textarea>
+                                v-model="step.instruction"
+                                :item="step.instruction"
+                                :error="errors.instruction"></form-textarea>
                         </div>
                     </div>
                 </li>
@@ -71,7 +71,6 @@
                 this.$parent.removeStep(step);
             },
             addToList: function() {
-                console.log('test');
                 this.$parent.addStep();
             },
         },

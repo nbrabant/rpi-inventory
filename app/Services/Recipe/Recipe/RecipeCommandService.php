@@ -55,7 +55,20 @@ class RecipeCommandService
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->recipe->update($attributes, $id);
+        $recipe = $this->recipe->update($attributes, $id);
+
+        // if ($request->file('image') && $request->file('image')->isValid()) {
+        //     $imageName = str_slug_fr($recipe->name).'-'.$recipe->id.'.'.$request->file('image')->getClientOriginalExtension();
+        //
+        //     $request->file('image')->move(
+        //         base_path().'/public/brands', $imageName
+        //     );
+        //
+        //     $recipe->visual = $request->file('image')->getClientOriginalExtension();
+        //     $recipe->save();
+        // }
+
+        return $recipe;
     }
 
     public function destroyRecipe($id)

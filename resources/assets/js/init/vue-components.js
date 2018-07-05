@@ -20,6 +20,7 @@ Vue.component('form-textarea',          require('../components/form/Textarea.vue
 Vue.component('form-hidden',            require('../components/form/Hidden.vue'))
 // Vue.component('form-wysiwyg',           require('../components/form/Wysiwyg.vue'))
 Vue.component('form-file',              require('../components/form/File.vue'))
+Vue.component('form-image',             require('../components/form/Image.vue'))
 
 // Template components
 Vue.component('template-index',         require('../components/template/Index.vue'))

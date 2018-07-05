@@ -7,10 +7,10 @@
             {{ label }}
         </label>
 
-        <input type="file" classv-model="item" :disabled="disabled">
+        <input type="file" classv-model="item" v-on:change="updatePreview">
 
-        <div v-if="this.item || this.temporary_file" class="preview_image">
-            <img class="img-responsive center-block" v-bind:src="fileSrc"/>
+        <div v-if="this.item || this.temporary_image" class="preview_image">
+            <img class="img-responsive center-block" v-bind:src="imageSrc"/>
         </div>
 
         <span class="help-block">{{ error }}</span>
@@ -26,7 +26,7 @@
         data: function () {
             return {
                 time: "?"+ new Date().getTime(),
-                temporary_file: null
+                temporary_image: null
             }
         },
 
@@ -35,14 +35,15 @@
             path: null,
             label: null,
             item: null,
-        	error: null,
+            error: null,
+            imagesrc: ''
         },
 
         computed: {
-            fileSrc: function() {
-                if(this.temporary_file != null && typeof this.temporary_file != "undefined")
+            imageSrc: function() {
+                if(this.temporary_image != null && typeof this.temporary_image != "undefined")
                 {
-                    var render = this.temporary_file;
+                    var render = this.temporary_image;
                 }
                 else
                 {
@@ -54,6 +55,8 @@
                     }
                 }
 
+                this.$emit('updateImageSrc', render)
+
                 return render;
             }
         },
@@ -62,7 +65,7 @@
             getInput: function(msg, event) {
                 return this.$el.querySelectorAll("input[type='file']");
             },
-            updatePreview: function() {
+            updatePreview: function(msg, event) {
                 var input = this.getInput();
 
                 if (input[0].files && input[0].files[0]) {
@@ -74,7 +77,7 @@
 
                         var component = this;
                         reader.onload = function (e) {
-                            component.temporary_file = e.target.result;
+                            component.temporary_image = e.target.result;
                         };
 
                         reader.readAsDataURL(input[0].files[0]);
@@ -86,24 +89,36 @@
                     }
                 }
             },
-            refreshFile: function(msg, event)
+            refreshImage: function(msg, event)
             {
                 this.time = "?"+ new Date().getTime();
             }
         },
 
+        events: {
+            'reset-upload': function() {
+                this.temporary_image = null;
+                this.item = null;
+                $("input[type='file']").val("");
+            },
+        }
+
     }
 
 </script>
 
-<style>
+<style scoped>
 
     .form-control {
         font-size: 14px;
         line-height: 22px;
     }
 
-    .preview_file
+    /* input {
+        display: none;
+    } */
+
+    .preview_image
     {
         margin-top: 20px;
     }

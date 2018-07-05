@@ -217,6 +217,7 @@ module.exports = Vue.extend({
             }
 
             this.prepareRestUpdate(route, params, item)
+            this.beforeUpdate(params, item)
             this.HTTP.patch(route, item, params)
                 .then(response => {
                     this.successRestUpdate(response)
@@ -228,6 +229,7 @@ module.exports = Vue.extend({
                     }
                 });
         },
+        beforeUpdate: function(params, item) {},
         prepareRestUpdate: function (route, params, item) {
             this.cacheRestQuery('triggerRestUpdate', route, params, item);
             this.errors = {}

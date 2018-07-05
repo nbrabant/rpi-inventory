@@ -51,24 +51,14 @@
                         :error="errors.cooking_time"></form-text>
                 </div>
 
-<!--
-<div class="form-group">
-	{!! Form::label('visuel', 'Visuel', array('class' => 'col-md-3 control-label')) !!}
-	<div class="col-md-9">
-		{!! Form::file('visuel') !!}
-		<p class="help-block">
-			Format de fichier autorisé : JPG / PNG
-		</p>
-	</div>
-</div>
--->
-
-                <!-- @TODO : change to steps functionnal -->
                 <div class="col-md-12">
-                    <form-textarea label="Instructions"
-                        v-model="item.instructions"
-                        :item="item.instructions"
-                        :error="errors.instructions"></form-textarea>
+                    <form-image label="Visuel"
+                        ref="image"
+                        :imagesrc="imageSrc"
+                        :item="item.visual"
+                        :id="current_id_image"
+                        :path="'assets/img/recipes'"
+                        :error="errors.image"></form-image>
                 </div>
 
             </div>
@@ -77,8 +67,8 @@
 
         <div class="card">
             <list-product
-            :recipeProducts="item.products"
-            :errors="errors"></list-product>
+                :recipeProducts="item.products"
+                :errors="errors"></list-product>
         </div>
 
         <div class="card">
@@ -108,6 +98,14 @@
 
     export default RestShow.extend({
 
+        data: function() {
+            return {
+                item: {},
+                errors: {},
+                imageSrc: '',
+            }
+        },
+
         computed: {
             title: function () {
                 return this.item.id ? this.item.name : 'Nouvelle recette'
@@ -118,10 +116,20 @@
                     {key: "plat", value: "Plat"},
                     {key: "dessert", value: "Dessert"},
                 ];
-            }
+            },
+            current_id_image: function () {
+                if (this.item.id)
+                {
+                    // var slug = Vue.filter('str_slug_fr');
+                    // return slug(this.item.name) + "-" + this.item.id;
+                }
+            },
         },
 
         methods: {
+            saveImage: function(input, id, url) {
+
+            },
             addProduct: function(product) {
                 this.item.products.push(product)
             },
@@ -139,6 +147,35 @@
             removeStep: function(step) {
                 var index = this.item.steps.indexOf(step)
                 this.item.steps.splice(index, 1)
+            },
+
+            // beforeUpdate: function (params, item) {
+            //     var inputFile = this.$refs.image.getInput();
+            //
+            //     var oData = new FormData();
+            //
+            //     // oData.append("_token", this.HTTP.options.headers['X-CSRF-TOKEN']);
+            //     $.each(this.item, function( index, value ){
+            //         oData.append(index, JSON.stringify(value));
+            //     });
+            //     if (typeof inputFile[0].files[0] != "undefined") {
+            //         oData.append('image', inputFile[0].files[0]);
+            //     }
+            //     else {
+            //         oData.append('image', JSON.stringify(this.item.visual));
+            //     }
+            //
+            //     params.headers = {
+            //         'content-type': 'multipart/form-data'
+            //     };
+            //
+            //     item.image = oData;
+            // }
+        },
+
+        events: {
+            'updateImageSrc': function(render) {
+                this.imageSrc = render
             }
         },
 
