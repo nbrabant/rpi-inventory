@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
 use App\Repositories\Recipe\RecipeRepository as Recipe;
 use Validator;
-use Illuminate\Support\Facades\Log;
 
 class RecipeCommandService
 {

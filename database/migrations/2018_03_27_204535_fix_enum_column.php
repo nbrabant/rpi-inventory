@@ -12,7 +12,7 @@ class FixEnumColumn extends Migration
         $this->fixEnumFormat('operations',        'operation');
         $this->fixEnumFormat('recipes',           'type_recette');
         $this->fixEnumFormat('recipe_products',   'unite');
-        $this->fixEnumFormat('plannings',         'moment');
+        $this->fixEnumFormat('schedules',         'moment');
     }
 
     public function down()

@@ -109,6 +109,18 @@ var router = new VueRouter({
                     component: require('./../components/app/recipes/recipes/Show.vue')
                 }
             ]
+        }, {
+            path: '/schedules',
+            component: {
+                template: '<div><template-index route="/recipe" title="Recettes" icon="calendar"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'schedules',
+                    path: '/',
+                    component: require('./../components/app/schedules/schedules/List.vue')
+                }
+            ]
         }
     ]
 });

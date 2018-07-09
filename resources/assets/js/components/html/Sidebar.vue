@@ -62,6 +62,11 @@
                         title: 'Recettes',
                         icon: 'cutlery',
                     },
+                    {
+                        route: 'schedules',
+                        title: 'Agenda',
+                        icon: 'calendar',
+                    },
                 ]
             }
         }

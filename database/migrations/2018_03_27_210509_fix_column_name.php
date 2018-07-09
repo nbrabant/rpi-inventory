@@ -43,7 +43,7 @@ class FixColumnName extends Migration
             ['currentname' => 'quantite', 'newname' => 'quantity'],
             ['currentname' => 'unite', 'newname' => 'unit'],
         ],
-        'plannings' => [
+        'schedules' => [
             ['currentname' => 'recette_id', 'newname' => 'recipe_id'],
             ['currentname' => 'date_recette', 'newname' => 'date_recipe'],
             ['currentname' => 'realise', 'newname' => 'finished'],

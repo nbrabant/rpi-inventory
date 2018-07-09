@@ -24,7 +24,7 @@ class Recipe extends Model
 	//hierarchical
 	public function plannings()
 	{
-		return $this->hasMany('App\Models\Planning');
+		return $this->hasMany('App\Models\Schedule');
 	}
 
 	public function products()

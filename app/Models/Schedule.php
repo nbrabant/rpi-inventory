@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Planning extends Model
+class Schedule extends Model
 {
 	//columns
     protected $fillable = [
@@ -45,4 +45,14 @@ class Planning extends Model
 			'soir' 	=> 'Soir'
 		];
 	}
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+
+        $array['start'] = Carbon::now()->addDays(2)->format('Y-m-d\TH:i:s');
+        $array['end'] = Carbon::now()->addDays(2)->addHours(2)->format('Y-m-d\TH:i:s');
+
+        return $array;
+    }
 }
