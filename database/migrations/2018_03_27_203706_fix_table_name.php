@@ -23,7 +23,7 @@ class FixTableName extends Migration
         $this->changeTableName('carts',             'listes');
         $this->changeTableName('recipes',           'recettes');
         $this->changeTableName('recipe_products',   'recettes_produits');
-        $this->changeTableName('plannings',         'agendas');
+        $this->changeTableName('schedules',         'agendas');
     }
 
     protected function changeTableName($table, $newname)

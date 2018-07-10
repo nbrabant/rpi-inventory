@@ -20,20 +20,7 @@ class ScheduleQueryService
 
     public function getSchedules(Request $request)
     {
-        $events = [[
-            'title' =>  'test',
-            'allDay' =>  true,
-            'start' =>  Carbon::now()->format('Y-m-d\TH:i:s'), // 2018-07-06T21:19:47.179Z
-            'end' =>  Carbon::now()->addDay()->format('Y-m-d\TH:i:s'),
-        ], [
-            'title' => 'another test',
-            'start' => Carbon::now()->addDays(2)->format('Y-m-d\TH:i:s'),
-            'end' => Carbon::now()->addDays(2)->addHours(2)->format('Y-m-d\TH:i:s'),
-        ]];
-
-        return compact('events');
-
-        // return $this->schedule->getAll($request);
+        return $this->schedule->getAll($request);
     }
 
     public function getSchedule($id, Request $request)

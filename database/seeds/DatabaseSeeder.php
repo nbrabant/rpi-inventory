@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeTableSeeder::class);
         $this->call(RecipeProductsTableSeeder::class);
         $this->call(RecipeStepsTableSeeder::class);
+        $this->call(SchedulesSeeder::class);
 
         Model::reguard();
     }

@@ -12,13 +12,32 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+// $factory->define(App\User::class, function (Faker\Generator $faker) {
+//     static $password;
+//
+//     return [
+//         'name' => $faker->name,
+//         'email' => $faker->unique()->safeEmail,
+//         'password' => $password ?: $password = bcrypt('secret'),
+//         'remember_token' => str_random(10),
+//     ];
+// });
+
+
+$factory->define(App\Models\Schedule::class, function (Faker\Generator $faker) {
+    $isRecipe = $faker->boolean;
+    $recipe = $isRecipe ? \App\Models\Recipe::inRandomOrder()->first() : null;
+    $start_at = \Carbon\Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
+    $end_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $start_at)->addHours($faker->randomDigit);
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'recipe_id' => $isRecipe ? $recipe->id : null,
+        'user_id' => '1',
+        'type_schedule' => $isRecipe ? 'recette' : ($faker->boolean ? 'rendezvous' : 'planning'),
+        'title' => $isRecipe ? $recipe->name : implode(' ', $faker->words),
+        'details' => $faker->sentence,
+        'start_at' => $start_at,
+        'end_at' => $end_at,
+        'all_day' => $isRecipe ? 0 : $faker->boolean,
     ];
 });
