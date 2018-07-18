@@ -26,6 +26,17 @@ class Schedule extends Model
 		return $this->belongsTo('App\Models\Recipe');
 	}
 
+    public function getColorAttribute()
+    {
+        if ($this->type_schedule == 'recette') {
+            return '#330000';
+        } else if ($this->type_schedule == 'rendezvous') {
+            return '#003300';
+        } else if ($this->type_schedule == 'planning') {
+            return '#000033';
+        }
+    }
+
 	//scope functions
 	// public function scopeByDateInterval($query, $date = '') {
 	// 	$startDate 	= isset($dates['startAt']) ? $dates['startAt'] : Carbon::now()->startOfWeek();
@@ -41,7 +52,9 @@ class Schedule extends Model
 
         $array['start'] = $this->start_at->format('Y-m-d\TH:i:s');
         $array['end'] = $this->start_at->format('Y-m-d\TH:i:s');
+        $array['color'] = $this->color;
 
         return $array;
     }
+
 }

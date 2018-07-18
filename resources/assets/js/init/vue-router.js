@@ -119,6 +119,10 @@ var router = new VueRouter({
                     name: 'schedules',
                     path: '/',
                     component: require('./../components/app/schedules/schedules/List.vue')
+                }, {
+                    name: 'schedule',
+                    path: ':id',
+                    component: require('./../components/app/schedules/schedules/Show.vue')
                 }
             ]
         }

@@ -34,12 +34,62 @@
                 return {
                     locale: 'fr',
                     defaultView: 'agendaWeek',
-                    eventRender: function(event, element) {
+                    contentHeight: 'auto',
+                    themeSystem: 'bootstrap4',
+                    // refetchResourcesOnNavigate: true,
+                    eventRender: (event, element) => {
                         // console.log(event)
-                    }
+                    },
+                    eventClick: (element, jsEvent, view) => {
+                        let buttons = {
+                            cancel: 'Fermer',
+                            modify: {
+                                text: "Modifier",
+                                value: "modify",
+                                closeModal: true,
+                                className: "btn-warning",
+                            }
+                        }
+
+                        if (element.type_schedule == 'recette') {
+                            buttons.view = {
+                                text: 'Voir',
+                                value: 'view',
+                                closeModal: true
+                            }
+                        }
+
+                        swal(element.title, {
+                            title: element.title,
+                            icon: "info",
+                            buttons: buttons
+                        }).then((value) => {
+                            if (!value) return;
+
+                            if (value == "view") {
+                                this.$router.push('show-recipe')
+                            }
+
+                            console.log(value);
+                            return ;
+                        })
+
+                        // console.log(element.type_schedule == 'recette' ? 'redirect' : 'show');
+                    },
+                    // resources: (callback) => {
+                    //     console.log('test');
+                    //     this.callResources()
+                    // }
                 }
             }
         },
+
+        // methods: {
+        //     callResources() {
+        //         console.log('called!!!');
+        //         return this.item.data;
+        //     }
+        // },
 
         components: {
             FullCalendar,
@@ -53,12 +103,8 @@
 
     @import '~fullcalendar/dist/fullcalendar.css';
 
-    .task-list-item {
-        width: 100% !important;
-    }
-
-    .task-list-item h3 {
-        font-size: 2rem;
+    #calendar {
+        margin: 2rem
     }
 
 </style>

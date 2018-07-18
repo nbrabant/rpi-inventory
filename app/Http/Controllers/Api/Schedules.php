@@ -21,4 +21,29 @@ class Schedules extends Controller
         return $this->schedule_query_service->getSchedules($request);
     }
 
+    public function create(Request $request)
+    {
+        return $this->schedule_command_service->initializeSchedule($request);
+    }
+
+	public function store(Request $request)
+    {
+        return $this->schedule_command_service->createSchedule($request);
+    }
+
+	public function show(Request $request, $id)
+    {
+        return $this->schedule_query_service->getSchedule($id, $request);
+    }
+
+	public function update(Request $request, $id)
+    {
+        return $this->schedule_command_service->updateSchedule($id, $request);
+    }
+
+	public function destroy($id)
+    {
+        return $this->schedule_command_service->destroySchedule($id);
+    }
+
 }

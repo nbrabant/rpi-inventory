@@ -14,7 +14,11 @@ class ScheduleRepository extends Repository
 
     public function initialize()
     {
-        return new $this->model();
+        return new $this->model([
+            'user_id' => 1,
+            'start_at' => Carbon::now(),
+            'end_at' => Carbon::now(),
+        ]);
     }
 
 

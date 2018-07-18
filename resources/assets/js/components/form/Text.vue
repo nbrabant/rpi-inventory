@@ -24,8 +24,6 @@
 
 </template>
 
-
-
 <script>
 
     export default {

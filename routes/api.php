@@ -24,5 +24,5 @@ Route::group(['namespace' => 'Api'], function () {
 	Route::resource('products', 	'Products');
 	Route::resource('consumptions', 'Consumptions',    ['only' => ['index', 'create', 'store', 'show']]);
 	Route::resource('recipes',      'Recipes');
-    Route::resource('schedules',    'Schedules');
+    Route::resource('schedules',    'Schedules',       ['except' => ['edit']]);
 });

@@ -23,6 +23,7 @@
     "moment": "^2.18.1",
     "select2": "^4.0.6-rc.1",
     "sweetalert": "^2.0.8",
+    "vue-bootstrap-datetimepicker": "^4.1.4",
     "vue-full-calendar": "^4.0.0-1",
     "vue-router": "^2.7.0",
     "vuex": "^3.0.1"

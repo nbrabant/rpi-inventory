@@ -20,6 +20,31 @@ class ScheduleCommandService
         $this->schedule = $schedule;
     }
 
+    public function initializeSchedule(Request $request)
+    {
+        return $this->schedule->initialize();
+    }
+
+    public function createSchedule(Request $request)
+    {
+        $request->validate($this->validation);
+
+        $attributes = $request->only(array_keys($this->validation));
+
+        return $this->schedule->create($attributes);
+    }
+
+    public function updateSchedule($id, Request $request)
+    {
+        $request->validate($this->validation);
+
+        $attributes = $request->only(array_keys($this->validation));
+
+        $schedule = $this->schedule->update($attributes, $id);
+
+        return $schedule;
+    }
+
     public function destroySchedule($id)
     {
         return $this->schedule->destroy($id);

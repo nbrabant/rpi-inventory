@@ -9,8 +9,8 @@ Vue.component('html-slider',            require('../components/html/Slider.vue')
 
 // Form components
 Vue.component('form-button',            require('../components/form/Button.vue'))
-// Vue.component('form-checkbox',          require('../components/form/Checkbox.vue'))
-// Vue.component('form-datepicker',        require('../components/form/Datepicker.vue'))
+Vue.component('form-checkbox',          require('../components/form/Checkbox.vue'))
+Vue.component('form-datepicker',        require('../components/form/Datepicker.vue'))
 // Vue.component('form-percentage',        require('../components/form/Percentage.vue'))
 // Vue.component('form-price',             require('../components/form/Price.vue'))
 Vue.component('form-select',            require('../components/form/Select.vue'))
