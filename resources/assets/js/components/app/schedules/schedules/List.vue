@@ -67,7 +67,11 @@
                             if (!value) return;
 
                             if (value == "view") {
-                                this.$router.push('show-recipe')
+                                this.$router.push({name: 'show-recipe', params: { id: element.id }})
+                            } else if (value == "modify") {
+                                this.$router.push({name: 'schedule', params: { id: element.id }})
+                            } else if (value == "delete") {
+
                             }
 
                             console.log(value);
