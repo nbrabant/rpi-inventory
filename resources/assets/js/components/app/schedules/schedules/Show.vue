@@ -24,14 +24,16 @@
 
                 <div class="col-md-5">
                     <form-datepicker label="Débute à"
-                        :item="item.start_at"
-                        :error="errors.start_at"></form-datepicker>
+                        :initialdatetime="item.start_at"
+                        :error="errors.start_at"
+                        v-on:change-date="item.start_at = $event"></form-datepicker>
                 </div>
 
                 <div class="col-md-5">
-                    <!-- <form-datepicker label="Termine à"
-                        :item="item.end_at"
-                        :error="errors.end_at"></form-datepicker> -->
+                    <form-datepicker label="Termine à"
+                        :initialdatetime="item.end_at"
+                        :error="errors.end_at"
+                        v-on:change-date="item.end_at = $event"></form-datepicker>
                 </div>
 
                 <div class="col-md-2">
@@ -108,7 +110,7 @@
             isRecette: function () {
                 return this.item.type_schedule == 'recette';
             }
-        }
+        },
 
     })
 

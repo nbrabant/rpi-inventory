@@ -51,7 +51,7 @@ class Schedule extends Model
         $array = parent::toArray();
 
         $array['start'] = $this->start_at->format('Y-m-d\TH:i:s');
-        $array['end'] = $this->start_at->format('Y-m-d\TH:i:s');
+        $array['end']   = $this->start_at->format('Y-m-d\TH:i:s');
         $array['color'] = $this->color;
 
         return $array;

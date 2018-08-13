@@ -7,14 +7,14 @@
             {{ label }}
         </label>
 
-        <date-picker v-model="item" :config="config"></date-picker>
-
-
-        <!-- <input
-            type="text"
+        <date-picker
             class="form-control"
-            v-datepicker="item"
-            :disabled="disabled == 'disabled' ? 'disabled' : null"> -->
+            v-model="datetime"
+            @dp-change="setDatetime"
+            :config="config"
+            :disabled="disabled == 'disabled' ? 'disabled' : null"
+            ref="input"></date-picker>
+            <!-- @change="updateItem($event)" -->
 
         <span class="help-block">
             {{ helper }}
@@ -36,23 +36,28 @@
     import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css';
 
     export default {
-        props: ['label', 'item', 'error', 'disabled', 'helper'],
 
-        computed: {
-            config: function() {
-                return {};
-            }
+        props: ['label', 'initialdatetime', 'error', 'disabled', 'helper'],
+
+        data() {
+            return {
+                config: {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    useCurrent: false,
+                    sideBySide: true,
+                    toolbarPlacement: 'bottom',
+                    showTodayButton: true,
+                    showClear: true,
+                },
+                datetime: this.initialdatetime
+            };
         },
 
         methods: {
-        //     getInput: function(msg, event) {
-        //         return this.$el.querySelectorAll("input[type='text']");
-        //     },
-        //
-        //     clearValue: function() {
-        //         var datepicker = this.getInput()
-        //         console.log(datepicker)
-        //     },
+            setDatetime: function() {
+                this.initialdatetime = this.datetime
+                this.$emit('change-date', this.datetime);
+            }
         },
 
         components: {

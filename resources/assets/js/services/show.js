@@ -40,12 +40,11 @@ module.exports = RestCore.extend({
 
     mounted: function() {
         if (this.endpoint == undefined) return
-        
+
         this.triggerRestGet(this.endpoint, {id: this.$route.params.id}, this.item)
     },
 
     methods: {
-
         submitForm: function () {
             if (this.item.id) {
                 this.triggerRestUpdate(this.endpoint, {id: this.item.id}, this.item)
@@ -57,7 +56,6 @@ module.exports = RestCore.extend({
         prepareRestGet: function (route, item, params) {
             this.cacheRestQuery('triggerRestGet', route, params, item);
         },
-
     },
 
     events: {
