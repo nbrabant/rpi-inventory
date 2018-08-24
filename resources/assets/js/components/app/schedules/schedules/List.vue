@@ -12,7 +12,7 @@
         </div>
 
         <div class="card clearfix">
-            <full-calendar :config="config" :events="item.data"/>
+            <full-calendar :config="config" :event-sources="eventSources" :events="item.data" />
         </div>
     </div>
 
@@ -25,21 +25,40 @@
 
     export default RestList.extend({
 
+        data() {
+            return {
+                eventSources: [{
+                    events: (start, end, timezone, callback) => {
+                        this.HTTP.get('schedules', {
+                            params: {
+                                'search': {
+                                    'scope.byDateInterval': {
+                                        equal: {
+                                            startAt: start,
+                                            endAt: end,
+                                        }
+                                    }
+                                }
+                            }
+                        }).then(response => {
+                            callback(response.data.data)
+                        })
+                    }
+                }],
+            };
+        },
+
         computed: {
+            endpoint: function () {
+                return;
+            },
             config: function() {
-                console.log(moment());
-                console.log(this.item.events);
-                // console.log(this.events);
-                // console.log(this.item.events);
                 return {
                     locale: 'fr',
                     defaultView: 'agendaWeek',
                     contentHeight: 'auto',
                     themeSystem: 'bootstrap4',
-                    // refetchResourcesOnNavigate: true,
-                    eventRender: (event, element) => {
-                        // console.log(event)
-                    },
+                    refetchResourcesOnNavigate: true,
                     eventClick: (element, jsEvent, view) => {
                         let buttons = {
                             cancel: 'Fermer',
@@ -71,29 +90,15 @@
                             } else if (value == "modify") {
                                 this.$router.push({name: 'schedule', params: { id: element.id }})
                             } else if (value == "delete") {
-
+                                console.log(value);
                             }
 
-                            console.log(value);
                             return ;
                         })
-
-                        // console.log(element.type_schedule == 'recette' ? 'redirect' : 'show');
                     },
-                    // resources: (callback) => {
-                    //     console.log('test');
-                    //     this.callResources()
-                    // }
                 }
-            }
+            },
         },
-
-        // methods: {
-        //     callResources() {
-        //         console.log('called!!!');
-        //         return this.item.data;
-        //     }
-        // },
 
         components: {
             FullCalendar,

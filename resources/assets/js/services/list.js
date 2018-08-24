@@ -14,7 +14,7 @@ module.exports = RestCore.extend({
 
     mounted: function() {
         if (this.endpoint == undefined) return
-        
+
         this.triggerRestGet(this.endpoint)
     },
 

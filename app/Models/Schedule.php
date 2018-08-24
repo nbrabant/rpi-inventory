@@ -38,13 +38,34 @@ class Schedule extends Model
     }
 
 	//scope functions
-	// public function scopeByDateInterval($query, $date = '') {
-	// 	$startDate 	= isset($dates['startAt']) ? $dates['startAt'] : Carbon::now()->startOfWeek();
-	// 	$endDate 	= isset($dates['endAt']) ? $dates['endAt'] : Carbon::now()->endOfWeek();
-    //
-	// 	$query->whereBetween('date_recipe', [$startDate, $endDate]);
-	// 	return $query;
-	// }
+	public function scopeByDateInterval($query, $dates = '') {
+        if (!isset($dates->startAt)) {
+            $startDate = Carbon::now()->startOfWeek();
+        } elseif ($dates->startAt instanceof Carbon) {
+            $startDate = $dates->startAt;
+        } elseif (is_string($dates->startAt)) {
+            $startDate = new Carbon($dates->startAt);
+            if (!$startDate) {
+                $startDate = Carbon::now()->startOfWeek();
+            }
+        }
+
+        if (!isset($dates->endAt)) {
+            $endDate = Carbon::now()->endOfWeek();
+        } else if ($dates->endAt instanceof Carbon) {
+            $endDate = $dates->endAt;
+        } elseif (is_string($dates->endAt)) {
+            $endDate = new Carbon($dates->endAt);
+            if (!$endDate) {
+                $endDate = Carbon::now()->endOfWeek();
+            }
+        }
+
+		$query->whereBetween('start_at', [$startDate, $endDate]);
+		$query->whereBetween('end_at', [$startDate, $endDate]);
+
+		return $query;
+	}
 
     public function toArray()
     {

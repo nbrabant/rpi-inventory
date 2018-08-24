@@ -190,13 +190,28 @@ abstract class Repository {
      */
     protected function handleSearchParameters(QueryBuilder $query, Request $request)
     {
-        if (! $request->search || ! is_array($request->search)) {
+        if (!$request->search || (!is_array($request->search) && !is_string($request->search)) ) {
             return $query;
         }
 
-        foreach ($request->search as $fieldName => $search) {
-            foreach ($search as $searchType => $values) {
-                $this->handleSearchQuery($query, $fieldName, $searchType, $values);
+        // @TODO : refactoring
+        if (is_array($request->search)) {
+            foreach ($request->search as $fieldName => $search) {
+                foreach ($search as $searchType => $values) {
+                    $this->handleSearchQuery($query, $fieldName, $searchType, $values);
+                }
+            }
+        } else if (is_string($request->search)) {
+            $requestSearch = json_decode($request->search);
+
+            if (!$requestSearch || empty($requestSearch)) {
+                return $query;
+            }
+
+            foreach ($requestSearch as $fieldName => $search) {
+                foreach ($search as $searchType => $values) {
+                    $this->handleSearchQuery($query, $fieldName, $searchType, $values);
+                }
             }
         }
 
