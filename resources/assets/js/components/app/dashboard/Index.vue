@@ -10,6 +10,10 @@
 
             Bienvenue sur le rpi-inventory
 
+            <div class="col-sm-4">
+                <widget-meteo></widget-meteo>
+            </div>
+
         </div>
 
     </div>
@@ -18,12 +22,20 @@
 
 <script>
 
+    import WidgetMeteo from './widgets/Meteo.vue'
+
     export default {
+
         route: {
             data: function () {
                 this.$emit('set-breadcrumbs', [])
             },
         },
+
+        components: {
+            WidgetMeteo
+        }
+
     }
 
 </script>

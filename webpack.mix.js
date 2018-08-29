@@ -28,6 +28,7 @@ var webpack = require('webpack')
             './resources/assets/js/init/vue-services.js',
             './resources/assets/js/plugins/light-bootstrap-dashboard.js',
             './resources/assets/js/plugins/moment.js',
+            './resources/assets/js/plugins/weatherwidget.js',
             // './resources/assets/js/init/vue-directives.js',
             './resources/assets/js/init/vue-filters.js',
             './resources/assets/js/init/vue-components.js',
