@@ -27,12 +27,11 @@
                             </td>
                             <td>{{ product.product.unit }}</td>
                             <td class="pull-right">
-                                <button v-on:click="updateLine(product)" class="btn btn-fill btn-primary">
-                                    Modifier
+                                <button v-on:click="updateLine(product)" class="btn btn-fill btn-primary" title="Modifier">
+                                    <i class="fa fa-edit"></i>
                                 </button>
-                                <button v-on:click="removeLine(product)" class="btn btn-fill btn-warning">
+                                <button v-on:click="removeLine(product)" class="btn btn-fill btn-danger" title="Supprimer">
                                     <i class="fa fa-trash"></i>
-                                    Supprimer
                                 </button>
                             </td>
                         </tr>

@@ -34,9 +34,8 @@
                                 :error="errors.unit"></form-select>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger pull-right" v-on:click="removeFromList(product)">
+                            <button type="button" class="btn btn-danger pull-right" v-on:click="removeFromList(product)" title="Supprimer">
                                 <span class="fa fa-close"></span>
-                                Supprimer
                             </button>
                         </td>
                     </tr>

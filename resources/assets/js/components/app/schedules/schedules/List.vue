@@ -90,7 +90,7 @@
                             } else if (value == "modify") {
                                 this.$router.push({name: 'schedule', params: { id: element.id }})
                             } else if (value == "delete") {
-                                console.log(value);
+                                // console.log(value);
                             }
 
                             return ;

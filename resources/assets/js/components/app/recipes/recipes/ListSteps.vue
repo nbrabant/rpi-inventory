@@ -23,26 +23,24 @@
                             v-model="step.id"
                             :item="step.id"></form-hidden>
 
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <form-text label="Etape"
                                 v-model="step.name"
                                 :item="step.name"
                                 :error="errors.name"></form-text>
-                        </div>
 
-                        <div class="col-md-4">
-                            <button type="button" class="btn btn-danger pull-right" v-on:click="removeFromList(step)">
-                                <span class="fa fa-close"></span>
-                                Supprimer
-                            </button>
-                        </div>
-
-                        <div class="col-md-12">
                             <form-textarea label="Instructions"
                                 v-model="step.instruction"
                                 :item="step.instruction"
                                 :error="errors.instruction"></form-textarea>
                         </div>
+
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger pull-right" v-on:click="removeFromList(step)" title="Supprimer">
+                                <span class="fa fa-close"></span>
+                            </button>
+                        </div>
+
                     </div>
                 </li>
 

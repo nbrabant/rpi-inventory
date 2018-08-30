@@ -29,45 +29,49 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card" v-if="hasOperations">
-                <html-cardheader title="Liste des opérations"></html-cardheader>
+                <hr />
 
-                <table class="table table-hover table-striped">
+                <div class="clearfix" v-if="hasOperations">
+                    <html-cardheader title="Liste des opérations"></html-cardheader>
 
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Détail</th>
-                            <th>Type d'opération</th>
-                            <th>Quantité</th>
-                        </tr>
-                    </thead>
+                    <table class="table table-hover table-striped">
 
-                    <tbody>
-                        <tr v-for="operation in item.operations" :key="operation.id">
-                            <td>{{ operation.created_at }}</td>
-                            <td>{{ operation.detail }}</td>
-                            <td>{{ operation.operation | type-operation }}</td>
-                            <td>{{ operation.quantity }}</td>
-                        </tr>
-                    </tbody>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Détail</th>
+                                <th>Type d'opération</th>
+                                <th class="right">Quantité</th>
+                            </tr>
+                        </thead>
 
-                </table>
-            </div>
+                        <tbody>
 
-            <div class="card">
-                <show-add-operation
-                    :productId="productId">
-                </show-add-operation>
+                            <tr>
+                                <td colspan="4">
+                                    <show-add-operation
+                                        :productId="productId">
+                                    </show-add-operation>
+                                </td>
+                            </tr>
+
+                            <tr v-for="operation in item.operations" :key="operation.id">
+                                <td>{{ operation.created_at }}</td>
+                                <td>{{ operation.detail }}</td>
+                                <td>{{ operation.operation | type-operation }}</td>
+                                <td class="right">{{ operation.quantity }}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
 
         </div>
         <div v-else>
             Aucun produit sélectionné
         </div>
-
     </div>
 
 </template>
