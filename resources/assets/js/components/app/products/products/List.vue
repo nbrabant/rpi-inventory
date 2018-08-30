@@ -32,6 +32,9 @@
                                 <span class="fa fa-eye"></span>
                                 Voir les opérations
                             </router-link>
+                            <button class="btn btn-fill btn-success"  v-on:click="addProductToCart(product)" @click.capture="clicked">
+                                <span class="fa fa-shopping-cart"></span>
+                            </button>
                         </td>
                     </router-link>
                 </tbody>
@@ -55,6 +58,28 @@
 
         data() {
             return {};
+        },
+
+        methods: {
+            clicked: function(e) {
+                e.preventDefault();
+            },
+            addProductToCart: function(product) {
+                this.HTTP.post('carts', {
+                        product_id: product.id,
+                        quantity: 0,
+                    })
+                    .then(response => {
+                        swal("Ajouté !", "le produit a été ajouté à la liste de courses.", "success")
+                    }).catch(response => {
+                        if (response.response.data.errors.product_id != undefined) {
+                            swal("Erreur !", response.response.data.errors.product_id.join(','), "error")
+                        } else {
+                            swal("Erreur !", 'Erreur inconnue', "error")
+                            console.log(response);
+                        }
+                    });
+            }
         },
 
     })
