@@ -14,6 +14,10 @@
                 <widget-meteo></widget-meteo>
             </div>
 
+            <div class="col-sm-4">
+                <time-clock></time-clock>
+            </div>
+
         </div>
 
     </div>
@@ -23,6 +27,7 @@
 <script>
 
     import WidgetMeteo from './widgets/Meteo.vue'
+    import TimeClock from './widgets/TimeClock.vue'
 
     export default {
 
@@ -33,7 +38,8 @@
         },
 
         components: {
-            WidgetMeteo
+            WidgetMeteo,
+            TimeClock
         }
 
     }
