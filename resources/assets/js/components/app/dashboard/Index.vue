@@ -1,23 +1,18 @@
 
 <template>
 
-    <div class="card">
+    <div class="clearfix">
 
-        <html-cardheader
-            title="Accueil"></html-cardheader>
+        <div class="col-sm-4">
+            <widget-meteo></widget-meteo>
+        </div>
 
-        <div class="content clearfix">
+        <div class="col-sm-4">
+            <time-clock></time-clock>
+        </div>
 
-            Bienvenue sur le rpi-inventory
-
-            <div class="col-sm-4">
-                <widget-meteo></widget-meteo>
-            </div>
-
-            <div class="col-sm-4">
-                <time-clock></time-clock>
-            </div>
-
+        <div class="col-sm-4">
+            <day-schedules></day-schedules>
         </div>
 
     </div>
@@ -28,6 +23,7 @@
 
     import WidgetMeteo from './widgets/Meteo.vue'
     import TimeClock from './widgets/TimeClock.vue'
+    import DaySchedules from './widgets/DaySchedules.vue'
 
     export default {
 
@@ -39,7 +35,8 @@
 
         components: {
             WidgetMeteo,
-            TimeClock
+            TimeClock,
+            DaySchedules
         }
 
     }

@@ -8,6 +8,10 @@ Vue.filter('datetime', function (value) {
     return moment(value).format('L à LT')
 })
 
+Vue.filter('time', function (value) {
+    return moment(value).format('LT')
+})
+
 // Format boolean value as icon
 Vue.filter('bool-icon', function (value) {
     return parseInt(value) ? '<i class="fa fa-check text-success"></i>' : '<i class="fa fa-times text-danger"></i>'
@@ -84,7 +88,6 @@ Vue.filter('fix-amount', function(value) {
 
 // Format import type
 Vue.filter('str_slug_fr', function (str) {
-
     str = str.replace(new RegExp("'", 'g'), ' ');
     str = str.replace(/^\s+|\s+$/g, ''); // trim
     str = str.toLowerCase();
@@ -140,4 +143,10 @@ Vue.filter('people', function(str) {
         return str;
     }
     return str + ' personne' + (str > 1 ? 's' : '');
+});
+
+Vue.filter('capitalize', function (value) {
+    if (!value) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
 });

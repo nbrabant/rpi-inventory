@@ -52,6 +52,9 @@
             endpoint: function () {
                 return;
             },
+            newurl: function() {
+                return "create";
+            },
             config: function() {
                 return {
                     locale: 'fr',
