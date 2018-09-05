@@ -109,6 +109,12 @@
             }
         },
 
+        methods: {
+            addConsumption: function(consumption) {
+                this.item.operations.unshift(consumption)
+            }
+        },
+
         components: {
             ShowOperation,
             ShowAddOperation,

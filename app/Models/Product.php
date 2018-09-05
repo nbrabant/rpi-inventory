@@ -24,7 +24,8 @@ class Product extends Eloquent {
 
 	public function operations()
 	{
-		return $this->hasMany('App\Models\Operation');
+		return $this->hasMany('App\Models\Operation')
+            ->orderBy('created_at', 'DESC');
 	}
 
 	public function productLine()
