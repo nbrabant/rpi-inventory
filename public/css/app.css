@@ -4172,6 +4172,42 @@ fieldset[disabled] .form-control {
   }
 }
 
+@-webkit-keyframes newItemAnimation {
+  0% {
+    background-color: transparent;
+  }
+
+  5% {
+    background-color: #d8f7d2;
+  }
+
+  80% {
+    background-color: #d8f7d2;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes newItemAnimation {
+  0% {
+    background-color: transparent;
+  }
+
+  5% {
+    background-color: #d8f7d2;
+  }
+
+  80% {
+    background-color: #d8f7d2;
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.

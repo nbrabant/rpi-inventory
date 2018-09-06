@@ -56,7 +56,7 @@
                                 </td>
                             </tr>
 
-                            <tr v-for="operation in item.operations" :key="operation.id">
+                            <tr v-for="operation in item.operations" :key="operation.id" :class="operation.created ? 'newitem' : ''">
                                 <td>{{ operation.created_at }}</td>
                                 <td>{{ operation.detail }}</td>
                                 <td>{{ operation.operation | type-operation }}</td>
@@ -123,3 +123,12 @@
     })
 
 </script>
+
+<style scoped>
+
+    .newitem {
+        animation: newItemAnimation 2s;
+        -webkit-animation: newItemAnimation 2s;
+    }
+
+</style>

@@ -69,7 +69,7 @@
 
         methods: {
             submitForm: function () {
-                // this.triggerRestSave('consumptions', {}, this.item)
+                this.triggerRestSave('consumptions', {}, this.item)
 
                 this.item.created = true;
 
