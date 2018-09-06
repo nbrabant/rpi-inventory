@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <ShowCart></ShowCart>
+        <ShowCart ref="cartlist"></ShowCart>
     </div>
 
 </template>
@@ -59,6 +59,8 @@
                 this.item.quantity = 0
 
                 this.triggerRestSave(this.$route.path.split('/').slice(-2, -1)[0], {}, this.item)
+
+                // console.log(this);
 
                 // and finally, bind item to list
                 location.reload();

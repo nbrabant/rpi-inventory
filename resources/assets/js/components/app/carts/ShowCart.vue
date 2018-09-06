@@ -17,7 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in item.product_lines" :key="product.id">
+                        <tr v-for="product in item.product_lines" :key="product.id" :class="product.created ? 'newitem' : ''">
                             <td>{{ product.product.name }}</td>
                             <td>
                                 <form-text
@@ -80,3 +80,12 @@
     })
 
 </script>
+
+<style scoped>
+
+    .newitem {
+        animation: newItemAnimation 2s;
+        -webkit-animation: newItemAnimation 2s;
+    }
+
+</style>
