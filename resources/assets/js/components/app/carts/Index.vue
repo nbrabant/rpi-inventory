@@ -3,6 +3,14 @@
 
     <div class="clearfix">
         <div class="card">
+            <html-cardheader title="Liste de courses"
+                subtitle="Gestion des prochaines courses"
+                :links="links"
+                :actions="actions"
+            ></html-cardheader>
+        </div>
+
+        <div class="card">
             <html-cardheader title="Rechercher un produit"></html-cardheader>
 
             <div class="content clearfix">
@@ -35,7 +43,33 @@
             return {
                 selection: '',
                 products: [],
-                productId: null
+                productId: null,
+                actions: [
+                    {
+                        actions: 'api/schedules/close',
+                        class: 'btn-danger',
+                        icon: 'exchange',
+                        title: 'Clore cette liste'
+                    }
+                ],
+                links: [
+                    {
+                        route: 'cart/export/pdf',
+                        class: 'btn-info',
+                        icon: 'file-pdf-o',
+                        title: 'Export en PDF'
+                    }, {
+                        route: 'cart/export/mail',
+                        class: 'btn-info',
+                        icon: 'envelope',
+                        title: 'Export par mail'
+                    }, {
+                        route: 'cart/export/trello',
+                        class: 'btn-info',
+                        icon: 'trello',
+                        title: 'Export vers Trello'
+                    }
+                ]
             };
         },
 
@@ -65,6 +99,10 @@
                 // and finally, bind item to list
                 location.reload();
             },
+
+            close: function() {
+                console.log('close list');
+            }
         },
 
         components: {

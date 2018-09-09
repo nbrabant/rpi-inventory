@@ -2,7 +2,7 @@
 <template>
 
     <div class="card">
-        <html-cardheader title="Liste de courses"></html-cardheader>
+        <html-cardheader title="Liste actuelle"></html-cardheader>
 
         <div class="content clearfix">
 

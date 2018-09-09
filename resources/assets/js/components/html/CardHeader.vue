@@ -2,6 +2,18 @@
 
     <div class="header">
 
+        <!-- for not RestFul actions -->
+        <a v-for="link in links" :key="link.route"
+            :href="link.route"
+            :class="'btn btn-fill ' + link.class + ' pull-right'"
+            :title="link.title">
+            <i :class="'fa fa-' + link.icon"></i>
+        </a>
+
+        <button v-for="action in actions" v-on:click="action.action" :class="'btn btn-fill ' + action.class + ' pull-right'" :title="action.title">
+            <i :class="'fa fa-' + action.icon"></i>
+        </button>
+
         <router-link v-if="newurl" :to="newurl" tag="a" class="btn btn-fill btn-success pull-right">
             <i class="fa fa-plus"></i>
             {{ newtitle }}
@@ -10,16 +22,6 @@
         <router-link v-if="deletetitle" v-on:click="confirmDelete" :to="newurl" tag="a" class="btn btn-fill btn-warning pull-right">
             <i class="fa fa-trash"></i>
             {{ deletetitle }}
-        </router-link>
-
-        <router-link v-if="exporttitle && exporturl" :to="exporturl" class="btn btn-fill btn-default pull-right">
-            <i class="fa fa-download"></i>
-            {{ exporttitle }}
-        </router-link>
-
-        <router-link v-if="actionurl && actiontitle" :to="actionurl" class="btn btn-fill btn-primary pull-right">
-            <i :class="'fa fa-' + actionicon"></i>
-            {{ actiontitle }}
         </router-link>
 
         <h4 class="title">
@@ -37,13 +39,13 @@
 
 </template>
 
-
-
 <script>
 
     export default {
 
         props: {
+            actions: {},
+            links: {},
             newtitle: {},
             newurl: {
                 default: false,
@@ -52,11 +54,6 @@
             backroute: {},
             title: {},
             subtitle: {},
-            exporttitle: {},
-            exporturl: {},
-            actionurl: {},
-            actiontitle: {},
-            actionicon: 'exchange',
         },
 
         methods: {
