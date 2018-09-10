@@ -46,7 +46,7 @@
                 productId: null,
                 actions: [
                     {
-                        actions: 'api/schedules/close',
+                        callback: () => { this.closeList() },
                         class: 'btn-danger',
                         icon: 'exchange',
                         title: 'Clore cette liste'
@@ -100,8 +100,27 @@
                 location.reload();
             },
 
-            close: function() {
-                console.log('close list');
+            closeList: (event) => {
+                swal('Cloturer liste', {
+                    title: 'Cloture de la liste courante',
+                    html: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
+                    icon: "warning",
+                    buttons: {
+                        cancel: 'Fermer',
+                        closelist: {
+                            text: "Cloturer",
+                            value: "closelist",
+                            closeModal: true,
+                            className: "btn-warning",
+                        }
+                    }
+                }).then((value) => {
+                    this.HTTP.post('edit', {
+
+                    })
+                }).then((response) => {
+                    console.log(response);
+                });
             }
         },
 

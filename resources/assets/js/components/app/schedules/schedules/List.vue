@@ -8,7 +8,8 @@
                 :backroute="parentRoute"
                 :newurl="newurl"
                 title="Agenda"
-                subtitle="Liste des tâches"></html-cardheader>
+                subtitle="Liste des tâches"
+                :links="links"></html-cardheader>
         </div>
 
         <div class="card clearfix">
@@ -45,6 +46,14 @@
                         })
                     }
                 }],
+                links: [
+                    {
+                        route: 'schedules/export/cartlist',
+                        class: 'btn-primary',
+                        icon: 'shopping-cart',
+                        title: 'Export vers la liste de courses'
+                    }
+                ]
             };
         },
 

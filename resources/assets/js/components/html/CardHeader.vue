@@ -11,7 +11,7 @@
         </a>
 
         <button v-for="action in actions"
-            :click="action.action"
+            @click="action.callback"
             :class="'btn btn-fill ' + action.class + ' pull-right'"
             :title="action.title">
             <i :class="'fa fa-' + action.icon"></i>
