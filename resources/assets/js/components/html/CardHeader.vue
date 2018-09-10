@@ -10,7 +10,10 @@
             <i :class="'fa fa-' + link.icon"></i>
         </a>
 
-        <button v-for="action in actions" v-on:click="action.action" :class="'btn btn-fill ' + action.class + ' pull-right'" :title="action.title">
+        <button v-for="action in actions"
+            :click="action.action"
+            :class="'btn btn-fill ' + action.class + ' pull-right'"
+            :title="action.title">
             <i :class="'fa fa-' + action.icon"></i>
         </button>
 
