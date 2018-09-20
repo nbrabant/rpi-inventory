@@ -6,7 +6,6 @@
             <html-cardheader title="Liste de courses"
                 subtitle="Gestion des prochaines courses"
                 :links="links"
-                :actions="actions"
             ></html-cardheader>
         </div>
 
@@ -44,14 +43,7 @@
                 selection: '',
                 products: [],
                 productId: null,
-                actions: [
-                    {
-                        callback: () => { this.closeList() },
-                        class: 'btn-danger',
-                        icon: 'exchange',
-                        title: 'Clore cette liste'
-                    }
-                ],
+                closeList: false,
                 links: [
                     {
                         route: 'cart/export/pdf',
@@ -92,7 +84,7 @@
                 this.item.product_id = payload.key
                 this.item.quantity = 0
 
-                this.triggerRestSave(this.$route.path.split('/').slice(-2, -1)[0], {}, this.item)
+                this.triggerRestSave('cartproducts', {}, this.item)
 
                 // console.log(this);
 
@@ -100,28 +92,6 @@
                 location.reload();
             },
 
-            closeList: (event) => {
-                swal('Cloturer liste', {
-                    title: 'Cloture de la liste courante',
-                    html: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
-                    icon: "warning",
-                    buttons: {
-                        cancel: 'Fermer',
-                        closelist: {
-                            text: "Cloturer",
-                            value: "closelist",
-                            closeModal: true,
-                            className: "btn-warning",
-                        }
-                    }
-                }).then((value) => {
-                    this.HTTP.post('edit', {
-
-                    })
-                }).then((response) => {
-                    console.log(response);
-                });
-            }
         },
 
         components: {

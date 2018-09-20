@@ -17,9 +17,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\Operation' => [
-            'App\Listeners\EventListener',
-        ],
+        // 'App\Events\Operation' => [
+        //     'App\Listeners\EventListener',
+        // ],
+        // 'App\Events\CartlistSaving' => [
+        //     'App\Listeners\CartlistUpdating',
+        // ]
     ];
 
     /**
@@ -34,6 +37,22 @@ class EventServiceProvider extends ServiceProvider
         \App\Models\Operation::created(function($operation) {
             $service = new ProductCommandService(new ProductRepository(app()), new OperationRepository(app()));
             $service->updateProductStockQuantity($operation->product_id);
+        });
+
+        \App\Models\Cart::saved(function($cart) {
+            if (!$cart->finished || $cart->getOriginal('finished')) {
+                return true;
+            }
+
+            $service = new ProductCommandService(new ProductRepository(app()), new OperationRepository(app()));
+            $cart->productLines->each(function($product) use($service) {
+                $service->createOperation([
+                    'product_id'    => $product->product_id,
+                    'quantity'      => $product->quantity,
+                    'operation'     => '+',
+                    'detail'        => 'Retour de courses du ' . \Carbon\Carbon::now()->format('d/m/Y'),
+                ]);
+            });
         });
     }
 }

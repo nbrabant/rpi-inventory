@@ -88,6 +88,11 @@ class ProductCommandService
         return $this->operation->create($attributes);
     }
 
+    public function createOperation($attributes)
+    {
+        return $this->operation->create($attributes);
+    }
+
     public function updateProductStockQuantity($id)
     {
         $product = $this->product->find($id);

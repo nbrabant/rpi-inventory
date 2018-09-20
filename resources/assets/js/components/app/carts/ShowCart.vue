@@ -2,7 +2,8 @@
 <template>
 
     <div class="card">
-        <html-cardheader title="Liste actuelle"></html-cardheader>
+        <html-cardheader title="Liste actuelle"
+            :actions="actions"></html-cardheader>
 
         <div class="content clearfix">
 
@@ -51,18 +52,33 @@
 
     export default RestShow.extend({
 
+        data: function() {
+            return {
+                actions: [
+                    {
+                        callback: () => {
+                            this.closeList()
+                        },
+                        class: 'btn-danger',
+                        icon: 'exchange',
+                        title: 'Clore cette liste'
+                    }
+                ]
+            };
+        },
+
         computed: {
             endpoint: function () {
                 return this.$route.path.split('/').slice(-2, -1)[0]
             },
             hasProductLines: function () {
                 return this.item.product_lines != undefined && this.item.product_lines.length > 0;
-            }
+            },
         },
 
         methods: {
             removeLine(product) {
-                this.confirmRestDelete("Suppression du produit du panier de courses", this.endpoint, {
+                this.confirmRestDelete("Suppression du produit du panier de courses", 'cartproducts', {
                     'product_id': product.product_id
                 })
 
@@ -71,9 +87,37 @@
                 // this.item.product_lines.splice(idx, 1)
             },
             updateLine(product) {
-                this.triggerRestUpdate(this.endpoint, {
+                this.triggerRestUpdate('cartproducts', {
                     cart_id: product.cart_id
                 }, product)
+            },
+            closeList() {
+                swal('Cloturer liste', {
+                    title: 'Cloture de la liste courante',
+                    content: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
+                    icon: "warning",
+                    buttons: {
+                        cancel: 'Fermer',
+                        closelist: {
+                            text: "Cloturer",
+                            value: "closelist",
+                            closeModal: true,
+                            className: "btn-danger",
+                        }
+                    }
+                }).then(value => {
+                    this.HTTP.patch(this.endpoint + '/' + this.item.id, {
+                        finished: true
+                    }, this.item)
+                    .then(response => {
+                        console.log(response);
+                    }).catch(response => {
+                        console.log(response);
+                    })
+
+                }).catch(response => {
+                    console.log(response);
+                })
             }
         }
 

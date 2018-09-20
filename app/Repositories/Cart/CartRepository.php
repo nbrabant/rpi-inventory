@@ -28,6 +28,17 @@ class CartRepository extends Repository
                     ->first();
     }
 
+    public function updateCurrent(Request $request, $attributes)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+
+        $cart->fill($attributes);
+
+        $cart->save();
+
+        return $this->getCurrentOrCreate($request);
+    }
+
     public function cartHasProduct($product_id)
     {
         $product = ProductLine::join('carts', 'carts.id', '=', 'product_lines.cart_id')

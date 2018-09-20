@@ -20,6 +20,17 @@ class CartCommandService
         $this->cart = $cart;
     }
 
+    public function updateCart(Request $request)
+    {
+        $request->validate([
+            'finished' => 'boolean'
+        ]);
+
+        $attributes = $request->only(['finished']);
+
+        return $this->cart->updateCurrent($request, $attributes);
+    }
+
     // add product
     public function attachProduct(Request $request)
     {
