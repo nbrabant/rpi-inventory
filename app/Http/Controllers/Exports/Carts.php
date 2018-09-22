@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Exports;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 
+use App\Mail\CartList;
 use App\Services\Cart\CartQueryService;
 
 class Carts extends Controller
@@ -30,7 +32,10 @@ class Carts extends Controller
 
     public function mail(Request $request)
     {
-        return 'mail';
+        Mail::to('aurore.derumier@gmail.com')
+            ->send( new CartList($this->cart_query_service->getCurrent($request)) );
+
+        return redirect('/');
     }
 
     public function trello(Request $request)
