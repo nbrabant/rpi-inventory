@@ -35,12 +35,15 @@ class Carts extends Controller
         Mail::to('aurore.derumier@gmail.com')
             ->send( new CartList($this->cart_query_service->getCurrent($request)) );
 
-        return redirect('/');
+        return redirect('/#/carts/');
     }
 
     public function trello(Request $request)
     {
-        return 'trello';
+        $cart = $this->cart_query_service->getCurrent($request);
+        $cart->exportToTrello();
+
+        return redirect('/#/carts/');
     }
 
 }

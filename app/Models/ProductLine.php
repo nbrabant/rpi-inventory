@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ProductLine extends Eloquent {
 
+    public function __toString() {
+        return $this->quantity . ' ' . $this->unity . ' ' . $this->product;
+    }
+
 	//columns
     protected $fillable = [
 		'cart_id',
@@ -23,6 +27,11 @@ class ProductLine extends Eloquent {
 	{
 		return $this->belongsTo('App\Models\Product');
 	}
+
+    public function getCategory()
+    {
+        return $this->product->category;
+    }
 
 	public function scopeCategoryByPosition($query)
 	{

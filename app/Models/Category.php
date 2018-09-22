@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Category extends Eloquent {
 
+    public function __toString() {
+        return $this->name;
+    }
+
 	//columns
     protected $fillable = [
 		'name',

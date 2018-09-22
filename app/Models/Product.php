@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Product extends Eloquent {
 
+    public function __toString() {
+        return $this->name;
+    }
+
 	//columns
     protected $fillable = [
 		'category_id',

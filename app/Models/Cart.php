@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Eloquent;
-// use App\Helpers\TrelloTraitHelper;
+use App\Helpers\TrelloTraitHelper;
 
 class Cart extends Eloquent
 {
-	// use TrelloTraitHelper;
+	use TrelloTraitHelper;
 
 	//columns
     protected $fillable = [
