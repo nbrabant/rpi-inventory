@@ -31,6 +31,11 @@ class CartCommandService
         return $this->cart->updateCurrent($request, $attributes);
     }
 
+    public function updateTrelloCard(Request $request, $trelloCardId)
+    {
+        return $this->cart->updateCurrent($request, ['trello_card_id' => $trelloCardId]);
+    }
+
     // add product
     public function attachProduct(Request $request)
     {
@@ -70,9 +75,6 @@ class CartCommandService
 
         return $this->cart->dissociateProduct($request, $product_id);
     }
-
-    // send cart to trello
-    // export to pdf
 
 
 }

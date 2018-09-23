@@ -32,7 +32,7 @@ trait TrelloTraitHelper
                 );
 		});
 
-        return ['status' => true, 'message' => 'Liste exportée sur Trello avec succès.'];
+        return $card->getId();
     }
 
     protected function getTrelloCard($trelloCardId) {

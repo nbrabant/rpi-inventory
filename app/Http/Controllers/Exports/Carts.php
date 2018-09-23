@@ -9,12 +9,14 @@ use Carbon\Carbon;
 
 use App\Mail\CartList;
 use App\Services\Cart\CartQueryService;
+use App\Services\Cart\CartCommandService;
 
 class Carts extends Controller
 {
-    public function __construct(CartQueryService $cart_query_service)
+    public function __construct(CartQueryService $cart_query_service, CartCommandService $cart_command_service)
     {
         $this->cart_query_service = $cart_query_service;
+        $this->cart_command_service = $cart_command_service;
     }
 
     public function pdf(Request $request)
@@ -41,7 +43,8 @@ class Carts extends Controller
     public function trello(Request $request)
     {
         $cart = $this->cart_query_service->getCurrent($request);
-        $cart->exportToTrello();
+
+        $this->cart_command_service->updateTrelloCard($request, $cart->exportToTrello());
 
         return redirect('/#/carts/');
     }
