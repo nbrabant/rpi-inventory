@@ -71,6 +71,20 @@
                     contentHeight: 'auto',
                     themeSystem: 'bootstrap4',
                     refetchResourcesOnNavigate: true,
+                    eventDrop: (event, delta)  => {
+                        this.HTTP.patch('schedules/' + event.id, {
+                                type_schedule: event.type_schedule,
+                                title: event.title,
+                                start_at: moment(event.start_at).add(delta).format('YYYY-MM-DD HH:mm:ss'),
+                                end_at: moment(event.end_at).add(delta).format('YYYY-MM-DD HH:mm:ss'),
+                                all_day: event.all_day,
+                            }, null)
+                            .then(response => {
+                                console.log(event);
+                            }).catch(response => {
+                                console.log(response);
+                            });
+                    },
                     eventClick: (element, jsEvent, view) => {
                         let buttons = {
                             cancel: 'Fermer',
