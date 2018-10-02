@@ -106,6 +106,7 @@
 
                         swal(element.title, {
                             title: element.title,
+                            text: element.details,
                             icon: "info",
                             buttons: buttons
                         }).then((value) => {
