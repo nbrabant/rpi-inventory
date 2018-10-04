@@ -9,7 +9,7 @@
                 :newurl="newurl"
                 title="Agenda"
                 subtitle="Liste des tâches"
-                :links="links"></html-cardheader>
+                :actions="actions"></html-cardheader>
         </div>
 
         <div class="card clearfix">
@@ -46,9 +46,11 @@
                         })
                     }
                 }],
-                links: [
+                actions: [
                     {
-                        route: 'schedules/export/cartlist',
+                        callback: () => {
+                            this.exportToCart()
+                        },
                         class: 'btn-primary',
                         icon: 'shopping-cart',
                         title: 'Export vers la liste de courses'
@@ -125,6 +127,45 @@
                     },
                 }
             },
+        },
+
+        methods: {
+            exportToCart: function() {
+                swal('Exporter vers la liste de courses', {
+                    title: 'Exporter vers la liste de courses',
+                    text: 'Cette action va ajouter les produits nécessaire aux recettes des semaines affichées à la liste de courses courante',
+                    icon: "warning",
+                    buttons: {
+                        cancel: 'Fermer',
+                        export: {
+                            text: "Exporter",
+                            value: "export",
+                            closeModal: true,
+                            className: "btn-primary",
+                        },
+                        cleanexport: {
+                            text: "Purger et exporter",
+                            value: "cleanexport",
+                            closeModal: true,
+                            className: "btn-primary",
+                        }
+                    }
+                }).then(value => {
+                    if (!value) return;
+
+                    this.HTTP.patch('schedules/export/cartlist', {
+                        exportType: value
+                    }, this.item)
+                    .then(response => {
+                        console.log(response);
+                    }).catch(response => {
+                        console.log(response);
+                    })
+                    
+                }).catch(response => {
+                    console.log(response);
+                })
+            }
         },
 
         components: {

@@ -94,7 +94,7 @@
             closeList() {
                 swal('Cloturer liste', {
                     title: 'Cloture de la liste courante',
-                    content: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
+                    text: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
                     icon: "warning",
                     buttons: {
                         cancel: 'Fermer',
