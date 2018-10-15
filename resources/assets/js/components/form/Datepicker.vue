@@ -9,12 +9,11 @@
 
         <date-picker
             class="form-control"
-            v-model="datetime"
+            v-model="initialdatetime"
             @dp-change="setDatetime"
             :config="config"
             :disabled="disabled == 'disabled' ? 'disabled' : null"
             ref="input"></date-picker>
-            <!-- @change="updateItem($event)" -->
 
         <span class="help-block">
             {{ helper }}
@@ -49,14 +48,12 @@
                     showTodayButton: true,
                     showClear: true,
                 },
-                datetime: this.initialdatetime
             };
         },
 
         methods: {
             setDatetime: function() {
-                this.initialdatetime = this.datetime
-                this.$emit('change-date', this.datetime);
+                this.$emit('change-date', this.initialdatetime);
             }
         },
 

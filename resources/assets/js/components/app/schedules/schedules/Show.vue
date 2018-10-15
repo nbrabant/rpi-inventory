@@ -104,7 +104,7 @@
 
         computed: {
             title: function () {
-                return this.item.id ? this.item.name : 'Nouvelle tâche'
+                return this.item.id ? this.item.title : 'Nouvelle tâche'
             },
 
             isRecette: function () {
