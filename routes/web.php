@@ -16,5 +16,4 @@ Route::get('/', 	'Dashboard@getIndex');
 Route::get('/cart/export/pdf',      'Exports\Carts@pdf');
 Route::get('/cart/export/mail',     'Exports\Carts@mail');
 Route::get('/cart/export/trello',   'Exports\Carts@trello');
-
-Route::get('/schedules/export/cartlist',   'Exports\Schedules@cartlist');
+Route::post('/api/schedules/export/cartlist',   'Exports\Schedules@cartlist');

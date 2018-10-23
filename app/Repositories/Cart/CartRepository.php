@@ -83,4 +83,15 @@ class CartRepository extends Repository
         return $cart;
     }
 
+    public function purgeCart(Request $request)
+    {
+        $cart = $this->getCurrentOrCreate($request);
+
+        $cart->productLines->map(function($productLine) {
+            $productLine->delete();
+        });
+
+        return $cart;
+    }
+
 }

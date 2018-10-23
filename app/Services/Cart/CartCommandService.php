@@ -9,8 +9,6 @@ use Validator;
 use App\Rules\NotInCart;
 use App\Rules\IsInCart;
 
-use Illuminate\Support\Facades\Log;
-
 class CartCommandService
 {
     private $cart;
@@ -76,5 +74,20 @@ class CartCommandService
         return $this->cart->dissociateProduct($request, $product_id);
     }
 
+    public function addProductFromRecipes(Request $request, $recipes)
+    {
+        $request->validate([
+            'exportType' => ['in:export,cleanexport']
+        ]);
+
+        if ($request->exportType === 'cleanexport') {
+            $this->cart->purgeCart($request);
+        }
+
+        $recipes->map(function($recipe) {
+            
+        });
+        // add or update product in cart
+    }
 
 }

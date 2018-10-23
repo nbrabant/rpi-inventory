@@ -13,7 +13,10 @@
         </div>
 
         <div class="card clearfix">
-            <full-calendar :config="config" :event-sources="eventSources" :events="item.data" />
+            <full-calendar ref="calendar"
+                :config="config"
+                :event-sources="eventSources"
+                :events="item.data" />
         </div>
     </div>
 
@@ -30,6 +33,7 @@
             return {
                 eventSources: [{
                     events: (start, end, timezone, callback) => {
+                        this.calendarDateRange = {start: start, end: end},
                         this.HTTP.get('schedules', {
                             params: {
                                 'search': {
@@ -55,7 +59,11 @@
                         icon: 'shopping-cart',
                         title: 'Export vers la liste de courses'
                     }
-                ]
+                ],
+                range: {
+                    start_at: null,
+                    end_at: null,
+                }
             };
         },
 
@@ -65,6 +73,14 @@
             },
             newurl: function() {
                 return "create";
+            },
+            calendarDateRange: {
+                get: function() {
+                    return this.range
+                },
+                set: function(range) {
+                    this.range = range
+                }
             },
             config: function() {
                 return {
@@ -153,15 +169,16 @@
                 }).then(value => {
                     if (!value) return;
 
-                    this.HTTP.patch('schedules/export/cartlist', {
-                        exportType: value
+                    this.HTTP.post('schedules/export/cartlist', {
+                        exportType: value,
+                        dateRange: this.calendarDateRange
                     }, this.item)
                     .then(response => {
                         console.log(response);
                     }).catch(response => {
                         console.log(response);
                     })
-                    
+
                 }).catch(response => {
                     console.log(response);
                 })

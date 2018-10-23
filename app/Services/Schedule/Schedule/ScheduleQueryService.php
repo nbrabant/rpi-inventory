@@ -16,8 +16,6 @@ class ScheduleQueryService
         $this->schedule = $schedule;
     }
 
-    // @TODO : override index method to load actual week schedules
-
     public function getSchedules(Request $request)
     {
         return $this->schedule->getAll($request);
@@ -26,6 +24,13 @@ class ScheduleQueryService
     public function getSchedule($id, Request $request)
     {
         return $this->schedule->find($id, $request);
+    }
+
+    public function getAttachedRecipes(Request $request)
+    {
+        return $this->schedule->getAllRecipes($request)->map(function($schedule) {
+            return $schedule->recipe;
+        });
     }
 
 }

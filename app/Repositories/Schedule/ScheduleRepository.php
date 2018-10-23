@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Schedule;
 
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Repositories\Repository;
 use \App\Models\Schedule as Schedule;
@@ -24,5 +25,12 @@ class ScheduleRepository extends Repository
         ]);
     }
 
+    public function getAllRecipes(Request $request)
+    {
+        return $this->model->query()
+            ->byDateInterval($request['dateRange'])
+            ->whereTypeSchedule('recette')
+            ->get();
+    }
 
 }
