@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class RecipeProduct extends Model
 {
-	//columns
     protected $fillable = [
 		'recipe_id',
 		'product_id',
@@ -16,7 +15,6 @@ class RecipeProduct extends Model
 
 	public $timestamps = false;
 
-	//hierarchical
 	public function recipe()
 	{
 		return $this->belongsTo('App\Models\Recipe');

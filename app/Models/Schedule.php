@@ -7,7 +7,6 @@ use Carbon\Carbon;
 
 class Schedule extends Model
 {
-	//columns
     protected $fillable = [
         'recipe_id',
         'user_id',
@@ -21,7 +20,6 @@ class Schedule extends Model
 
 	protected $dates = ['start_at', 'end_at'];
 
-	//hierarchical
 	public function recipe() {
 		return $this->belongsTo('App\Models\Recipe');
 	}
@@ -37,7 +35,7 @@ class Schedule extends Model
         }
     }
 
-	//scope functions
+	// @TODO : refactor this...
 	public function scopeByDateInterval($query, $dates = '') {
         if (!isset($dates->startAt)) {
             $startDate = Carbon::now()->startOfWeek();

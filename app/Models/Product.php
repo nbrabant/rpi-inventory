@@ -10,7 +10,6 @@ class Product extends Eloquent {
         return $this->name;
     }
 
-	//columns
     protected $fillable = [
 		'category_id',
 		'name',
@@ -20,7 +19,6 @@ class Product extends Eloquent {
 		'unit'
 	];
 
-	//hierarchical
 	public function category()
 	{
 		return $this->belongsTo('App\Models\Category');
@@ -42,7 +40,6 @@ class Product extends Eloquent {
 		return $this->hasMany('App\Models\RecipeProduct');
 	}
 
-	// scope functions
 	public function scopeWithoutIds($query, $ids = [])
 	{
 		if (is_array($ids) && !empty($ids)) {

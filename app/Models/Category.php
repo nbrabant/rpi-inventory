@@ -10,18 +10,16 @@ class Category extends Eloquent {
         return $this->name;
     }
 
-	//columns
-    protected $fillable = [
+	protected $fillable = [
 		'name',
 		'position'
 	];
 
-    //hierarchical
-	public function products() {
+	public function products()
+    {
 		return $this->hasMany('App\Product');
 	}
 
-	//scope functions
 	public function scopeByPosition($query, $order = 'ASC') {
 		if(!in_array($order, ['ASC', 'DESC'])){
 			$order = 'ASC';

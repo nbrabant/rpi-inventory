@@ -8,7 +8,6 @@ class Operation extends Eloquent {
 
 	protected $table = 'operations';
 
-	//columns
     protected $fillable = [
 		'product_id',
 		'quantity',
@@ -16,7 +15,6 @@ class Operation extends Eloquent {
 		'detail'
 	];
 
-	//hierarchical
 	public function product() {
 		return $this->belongsTo('App\Product');
 	}

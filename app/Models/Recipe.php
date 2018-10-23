@@ -10,7 +10,6 @@ class Recipe extends Model
 {
 	// use CrawlerTraitHelper;
 
-	//columns
     protected $fillable = [
 		'name',
 		'recipe_type',
@@ -21,7 +20,6 @@ class Recipe extends Model
 		'complement',
 	];
 
-	//hierarchical
 	public function plannings()
 	{
 		return $this->hasMany('App\Models\Schedule');

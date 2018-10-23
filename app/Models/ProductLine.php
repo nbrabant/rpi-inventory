@@ -10,14 +10,12 @@ class ProductLine extends Eloquent {
         return $this->quantity . ' ' . $this->unity . ' ' . $this->product;
     }
 
-	//columns
     protected $fillable = [
 		'cart_id',
 		'product_id',
 		'quantity'
 	];
 
-	//hierarchical
 	public function cart()
 	{
 		return $this->belongsTo('App\Models\Cart');
