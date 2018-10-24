@@ -81,13 +81,14 @@ class CartCommandService
         ]);
 
         if ($request->exportType === 'cleanexport') {
-            $this->cart->purgeCart($request);
+            $cart = $this->cart->purgeCart($request);
         }
 
-        $recipes->map(function($recipe) {
-            
+        $recipes->map(function($recipe) use($request) {
+            $cart = $this->cart->addOrUpdateProducts($request, $recipe->products);
         });
-        // add or update product in cart
+
+        return $cart;
     }
 
 }
