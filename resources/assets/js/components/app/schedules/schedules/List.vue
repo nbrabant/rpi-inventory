@@ -146,8 +146,8 @@
         },
 
         methods: {
-            exportToCart: function() {
-                swal('Exporter vers la liste de courses', {
+            exportToCart: async function() {
+                let value = await swal('Exporter vers la liste de courses', {
                     title: 'Exporter vers la liste de courses',
                     text: 'Cette action va ajouter les produits nécessaire aux recettes des semaines affichées à la liste de courses courante',
                     icon: "warning",
@@ -166,22 +166,20 @@
                             className: "btn-primary",
                         }
                     }
-                }).then(value => {
-                    if (!value) return;
-
-                    this.HTTP.post('schedules/export/cartlist', {
-                        exportType: value,
-                        dateRange: this.calendarDateRange
-                    }, this.item)
-                    .then(response => {
-                        console.log(response);
-                    }).catch(response => {
-                        console.log(response);
-                    })
-
-                }).catch(response => {
-                    console.log(response);
                 })
+
+                if (!value) return;
+
+                let response = await this.HTTP.post('schedules/export/cartlist', {
+                    exportType: value,
+                    dateRange: this.calendarDateRange
+                }, this.item)
+
+                if (response.status == 200) {
+                    swal('Ajouté!', 'Produits ajoutés à la liste', 'success')
+                } else {
+                    swal(this.statusTexts[response.status], 'Erreur', 'error')
+                }
             }
         },
 

@@ -80,6 +80,8 @@ class CartCommandService
             'exportType' => ['in:export,cleanexport']
         ]);
 
+        $cart = $this->cart->getCurrentOrCreate($request);
+
         if ($request->exportType === 'cleanexport') {
             $cart = $this->cart->purgeCart($request);
         }
