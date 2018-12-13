@@ -12,6 +12,13 @@ class CartRepository extends Repository
     public function model() {
         return \App\Models\Cart::class;
     }
+    
+    public function initialize() 
+    {
+        return new $this->model([
+            'date_creation' => Carbon::now(),
+        ]);
+    }
 
     public function getCurrentOrCreate(Request $request)
     {

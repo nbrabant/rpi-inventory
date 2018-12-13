@@ -36,12 +36,7 @@ abstract class Repository {
 
     abstract function model();
 
-    public function initialize()
-    {
-        return new $this->model([
-            'date_creation' => Carbon::now(),
-        ]);
-    }
+    abstract function initialize(); 
 
     public function getAll(Request $request)
     {
