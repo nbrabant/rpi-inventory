@@ -9,12 +9,11 @@ use Validator;
 
 class RecipeCommandService
 {
-    private $recipe;
+    private $_recipe;
 
     protected $validation = [
         'name'                  => 'required|string',
         'recipe_type'           => 'required|in:entrée,plat,dessert',
-        'instructions'          => 'required|string',
         'number_people'         => 'required|string|max:64',
         'preparation_time'      => 'integer',
         'cooking_time'          => 'integer',
@@ -31,12 +30,12 @@ class RecipeCommandService
 
     public function __construct(Recipe $recipe)
     {
-        $this->recipe = $recipe;
+        $this->_recipe = $recipe;
     }
 
     public function initializeRecipe(Request $request)
     {
-        return $this->recipe->initialize();
+        return $this->_recipe->initialize();
     }
 
     public function createRecipe(Request $request)
@@ -45,7 +44,11 @@ class RecipeCommandService
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->recipe->create($attributes);
+        $recipe = $this->_recipe->create($attributes);
+        $recipe = $this->_recipe->syncProducts($recipe, reset($attributes['products']));
+        $recipe = $this->_recipe->syncSteps($recipe, reset($attributes['steps']));
+
+        return $recipe;
     }
 
     public function updateRecipe($id, Request $request)
@@ -54,7 +57,9 @@ class RecipeCommandService
 
         $attributes = $request->only(array_keys($this->validation));
 
-        $recipe = $this->recipe->update($attributes, $id);
+        $recipe = $this->_recipe->update($attributes, $id);
+        $recipe = $this->_recipe->syncProducts($recipe, reset($attributes['products']));
+        $recipe = $this->_recipe->syncSteps($recipe, reset($attributes['steps']));
 
         // if ($request->file('image') && $request->file('image')->isValid()) {
         //     $imageName = str_slug_fr($recipe->name).'-'.$recipe->id.'.'.$request->file('image')->getClientOriginalExtension();
@@ -72,6 +77,6 @@ class RecipeCommandService
 
     public function destroyRecipe($id)
     {
-        return $this->recipe->destroy($id);
+        return $this->_recipe->destroy($id);
     }
 }

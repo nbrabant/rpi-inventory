@@ -21,31 +21,7 @@ class RecipeRepository extends Repository
         return new $this->model();
     }
 
-    public function create(array $attributes)
-    {
-        $object = $this->model->create($attributes);
-        $this->syncProducts($object, reset($attributes['products']));
-        $this->syncSteps($object, reset($attributes['steps']));
-
-        return $object->load($this->with);
-    }
-
-    public function update(array $attributes, $id)
-    {
-        if (array_key_exists('id', $attributes)) {
-            unset($attributes['id']);
-        }
-
-        $object = $this->model->findOrFail($id);
-        $this->syncProducts($object, reset($attributes['products']));
-        $this->syncSteps($object, reset($attributes['steps']));
-        $object->fill($attributes)->save();
-
-        $object->load($this->with);
-
-        return $object;
-    }
-
+    // refactoring
     public function syncProducts(Recipe $recipe, array $products = [])
     {
         $productsList = ParseHelper::arrayRequestToArray($products);
@@ -83,9 +59,14 @@ class RecipeRepository extends Repository
         if (is_array($listToAdd) && !empty($listToAdd)) {
             $recipe->products()->saveMany($listToAdd);
         }
+
+        $recipe->load($this->with);
+
+        return $recipe;
     }
 
-    protected function syncSteps(Recipe $recipe, array $steps = [])
+    // refactoring
+    public function syncSteps(Recipe $recipe, array $steps = [])
     {
         $stepsList = ParseHelper::arrayRequestToArray($steps);
 
@@ -122,5 +103,9 @@ class RecipeRepository extends Repository
         if (is_array($listToAdd) && !empty($listToAdd)) {
             $recipe->steps()->saveMany($listToAdd);
         }
+
+        $recipe->load($this->with);
+
+        return $recipe;
     }
 }
