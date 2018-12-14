@@ -9,11 +9,12 @@ use App\Models\ProductLine;
 
 class CartRepository extends Repository
 {
-    public function model() {
+    public function model()
+    {
         return \App\Models\Cart::class;
     }
     
-    public function initialize() 
+    public function initialize()
     {
         return new $this->model([
             'date_creation' => Carbon::now(),
@@ -94,7 +95,7 @@ class CartRepository extends Repository
     {
         $cart = $this->getCurrentOrCreate($request);
 
-        $cart->productLines->map(function($productLine) {
+        $cart->productLines->map(function ($productLine) {
             $productLine->delete();
         });
 
@@ -105,7 +106,7 @@ class CartRepository extends Repository
     {
         $cart = $this->getCurrentOrCreate($request);
 
-        $recipeProducts->map(function($recipeProduct) use($request, $cart) {
+        $recipeProducts->map(function ($recipeProduct) use ($request, $cart) {
             if ($cart->productLines->where('product_id', $recipeProduct->product_id)->isEmpty()) {
                 $this->associateProduct($request, [
                     'product_id' => $recipeProduct->product_id,
@@ -123,5 +124,4 @@ class CartRepository extends Repository
 
         return $cart;
     }
-
 }

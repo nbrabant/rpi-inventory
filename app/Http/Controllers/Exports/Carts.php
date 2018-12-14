@@ -24,18 +24,18 @@ class Carts extends Controller
         $cart = $this->cart_query_service->getCurrent($request);
 
         $datas = [
-			'title' => 'Liste de courses du ' . Carbon::now()->format('d/m/Y à H:i'),
-			'productLines' => $cart->productLines
-		];
+            'title' => 'Liste de courses du ' . Carbon::now()->format('d/m/Y à H:i'),
+            'productLines' => $cart->productLines
+        ];
 
         $pdf = \PDF::loadView('pdf.exportliste', $datas);
-		return $pdf->download('liste-courses.pdf');
+        return $pdf->download('liste-courses.pdf');
     }
 
     public function mail(Request $request)
     {
         Mail::to('aurore.derumier@gmail.com')
-            ->send( new CartList($this->cart_query_service->getCurrent($request)) );
+            ->send(new CartList($this->cart_query_service->getCurrent($request)));
 
         return redirect('/#/carts/');
     }
@@ -48,5 +48,4 @@ class Carts extends Controller
 
         return redirect('/#/carts/');
     }
-
 }

@@ -31,5 +31,4 @@ class ProductQueryService
 
         return $this->product->find($id, $request);
     }
-
 }

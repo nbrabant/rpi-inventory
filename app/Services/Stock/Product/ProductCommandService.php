@@ -16,11 +16,11 @@ class ProductCommandService
 
     protected $validation = [
         'category_id'	=> 'required|integer',
-		'name' 			=> 'required|string|unique:products,name',
-		'description'	=> 'required|string',
-		'min_quantity'	=> 'required|integer',
-		'unit'			=> 'string|in:piece,grammes,litre,sachet',
-	];
+        'name' 			=> 'required|string|unique:products,name',
+        'description'	=> 'required|string',
+        'min_quantity'	=> 'required|integer',
+        'unit'			=> 'string|in:piece,grammes,litre,sachet',
+    ];
 
     public function __construct(Product $product, Operation $operation)
     {
@@ -100,5 +100,4 @@ class ProductCommandService
 
         return $product->save();
     }
-
 }

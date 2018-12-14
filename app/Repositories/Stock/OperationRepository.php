@@ -7,7 +7,8 @@ use App\Repositories\Repository;
 
 class OperationRepository extends Repository
 {
-    public function model() {
+    public function model()
+    {
         return \App\Models\Operation::class;
     }
 
@@ -23,7 +24,7 @@ class OperationRepository extends Repository
         $this->model
             ->where('product_id', $productId)
             ->get()
-            ->map(function($item, $key) use(&$count) {
+            ->map(function ($item, $key) use (&$count) {
                 $count = ($item->operation === '+') ? ($count + $item->quantity) : ($count - $item->quantity);
             });
 

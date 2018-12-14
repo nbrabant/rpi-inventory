@@ -11,14 +11,14 @@ class RecipeCommandService
 {
     private $recipe;
 
-	protected $validation = [
+    protected $validation = [
         'name'                  => 'required|string',
         'recipe_type'           => 'required|in:entrée,plat,dessert',
-		'instructions'          => 'required|string',
-		'number_people'         => 'required|string|max:64',
-		'preparation_time'      => 'integer',
-		'cooking_time'          => 'integer',
-		'complement'            => 'nullable|string',
+        'instructions'          => 'required|string',
+        'number_people'         => 'required|string|max:64',
+        'preparation_time'      => 'integer',
+        'cooking_time'          => 'integer',
+        'complement'            => 'nullable|string',
         'products.*.product_id' => 'integer',
         'products.*.quantity'   => 'integer',
         // @TODO : define validation rule for product unit?
@@ -27,7 +27,7 @@ class RecipeCommandService
         'steps.*.name'          => 'string',
         'steps.*.instruction'   => 'string',
         'steps.*.position'      => 'integer|max:255',
-	];
+    ];
 
     public function __construct(Recipe $recipe)
     {
@@ -74,5 +74,4 @@ class RecipeCommandService
     {
         return $this->recipe->destroy($id);
     }
-
 }

@@ -11,7 +11,8 @@ class ScheduleRepository extends Repository
 {
     protected $perPage = 300; // @TODO : après transmission, récupération par date sans limite
 
-    public function model() {
+    public function model()
+    {
         return \App\Models\Schedule::class;
     }
 
@@ -32,5 +33,4 @@ class ScheduleRepository extends Repository
             ->whereTypeSchedule('recette')
             ->get();
     }
-
 }

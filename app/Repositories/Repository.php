@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Container\Container as App;
 use Carbon\Carbon;
 
-abstract class Repository {
-
+abstract class Repository
+{
     protected $perPage = 10;
 
     /**
@@ -34,9 +34,9 @@ abstract class Repository {
         $this->makeModel();
     }
 
-    abstract function model();
+    abstract public function model();
 
-    abstract function initialize(); 
+    abstract public function initialize();
 
     public function getAll(Request $request)
     {
@@ -185,7 +185,7 @@ abstract class Repository {
      */
     protected function handleSearchParameters(QueryBuilder $query, Request $request)
     {
-        if (!$request->search || (!is_array($request->search) && !is_string($request->search)) ) {
+        if (!$request->search || (!is_array($request->search) && !is_string($request->search))) {
             return $query;
         }
 
@@ -196,7 +196,7 @@ abstract class Repository {
                     $this->handleSearchQuery($query, $fieldName, $searchType, $values);
                 }
             }
-        } else if (is_string($request->search)) {
+        } elseif (is_string($request->search)) {
             $requestSearch = json_decode($request->search);
 
             if (!$requestSearch || empty($requestSearch)) {
@@ -384,5 +384,4 @@ abstract class Repository {
 
         return $query;
     }
-
 }

@@ -19,5 +19,4 @@ class CartQueryService
     {
         return $this->cart->getCurrentOrCreate($request);
     }
-
 }

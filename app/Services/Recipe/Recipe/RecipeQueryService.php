@@ -24,5 +24,4 @@ class RecipeQueryService
     {
         return $this->recipe->find($id, $request);
     }
-
 }

@@ -28,9 +28,8 @@ class ScheduleQueryService
 
     public function getAttachedRecipes(Request $request)
     {
-        return $this->schedule->getAllRecipes($request)->map(function($schedule) {
+        return $this->schedule->getAllRecipes($request)->map(function ($schedule) {
             return $schedule->recipe;
         });
     }
-
 }

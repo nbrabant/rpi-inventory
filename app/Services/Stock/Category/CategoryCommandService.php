@@ -11,10 +11,10 @@ class CategoryCommandService
 {
     private $category;
 
-	protected $validation = [
+    protected $validation = [
         'name' 		=> 'required|string|unique:categories,name',
-		'position' 	=> 'required|integer',
-	];
+        'position' 	=> 'required|integer',
+    ];
 
     public function __construct(Category $category)
     {
@@ -50,5 +50,4 @@ class CategoryCommandService
     {
         return $this->category->destroy($id);
     }
-
 }

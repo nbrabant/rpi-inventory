@@ -7,7 +7,8 @@ use App\Repositories\Repository;
 
 class ProductRepository extends Repository
 {
-    public function model() {
+    public function model()
+    {
         return \App\Models\Product::class;
     }
 

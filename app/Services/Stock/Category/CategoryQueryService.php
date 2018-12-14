@@ -24,5 +24,4 @@ class CategoryQueryService
     {
         return $this->category->find($id, $request);
     }
-
 }

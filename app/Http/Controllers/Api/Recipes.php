@@ -45,5 +45,4 @@ class Recipes extends Controller
     {
         return $this->recipe_command_service->destroyRecipe($id);
     }
-
 }

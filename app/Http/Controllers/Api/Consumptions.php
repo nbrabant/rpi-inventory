@@ -35,5 +35,4 @@ class Consumptions extends Controller
     {
         return $this->product_query_service->getProductWithConsumptions($id, $request);
     }
-
 }

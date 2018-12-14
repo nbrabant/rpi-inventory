@@ -25,5 +25,4 @@ class Carts extends Controller
     {
         return $this->cart_command_service->updateCart($request);
     }
-
 }

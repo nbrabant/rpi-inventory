@@ -86,11 +86,10 @@ class CartCommandService
             $cart = $this->cart->purgeCart($request);
         }
 
-        $recipes->map(function($recipe) use($request) {
+        $recipes->map(function ($recipe) use ($request) {
             $cart = $this->cart->addOrUpdateProducts($request, $recipe->products);
         });
 
         return $cart;
     }
-
 }

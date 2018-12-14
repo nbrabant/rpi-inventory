@@ -7,7 +7,8 @@ use App\Repositories\Repository;
 
 class CategoryRepository extends Repository
 {
-    public function model() {
+    public function model()
+    {
         return \App\Models\Category::class;
     }
 

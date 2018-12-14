@@ -16,27 +16,29 @@ class Schedule extends Model
         'start_at',
         'end_at',
         'all_day',
-	];
+    ];
 
-	protected $dates = ['start_at', 'end_at'];
+    protected $dates = ['start_at', 'end_at'];
 
-	public function recipe() {
-		return $this->belongsTo('App\Models\Recipe');
-	}
+    public function recipe()
+    {
+        return $this->belongsTo('App\Models\Recipe');
+    }
 
     public function getColorAttribute()
     {
         if ($this->type_schedule == 'recette') {
             return '#330000';
-        } else if ($this->type_schedule == 'rendezvous') {
+        } elseif ($this->type_schedule == 'rendezvous') {
             return '#003300';
-        } else if ($this->type_schedule == 'planning') {
+        } elseif ($this->type_schedule == 'planning') {
             return '#000033';
         }
     }
 
-	// @TODO : refactor this...
-	public function scopeByDateInterval($query, $dates = '') {
+    // @TODO : refactor this...
+    public function scopeByDateInterval($query, $dates = '')
+    {
         if (!isset($dates->startAt)) {
             $startDate = Carbon::now()->startOfWeek();
         } elseif ($dates->startAt instanceof Carbon) {
@@ -50,7 +52,7 @@ class Schedule extends Model
 
         if (!isset($dates->endAt)) {
             $endDate = Carbon::now()->endOfWeek();
-        } else if ($dates->endAt instanceof Carbon) {
+        } elseif ($dates->endAt instanceof Carbon) {
             $endDate = $dates->endAt;
         } elseif (is_string($dates->endAt)) {
             $endDate = new Carbon($dates->endAt);
@@ -59,11 +61,11 @@ class Schedule extends Model
             }
         }
 
-		$query->whereBetween('start_at', [$startDate, $endDate]);
-		$query->whereBetween('end_at', [$startDate, $endDate]);
+        $query->whereBetween('start_at', [$startDate, $endDate]);
+        $query->whereBetween('end_at', [$startDate, $endDate]);
 
-		return $query;
-	}
+        return $query;
+    }
 
     public function toArray()
     {
@@ -75,5 +77,4 @@ class Schedule extends Model
 
         return $array;
     }
-
 }
