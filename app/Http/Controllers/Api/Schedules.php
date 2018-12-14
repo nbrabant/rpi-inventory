@@ -10,8 +10,10 @@ use App\Services\Schedule\Schedule\ScheduleQueryService;
 
 class Schedules extends Controller
 {
-    public function __construct(ScheduleCommandService $schedule_command_service, ScheduleQueryService $schedule_query_service)
-    {
+    public function __construct(
+        ScheduleCommandService $schedule_command_service, 
+        ScheduleQueryService $schedule_query_service
+    ) {
         $this->schedule_command_service = $schedule_command_service;
         $this->schedule_query_service = $schedule_query_service;
     }

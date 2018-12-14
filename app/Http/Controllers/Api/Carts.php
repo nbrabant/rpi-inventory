@@ -10,8 +10,10 @@ use App\Services\Cart\CartQueryService;
 
 class Carts extends Controller
 {
-    public function __construct(CartCommandService $cart_command_service, CartQueryService $cart_query_service)
-    {
+    public function __construct(
+        CartCommandService $cart_command_service, 
+        CartQueryService $cart_query_service
+    ) {
         $this->cart_command_service = $cart_command_service;
         $this->cart_query_service = $cart_query_service;
     }

@@ -64,7 +64,7 @@
                 e.preventDefault();
             },
             addProductToCart: function(product) {
-                this.HTTP.post('carts', {
+                this.HTTP.post('cartproducts', {
                         product_id: product.id,
                         quantity: 0,
                     })

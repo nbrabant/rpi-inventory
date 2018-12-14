@@ -10,8 +10,10 @@ use App\Services\Recipe\Recipe\RecipeQueryService;
 
 class Recipes extends Controller
 {
-    public function __construct(RecipeCommandService $recipe_command_service, RecipeQueryService $recipe_query_service)
-    {
+    public function __construct(
+        RecipeCommandService $recipe_command_service, 
+        RecipeQueryService $recipe_query_service
+    ) {
         $this->recipe_command_service = $recipe_command_service;
         $this->recipe_query_service = $recipe_query_service;
     }

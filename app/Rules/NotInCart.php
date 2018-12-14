@@ -7,7 +7,7 @@ use App\Repositories\Cart\CartRepository as Cart;
 
 class NotInCart implements Rule
 {
-    private $repository;
+    private $_repository;
 
     /**
      * Create a new rule instance.
@@ -16,7 +16,7 @@ class NotInCart implements Rule
      */
     public function __construct()
     {
-        $this->repository = new Cart(app());
+        $this->_repository = new Cart(app());
     }
 
     /**
@@ -28,7 +28,7 @@ class NotInCart implements Rule
      */
     public function passes($attribute, $value)
     {
-        return !$this->repository->cartHasProduct($value);
+        return !$this->_repository->cartHasProduct($value);
     }
 
     /**

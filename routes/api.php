@@ -18,12 +18,14 @@ use Illuminate\Http\Request;
 // });
 //
 //
-Route::group(['namespace' => 'Api'], function () {
-    Route::resource('carts', 	    'Carts',           ['only' => ['show', 'update']]);
-    Route::resource('cartproducts', 'CartProducts',    ['only' => ['store', 'update', 'destroy']]);
-    Route::resource('categories', 	'Categories');
-	Route::resource('products', 	'Products');
-	Route::resource('consumptions', 'Consumptions',    ['only' => ['index', 'create', 'store', 'show']]);
-	Route::resource('recipes',      'Recipes');
-    Route::resource('schedules',    'Schedules',       ['except' => ['edit']]);
-});
+Route::group(
+    ['namespace' => 'Api'], function () {
+        Route::resource('carts', 'Carts', ['only' => ['show', 'update']]);
+        Route::resource('cartproducts', 'CartProducts', ['only' => ['store', 'update', 'destroy']]);
+        Route::resource('categories', 'Categories');
+        Route::resource('products', 'Products');
+        Route::resource('consumptions', 'Consumptions', ['only' => ['index', 'create', 'store', 'show']]);
+        Route::resource('recipes', 'Recipes');
+        Route::resource('schedules', 'Schedules', ['except' => ['edit']]);
+    }
+);

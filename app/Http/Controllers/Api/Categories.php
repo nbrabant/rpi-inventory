@@ -10,8 +10,10 @@ use App\Services\Stock\Category\CategoryQueryService;
 
 class Categories extends Controller
 {
-    public function __construct(CategoryCommandService $category_command_service, CategoryQueryService $category_query_service)
-    {
+    public function __construct(
+        CategoryCommandService $category_command_service, 
+        CategoryQueryService $category_query_service
+    ) {
         $this->category_command_service = $category_command_service;
         $this->category_query_service = $category_query_service;
     }
