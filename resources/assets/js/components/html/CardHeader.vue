@@ -72,10 +72,11 @@
 <style scoped>
     a.btn
     {
-        margin-left: 20px;
+        margin-left: 5px;
     }
     button.btn
     {
+        margin-left: 5px;
         z-index: 1;
     }
 </style>
