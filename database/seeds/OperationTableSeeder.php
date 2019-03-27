@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Operation;
+use App\Domain\Stock\Entities\Operation;
 use Illuminate\Database\Seeder;
 
 class OperationTableSeeder extends Seeder {

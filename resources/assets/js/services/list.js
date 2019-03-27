@@ -6,11 +6,18 @@ module.exports = RestCore.extend({
     data: function() {
         return {
             item: {},
+            links: [],
             sortCol: 'id',
             sortDir: 'desc',
             searchDelayer: null,
         }
     },
+
+    // created: () => {
+    //     this.events.$on('pagination-changed', (page) => {
+    //         this.triggerRestGet(this.endpoint, {}, this.item)
+    //     })
+    // },
 
     mounted: function() {
         if (this.endpoint == undefined) return
@@ -53,6 +60,7 @@ module.exports = RestCore.extend({
         }
     },
 
+    // declare in created
     events: {
         'sort-changed': function () {
             this.triggerRestGet(this.endpoint)

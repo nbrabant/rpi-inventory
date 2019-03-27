@@ -1,7 +1,7 @@
 	<?php
 
-use App\Models\Product;
-use App\Models\RecipeProduct;
+use App\Domain\Stock\Entities\Product;
+use App\Domain\Recipe\Entities\RecipeProduct;
 use Illuminate\Database\Seeder;
 
 class RecipeProductsTableSeeder extends Seeder

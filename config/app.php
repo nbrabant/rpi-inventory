@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Application\Providers\AppServiceProvider::class,
+        App\Application\Providers\AuthServiceProvider::class,
+        // App\Application\Providers\BroadcastServiceProvider::class,
+        App\Application\Providers\EventServiceProvider::class,
+        App\Interfaces\Http\Providers\RouteServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
         Gregoriohc\LaravelTrello\TrelloServiceProvider::class,

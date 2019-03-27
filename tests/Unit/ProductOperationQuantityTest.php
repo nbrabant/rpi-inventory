@@ -6,19 +6,15 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Repositories\Stock\OperationRepository as Operation;
+use App\Domain\Stock\Repositories\OperationRepository as Operation;
 
 class ProductOperationQuantityTest extends TestCase
 {
-    private $operation;
-
-    public function __construct(Operation $operation)
-    {
-        $this->operation = $operation;
-    }
 
     public function testQuantityCounter()
     {
-        $this->assertInternalType( 'int', $this->operation->countQuantityByProduct(2) );
+        $this->assertTrue(true);
+        $operation = new Operation(app());
+        $this->assertInternalType( 'int', $operation->countQuantityByProduct(2) );
     }
 }
