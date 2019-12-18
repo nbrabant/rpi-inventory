@@ -21,7 +21,7 @@ var router = new VueRouter({
                 {
                     name: 'dashboard',
                     path: '/',
-                    component: require('./../components/app/dashboard/Index.vue')
+                    component: require('../components/app/dashboard/Index.vue')
                 }
             ]
         },
@@ -34,7 +34,7 @@ var router = new VueRouter({
                 {
                     name: 'carts',
                     path: '/',
-                    component: require('./../components/app/carts/Index.vue')
+                    component: require('../components/app/carts/Index.vue')
                 }
             ]
         },
@@ -47,11 +47,11 @@ var router = new VueRouter({
                 {
                     name: 'categories',
                     path: '/',
-                    component: require('./../components/app/products/categories/List.vue')
+                    component: require('../components/app/products/categories/List.vue')
                 }, {
                     name: 'category',
                     path: ':id',
-                    component: require('./../components/app/products/categories/Show.vue')
+                    component: require('../components/app/products/categories/Show.vue')
                 }
             ]
         },
@@ -64,11 +64,11 @@ var router = new VueRouter({
                 {
                     name: 'products',
                     path: '/',
-                    component: require('./../components/app/products/products/List.vue')
+                    component: require('../components/app/products/products/List.vue')
                 }, {
                     name: 'product',
                     path: ':id',
-                    component: require('./../components/app/products/products/Show.vue')
+                    component: require('../components/app/products/products/Show.vue')
                 }
             ]
         },
@@ -81,11 +81,11 @@ var router = new VueRouter({
                 {
                     name: 'consumptions',
                     path: '/',
-                    component: require('./../components/app/products/consumptions/Index.vue')
+                    component: require('../components/app/products/consumptions/Index.vue')
                 }, {
                     name: 'consumptions-by-products',
                     path: 'product/:product_id',
-                    component: require('./../components/app/products/consumptions/List.vue')
+                    component: require('../components/app/products/consumptions/List.vue')
                 }
             ]
         },
@@ -98,15 +98,15 @@ var router = new VueRouter({
                 {
                     name: 'recipes',
                     path: '/',
-                    component: require('./../components/app/recipes/recipes/List.vue')
+                    component: require('../components/app/recipes/recipes/List.vue')
                 }, {
                     name: 'show-recipe',
                     path: ':id',
-                    component: require('./../components/app/recipes/recipes/View.vue')
+                    component: require('../components/app/recipes/recipes/View.vue')
                 }, {
                     name: 'recipe',
                     path: ':id',
-                    component: require('./../components/app/recipes/recipes/Show.vue')
+                    component: require('../components/app/recipes/recipes/Show.vue')
                 }
             ]
         }, {
@@ -118,11 +118,11 @@ var router = new VueRouter({
                 {
                     name: 'schedules',
                     path: '/',
-                    component: require('./../components/app/schedules/schedules/List.vue')
+                    component: require('../components/app/schedules/schedules/List.vue')
                 }, {
                     name: 'schedule',
                     path: ':id',
-                    component: require('./../components/app/schedules/schedules/Show.vue')
+                    component: require('../components/app/schedules/schedules/Show.vue')
                 }
             ]
         }

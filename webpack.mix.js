@@ -5,8 +5,8 @@ const { mix } = require('laravel-mix');
 var path = require('path')
 var webpack = require('webpack')
 
- mix.js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
+ mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
     .version()
 
     .webpackConfig({
@@ -25,15 +25,15 @@ var webpack = require('webpack')
             'querystring',
             'sweetalert',
             'select2',
-            './resources/assets/js/init/vue-services.js',
-            './resources/assets/js/plugins/light-bootstrap-dashboard.js',
-            './resources/assets/js/plugins/moment.js',
-            './resources/assets/js/plugins/weatherwidget.js',
-            // './resources/assets/js/init/vue-directives.js',
-            './resources/assets/js/init/vue-filters.js',
-            './resources/assets/js/init/vue-components.js',
-            './resources/assets/js/init/vue-router.js',
-            './resources/assets/sass/app.scss',
+            './resources/js/init/vue-services.js',
+            './resources/js/plugins/light-bootstrap-dashboard.js',
+            './resources/js/plugins/moment.js',
+            './resources/js/plugins/weatherwidget.js',
+            // './resources/js/init/vue-directives.js',
+            './resources/js/init/vue-filters.js',
+            './resources/js/init/vue-components.js',
+            './resources/js/init/vue-router.js',
+            './resources/sass/app.scss',
             'font-awesome/scss/font-awesome.scss',
         ],
 
@@ -42,7 +42,7 @@ var webpack = require('webpack')
                 {
                     test: /\.js?$/,
                     include: [
-                        path.resolve(__dirname, 'resources/assets/js'),
+                        path.resolve(__dirname, 'resources/js'),
                         'node_modules'
                     ],
                 }
@@ -63,9 +63,9 @@ var webpack = require('webpack')
                 FullCalendar: 'vue-full-calendar',
                 swal: 'sweetalert',
                 datePicker: 'vue-bootstrap-datetimepicker',
-                RestCore: path.resolve(__dirname, 'resources/assets/js/services', 'core'),
-                RestList: path.resolve(__dirname, 'resources/assets/js/services', 'list'),
-                RestShow: path.resolve(__dirname, 'resources/assets/js/services', 'show'),
+                RestCore: path.resolve(__dirname, 'resources/js/services', 'core'),
+                RestList: path.resolve(__dirname, 'resources/js/services', 'list'),
+                RestShow: path.resolve(__dirname, 'resources/js/services', 'show'),
             }),
         ],
 

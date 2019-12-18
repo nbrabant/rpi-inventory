@@ -193,7 +193,7 @@
 
 <style>
 
-    @import '~fullcalendar/dist/fullcalendar.css';
+    @import '../../../../../../node_modules/fullcalendar/dist/fullcalendar.css';
 
     #calendar {
         margin: 2rem

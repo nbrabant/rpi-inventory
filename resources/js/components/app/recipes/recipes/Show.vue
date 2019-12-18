@@ -57,7 +57,7 @@
                         :imagesrc="imageSrc"
                         :item="item.visual"
                         :id="current_id_image"
-                        :path="'assets/img/recipes'"
+                        :path="'img/recipes'"
                         :error="errors.image"></form-image>
                 </div>
 

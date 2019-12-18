@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico" />
+        <link rel="icon" type="image/png" href="img/favicon.ico" />
         <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
     </head>
 
