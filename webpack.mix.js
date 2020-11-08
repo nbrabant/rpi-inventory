@@ -1,6 +1,6 @@
 'use strict'
 
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 
 var path = require('path')
 var webpack = require('webpack')
@@ -8,7 +8,7 @@ var webpack = require('webpack')
  mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .version()
-
+    
     .webpackConfig({
 
         resolve: {
@@ -17,7 +17,6 @@ var webpack = require('webpack')
 
         entry: [
             'vue',
-            'vuex',
             'vue-router',
             'vue-full-calendar',
             'vue-bootstrap-datetimepicker',
@@ -26,7 +25,7 @@ var webpack = require('webpack')
             'sweetalert',
             'select2',
             './resources/js/init/vue-services.js',
-            './resources/js/plugins/light-bootstrap-dashboard.js',
+            // './resources/js/plugins/light-bootstrap-dashboard.js',
             './resources/js/plugins/moment.js',
             './resources/js/plugins/weatherwidget.js',
             // './resources/js/init/vue-directives.js',
@@ -42,8 +41,7 @@ var webpack = require('webpack')
                 {
                     test: /\.js?$/,
                     include: [
-                        path.resolve(__dirname, 'resources/js'),
-                        'node_modules'
+                        path.resolve(__dirname, 'resources/js')
                     ],
                 }
             ],
@@ -58,7 +56,6 @@ var webpack = require('webpack')
                 querystring: 'querystring',
                 moment: 'moment',
                 Vue: 'vue',
-                Vuex: 'vuex',
                 VueRouter: 'vue-router',
                 FullCalendar: 'vue-full-calendar',
                 swal: 'sweetalert',
@@ -67,6 +64,6 @@ var webpack = require('webpack')
                 RestList: path.resolve(__dirname, 'resources/js/services', 'list'),
                 RestShow: path.resolve(__dirname, 'resources/js/services', 'show'),
             }),
-        ],
+        ]
 
     });
