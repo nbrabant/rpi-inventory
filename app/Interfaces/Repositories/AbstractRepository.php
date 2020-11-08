@@ -7,23 +7,24 @@ use App\Application\Exceptions\RepositoryException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\DB;
 
 abstract class AbstractRepository
 {
     protected $perPage = 10;
 
     /**
-     * @var App
+     * @var App $app
      */
     private $app;
 
     /**
-     * @var
+     * @var Model $model
      */
     protected $model;
 
     /**
-     * @var
+     * @var array $with
      */
     protected $with = [];
 
@@ -298,8 +299,8 @@ abstract class AbstractRepository
      * Add exact constraint on query for the given field name and value.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param string       $value
+     * @param string $fieldName
+     * @param string $value
      *
      * @return QueryBuilder
      */
@@ -312,8 +313,8 @@ abstract class AbstractRepository
      * Add approximate constraint on query for the given field name and values.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param string       $values
+     * @param string $fieldName
+     * @param string $values
      *
      * @return QueryBuilder
      */
@@ -322,14 +323,16 @@ abstract class AbstractRepository
         foreach (explode(' ', $values) as $value) {
             $query->where($fieldName, 'like', '%'.$value.'%');
         }
+
+        return $query;
     }
 
     /**
      * Add approximate constraint on query for the given field name and values.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param string       $values
+     * @param string $fieldName
+     * @param string $values
      *
      * @return QueryBuilder
      */
@@ -338,6 +341,8 @@ abstract class AbstractRepository
         foreach (explode(' ', $values) as $value) {
             $query->orWhere($fieldName, 'like', '%'.$value.'%');
         }
+
+        return $query;
     }
 
     /**
