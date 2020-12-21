@@ -1,26 +1,46 @@
+import HtmlSidebarComponent from '../components/html/Sidebar.vue';
+import HtmlNavbarComponent from '../components/html/Navbar.vue';
+import HtmlPagefooterComponent from '../components/html/PageFooter.vue';
+import HtmlCardheaderComponent from '../components/html/CardHeader.vue';
+import HtmlCardfooterComponent from '../components/html/CardFooter.vue';
+import HtmlPaginationComponent from '../components/html/Pagination.vue';
+import HtmlSliderComponent from '../components/html/Slider.vue';
+import FormButtonComponent from '../components/form/Button.vue';
+import FormCheckboxComponent from '../components/form/Checkbox.vue';
+import FormDatepickerComponent from '../components/form/Datepicker.vue';
+import FormSelectComponent from '../components/form/Select.vue';
+import FormTextComponent from '../components/form/Text.vue';
+import FormAutocompleteComponent from '../components/form/Autocomplete.vue';
+import FormTextareaComponent from '../components/form/Textarea.vue';
+import FormHiddenComponent from '../components/form/Hidden.vue';
+import FormFileComponent from '../components/form/File.vue';
+import FormImageComponent from '../components/form/Image.vue';
+import TemplateIndexComponent from '../components/template/Index.vue';
+
+
 // Html components
-Vue.component('html-sidebar',           require('../components/html/Sidebar.vue'))
-Vue.component('html-navbar',            require('../components/html/Navbar.vue'))
-Vue.component('html-pagefooter',        require('../components/html/PageFooter.vue'))
-Vue.component('html-cardheader',        require('../components/html/CardHeader.vue'))
-Vue.component('html-cardfooter',        require('../components/html/CardFooter.vue'))
-Vue.component('html-pagination',        require('../components/html/Pagination.vue'))
-Vue.component('html-slider',            require('../components/html/Slider.vue'))
+Vue.component('html-sidebar', HtmlSidebarComponent)
+Vue.component('html-navbar', HtmlNavbarComponent)
+Vue.component('html-pagefooter', HtmlPagefooterComponent)
+Vue.component('html-cardheader', HtmlCardheaderComponent)
+Vue.component('html-cardfooter', HtmlCardfooterComponent)
+Vue.component('html-pagination', HtmlPaginationComponent)
+Vue.component('html-slider', HtmlSliderComponent)
 
 // Form components
-Vue.component('form-button',            require('../components/form/Button.vue'))
-Vue.component('form-checkbox',          require('../components/form/Checkbox.vue'))
-Vue.component('form-datepicker',        require('../components/form/Datepicker.vue'))
+Vue.component('form-button', FormButtonComponent)
+Vue.component('form-checkbox', FormCheckboxComponent)
+Vue.component('form-datepicker', FormDatepickerComponent)
 // Vue.component('form-percentage',        require('../components/form/Percentage.vue'))
 // Vue.component('form-price',             require('../components/form/Price.vue'))
-Vue.component('form-select',            require('../components/form/Select.vue'))
-Vue.component('form-text',              require('../components/form/Text.vue'))
-Vue.component('form-autocomplete',      require('../components/form/Autocomplete.vue'))
-Vue.component('form-textarea',          require('../components/form/Textarea.vue'))
-Vue.component('form-hidden',            require('../components/form/Hidden.vue'))
+Vue.component('form-select', FormSelectComponent)
+Vue.component('form-text', FormTextComponent)
+Vue.component('form-autocomplete', FormAutocompleteComponent)
+Vue.component('form-textarea', FormTextareaComponent)
+Vue.component('form-hidden', FormHiddenComponent)
 // Vue.component('form-wysiwyg',           require('../components/form/Wysiwyg.vue'))
-Vue.component('form-file',              require('../components/form/File.vue'))
-Vue.component('form-image',             require('../components/form/Image.vue'))
+Vue.component('form-file', FormFileComponent)
+Vue.component('form-image', FormImageComponent)
 
 // Template components
-Vue.component('template-index',         require('../components/template/Index.vue'))
+Vue.component('template-index', TemplateIndexComponent)

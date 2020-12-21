@@ -6,7 +6,6 @@
         <html-sidebar></html-sidebar>
 
         <div class="main-panel">
-
             <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
 
             <div class="content clearfix">
@@ -23,7 +22,7 @@
 
     export default {
         mounted() {
-            // console.log('Component mounted.')
+            console.log('Component mounted.')
         },
 
         data: function() {
@@ -36,7 +35,7 @@
             'set-breadcrumbs': function (msg) {
                 this.breadcrumbs = msg
             }
-        },
+        }
     }
 
 </script>
