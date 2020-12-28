@@ -11,6 +11,7 @@
 
         <div class="content table-responsive table-full-width">
 
+            <!-- @TODO : change to grid component -->
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
@@ -20,9 +21,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <router-link :to="{ name: 'category', params: { id: category.id } }" tag="tr" v-for="category in item.data" :key="category.id">
+                    <router-link v-for="category in item.data" 
+                        :key="category.id"
+                        :to="{ name: 'category', params: { id: category.id } }" 
+                        tag="tr">
+                        
                         <td>{{ category.id }}</td>
-                        <td>{{ category.name }}</th>
+                        <td>{{ category.name }}</td>
                         <td>{{ category.updated_at | datetime }}</td>
                     </router-link>
                 </tbody>

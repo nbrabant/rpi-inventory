@@ -3,16 +3,16 @@
 
     <div class="wrapper">
 
-        <html-sidebar></html-sidebar>
+        <html-sidebar />
 
         <div class="main-panel">
-            <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
+            <html-navbar :breadcrumbList="breadcrumbList" />
 
             <div class="content clearfix">
-                <router-view></router-view>
+                <router-view />
             </div>
 
-            <html-pagefooter></html-pagefooter>
+            <html-pagefooter />
         </div>
     </div>
 
@@ -21,19 +21,9 @@
 <script>
 
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        },
-
         data: function() {
             return {
-                breadcrumbs: [],
-            }
-        },
-
-        events: {
-            'set-breadcrumbs': function (msg) {
-                this.breadcrumbs = msg
+                breadcrumbList: [],
             }
         }
     }

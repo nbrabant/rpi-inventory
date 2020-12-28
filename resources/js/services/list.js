@@ -1,4 +1,3 @@
-
 module.exports = RestCore.extend({
 
     abstract: true,
@@ -55,6 +54,7 @@ module.exports = RestCore.extend({
         },
 
         pagination: function(page) {
+            console.log('changed!!!');
             // this.item.current_page = page;
             this.triggerRestGet(this.endpoint, {}, this.item)
         }
@@ -66,6 +66,7 @@ module.exports = RestCore.extend({
             this.triggerRestGet(this.endpoint)
         },
         'pagination-changed': function (page) {
+            console.log('changed!!!');
             this.triggerRestGet(this.endpoint, {}, this.item)
         },
     },

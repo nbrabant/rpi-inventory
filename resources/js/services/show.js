@@ -59,16 +59,6 @@ module.exports = RestCore.extend({
     },
 
     events: {
-        'set-breadcrumbs': function (msg) {
-            if (this.setOriginalBreadcrumbs) {
-                msg.unshift({
-                    route: this.$route.path,
-                    title: this.title,
-                    icon: null,
-                })
-            }
-            return true
-        },
         'confirm-delete': function () {
             this.confirmRestDelete(
                 "Vous allez définitivement supprimer l'enregistrement " + this.title + '.',

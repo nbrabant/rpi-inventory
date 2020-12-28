@@ -94,7 +94,8 @@
             goTo: function (page) {
                 if (page != this.selected) {
                     this.selected = page
-                    this.$emit('pagination-changed', page)
+console.log(this, 'go to page!!');                
+                    this.$emit('pagination-changed', { page : page } )
                 }
             },
         },

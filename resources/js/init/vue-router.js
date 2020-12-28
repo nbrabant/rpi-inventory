@@ -22,7 +22,12 @@ var router = new VueRouter({
                 {
                     name: 'dashboard',
                     path: '/',
-                    component: () => import("../components/app/dashboard/Index.vue")
+                    component: () => import("../components/app/dashboard/Index.vue"),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', icon: 'home' }
+                        ]
+                    }
                 }
             ]
         },
@@ -35,7 +40,13 @@ var router = new VueRouter({
                 {
                     name: 'carts',
                     path: '/',
-                    component: () => import('../components/app/carts/Index.vue')
+                    component: () => import('../components/app/carts/Index.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Cart' }
+                        ]
+                    }
                 }
             ]
         },
@@ -48,11 +59,24 @@ var router = new VueRouter({
                 {
                     name: 'categories',
                     path: '/',
-                    component: () => import('../components/app/products/categories/List.vue')
+                    component: () => import('../components/app/products/categories/List.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Categories' }
+                        ]
+                    }
                 }, {
                     name: 'category',
                     path: ':id',
-                    component: () => import('../components/app/products/categories/Show.vue')
+                    component: () => import('../components/app/products/categories/Show.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Categories', link: '/categories/' },
+                            { name: 'Category' },
+                        ]
+                    }
                 }
             ]
         },
@@ -65,11 +89,24 @@ var router = new VueRouter({
                 {
                     name: 'products',
                     path: '/',
-                    component: () => import('../components/app/products/products/List.vue')
+                    component: () => import('../components/app/products/products/List.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Products' }
+                        ]
+                    }
                 }, {
                     name: 'product',
                     path: ':id',
-                    component: () => import('../components/app/products/products/Show.vue')
+                    component: () => import('../components/app/products/products/Show.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Products', link: '/products/' },
+                            { name: 'Product' }
+                        ]
+                    }
                 }
             ]
         },
@@ -82,11 +119,23 @@ var router = new VueRouter({
                 {
                     name: 'consumptions',
                     path: '/',
-                    component: () => import('../components/app/products/consumptions/Index.vue')
+                    component: () => import('../components/app/products/consumptions/Index.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Consumptions' }
+                        ]
+                    }
                 }, {
                     name: 'consumptions-by-products',
                     path: 'product/:product_id',
-                    component: () => import('../components/app/products/consumptions/List.vue')
+                    component: () => import('../components/app/products/consumptions/List.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Product consumption' }
+                        ]
+                    }
                 }
             ]
         },
@@ -99,15 +148,35 @@ var router = new VueRouter({
                 {
                     name: 'recipes',
                     path: '/',
-                    component: () => import('../components/app/recipes/recipes/List.vue')
+                    component: () => import('../components/app/recipes/recipes/List.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Recipes' }
+                        ]
+                    }
                 }, {
                     name: 'show-recipe',
                     path: ':id',
-                    component: () => import('../components/app/recipes/recipes/View.vue')
+                    component: () => import('../components/app/recipes/recipes/View.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Recipes', link: '/recipes/' },
+                            { name: 'Recipes' }
+                        ]
+                    }
                 }, {
                     name: 'recipe',
                     path: ':id',
-                    component: () => import('../components/app/recipes/recipes/Show.vue')
+                    component: () => import('../components/app/recipes/recipes/Show.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Recipes', link: '/recipes/' },
+                            { name: 'Recipes' }
+                        ]
+                    }
                 }
             ]
         }, {
@@ -119,11 +188,24 @@ var router = new VueRouter({
                 {
                     name: 'schedules',
                     path: '/',
-                    component: () => import('../components/app/schedules/schedules/List.vue')
+                    component: () => import('../components/app/schedules/schedules/List.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Schedules' },
+                        ]
+                    }
                 }, {
                     name: 'schedule',
                     path: ':id',
-                    component: () => import('../components/app/schedules/schedules/Show.vue')
+                    component: () => import('../components/app/schedules/schedules/Show.vue'),
+                    meta: {
+                        breadcrumb: [
+                            { name: 'Dashboard', link: '/', icon: 'home' },
+                            { name: 'Schedules', link: '/schedules/' },
+                            { name: 'Schedule' }
+                        ]
+                    }
                 }
             ]
         }

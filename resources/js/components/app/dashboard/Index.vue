@@ -27,12 +27,6 @@
 
     export default {
 
-        route: {
-            data: function () {
-                this.$emit('set-breadcrumbs', [])
-            },
-        },
-
         components: {
             WidgetMeteo,
             TimeClock,

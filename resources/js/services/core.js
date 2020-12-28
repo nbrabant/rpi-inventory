@@ -48,6 +48,7 @@ module.exports = Vue.extend({
                 555: 'Ressource non supprimable',
             },
             restState: null,
+            events: {},
         }
     },
 
@@ -63,12 +64,6 @@ module.exports = Vue.extend({
                 }
             })
         }
-    },
-
-    watch: {
-        item: function () {
-            this.$emit('set-breadcrumbs', [])
-        },
     },
 
     methods: {

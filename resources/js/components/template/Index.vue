@@ -3,16 +3,16 @@
 
     <div class="wrapper">
 
-        <html-sidebar></html-sidebar>
+        <html-sidebar />
 
         <div class="main-panel">
-            <html-navbar :breadcrumbs="breadcrumbs"></html-navbar>
+            <html-navbar :breadcrumbList="breadcrumbList" />
 
             <div class="content clearfix">
-                <router-view></router-view>
+                <router-view />
             </div>
 
-            <html-pagefooter></html-pagefooter>
+            <html-pagefooter />
 
         </div>
 
@@ -34,26 +34,23 @@
 
         data: function() {
             return {
-                breadcrumbs: [],
+                breadcrumbList: [],
             }
         },
 
-        route: {
-            data: function () {
-                this.$emit('set-breadcrumbs', [])
-            },
+        mounted() {
+            this.updateCrumbs()
         },
 
-        events: {
-            'set-breadcrumbs': function (msg) {
-                msg.unshift({
-                    route: this.route,
-                    title: this.title,
-                    icon: this.icon,
-                })
-                return true
-            },
+        watch: {
+            '$route': function() { this.updateCrumbs() }
         },
+
+        methods: {
+            updateCrumbs: function() {
+                this.breadcrumbList = this.$route.meta.breadcrumb
+            }
+        }
 
     }
 

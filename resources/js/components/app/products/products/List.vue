@@ -24,8 +24,8 @@
                 <tbody>
                     <router-link :to="{ name: 'product', params: { id: product.id } }" tag="tr" v-for="product in item.data" :key="product.id">
                         <td>{{ product.id }}</td>
-                        <td>{{ product.name }}</th>
-                        <td :class="product.status">{{ product.quantity }}</th>
+                        <td>{{ product.name }}</td>
+                        <td :class="product.status">{{ product.quantity }}</td>
                         <td>{{ product.updated_at | datetime }}</td>
                         <td class="text-right">
                             <router-link :to="{ name: 'consumptions-by-products', params: { product_id: product.id } }" tag="a" class="btn btn-primary" title="Voir les opérations">
@@ -44,7 +44,7 @@
         <html-pagination v-if="item.current_page"
             :current.sync="item.current_page"
             :last="item.last_page"
-            :total="item.total"></html-pagination>
+            :total="item.total" />
 
     </div>
 

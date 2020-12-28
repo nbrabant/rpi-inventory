@@ -145,6 +145,10 @@ h2 {
   font-weight: var(--font-weight-black);
 }
 
+.nav li {
+  width: 100%;
+}
+
 li {
   padding: 0.35vh 0;
   border-bottom: solid 2px rgba(255, 255, 255, 0.2);
