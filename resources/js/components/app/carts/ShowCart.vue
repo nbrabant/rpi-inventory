@@ -3,7 +3,7 @@
 
     <div class="card">
         <html-cardheader title="Liste actuelle"
-            :actions="actions"></html-cardheader>
+            :actions="actions" />
 
         <div class="content clearfix">
 
@@ -18,13 +18,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in item.product_lines" :key="product.id" :class="product.created ? 'newitem' : ''">
+                        <tr v-for="product in item.product_lines" :key="product.id" 
+                            :class="product.created ? 'newitem' : ''">
+                            
                             <td>{{ product.product.name }}</td>
                             <td>
                                 <form-text
                                     v-model="product.quantity"
                                     :item="product.quantity"
-                                    :error="errors.quantity"></form-text>
+                                    :error="errors.quantity" />
                             </td>
                             <td>{{ product.product.unit }}</td>
                             <td class="pull-right">
@@ -35,10 +37,12 @@
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
+
                         </tr>
                     </tbody>
                 </table>
             </div>
+            
             <div class="alert alert-warning" v-else>
                 Aucun produit dans la liste de course actuellement.
             </div>
@@ -50,7 +54,11 @@
 
 <script>
 
-    export default RestShow.extend({
+    import RestShow from '../../../mixins/restshow'
+
+    export default {
+
+        mixins: [RestShow],
 
         data: function() {
             return {
@@ -121,7 +129,7 @@
             }
         }
 
-    })
+    }
 
 </script>
 

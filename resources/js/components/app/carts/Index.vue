@@ -5,12 +5,11 @@
         <div class="card">
             <html-cardheader title="Liste de courses"
                 subtitle="Gestion des prochaines courses"
-                :links="links"
-            ></html-cardheader>
+                :links="links" />
         </div>
 
         <div class="card">
-            <html-cardheader title="Rechercher un produit"></html-cardheader>
+            <html-cardheader title="Rechercher un produit" />
 
             <div class="content clearfix">
 
@@ -20,14 +19,13 @@
                         v-model="selection"
                         v-on:updateSelection="updateSelection"
                         placeholder="Saisir le produit"
-                        :error="errors.product_id"
-                    ></form-autocomplete>
+                        :error="errors.product_id" />
                 </div>
 
             </div>
         </div>
 
-        <ShowCart ref="cartlist"></ShowCart>
+        <ShowCart ref="cartlist" />
     </div>
 
 </template>
@@ -35,8 +33,13 @@
 <script>
 
     import ShowCart from './ShowCart.vue'
+    import RestList from '../../../mixins/restlist'
 
-    export default RestShow.extend({
+    export default {
+
+        mixins: [RestList],
+
+        name: 'IndexCart',
 
         data: function() {
             return {
@@ -63,6 +66,10 @@
                     }
                 ]
             };
+        },
+
+        components: {
+            ShowCart,
         },
 
         mounted() {
@@ -94,10 +101,6 @@
 
         },
 
-        components: {
-            ShowCart,
-        },
-
-    })
+    }
 
 </script>

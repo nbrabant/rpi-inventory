@@ -24,12 +24,16 @@
 
 <script>
 
-    export default RestCore.extend({
+    import RestCore from '../../../../mixins/restcore'
+
+    export default {
+
+        mixins : [RestCore],
 
         name: 'ShowOperation',
 
         props: ['operation'],
 
-    });
+    }
 
 </script>

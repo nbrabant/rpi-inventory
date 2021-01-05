@@ -80,8 +80,11 @@
 
     import ShowOperation from './ShowOperation.vue'
     import ShowAddOperation from './ShowAddOperation.vue'
+    import RestShow from '../../../../mixins/restshow'
 
-    export default RestShow.extend({
+    export default {
+
+        mixins: [RestShow],
 
         props: ['productId'],
 
@@ -120,7 +123,7 @@
             ShowAddOperation,
         },
 
-    })
+    }
 
 </script>
 

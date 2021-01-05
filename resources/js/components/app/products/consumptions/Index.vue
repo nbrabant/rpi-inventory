@@ -29,8 +29,11 @@
 <script>
 
     import ShowProduct from './ShowProduct.vue'
+    import RestCore from '../../../../mixins/restcore'
 
-    export default RestCore.extend({
+    export default {
+
+        mixins : [RestCore],
 
         data: function() {
             return {
@@ -58,8 +61,8 @@
 
         components: {
             ShowProduct,
-        },
+        }
 
-    })
+    }
 
 </script>

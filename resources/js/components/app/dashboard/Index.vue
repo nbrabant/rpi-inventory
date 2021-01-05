@@ -4,15 +4,15 @@
     <div class="clearfix">
 
         <div class="col-sm-4">
-            <widget-meteo></widget-meteo>
+            <widget-meteo />
         </div>
 
         <div class="col-sm-4">
-            <time-clock></time-clock>
+            <time-clock />
         </div>
 
         <div class="col-sm-4">
-            <day-schedules></day-schedules>
+            <day-schedules />
         </div>
 
     </div>

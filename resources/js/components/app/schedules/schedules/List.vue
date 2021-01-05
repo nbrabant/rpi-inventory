@@ -26,8 +26,11 @@
 
     // https://www.npmjs.com/package/vue-full-calendar
     import { FullCalendar } from 'vue-full-calendar'
+    import RestList from '../../../../mixins/restlist'
 
-    export default RestList.extend({
+    export default {
+
+        mixins: [RestList],
 
         data() {
             return {
@@ -184,10 +187,10 @@
         },
 
         components: {
-            FullCalendar,
-        },
+            FullCalendar
+        }
 
-    })
+    }
 
 </script>
 

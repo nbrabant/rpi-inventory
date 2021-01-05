@@ -44,7 +44,8 @@
         <html-pagination v-if="item.current_page"
             :current.sync="item.current_page"
             :last="item.last_page"
-            :total="item.total" />
+            :total="item.total"
+            @changePage="pagination" />
 
     </div>
 
@@ -53,7 +54,11 @@
 
 <script>
 
-    export default RestList.extend({
+    import RestList from '../../../../mixins/restlist'
+
+    export default {
+
+        mixins: [RestList],
 
         data() {
             return {};
@@ -79,9 +84,9 @@
                         }
                     });
             }
-        },
-
-    })
+        }
+        
+    }
 
 </script>
 

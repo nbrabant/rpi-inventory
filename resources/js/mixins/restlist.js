@@ -1,8 +1,7 @@
-module.exports = RestCore.extend({
+import RestCore from './restcore';
 
-    abstract: true,
-
-    data: function() {
+export default RestCore.extend({
+	data: function() {
         return {
             item: {},
             links: [],
@@ -11,12 +10,6 @@ module.exports = RestCore.extend({
             searchDelayer: null,
         }
     },
-
-    // created: () => {
-    //     this.events.$on('pagination-changed', (page) => {
-    //         this.triggerRestGet(this.endpoint, {}, this.item)
-    //     })
-    // },
 
     mounted: function() {
         if (this.endpoint == undefined) return
@@ -54,9 +47,8 @@ module.exports = RestCore.extend({
         },
 
         pagination: function(page) {
-            console.log('changed!!!');
-            // this.item.current_page = page;
-            this.triggerRestGet(this.endpoint, {}, this.item)
+            this.item.current_page = page;
+            this.triggerRestGet(this.endpoint, {'page' : page}, this.item)
         }
     },
 
@@ -65,10 +57,5 @@ module.exports = RestCore.extend({
         'sort-changed': function () {
             this.triggerRestGet(this.endpoint)
         },
-        'pagination-changed': function (page) {
-            console.log('changed!!!');
-            this.triggerRestGet(this.endpoint, {}, this.item)
-        },
-    },
-
+    }
 })

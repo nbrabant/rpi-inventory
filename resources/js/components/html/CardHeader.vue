@@ -1,3 +1,4 @@
+
 <template>
 
     <div class="header">
@@ -10,7 +11,7 @@
             <i :class="'fa fa-' + link.icon"></i>
         </a>
 
-        <button v-for="action in actions"
+        <button v-for="action in actions" :key="action.title"
             @click="action.callback"
             :class="'btn btn-fill ' + action.class + ' pull-right'"
             :title="action.title">
@@ -44,7 +45,11 @@
 
 <script>
 
+    import RestCore from './../../mixins/restshow'
+
     export default {
+
+        mixins: [RestCore],
 
         props: {
             actions: {},
@@ -64,7 +69,6 @@
                 this.$emit('confirm-delete')
             },
         },
-
     }
 
 </script>

@@ -54,7 +54,11 @@
 
 <script>
 
-    export default RestList.extend({
+    import RestList from '../../../../mixins/restlist'
+
+    export default {
+
+        mixins: [RestList],
 
         props: ['recipeSteps', 'errors'],
 
@@ -73,6 +77,6 @@
             },
         },
 
-    })
+    }
 
 </script>

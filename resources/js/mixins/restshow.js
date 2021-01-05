@@ -1,9 +1,8 @@
+import RestCore from './restcore';
 
-module.exports = RestCore.extend({
+export default RestCore.extend({
 
-    abstract: true,
-
-    data: function() {
+	data: function() {
         return {
             item: {},
             errors: {},
@@ -66,6 +65,6 @@ module.exports = RestCore.extend({
                 {id: this.item.id}
             )
         },
-    },
+    }
 
 })

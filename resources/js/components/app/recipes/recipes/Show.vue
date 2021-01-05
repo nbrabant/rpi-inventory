@@ -95,8 +95,11 @@
 
     import ListProduct from './ListProduct.vue'
     import ListSteps from './ListSteps.vue'
+    import RestShow from '../../../../mixins/restshow'
 
-    export default RestShow.extend({
+    export default {
+
+        mixins: [RestShow],
 
         data: function() {
             return {
@@ -184,6 +187,6 @@
             ListSteps,
         },
 
-    })
+    }
 
 </script>

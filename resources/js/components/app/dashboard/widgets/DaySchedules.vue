@@ -25,7 +25,11 @@
 
 <script>
 
-    export default RestList.extend({
+    import RestList from '../../../../mixins/restlist'
+
+    export default {
+
+        mixins: [RestList],
 
         mounted() {
             this.HTTP.get('schedules', {
@@ -70,7 +74,7 @@
             }
         }
 
-    })
+    }
 
 </script>
 

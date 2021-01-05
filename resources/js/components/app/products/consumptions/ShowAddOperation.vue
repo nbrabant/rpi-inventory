@@ -42,7 +42,11 @@
 
 <script>
 
-    module.exports = RestShow.extend({
+    import RestShow from '../../../../mixins/restshow'
+
+    export default {
+
+        mixins: [RestShow],
 
         props: ['productId'],
 
@@ -77,6 +81,6 @@
             },
         }
 
-    });
+    }
 
 </script>

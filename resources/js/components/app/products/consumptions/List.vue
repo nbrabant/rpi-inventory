@@ -6,7 +6,7 @@
         <div class="card">
 
             <html-cardheader :backroute="parentRoute"
-                title="Consommation par produits"></html-cardheader>
+                title="Consommation par produits" />
 
             <div class="clearfix">
                 <div class="col-sm-12">
@@ -37,7 +37,7 @@
 
             <div class="content table-responsive table-full-width">
 
-                <html-cardheader title="Liste des opérations"></html-cardheader>
+                <html-cardheader title="Liste des opérations" />
 
                 <table class="table table-hover table-striped">
 
@@ -52,10 +52,10 @@
 
                     <tbody>
                         <tr v-for="operation in item.operations" :key="operation.id">
-                            <th>{{ operation.created_at }}</th>
-                            <th>{{ operation.detail }}</th>
-                            <th>{{ operation.operation | type-operation }}</th>
-                            <th>{{ operation.quantity }}</th>
+                            <td>{{ operation.created_at }}</td>
+                            <td>{{ operation.detail }}</td>
+                            <td>{{ operation.operation | type-operation }}</td>
+                            <td>{{ operation.quantity }}</td>
                         </tr>
                     </tbody>
 
@@ -66,7 +66,8 @@
             <html-pagination v-if="item.current_page"
                 :current.sync="item.current_page"
                 :last="item.last_page"
-                :total="item.total"></html-pagination>
+                :total="item.total"
+                @changePage="pagination" />
 
         </div>
 
@@ -85,8 +86,11 @@
 <script>
 
     import ShowAddOperation from './ShowAddOperation.vue'
+    import RestList from '../../../../mixins/restlist'
 
-    export default RestList.extend({
+    export default {
+
+        mixins: [RestList],
 
         data() {
             return {};
@@ -107,7 +111,7 @@
             ShowAddOperation
         }
 
-    })
+    }
 
 </script>
 

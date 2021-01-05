@@ -51,7 +51,12 @@
 
 <script>
 
-    export default RestShow.extend({
+    import RestShow from '../../../../mixins/restshow'
+
+    export default {
+
+        mixins: [RestShow],
+
         computed: {
             title: function () {
                 return this.item.id ? this.item.name : 'Nouvelle recette'
@@ -67,7 +72,7 @@
                 })
             }
         }
-    });
+    }
 
 </script>
 

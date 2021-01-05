@@ -85,7 +85,11 @@
 
 <script>
 
-    export default RestShow.extend({
+    import RestShow from '../../../../mixins/restshow'
+
+    export default {
+
+        mixins: [RestShow],
 
         data: function() {
             return {
@@ -112,6 +116,6 @@
             }
         },
 
-    })
+    }
 
 </script>

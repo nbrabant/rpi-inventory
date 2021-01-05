@@ -24,7 +24,6 @@ var webpack = require('webpack')
             'querystring',
             'sweetalert',
             'select2',
-            './resources/js/init/vue-services.js',
             // './resources/js/plugins/light-bootstrap-dashboard.js',
             './resources/js/plugins/moment.js',
             './resources/js/plugins/weatherwidget.js',
@@ -60,9 +59,6 @@ var webpack = require('webpack')
                 FullCalendar: 'vue-full-calendar',
                 swal: 'sweetalert',
                 datePicker: 'vue-bootstrap-datetimepicker',
-                RestCore: path.resolve(__dirname, 'resources/js/services', 'core'),
-                RestList: path.resolve(__dirname, 'resources/js/services', 'list'),
-                RestShow: path.resolve(__dirname, 'resources/js/services', 'show'),
             }),
         ]
 

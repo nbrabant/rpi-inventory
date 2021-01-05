@@ -24,9 +24,9 @@
                 <tbody>
                     <router-link :to="{ name: 'recipe', params: { id: recipe.id } }" tag="tr" v-for="recipe in item.data" :key="recipe.id">
                         <td>{{ recipe.id }}</td>
-                        <td>{{ recipe.name }}</th>
-                        <td>{{ recipe.number_people }}</th>
-                        <td>{{ recipe.preparation_time }}</th>
+                        <td>{{ recipe.name }}</td>
+                        <td>{{ recipe.number_people }}</td>
+                        <td>{{ recipe.preparation_time }}</td>
                         <td>
                             <router-link :to="{ name: 'show-recipe', params: { id: recipe.id } }" tag="a" class="btn btn-primary pull-right" title="Voir la recette">
                                 <span class="fa fa-eye"></span>
@@ -41,7 +41,8 @@
         <html-pagination v-if="item.current_page"
             :current.sync="item.current_page"
             :last="item.last_page"
-            :total="item.total"></html-pagination>
+            :total="item.total"
+            @changePage="pagination" />
 
     </div>
 
@@ -50,13 +51,17 @@
 
 <script>
 
-    export default RestList.extend({
+    import RestList from '../../../../mixins/restlist'
+
+    export default {
+
+        mixins: [RestList],
 
         data() {
             return {};
         },
 
-    })
+    }
 
 </script>
 

@@ -1,5 +1,6 @@
+import axios from 'axios';
 
-module.exports = Vue.extend({
+export default Vue.extend({
 
     abstract: true,
 
@@ -48,7 +49,7 @@ module.exports = Vue.extend({
                 555: 'Ressource non supprimable',
             },
             restState: null,
-            events: {},
+            errors: {}
         }
     },
 

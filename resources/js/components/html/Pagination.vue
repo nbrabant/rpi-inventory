@@ -3,7 +3,7 @@
 
     <div class="footer clearfix">
 
-        <hr>
+        <hr />
 
         <div class="row">
             <div class="col-sm-4">
@@ -34,7 +34,11 @@
 
 <script>
 
+    import RestCore from './../../mixins/restshow'
+
     export default {
+
+        mixins: [RestCore],
 
         props: {
             current: {
@@ -94,16 +98,13 @@
             goTo: function (page) {
                 if (page != this.selected) {
                     this.selected = page
-console.log(this, 'go to page!!');                
-                    this.$emit('pagination-changed', { page : page } )
+                    this.$emit('changePage', page )
                 }
             },
         },
     }
 
 </script>
-
-
 
 <style scoped>
 
