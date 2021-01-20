@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         \App\Domain\Stock\Entities\Operation::created(function($operation) {
-            $service = new ProductCommandService(new ProductAbstractRepository(app()), new OperationAbstractRepository(app()));
+            $service = new ProductCommandService(new ProductRepository(app()), new OperationRepository(app()));
             $service->updateProductStockQuantity($operation->product_id);
         });
 
@@ -44,7 +44,7 @@ class EventServiceProvider extends ServiceProvider
                 return true;
             }
 
-            $service = new ProductCommandService(new ProductAbstractRepository(app()), new OperationAbstractRepository(app()));
+            $service = new ProductCommandService(new ProductRepository(app()), new OperationRepository(app()));
             $cart->productLines->each(function($product) use($service) {
                 $service->createOperation([
                     'product_id'    => $product->product_id,

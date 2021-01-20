@@ -2,25 +2,41 @@
 
 namespace App\Domain\Stock\Services\Category;
 
+use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Stock\Repositories\CategoryRepository as Category;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CategoryQueryService
 {
-    private $category;
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private CategoryRepositoryInterface $categoryRepository;
 
-    public function __construct(Category $category)
-    {
-        $this->category = $category;
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepository
+    ) {
+        $this->categoryRepository = $categoryRepository;
     }
 
-    public function getCategories(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getCategories(Request $request): LengthAwarePaginator
     {
-        return $this->category->getAll($request);
+        return $this->categoryRepository->getAll($request);
     }
 
-    public function getCategory($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function getCategory($id, Request $request): Model
     {
-        return $this->category->find($id, $request);
+        return $this->categoryRepository->find($id, $request);
     }
+
 }

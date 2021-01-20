@@ -3,6 +3,7 @@
 namespace App\Domain\Stock\Entities;
 
 use App\Domain\Recipe\Entities\RecipeProduct;
+use App\Domain\Cart\Entities\ProductLine;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Product extends Eloquent

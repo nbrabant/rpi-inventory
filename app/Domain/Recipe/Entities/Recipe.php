@@ -5,10 +5,11 @@ namespace App\Domain\Recipe\Entities;
 use App\Domain\Schedule\Entities\Schedule;
 use Image;
 use Illuminate\Database\Eloquent\Model;
+use App\Domain\Recipe\Contracts\RecipeInterface;
 
 // use App\Helpers\CrawlerTraitHelper;
 
-class Recipe extends Model
+class Recipe extends Model implements RecipeInterface
 {
     // use CrawlerTraitHelper;
 

@@ -2,20 +2,31 @@
 
 namespace App\Repositories\Recipe;
 
-use App\Interfaces\Repositories\AbstractRepository;
+use App\Infrastructure\Contracts\BaseRepository;
 use App\Domain\Recipe\Entities\Recipe as Recipe;
 use \App\Helpers\ParseHelper;
+use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 
-class RecipeRepository extends AbstractRepository
+class RecipeRepository extends BaseRepository implements RecipeRepositoryInterface
 {
     protected $with = ['products', 'steps'];
 
-    public function model()
+    /**
+	 * Return repository entity model used
+	 *
+	 * @return string
+	 */
+	public function model(): string
     {
         return Recipe::class;
     }
 
-    public function initialize()
+    /**
+	 * Initialize new Eloquent model
+	 *
+	 * @return Recipe
+	 */
+    public function initialize(): Recipe
     {
         return new $this->model();
     }

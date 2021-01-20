@@ -2,25 +2,42 @@
 
 namespace App\Domain\Recipe\Services;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Repositories\Recipe\RecipeRepository as Recipe;
+use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class RecipeQueryService
 {
-    private $recipe;
+    /** @var RecipeRepositoryInterface $recipeRepository */
+    private RecipeRepositoryInterface $recipeRepository;
 
-    public function __construct(Recipe $recipe)
+    /**
+     * Create Cart Recipe Service instance.
+     *
+     * @param RecipeRepositoryInterface $recipeRepository
+     */
+    public function __construct(RecipeRepositoryInterface $recipeRepository)
     {
-        $this->recipe = $recipe;
+        $this->recipeRepository = $recipeRepository;
     }
 
-    public function getRecipes(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getRecipes(Request $request): LengthAwarePaginator
     {
-        return $this->recipe->getAll($request);
+        return $this->recipeRepository->getAll($request);
     }
 
-    public function getRecipe($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function getRecipe($id, Request $request): Model
     {
-        return $this->recipe->find($id, $request);
+        return $this->recipeRepository->find($id, $request);
     }
 }

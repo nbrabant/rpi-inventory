@@ -3,23 +3,41 @@
 namespace App\Domain\Stock\Repositories;
 
 use App\Domain\Stock\Entities\Operation;
-use App\Interfaces\Repositories\AbstractRepository;
+use App\Infrastructure\Contracts\BaseRepository;
+use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 
-class OperationRepository extends AbstractRepository
+class OperationRepository extends BaseRepository implements OperationRepositoryInterface
 {
-    public function model()
+    /**
+	 * Return repository entity model used
+	 *
+	 * @return string
+	 */
+	public function model(): string
     {
         return Operation::class;
     }
 
-    public function initialize()
+    /**
+	 * Initialize new Eloquent model
+	 *
+	 * @return Operation
+	 */
+    public function initialize(): Operation
     {
         return new $this->model([
             'detail' => ''
         ]);
     }
 
-    public function countQuantityByProduct($productId, $count = 0)
+    /**
+	 * Count quantity for a product
+	 *
+	 * @param string $productId
+	 * @param integer $count
+	 * @return int
+	 */
+	public function countQuantityByProduct(string $productId, int $count = 0): int
     {
         $this->model
             ->where('product_id', $productId)

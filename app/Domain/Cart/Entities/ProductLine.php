@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Domain\Stock\Entities;
+namespace App\Domain\Cart\Entities;
 
-use App\Domain\Cart\Entities\Cart;
+use App\Domain\Cart\Contracts\CartInterface;
+use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ProductLine extends Eloquent
 {
-    public function __toString()
+    public function __toString(): string
     {
         return $this->quantity . ' ' . $this->unity . ' ' . $this->product;
     }
@@ -18,7 +19,7 @@ class ProductLine extends Eloquent
         'quantity'
     ];
 
-    public function cart()
+    public function cart(): CartInterface
     {
         return $this->belongsTo(Cart::class);
     }

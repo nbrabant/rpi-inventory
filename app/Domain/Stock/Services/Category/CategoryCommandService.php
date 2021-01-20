@@ -2,39 +2,57 @@
 
 namespace App\Domain\Stock\Services\Category;
 
+use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Stock\Repositories\CategoryRepository as Category;
 use Validator;
 
 class CategoryCommandService
 {
-    private $category;
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private CategoryRepositoryInterface $categoryRepository;
 
     protected $validation = [
         'name' 		=> 'required|string|unique:categories,name',
         'position' 	=> 'required|integer',
     ];
 
-    public function __construct(Category $category)
-    {
-        $this->category = $category;
+    public function __construct(
+        CategoryRepositoryInterface $categoryRepository
+    ) {
+        $this->categoryRepository = $categoryRepository;
     }
 
-    public function initializeCategory(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function initializeCategory(Request $request): Model
     {
-        return $this->category->initialize();
+        return $this->categoryRepository->initialize();
     }
 
-    public function createCategory(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function createCategory(Request $request): Model
     {
         $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->category->create($attributes);
+        return $this->categoryRepository->create($attributes);
     }
 
-    public function updateCategory($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function updateCategory($id, Request $request): Model
     {
         $this->validation['name'] .= ',' . $id;
 
@@ -42,11 +60,16 @@ class CategoryCommandService
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->category->update($attributes, $id);
+        return $this->categoryRepository->update($attributes, $id);
     }
 
-    public function destroyCategory($id)
+    /**
+     * @param $id
+     * @return int
+     */
+    public function destroyCategory($id): int
     {
-        return $this->category->destroy($id);
+        return $this->categoryRepository->destroy($id);
     }
+
 }

@@ -3,26 +3,43 @@
 namespace App\Domain\Cart\Repositories;
 
 use App\Domain\Cart\Entities\Cart;
-use App\Domain\Stock\Entities\ProductLine;
+use App\Domain\Cart\Entities\ProductLine;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Interfaces\Repositories\AbstractRepository;
+use App\Infrastructure\Contracts\BaseRepository;
+use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
-class CartRepository extends AbstractRepository
+class CartRepository extends BaseRepository implements CartRepositoryInterface
 {
-    public function model()
+    /**
+	 * Return repository entity model used
+	 *
+	 * @return string
+	 */
+	public function model(): string
     {
         return Cart::class;
     }
     
-    public function initialize()
+    /**
+	 * Initialize new Eloquent model
+	 *
+	 * @return Cart
+	 */
+    public function initialize(): Cart
     {
         return new $this->model([
             'date_creation' => Carbon::now(),
         ]);
     }
 
-    public function getCurrentOrCreate(Request $request)
+    /**
+	 * Create if it need and return current active cart
+	 * 
+	 * @param Request $request
+	 * @return Cart
+	 */
+	public function getCurrentOrCreate(Request $request): Cart
     {
         return $this->model
                     ->with('productLines')
@@ -30,14 +47,26 @@ class CartRepository extends AbstractRepository
                     ->firstOrCreate(['finished' => 0]);
     }
 
-    public function getCurrent()
+    /**
+	 * Retrieve current active cart
+	 * 
+	 * @return Cart
+	 */
+	public function getCurrent(): Cart
     {
         return $this->model
                     ->with('productLines')
                     ->first();
     }
 
-    public function updateCurrent(Request $request, $attributes)
+    /**
+	 * Fill current active cart with attributes and return it
+	 *
+	 * @param Request $request
+	 * @param array $attributes
+	 * @return Cart
+	 */
+	public function updateCurrent(Request $request, $attributes): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
 
@@ -48,7 +77,13 @@ class CartRepository extends AbstractRepository
         return $this->getCurrentOrCreate($request);
     }
 
-    public function cartHasProduct($product_id)
+    /**
+	 * Determine if current active cart has the specified product
+	 * 
+	 * @param int $product_id
+	 * @return bool
+	 */
+	public function cartHasProduct($product_id): bool
     {
         $product = ProductLine::join('carts', 'carts.id', '=', 'product_lines.cart_id')
             ->where('product_id', $product_id)
@@ -58,7 +93,14 @@ class CartRepository extends AbstractRepository
         return (bool)($product && $product instanceof ProductLine);
     }
 
-    public function associateProduct(Request $request, $attributes)
+    /**
+	 * Associate product to current active cart
+	 *
+	 * @param Request $request
+	 * @param [type] $attributes
+	 * @return Cart
+	 */
+	public function associateProduct(Request $request, $attributes): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
         $cart->productLines()->create($attributes);
@@ -68,7 +110,15 @@ class CartRepository extends AbstractRepository
         return $cart;
     }
 
-    public function updateProduct(Request $request, $attributes, $product_id)
+    /**
+	 * Update cart's product information
+	 *
+	 * @param Request $request
+	 * @param [type] $attributes
+	 * @param int $product_id
+	 * @return Cart
+	 */
+	public function updateProduct(Request $request, $attributes, $product_id): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
 
@@ -81,7 +131,14 @@ class CartRepository extends AbstractRepository
         return $cart;
     }
 
-    public function dissociateProduct(Request $request, $product_id)
+    /**
+	 * Dissociate product to current cart
+	 *
+	 * @param Request $request
+	 * @param int $product_id
+	 * @return Cart
+	 */
+	public function dissociateProduct(Request $request, $product_id): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
 
@@ -92,7 +149,12 @@ class CartRepository extends AbstractRepository
         return $cart;
     }
 
-    public function purgeCart(Request $request)
+    /**
+	 * Remove all the products of current cart
+	 * 
+	 * @return Cart
+	 */
+	public function purgeCart(Request $request): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
 
@@ -103,7 +165,14 @@ class CartRepository extends AbstractRepository
         return $cart;
     }
 
-    public function addOrUpdateProducts(Request $request, $recipeProducts)
+    /**
+	 * Synchronize product added to cart
+	 *
+	 * @param Request $request
+	 * @param [type] $recipeProducts
+	 * @return Cart
+	 */
+	public function addOrUpdateProducts(Request $request, $recipeProducts): Cart
     {
         $cart = $this->getCurrentOrCreate($request);
 

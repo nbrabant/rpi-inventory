@@ -2,11 +2,12 @@
 
 namespace App\Domain\Cart\Entities;
 
-use App\Domain\Stock\Entities\ProductLine;
+use App\Domain\Cart\Entities\ProductLine;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Domain\Cart\Helpers\TrelloTraitHelper;
+use App\Domain\Cart\Contracts\CartInterface;
 
-class Cart extends Eloquent
+class Cart extends Eloquent implements CartInterface
 {
     use TrelloTraitHelper;
 

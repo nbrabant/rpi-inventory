@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Repositories;
+namespace App\Infrastructure\Contracts;
 
 use Illuminate\Http\Request;
 use App\Application\Exceptions\RepositoryException;
@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Container\Container as App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
 
-abstract class AbstractRepository
+abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $perPage = 10;
 
@@ -34,11 +35,12 @@ abstract class AbstractRepository
         $this->makeModel();
     }
 
-    abstract public function model();
-
-    abstract public function initialize();
-
-    public function getAll(Request $request)
+    /**
+	 * Build and return builded query from request context
+	 * 
+	 * @return \Illuminate\\Pagination\\LengthAwarePaginator
+	 */
+    public function getAll(Request $request): LengthAwarePaginator
     {
         $query = $this->model->query();
 
@@ -54,14 +56,26 @@ abstract class AbstractRepository
         return $query;
     }
 
-    public function create(array $attributes)
+    /**
+	 * Create, persist and return new Eloquent Model
+	 * 
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
+    public function create(array $attributes): Model
     {
         $object = $this->model->create($attributes);
 
         return $object->load($this->with);
     }
 
-    public function update(array $attributes, $id)
+    /**
+	 * Update Eloquent model from his identifier
+	 *
+	 * @param array $attributes
+	 * @param int $id
+	 * @return \Illuminate\Database\Eloquent\Model
+	 */
+    public function update(array $attributes, int $id): Model
     {
         if (array_key_exists('id', $attributes)) {
             unset($attributes['id']);
@@ -75,17 +89,41 @@ abstract class AbstractRepository
         return $object;
     }
 
-    public function destroy($id)
+    /**
+	 * Destroy the models for the given IDs.
+	 *
+	 * @param int $id
+	 * @return int
+	 */
+	public function destroy(int $id): int
     {
         return $this->model->destroy($id);
     }
 
-    public function find($id, $columns = array('*'))
+    /**
+	 * Find Eloquent Model from his identifier based on field list
+	 *
+	 * @param string $id
+	 * @param array|object $columns
+	 * @return Model
+	 */
+	public function find(string $id, $columns = array('*')): Model
     {
         return $this->model->with($this->with)->findOrFail($id);
     }
 
-    public function makeModel()
+    /**
+	 * Add relationnal to request
+	 *
+	 * @param array $withRelation
+	 * @return void
+	 */
+	public function setWithRelation($withRelation = []): void
+    {
+        $this->with = $withRelation;
+    }
+    
+    private function makeModel()
     {
         $model = $this->app->make($this->model());
 
@@ -94,11 +132,6 @@ abstract class AbstractRepository
         }
 
         return $this->model = $model;
-    }
-
-    public function setWithRelation($withRelation = [])
-    {
-        $this->with = $withRelation;
     }
 
     // CRITERIA

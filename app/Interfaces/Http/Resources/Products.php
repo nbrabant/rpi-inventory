@@ -39,7 +39,7 @@ class Products extends Controller
 
     public function show(Request $request, $id)
     {
-        return $this->product_query_service->getProduct($id, $request);
+        return $this->product_query_service->getProductRepository($id, $request);
     }
 
     public function update(Request $request, $id)

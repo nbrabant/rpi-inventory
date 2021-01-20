@@ -2,20 +2,33 @@
 
 namespace App\Domain\Cart\Services;
 
+use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Http\Request;
-use App\Domain\Cart\Repositories\CartRepository as Cart;
+use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
 class CartQueryService
 {
-    private $cart;
+    /** @var CartRepositoryInterface $cartRepository */
+    private CartRepositoryInterface $cartRepository;
 
-    public function __construct(Cart $cart)
-    {
-        $this->cart = $cart;
+    /**
+     * Create CartQuery Service instance.
+     *
+     * @param CartRepositoryInterface $cartRepository
+     */
+    public function __construct(
+        CartRepositoryInterface $cartRepository
+    ) {
+        $this->cartRepository = $cartRepository;
     }
 
-    public function getCurrent(Request $request)
+    /**
+     * @param Request $request
+     * @return CartInterface
+     */
+    public function getCurrent(Request $request): CartInterface
     {
-        return $this->cart->getCurrentOrCreate($request);
+        return $this->cartRepository->getCurrentOrCreate($request);
     }
+
 }

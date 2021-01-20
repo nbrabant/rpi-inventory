@@ -2,32 +2,53 @@
 
 namespace App\Domain\Stock\Services\Product;
 
+use App\Domain\Stock\Contracts\ProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Stock\Repositories\ProductRepository as Product;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductQueryService
 {
-    private $product;
+    /**
+     * @var ProductRepositoryInterface $productRepository
+     */
+    private ProductRepositoryInterface $productRepository;
 
-    public function __construct(Product $product)
-    {
-        $this->product = $product;
+    public function __construct(
+        ProductRepositoryInterface $productRepository
+    ) {
+        $this->productRepository = $productRepository;
     }
 
-    public function getProducts(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getProducts(Request $request): LengthAwarePaginator
     {
-        return $this->product->getAll($request);
+        return $this->productRepository->getAll($request);
     }
 
-    public function getProduct($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function getProductRepository($id, Request $request): Model
     {
-        return $this->product->find($id, $request);
+        return $this->productRepository->find($id, $request);
     }
 
-    public function getProductWithConsumptions($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function getProductWithConsumptions($id, Request $request): Model
     {
-        $this->product->setWithRelation('operations');
+        $this->productRepository->setWithRelation('operations');
 
-        return $this->product->find($id, $request);
+        return $this->productRepository->find($id, $request);
     }
+
 }

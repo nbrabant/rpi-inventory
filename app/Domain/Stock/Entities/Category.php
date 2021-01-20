@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Category extends Eloquent
 {
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }

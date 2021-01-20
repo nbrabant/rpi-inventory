@@ -3,32 +3,34 @@
 namespace App\Domain\Cart\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Domain\Cart\Repositories\CartRepository as Cart;
+use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
 class IsInCart implements Rule
 {
-    private $_repository;
+    /** @var CartRepositoryInterface $cartRepository */
+    private CartRepositoryInterface $cartRepository;
     
     /**
      * Create a new rule instance.
      *
-     * @return void
+     * @param CartRepositoryInterface $cartRepository
      */
-    public function __construct()
-    {
-        $this->_repository = new Cart(app());
+    public function __construct(
+        CartRepositoryInterface $cartRepository
+    ) {
+        $this->cartRepository = $cartRepository;
     }
 
     /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
-     * @param  mixed  $value
+     * @param  mixed  $productId
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $productId): bool
     {
-        return $this->_repository->cartHasProduct($value);
+        return $this->cartRepository->cartHasProduct($productId);
     }
 
     /**
@@ -36,8 +38,9 @@ class IsInCart implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'Ce produit n\'est pas dans la liste de courses.';
     }
+
 }

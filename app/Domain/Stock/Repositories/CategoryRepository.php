@@ -3,18 +3,29 @@
 namespace App\Domain\Stock\Repositories;
 
 use App\Domain\Stock\Entities\Category;
-use App\Interfaces\Repositories\AbstractRepository;
+use App\Infrastructure\Contracts\BaseRepository;
+use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 
-class CategoryRepository extends AbstractRepository
+class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
     protected $perPage = false;
 
-    public function model()
+    /**
+	 * Return repository entity model used
+	 *
+	 * @return string
+	 */
+	public function model(): string
     {
         return Category::class;
     }
 
-    public function initialize()
+    /**
+	 * Initialize new Eloquent model
+	 *
+	 * @return Category
+	 */
+    public function initialize(): Category
     {
         return new $this->model([
             'position' => 255,

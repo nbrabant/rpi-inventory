@@ -2,16 +2,23 @@
 
 namespace App\Domain\Stock\Services\Product;
 
+use App\Domain\Stock\Contracts\OperationRepositoryInterface;
+use App\Domain\Stock\Contracts\ProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Stock\Repositories\ProductRepository as Product;
-use App\Domain\Stock\Repositories\OperationRepository as Operation;
 use Validator;
 
 class ProductCommandService
 {
-    private $product;
+    /**
+     * @var ProductRepositoryInterface $productRepository
+     */
+    private ProductRepositoryInterface $productRepository;
 
-    private $operation;
+    /**
+     * @var OperationRepositoryInterface $operationRepository
+     */
+    private OperationRepositoryInterface $operationRepository;
 
     protected $validation = [
         'category_id'	=> 'required|integer',
@@ -21,27 +28,42 @@ class ProductCommandService
         'unit'			=> 'string|in:piece,grammes,litre,sachet',
     ];
 
-    public function __construct(Product $product, Operation $operation)
-    {
-        $this->product = $product;
-        $this->operation = $operation;
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        OperationRepositoryInterface $operationRepository
+    ) {
+        $this->productRepository = $productRepository;
+        $this->operationRepository = $operationRepository;
     }
 
-    public function initializeProduct(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function initializeProduct(Request $request): Model
     {
-        return $this->product->initialize();
+        return $this->productRepository->initialize();
     }
 
-    public function createProduct(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function createProduct(Request $request): Model
     {
         $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->product->create($attributes);
+        return $this->productRepository->create($attributes);
     }
 
-    public function updateProduct($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function updateProduct($id, Request $request): Model
     {
         $this->validation['name'] .= ',' . $id;
 
@@ -49,26 +71,34 @@ class ProductCommandService
 
         $attributes = $request->only(array_keys($this->validation));
 
-        return $this->product->update($attributes, $id);
+        return $this->productRepository->update($attributes, $id);
     }
 
     public function destroyProduct($id)
     {
-        return $this->product->destroy($id);
+        return $this->productRepository->destroy($id);
     }
 
-    public function initializeOperation(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function initializeOperation(Request $request): Model
     {
         $request->validate(['product_id' => 'required|integer']);
 
-        $operation = $this->operation->initialize();
+        $operation = $this->operationRepository->initialize();
 
         $operation->fill($request->only('product_id'));
 
         return $operation;
     }
 
-    public function saveOperation(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function saveOperation(Request $request): Model
     {
         $request->validate([
             'product_id' => 'required|integer',
@@ -84,18 +114,26 @@ class ProductCommandService
             'detail',
         ]);
 
-        return $this->operation->create($attributes);
+        return $this->operationRepository->create($attributes);
     }
 
-    public function createOperation($attributes)
+    /**
+     * @param $attributes
+     * @return Model
+     */
+    public function createOperation($attributes): Model
     {
-        return $this->operation->create($attributes);
+        return $this->operationRepository->create($attributes);
     }
 
-    public function updateProductStockQuantity($id)
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function updateProductStockQuantity($id): bool
     {
-        $product = $this->product->find($id);
-        $product->quantity = $this->operation->countQuantityByProduct($id);
+        $product = $this->productRepository->find($id);
+        $product->quantity = $this->operationRepository->countQuantityByProduct($id);
 
         return $product->save();
     }

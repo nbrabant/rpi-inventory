@@ -2,13 +2,16 @@
 
 namespace App\Domain\Recipe\Services;
 
+use App\Domain\Recipe\Entities\Recipe;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Repositories\Recipe\RecipeRepository as Recipe;
 use Validator;
+use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 
 class RecipeCommandService
 {
-    private $_recipe;
+    /** @var RecipeRepositoryInterface $recipeRepository */
+    private RecipeRepositoryInterface $recipeRepository;
 
     protected $validation = [
         'name'                  => 'required|string',
@@ -27,38 +30,56 @@ class RecipeCommandService
         'steps.*.position'      => 'integer|max:255',
     ];
 
-    public function __construct(Recipe $recipe)
+    /**
+     * Create Cart Recipe Service instance.
+     *
+     * @param RecipeRepositoryInterface $recipeRepository
+     */
+    public function __construct(RecipeRepositoryInterface $recipeRepository)
     {
-        $this->_recipe = $recipe;
+        $this->recipeRepository = $recipeRepository;
     }
 
-    public function initializeRecipe(Request $request)
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function initializeRecipe(Request $request): Model
     {
-        return $this->_recipe->initialize();
+        return $this->recipeRepository->initialize();
     }
 
-    public function createRecipe(Request $request)
+    /**
+     * @param Request $request
+     * @return Recipe
+     */
+    public function createRecipe(Request $request): Recipe
     {
         $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
-        $recipe = $this->_recipe->create($attributes);
-        $recipe = $this->_recipe->syncProducts($recipe, reset($attributes['products']));
-        $recipe = $this->_recipe->syncSteps($recipe, reset($attributes['steps']));
+        $recipe = $this->recipeRepository->create($attributes);
+        $recipe = $this->recipeRepository->syncProducts($recipe, reset($attributes['products']));
+        $recipe = $this->recipeRepository->syncSteps($recipe, reset($attributes['steps']));
 
         return $recipe;
     }
 
-    public function updateRecipe($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Recipe
+     */
+    public function updateRecipe($id, Request $request): Recipe
     {
         $request->validate($this->validation);
 
         $attributes = $request->only(array_keys($this->validation));
 
-        $recipe = $this->_recipe->update($attributes, $id);
-        $recipe = $this->_recipe->syncProducts($recipe, reset($attributes['products']));
-        $recipe = $this->_recipe->syncSteps($recipe, reset($attributes['steps']));
+        $recipe = $this->recipeRepository->update($attributes, $id);
+        $recipe = $this->recipeRepository->syncProducts($recipe, reset($attributes['products']));
+        $recipe = $this->recipeRepository->syncSteps($recipe, reset($attributes['steps']));
 
         // if ($request->file('image') && $request->file('image')->isValid()) {
         //     $imageName = str_slug_fr($recipe->name).'-'.$recipe->id.'.'.$request->file('image')->getClientOriginalExtension();
@@ -74,8 +95,13 @@ class RecipeCommandService
         return $recipe;
     }
 
-    public function destroyRecipe($id)
+    /**
+     * @param $id
+     * @return int
+     */
+    public function destroyRecipe($id): int
     {
-        return $this->_recipe->destroy($id);
+        return $this->recipeRepository->destroy($id);
     }
+
 }

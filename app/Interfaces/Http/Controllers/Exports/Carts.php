@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Interfaces\Http\Controllers\Controller;
 use Carbon\Carbon;
 
-use App\Interfaces\Mail\CartList;
+use App\Domain\Cart\Mail\CartList;
 use App\Domain\Cart\Services\CartQueryService;
 use App\Domain\Cart\Services\CartCommandService;
 

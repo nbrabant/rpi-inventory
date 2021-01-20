@@ -2,31 +2,52 @@
 
 namespace App\Domain\Schedule\Services;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Schedule\Repositories\ScheduleRepository as Schedule;
+use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ScheduleQueryService
 {
-    private $schedule;
+    /** @var ScheduleRepositoryInterface $scheduleRepository */
+    private ScheduleRepositoryInterface $scheduleRepository;
 
-    public function __construct(Schedule $schedule)
+    /**
+     * Create Schedule Query Service instance.
+     *
+     * @param ScheduleRepositoryInterface $scheduleRepository
+     */
+    public function __construct(ScheduleRepositoryInterface $scheduleRepository)
     {
-        $this->schedule = $schedule;
+        $this->scheduleRepository = $scheduleRepository;
     }
 
-    public function getSchedules(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function getSchedules(Request $request): LengthAwarePaginator
     {
-        return $this->schedule->getAll($request);
+        return $this->scheduleRepository->getAll($request);
     }
 
-    public function getSchedule($id, Request $request)
+    /**
+     * @param $id
+     * @param Request $request
+     * @return Model
+     */
+    public function getSchedule($id, Request $request): Model
     {
-        return $this->schedule->find($id, $request);
+        return $this->scheduleRepository->find($id, $request);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function getAttachedRecipes(Request $request)
     {
-        return $this->schedule->getAllRecipes($request)->map(function ($schedule) {
+        return $this->scheduleRepository->getAllRecipes($request)->map(function ($schedule) {
             return $schedule->recipe;
         });
     }

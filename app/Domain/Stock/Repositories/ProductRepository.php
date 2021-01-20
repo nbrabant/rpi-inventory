@@ -3,16 +3,27 @@
 namespace App\Domain\Stock\Repositories;
 
 use App\Domain\Stock\Entities\Product;
-use App\Interfaces\Repositories\AbstractRepository;
+use App\Infrastructure\Contracts\BaseRepository;
+use App\Domain\Stock\Contracts\ProductRepositoryInterface;
 
-class ProductRepository extends AbstractRepository
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
-    public function model()
+    /**
+	 * Return repository entity model used
+	 *
+	 * @return string
+	 */
+	public function model(): string
     {
         return Product::class;
     }
 
-    public function initialize()
+    /**
+	 * Initialize new Eloquent model
+	 *
+	 * @return Product
+	 */
+    public function initialize(): Product
     {
         return new $this->model([
             'quantity' => 0

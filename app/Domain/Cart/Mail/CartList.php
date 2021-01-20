@@ -1,30 +1,31 @@
 <?php
 
-namespace App\Interfaces\Mail;
+namespace App\Domain\Cart\Mail;
 
+use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 use Carbon\Carbon;
-
-use App\Domain\Cart\Entities\Cart;
 
 class CartList extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $title;
+    /**
+     * @var string $title
+     */
+    public string $title;
 
     public $productLines;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param CartInterface $cart
      */
-    public function __construct(Cart $cart)
+    public function __construct(CartInterface $cart)
     {
         $this->title = 'Liste de courses du ' . Carbon::now()->format('d/m/Y à H:i');
         $this->productLines = $cart->productLines;
@@ -35,7 +36,7 @@ class CartList extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build(): CartList
     {
         return $this->from( config('mail.username') )
                     ->view('pdf.exportliste');
