@@ -33,6 +33,7 @@ var webpack = require('webpack')
             './resources/js/init/vue-router.js',
             './resources/sass/app.scss',
             'font-awesome/scss/font-awesome.scss',
+            './resources/js/event-bus.js',
         ],
 
         module: {

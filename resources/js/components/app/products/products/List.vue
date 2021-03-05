@@ -44,8 +44,7 @@
         <html-pagination v-if="item.current_page"
             :current.sync="item.current_page"
             :last="item.last_page"
-            :total="item.total"
-            @changePage="pagination" />
+            :total="item.total" />
 
     </div>
 

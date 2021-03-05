@@ -1,6 +1,8 @@
 import RestCore from './restcore';
+import { EventBus } from "../event-bus";
 
 export default RestCore.extend({
+
 	data: function() {
         return {
             item: {},
@@ -12,7 +14,11 @@ export default RestCore.extend({
     },
 
     mounted: function() {
-        if (this.endpoint == undefined) return
+        EventBus.$on('changePage', page => {
+            this.pagination(page);
+        });
+
+        if (this.endpoint === undefined) return;
 
         this.triggerRestGet(this.endpoint)
     },

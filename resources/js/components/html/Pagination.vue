@@ -34,11 +34,9 @@
 
 <script>
 
-    import RestCore from './../../mixins/restshow'
+    import { EventBus } from "../../event-bus";
 
     export default {
-
-        mixins: [RestCore],
 
         props: {
             current: {
@@ -80,11 +78,11 @@
                 return this.selected < this.max ? this.selected + 1 : this.max
             },
             pagination: function () {
-                var links = new Array()
-                for (var i = this.min; i <= this.max; ++i) {
-                    if (i == this.min && i != this.first) {
+                let links = [];
+                for (let i = this.min; i <= this.max; ++i) {
+                    if (i === this.min && i !== this.first) {
                         links.push(this.first)
-                    } else if (i == this.max && i != this.last) {
+                    } else if (i === this.max && i !== this.last) {
                         links.push(this.last)
                     } else {
                         links.push(i)
@@ -96,9 +94,9 @@
 
         methods: {
             goTo: function (page) {
-                if (page != this.selected) {
+                if (page !== this.selected) {
                     this.selected = page
-                    this.$emit('changePage', page )
+                    EventBus.$emit('changePage', page )
                 }
             },
         },

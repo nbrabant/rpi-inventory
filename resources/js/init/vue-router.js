@@ -216,4 +216,4 @@ var router = new VueRouter({
 const app = new Vue({
     router,
     render: h => h('router-view')
-}).$mount('#app')
+}).$mount('#app');
