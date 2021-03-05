@@ -13,8 +13,19 @@ use App\Domain\Cart\Services\CartCommandService;
 
 class Carts extends Controller
 {
-    public function __construct(CartQueryService $cart_query_service, CartCommandService $cart_command_service)
-    {
+    /**
+     * @var CartQueryService
+     */
+    private $cart_query_service;
+    /**
+     * @var CartCommandService
+     */
+    private $cart_command_service;
+
+    public function __construct(
+        CartQueryService $cart_query_service,
+        CartCommandService $cart_command_service
+    ) {
         $this->cart_query_service = $cart_query_service;
         $this->cart_command_service = $cart_command_service;
     }

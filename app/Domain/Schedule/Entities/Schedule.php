@@ -46,9 +46,10 @@ class Schedule extends Model
             $startDate = $dates->startAt;
         } elseif (is_string($dates->startAt)) {
             $startDate = new Carbon($dates->startAt);
-            if (!$startDate) {
-                $startDate = Carbon::now()->startOfWeek();
-            }
+        }
+
+        if (!isset($startDate)) {
+            $startDate = Carbon::now()->startOfWeek();
         }
 
         if (!isset($dates->endAt)) {
@@ -57,9 +58,10 @@ class Schedule extends Model
             $endDate = $dates->endAt;
         } elseif (is_string($dates->endAt)) {
             $endDate = new Carbon($dates->endAt);
-            if (!$endDate) {
-                $endDate = Carbon::now()->endOfWeek();
-            }
+        }
+
+        if (!isset($endDate)) {
+            $endDate = Carbon::now()->endOfWeek();
         }
 
         $query->whereBetween('start_at', [$startDate, $endDate]);
@@ -73,7 +75,7 @@ class Schedule extends Model
         $array = parent::toArray();
 
         $array['start'] = $this->start_at->format('Y-m-d\TH:i:s');
-        $array['end']   = $this->start_at->format('Y-m-d\TH:i:s');
+        $array['end']   = $this->end_at->format('Y-m-d\TH:i:s');
         $array['color'] = $this->color;
 
         return $array;

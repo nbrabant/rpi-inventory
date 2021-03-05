@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Schedule\Entities\Schedule;
 use Illuminate\Database\Seeder;
 
 class SchedulesSeeder extends Seeder
@@ -11,6 +12,6 @@ class SchedulesSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Schedule::class, 200)->create();
+        factory(Schedule::class, 200)->create();
     }
 }

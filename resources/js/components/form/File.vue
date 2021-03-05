@@ -81,7 +81,10 @@
                     }
                     else
                     {
-                        swal("Mauvais format", null, 'error')
+                        swal.fire({
+                            title: "Mauvais format",
+                            icon: 'error'
+                        });
                         input[0].value = "";
                     }
                 }

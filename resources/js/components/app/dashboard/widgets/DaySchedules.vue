@@ -56,20 +56,23 @@
 
         methods: {
             showDetails: (schedule) => {
-                let buttons = {};
+                let showDenyButton = (schedule.type_schedule == 'recette');
 
-                if (schedule.type_schedule == 'recette') {
-                    buttons.view = {
-                        text: 'Voir',
-                        value: 'view',
-                        closeModal: true
-                    }
-                }
-
-                swal(schedule.title, {
+                swal.fire({
                     title: schedule.title,
                     icon: "info",
-                    buttons: buttons
+                    showDenyButton: showDenyButton,
+                    denyButtonText: 'Voir',
+                    customClass: {
+                        denyButton: 'btn-warning'
+                    }
+                }).then((sweetAlertResult) => {
+                    if (!sweetAlertResult) return;
+
+                    if (sweetAlertResult.isDenied) {
+                        // @TODO : Sanity check
+                        // this.$router.push({name: 'schedule', params: { id: schedule.id }})
+                    }
                 })
             }
         }

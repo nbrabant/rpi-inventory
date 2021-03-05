@@ -22,7 +22,7 @@ var webpack = require('webpack')
             'vue-bootstrap-datetimepicker',
             'axios',
             'querystring',
-            'sweetalert',
+            'sweetalert2',
             'select2',
             // './resources/js/plugins/light-bootstrap-dashboard.js',
             './resources/js/plugins/moment.js',
@@ -58,7 +58,7 @@ var webpack = require('webpack')
                 Vue: 'vue',
                 VueRouter: 'vue-router',
                 FullCalendar: 'vue-full-calendar',
-                swal: 'sweetalert',
+                swal: 'sweetalert2',
                 datePicker: 'vue-bootstrap-datetimepicker',
             }),
         ]

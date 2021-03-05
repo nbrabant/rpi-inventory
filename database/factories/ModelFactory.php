@@ -24,11 +24,15 @@
 // });
 
 
-$factory->define(App\Models\Schedule::class, function (Faker\Generator $faker) {
+use App\Domain\Recipe\Entities\Recipe;
+use App\Domain\Schedule\Entities\Schedule;
+use Carbon\Carbon;
+
+$factory->define(Schedule::class, function (Faker\Generator $faker) {
     $isRecipe = $faker->boolean;
-    $recipe = $isRecipe ? \App\Models\Recipe::inRandomOrder()->first() : null;
-    $start_at = \Carbon\Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
-    $end_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $start_at)->addHours($faker->randomDigit);
+    $recipe = $isRecipe ? Recipe::inRandomOrder()->first() : null;
+    $start_at = Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
+    $end_at = Carbon::createFromFormat('Y-m-d H:i:s', $start_at)->addHours($faker->randomDigit);
 
     return [
         'recipe_id' => $isRecipe ? $recipe->id : null,

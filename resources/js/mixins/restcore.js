@@ -167,7 +167,10 @@ export default Vue.extend({
             if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], null, 'error')
+                swal.fire({
+                    title: this.statusTexts[response.status],
+                    icon: 'error'
+                });
             }
         },
 
@@ -200,7 +203,11 @@ export default Vue.extend({
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], 'Erreur', 'error')
+                swal.fire({
+                    title: this.statusTexts[response.status],
+                    html: 'Erreur',
+                    icon: 'error'
+                });
             }
         },
 
@@ -241,26 +248,27 @@ export default Vue.extend({
             } else if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], 'Erreur', 'error')
+                swal.fire({
+                    title: this.statusTexts[response.status],
+                    html: 'Erreur',
+                    icon: 'error'
+                });
             }
         },
 
         confirmRestDelete: function (text, route, params) {
-            var component = this
-            swal("Êtes-vous sûr ?", {
+            var component = this;
+
+            swal.fire("Êtes-vous sûr ?", {
                 title: "Êtes-vous sûr ?",
-                text: this.$options.filters.truncate(text, 70),
+                html: this.$options.filters.truncate(text, 70),
                 icon: "warning",
-                buttons: {
-                    cancel: "Non",
-                    confirm: {
-                        text: "Oui, supprimer !",
-                        value: "confirm",
-                        closeModal: false,
-                    }
-                },
-            }).then((value) => {
-                if (!value) return;
+                showConfirmButton: true,
+                confirmButtonText: 'Oui, supprimer!',
+                showCancelButton: true,
+                confirmCancelText: 'Non'
+            }).then((sweetAlertResult) => {
+                if (!sweetAlertResult || !sweetAlertResult.isConfirmed) return;
 
                 component.triggerRestDelete(route, params)
             });
@@ -289,8 +297,11 @@ export default Vue.extend({
             this.cacheRestQuery('triggerRestDelete', route, params);
         },
         successRestDelete: function (response) {
-            swal("Supprimé !", "L'enregistrement a correctement été supprimé.", "success")
-            .then((value) => {
+            swal.fire({
+                title: "Supprimé !",
+                html: "L'enregistrement a correctement été supprimé.",
+                icon: "success"
+            }).then((value) => {
                 // this.$router.go(this.parentRoute)
                 location.reload()
             });
@@ -299,7 +310,10 @@ export default Vue.extend({
             if (response.status === 401) {
                 this.requestRestAuthentication()
             } else {
-                swal(this.statusTexts[response.status], null, 'error')
+                swal.fire({
+                    title: this.statusTexts[response.status],
+                    icon: 'error'
+                });
             }
         },
 

@@ -53,7 +53,7 @@ class UpdateSchedulesStructure extends Migration
         });
 
         Schema::table('schedules', function (Blueprint $table) {
-            $table->date('date_recipe');
+            $table->date('date_recipe')->default("1970-01-01");
             $table->text('moment');
             $table->boolean('finished');
         });

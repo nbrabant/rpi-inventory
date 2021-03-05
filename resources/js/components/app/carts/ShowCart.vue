@@ -100,20 +100,20 @@
                 }, product)
             },
             closeList() {
-                swal('Cloturer liste', {
+                swal.fire({
                     title: 'Cloture de la liste courante',
-                    text: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
+                    html: 'Cette action va cloturer la liste de courses courante et effectuer les opérations de stock, êtes-vous sûr?',
                     icon: "warning",
-                    buttons: {
-                        cancel: 'Fermer',
-                        closelist: {
-                            text: "Cloturer",
-                            value: "closelist",
-                            closeModal: true,
-                            className: "btn-danger",
-                        }
+                    showConfirmButton: true,
+                    confirmButtonText: 'Cloturer',
+                    showCancelButton: true,
+                    confirmCancelText: 'Annuler',
+                    customClass: {
+                        confirmButton: 'btn-danger'
                     }
-                }).then(value => {
+                }).then(sweetAlertResult => {
+                    if (!sweetAlertResult || !sweetAlertResult.isConfirmed) return;
+
                     this.HTTP.patch(this.endpoint + '/' + this.item.id, {
                         finished: true
                     }, this.item)
@@ -121,7 +121,7 @@
                         console.log(response);
                     }).catch(response => {
                         console.log(response);
-                    })
+                    });
 
                 }).catch(response => {
                     console.log(response);

@@ -2,16 +2,26 @@
 
 namespace App\Interfaces\Http\Controllers\Exports;
 
+use App\Domain\Schedule\Services\ScheduleQueryService;
 use Illuminate\Http\Request;
 use App\Interfaces\Http\Controllers\Controller;
-
-use App\Services\Schedule\Schedule\ScheduleQueryService;
 use App\Domain\Cart\Services\CartCommandService;
 
 class Schedules extends Controller
 {
-    public function __construct(CartCommandService $cart_command_service, ScheduleQueryService $schedule_query_service)
-    {
+    /**
+     * @var CartCommandService
+     */
+    private $cart_command_service;
+    /**
+     * @var ScheduleQueryService
+     */
+    private $schedule_query_service;
+
+    public function __construct(
+        CartCommandService $cart_command_service,
+        ScheduleQueryService $schedule_query_service
+    ) {
         $this->cart_command_service = $cart_command_service;
         $this->schedule_query_service = $schedule_query_service;
     }

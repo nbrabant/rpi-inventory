@@ -26,6 +26,7 @@
 
     // https://www.npmjs.com/package/vue-full-calendar
     import { FullCalendar } from 'vue-full-calendar'
+    // import Schedule from "./modal/Schedule";
     import RestList from '../../../../mixins/restlist'
 
     export default {
@@ -35,21 +36,26 @@
         data() {
             return {
                 eventSources: [{
-                    events: (start, end, timezone, callback) => {
-                        this.calendarDateRange = {start: start, end: end},
+                    events: (fetchInfo, successCallback, failureCallback) => {
+                        this.calendarDateRange = {
+                            start: fetchInfo.start.valueOf(),
+                            end: fetchInfo.end.valueOf()
+                        },
                         this.HTTP.get('schedules', {
                             params: {
                                 'search': {
                                     'scope.byDateInterval': {
                                         equal: {
-                                            startAt: start,
-                                            endAt: end,
+                                            startAt: fetchInfo.start.valueOf(),
+                                            endAt: fetchInfo.end.valueOf(),
                                         }
                                     }
                                 }
                             }
                         }).then(response => {
-                            callback(response.data.data)
+                            successCallback(response.data.data)
+                        }).catch(error => {
+                            failureCallback(error.message)
                         })
                     }
                 }],
@@ -92,97 +98,109 @@
                     contentHeight: 'auto',
                     themeSystem: 'bootstrap4',
                     refetchResourcesOnNavigate: true,
-                    eventDrop: (event, delta)  => {
-                        this.HTTP.patch('schedules/' + event.id, {
-                                type_schedule: event.type_schedule,
-                                title: event.title,
-                                start_at: moment(event.start_at).add(delta).format('YYYY-MM-DD HH:mm:ss'),
-                                end_at: moment(event.end_at).add(delta).format('YYYY-MM-DD HH:mm:ss'),
-                                all_day: event.all_day,
-                            }, null)
-                            .then(response => {
-                                console.log(event);
-                            }).catch(response => {
-                                console.log(response);
-                            });
+                    eventResize: (info) => {
+                        this.updateEvent(info);
                     },
-                    eventClick: (element, jsEvent, view) => {
-                        let buttons = {
-                            cancel: 'Fermer',
-                            modify: {
-                                text: "Modifier",
-                                value: "modify",
-                                closeModal: true,
-                                className: "btn-warning",
-                            }
-                        }
-
-                        if (element.type_schedule == 'recette') {
-                            buttons.view = {
-                                text: 'Voir',
-                                value: 'view',
-                                closeModal: true
-                            }
-                        }
-
-                        swal(element.title, {
-                            title: element.title,
-                            text: element.details,
-                            icon: "info",
-                            buttons: buttons
-                        }).then((value) => {
-                            if (!value) return;
-
-                            if (value == "view") {
-                                this.$router.push({name: 'show-recipe', params: { id: element.id }})
-                            } else if (value == "modify") {
-                                this.$router.push({name: 'schedule', params: { id: element.id }})
-                            } else if (value == "delete") {
-                                // console.log(value);
-                            }
-
-                            return ;
-                        })
+                    eventDrop: (info)  => {
+                        this.updateEvent(info);
                     },
+                    eventClick: (info) => {
+                        this.displayEvent(info);
+                    }
                 }
             },
         },
 
         methods: {
             exportToCart: async function() {
-                let value = await swal('Exporter vers la liste de courses', {
+                //@TODO : use daterange
+                let sweetAlertResult = await swal.fire({
                     title: 'Exporter vers la liste de courses',
-                    text: 'Cette action va ajouter les produits nécessaire aux recettes des semaines affichées à la liste de courses courante',
+                    html: 'Cette action va ajouter les produits nécessaire aux recettes des semaines affichées à la liste de courses courante',
                     icon: "warning",
-                    buttons: {
-                        cancel: 'Fermer',
-                        export: {
-                            text: "Exporter",
-                            value: "export",
-                            closeModal: true,
-                            className: "btn-primary",
-                        },
-                        cleanexport: {
-                            text: "Purger et exporter",
-                            value: "cleanexport",
-                            closeModal: true,
-                            className: "btn-primary",
-                        }
+                    showConfirmButton: true,
+                    confirmButtonText: 'Exporter',
+                    showDenyButton: true,
+                    denyButtonText: 'Purger et exporter',
+                    showCancelButton: true,
+                    confirmCancelText: 'Annuler',
+                    customClass: {
+                        confirmButton: 'btn-primary',
+                        denyButton: 'btn-primary'
                     }
-                })
+                });
 
-                if (!value) return;
+                let exportType;
+                if (sweetAlertResult.isConfirmed) {
+                    exportType = "export";
+                } else if (sweetAlertResult.isDenied) {
+                    exportType = "cleanexport";
+                } else {
+                    return;
+                }
 
                 let response = await this.HTTP.post('schedules/export/cartlist', {
-                    exportType: value,
+                    exportType: exportType,
                     dateRange: this.calendarDateRange
-                }, this.item)
+                }, this.item);
 
                 if (response.status == 200) {
-                    swal('Ajouté!', 'Produits ajoutés à la liste', 'success')
+                    swal.fire({
+                        title: 'Ajouté!',
+                        html: 'Produits ajoutés à la liste',
+                        icon: 'success'
+                    });
                 } else {
-                    swal(this.statusTexts[response.status], 'Erreur', 'error')
+                    swal.fire({
+                        title: this.statusTexts[response.status],
+                        html: 'Erreur',
+                        icon: 'error'
+                    });
                 }
+            },
+            updateEvent: async function(info) {
+                await this.HTTP.patch('schedules/' + info.event.id, {
+                    type_schedule: info.event.extendedProps.type_schedule,
+                    title: info.event.title,
+                    details: info.event.extendedProps.details,
+                    recipe_id: info.event.extendedProps.recipe_id,
+                    start_at: moment(info.event.start).format('YYYY-MM-DD HH:mm:ss'),
+                    end_at: moment(info.event.end).format('YYYY-MM-DD HH:mm:ss'),
+                    all_day: info.event.extendedProps.all_day,
+                }, null)
+                    .then(response => {
+                        console.log(info.event);
+                    }).catch(response => {
+                        console.log(response);
+                    });
+            },
+            displayEvent: function(info) {
+                let showDenyButton = (info.event.extendedProps.type_schedule == 'recette');
+
+                swal.fire({
+                    title: info.event.title,
+                    html: info.event.extendedProps.details,
+                    icon: "info",
+                    showConfirmButton: true,
+                    confirmButtonText: 'Modifier',
+                    showDenyButton: showDenyButton,
+                    denyButtonText: 'Voir',
+                    showCancelButton: true,
+                    confirmCancelText: 'Fermer',
+                    customClass: {
+                        denyButton: 'btn-warning'
+                    }
+                }).then((sweetAlertResult) => {
+                    if (!sweetAlertResult) return;
+
+                    if (sweetAlertResult.isConfirmed) {
+                        this.$router.push({name: 'show-recipe', params: { id: info.event.id }})
+                    } else if (sweetAlertResult.isDenied) {
+                        this.$router.push({name: 'schedule', params: { id: info.event.id }})
+                    } else if (sweetAlertResult.isDismissed) {
+                        console.log(sweetAlertResult);
+                    }
+                });
             }
         },
 

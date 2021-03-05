@@ -73,12 +73,24 @@
                         quantity: 0,
                     })
                     .then(response => {
-                        swal("Ajouté !", "le produit a été ajouté à la liste de courses.", "success")
+                        swal.fire({
+                            title: "Ajouté !",
+                            html: "le produit a été ajouté à la liste de courses.",
+                            icon: "success"
+                        });
                     }).catch(response => {
                         if (response.response.data.errors.product_id != undefined) {
-                            swal("Erreur !", response.response.data.errors.product_id.join(','), "error")
+                            swal.fire({
+                                title: "Erreur !",
+                                html: response.response.data.errors.product_id.join(','),
+                                icon: "error"
+                            });
                         } else {
-                            swal("Erreur !", 'Erreur inconnue', "error")
+                            swal.fire({
+                                title: "Erreur !",
+                                html: 'Erreur inconnue',
+                                icon: "error"
+                            });
                             console.log(response);
                         }
                     });

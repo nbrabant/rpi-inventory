@@ -19,7 +19,7 @@ class ProductLine extends Eloquent
         'quantity'
     ];
 
-    public function cart(): CartInterface
+    public function cart()
     {
         return $this->belongsTo(Cart::class);
     }
