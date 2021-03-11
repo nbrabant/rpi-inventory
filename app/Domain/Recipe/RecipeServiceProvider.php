@@ -5,11 +5,22 @@ namespace App\Domain\Recipe;
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use App\Domain\Recipe\Entities\Recipe;
-use App\Repositories\Recipe\RecipeRepository;
+use App\Infrastructure\Contracts\Provider\RouteProviderInterface;
+use App\Domain\Recipe\Repositories\RecipeRepository;
 use Illuminate\Support\ServiceProvider;
 
-class RecipeServiceProvider extends ServiceProvider
+class RecipeServiceProvider extends ServiceProvider implements RouteProviderInterface
 {
+    /**
+     * @var string $webNamespace
+     */
+    protected static $webNamespace = 'App\Domain\Recipe\Http\Controllers';
+
+    /**
+     * @var string $apiNamespace
+     */
+    protected static $apiNamespace = 'App\Domain\Recipe\Http\Resources';
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -28,6 +39,16 @@ class RecipeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerContracts();
+    }
+
+    public static function getWebNamespace(): string
+    {
+        return self::$webNamespace;
+    }
+
+    public static function getApiNamespace(): string
+    {
+        return self::$apiNamespace;
     }
 
     /**

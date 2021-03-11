@@ -8,6 +8,16 @@ use Carbon\Carbon;
 
 class Schedule extends Model
 {
+    const SCHEDULE_TYPE_RECIPE = 'recette';
+    const SCHEDULE_TYPE_RENDEZVOUS = 'rendezvous';
+    const SCHEDUDE_TYPE_PLANNING = 'planning';
+
+    private $scheduleColors = [
+        self::SCHEDULE_TYPE_RECIPE => '#330000',
+        self::SCHEDULE_TYPE_RENDEZVOUS => '#003300',
+        self::SCHEDUDE_TYPE_PLANNING => '#000033',
+    ];
+
     protected $fillable = [
         'recipe_id',
         'user_id',
@@ -28,13 +38,7 @@ class Schedule extends Model
 
     public function getColorAttribute()
     {
-        if ($this->type_schedule == 'recette') {
-            return '#330000';
-        } elseif ($this->type_schedule == 'rendezvous') {
-            return '#003300';
-        } elseif ($this->type_schedule == 'planning') {
-            return '#000033';
-        }
+        return $this->scheduleColors[$this->type_schedule] ?? '#000000';
     }
 
     // @TODO : refactor this...

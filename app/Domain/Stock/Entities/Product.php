@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Product extends Eloquent
 {
+    const STATUS_SUCCESS = 'alert-success';
+    const STATUS_WARNING = 'alert-warning';
+    const STATUS_DANGER = 'alert-danger';
+
     public function __toString()
     {
         return $this->name;
@@ -68,14 +72,19 @@ class Product extends Eloquent
     public function getStatus()
     {
         if ($this->min_quantity == 0 || $this->quantity > $this->min_quantity) {
-            return 'alert-success';
+            return self::STATUS_SUCCESS;
         } elseif ($this->quantity == $this->min_quantity) {
-            return 'alert-warning';
+            return self::STATUS_WARNING;
         }
-        return 'alert-danger';
+        return self::STATUS_DANGER;
     }
 
-    // récup des produits avec stock > stock mini hors produit dans la liste
+    /**
+     * récup des produits avec stock > stock mini hors produit dans la liste
+     *
+     * @param array $withoutIds
+     * @return array
+     */
     public static function getOutOfStockProducts($withoutIds = [])
     {
         return self::withoutIds($withoutIds)

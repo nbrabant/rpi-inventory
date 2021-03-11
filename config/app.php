@@ -175,7 +175,7 @@ return [
         App\Application\Providers\AuthServiceProvider::class,
         // App\Application\Providers\BroadcastServiceProvider::class,
         App\Application\Providers\EventServiceProvider::class,
-        App\Interfaces\Http\Providers\RouteServiceProvider::class,
+        App\Application\Providers\RouteServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
         Gregoriohc\LaravelTrello\TrelloServiceProvider::class,

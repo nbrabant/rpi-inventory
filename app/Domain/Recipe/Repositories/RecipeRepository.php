@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Repositories\Recipe;
+namespace App\Domain\Recipe\Repositories;
 
+use App\Domain\Recipe\Entities\RecipeProduct;
+use App\Domain\Recipe\Entities\RecipeStep;
 use App\Infrastructure\Contracts\BaseRepository;
 use App\Domain\Recipe\Entities\Recipe as Recipe;
 use \App\Helpers\ParseHelper;
@@ -32,10 +34,8 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
     }
 
     // refactoring
-    public function syncProducts(Recipe $recipe, array $products = [])
+    public function syncProducts(Recipe $recipe, array $productsList = [])
     {
-        $productsList = ParseHelper::arrayRequestToArray($products);
-
         $recipe->products->map(function ($recipeProduct) use (&$productsList) {
             $found = array_filter($productsList, function ($product) use ($recipeProduct) {
                 return $product['product_id'] == $recipeProduct->product_id;
@@ -61,7 +61,7 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
         $listToAdd = [];
         foreach ($productsList as $product) {
             if ($product['product_id'] && $product['quantity']) {
-                $listToAdd[] = new \App\Domain\Recipe\Entities\RecipeProduct($product);
+                $listToAdd[] = new RecipeProduct($product);
             }
         };
 
@@ -76,10 +76,8 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
     }
 
     // refactoring
-    public function syncSteps(Recipe $recipe, array $steps = [])
+    public function syncSteps(Recipe $recipe, array $stepsList = [])
     {
-        $stepsList = ParseHelper::arrayRequestToArray($steps);
-
         $recipe->steps->map(function ($recipeStep) use (&$stepsList) {
             $found = array_filter($stepsList, function ($step) use ($recipeStep) {
                 return $step['id'] == $recipeStep->id;
@@ -105,7 +103,7 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
         $listToAdd = [];
         foreach ($stepsList as $step) {
             if ($step['name']) {
-                $listToAdd[] = new \App\Domain\Recipe\Entities\RecipeStep($step);
+                $listToAdd[] = new RecipeStep($step);
             }
         };
 

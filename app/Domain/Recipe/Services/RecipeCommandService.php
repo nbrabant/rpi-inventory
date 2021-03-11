@@ -60,8 +60,7 @@ class RecipeCommandService
         $attributes = $request->only(array_keys($this->validation));
 
         $recipe = $this->recipeRepository->create($attributes);
-        $recipe = $this->recipeRepository->syncProducts($recipe, reset($attributes['products']));
-        $recipe = $this->recipeRepository->syncSteps($recipe, reset($attributes['steps']));
+        $recipe = $this->updateProductsAndSteps($recipe, $attributes);
 
         return $recipe;
     }
@@ -78,8 +77,7 @@ class RecipeCommandService
         $attributes = $request->only(array_keys($this->validation));
 
         $recipe = $this->recipeRepository->update($attributes, $id);
-        $recipe = $this->recipeRepository->syncProducts($recipe, reset($attributes['products']));
-        $recipe = $this->recipeRepository->syncSteps($recipe, reset($attributes['steps']));
+        $recipe = $this->updateProductsAndSteps($recipe, $attributes);
 
         // if ($request->file('image') && $request->file('image')->isValid()) {
         //     $imageName = str_slug_fr($recipe->name).'-'.$recipe->id.'.'.$request->file('image')->getClientOriginalExtension();
@@ -102,6 +100,45 @@ class RecipeCommandService
     public function destroyRecipe($id): int
     {
         return $this->recipeRepository->destroy($id);
+    }
+
+    /**
+     * Update Recipe's Products and Steps
+     *
+     * @param Recipe $recipe
+     * @param array $attributes
+     * @return Recipe
+     */
+    private function updateProductsAndSteps(Recipe $recipe, array $attributes): Recipe
+    {
+        $recipe = $this->recipeRepository->syncProducts(
+            $recipe,
+            $this->sanitizeAttribute($attributes['products'])
+        );
+        $recipe = $this->recipeRepository->syncSteps(
+            $recipe,
+            $this->sanitizeAttribute($attributes['steps'])
+        );
+
+        return $recipe;
+    }
+
+    /**
+     * @param array $attributes
+     * @return array
+     */
+    private function sanitizeAttribute(array $attributes = [])
+    {
+        $return = [];
+
+        $attributes = reset($attributes);
+        foreach ($attributes as $column => $values) {
+            foreach ($values as $key => $value) {
+                @$return[$key][$column] = $value;
+            }
+        }
+
+        return $return;
     }
 
 }

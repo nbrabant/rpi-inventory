@@ -11,9 +11,19 @@
 |
 */
 
-Route::get('/', 	'Dashboard@getIndex');
+Route::namespace('\App\Infrastructure\Http\Controllers')
+    ->group(function () {
+        Route::get('/', 'Dashboard@getIndex');
+    });
 
-Route::get('/cart/export/pdf',      'Exports\Carts@pdf');
-Route::get('/cart/export/mail',     'Exports\Carts@mail');
-Route::get('/cart/export/trello',   'Exports\Carts@trello');
-Route::post('/api/schedules/export/cartlist',   'Exports\Schedules@cartlist');
+Route::namespace('\App\Domain\Cart\Http\Controllers')
+    ->group(function () {
+        Route::get('/cart/export/pdf',      'Exports\Carts@pdf');
+        Route::get('/cart/export/mail',     'Exports\Carts@mail');
+        Route::get('/cart/export/trello',   'Exports\Carts@trello');
+    });
+
+Route::namespace('\App\Domain\Schedule\Http\Controllers')
+    ->group(function() {
+        Route::post('/api/schedules/export/cartlist',   'Exports\Schedules@cartlist');
+    });

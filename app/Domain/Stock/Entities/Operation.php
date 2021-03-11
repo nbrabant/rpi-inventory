@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Operation extends Eloquent
 {
+    const INCREMENT_OPERATOR = '+';
+    const DECREMENT_OPERATOR = '-';
+
     protected $table = 'operations';
 
     protected $fillable = [
@@ -22,17 +25,14 @@ class Operation extends Eloquent
 
     public function sumProductQuantity()
     {
-        $count = 0;
-
         $operations = self::where('product_id', $this->product_id)->get();
-        foreach ($operations as $operation) {
-            if ($operation->operation === '+') {
-                $count += $operation->quantity;
-            } else {
-                $count -= $operation->quantity;
-            }
-        }
 
-        return $count;
+        return array_reduce($operations, function ($sum, $operation) {
+            if ($operation->operation === self::INCREMENT_OPERATOR) {
+                return $sum + $operation->quantity;
+            } else {
+                return $sum - $operation->quantity;
+            }
+        }, 0);
     }
 }
