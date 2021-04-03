@@ -24,10 +24,10 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
     }
 
     /**
-	 * Initialize new Eloquent model
-	 *
-	 * @return Recipe
-	 */
+     * Initialize new Eloquent model
+     *
+     * @return Recipe
+     */
     public function initialize(): Recipe
     {
         return new $this->model();

@@ -13,11 +13,11 @@ class ScheduleRepository extends BaseRepository implements ScheduleRepositoryInt
     protected $perPage = 300; // @TODO : après transmission, récupération par date sans limite
 
     /**
-	 * Return repository entity model used
-	 *
-	 * @return string
-	 */
-	public function model(): string
+     * Return repository entity model used
+     *
+     * @return string
+     */
+    public function model(): string
     {
         return Schedule::class;
     }
@@ -38,12 +38,12 @@ class ScheduleRepository extends BaseRepository implements ScheduleRepositoryInt
     }
 
     /**
-	 * Retrieve all recipe from Context
-	 *
-	 * @param Request $request
-	 * @return void
-	 */
-	public function getAllRecipes(Request $request)
+     * Retrieve all recipe from Context
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function getAllRecipes(Request $request)
     {
         return $this->model->query()
             ->byDateInterval($request['dateRange'])

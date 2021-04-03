@@ -30,9 +30,8 @@ class Operation extends Eloquent
         return array_reduce($operations, function ($sum, $operation) {
             if ($operation->operation === self::INCREMENT_OPERATOR) {
                 return $sum + $operation->quantity;
-            } else {
-                return $sum - $operation->quantity;
             }
+            return $sum - $operation->quantity;
         }, 0);
     }
 }

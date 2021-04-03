@@ -69,12 +69,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-	 * Update Eloquent model from his identifier
-	 *
-	 * @param array $attributes
-	 * @param int $id
-	 * @return \Illuminate\Database\Eloquent\Model
-	 */
+     * Update Eloquent model from his identifier
+     *
+     * @param array $attributes
+     * @param int $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
     public function update(array $attributes, int $id): Model
     {
         if (array_key_exists('id', $attributes)) {
@@ -90,34 +90,34 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-	 * Destroy the models for the given IDs.
-	 *
-	 * @param int $id
-	 * @return int
-	 */
+     * Destroy the models for the given IDs.
+     *
+     * @param int $id
+     * @return int
+     */
 	public function destroy(int $id): int
     {
         return $this->model->destroy($id);
     }
 
     /**
-	 * Find Eloquent Model from his identifier based on field list
-	 *
-	 * @param string $id
-	 * @param array|object $columns
-	 * @return Model
-	 */
+     * Find Eloquent Model from his identifier based on field list
+     *
+     * @param string $id
+     * @param array|object $columns
+     * @return Model
+     */
 	public function find(string $id, $columns = array('*')): Model
     {
         return $this->model->with($this->with)->findOrFail($id);
     }
 
     /**
-	 * Add relationnal to request
-	 *
-	 * @param array $withRelation
-	 * @return void
-	 */
+     * Add relationnal to request
+     *
+     * @param array $withRelation
+     * @return void
+     */
 	public function setWithRelation($withRelation = []): void
     {
         $this->with = $withRelation;
