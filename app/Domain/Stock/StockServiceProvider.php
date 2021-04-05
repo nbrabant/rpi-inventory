@@ -2,16 +2,15 @@
 
 namespace App\Domain\Stock;
 
+use App\Application\Providers\DomainServiceProvider;
 use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 use App\Domain\Stock\Contracts\ProductRepositoryInterface;
 use App\Domain\Stock\Repositories\CategoryRepository;
 use App\Domain\Stock\Repositories\OperationRepository;
 use App\Domain\Stock\Repositories\ProductRepository;
-use App\Infrastructure\Contracts\Provider\RouteProviderInterface;
-use Illuminate\Support\ServiceProvider;
 
-class StockServiceProvider extends ServiceProvider implements RouteProviderInterface
+class StockServiceProvider extends DomainServiceProvider
 {
     /**
      * @var string $webNamespace
@@ -39,30 +38,4 @@ class StockServiceProvider extends ServiceProvider implements RouteProviderInter
         OperationRepositoryInterface::class => OperationRepository::class,
     ];
 
-    public function register()
-    {
-        $this->registerContracts();
-    }
-
-    public static function getWebNamespace(): string
-    {
-        return self::$webNamespace;
-    }
-
-    public static function getApiNamespace(): string
-    {
-        return self::$apiNamespace;
-    }
-
-    /**
-     * Bind Contracts
-     *
-     * @return void
-     */
-    protected function registerContracts()
-    {
-        foreach ($this->injections as $interface => $contract) {
-            $this->app->bind($interface, $contract);
-        }
-    }
 }

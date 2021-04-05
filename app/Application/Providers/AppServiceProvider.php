@@ -10,6 +10,9 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * @var DomainServiceProvider[] $providers
+     */
     protected $providers = [
         CartServiceProvider::class,
         RecipeServiceProvider::class,

@@ -2,12 +2,11 @@
 
 namespace App\Domain\Schedule;
 
+use App\Application\Providers\DomainServiceProvider;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use App\Domain\Schedule\Repositories\ScheduleRepository;
-use App\Infrastructure\Contracts\Provider\RouteProviderInterface;
-use Illuminate\Support\ServiceProvider;
 
-class ScheduleServiceProvider extends ServiceProvider implements RouteProviderInterface
+class ScheduleServiceProvider extends DomainServiceProvider
 {
     /**
      * @var string $webNamespace
@@ -33,30 +32,4 @@ class ScheduleServiceProvider extends ServiceProvider implements RouteProviderIn
         ScheduleRepositoryInterface::class => ScheduleRepository::class
     ];
 
-    public function register()
-    {
-        $this->registerContracts();
-    }
-
-    public static function getWebNamespace(): string
-    {
-        return self::$webNamespace;
-    }
-
-    public static function getApiNamespace(): string
-    {
-        return self::$apiNamespace;
-    }
-
-    /**
-     * Bind Contracts
-     *
-     * @return void
-     */
-    protected function registerContracts()
-    {
-        foreach ($this->injections as $interface => $contract) {
-            $this->app->bind($interface, $contract);
-        }
-    }
 }
