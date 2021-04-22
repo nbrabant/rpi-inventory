@@ -38,9 +38,9 @@ export default RestCore.extend({
     },
 
     mounted: function() {
-        if (this.endpoint == undefined) return
+        if (this.endpoint === undefined) return;
 
-        this.triggerRestGet(this.endpoint, {id: this.$route.params.id}, this.item)
+        this.triggerRestGet(this.endpoint, {id: this.$route.params.id}, this.item);
     },
 
     methods: {

@@ -45,7 +45,7 @@
 
 <script>
 
-    import RestCore from './../../mixins/restshow'
+    import RestCore from './../../mixins/restcore'
 
     export default {
 
