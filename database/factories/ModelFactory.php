@@ -11,26 +11,37 @@
 |
 */
 
-//$factory->define(App\User::class, function ($faker) {
-//    return [
-//        'name' => $faker->name,
-//        'email' => $faker->email,
-//        'password' => str_random(10),
-//        'remember_token' => str_random(10),
-//    ];
-//});
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+// $factory->define(App\User::class, function (Faker\Generator $faker) {
+//     static $password;
+//
+//     return [
+//         'name' => $faker->name,
+//         'email' => $faker->unique()->safeEmail,
+//         'password' => $password ?: $password = bcrypt('secret'),
+//         'remember_token' => str_random(10),
+//     ];
+// });
 
-$factory->define(App\Categorie::class, function ($faker) {
-	return [
-		'nom' => rand(1, 12)
-	];
-});
 
-$factory->define(App\Operation::class, function ($faker) {
-	return [
-		'produit_id'	=> rand(1, 50),
-		'quantite'		=> rand(0, 5),
-		'operation'		=> ((rand(1, 10) % 2) == 1 ? '+' : '-'),
-		'detail'		=> str_random( rand(5, 32) )
-	];
+use App\Domain\Recipe\Entities\Recipe;
+use App\Domain\Schedule\Entities\Schedule;
+use Carbon\Carbon;
+
+$factory->define(Schedule::class, function (Faker\Generator $faker) {
+    $isRecipe = $faker->boolean;
+    $recipe = $isRecipe ? Recipe::inRandomOrder()->first() : null;
+    $start_at = Carbon::createFromTimeStamp($faker->dateTimeBetween('-30 days', '+30 days')->getTimestamp());
+    $end_at = Carbon::createFromFormat('Y-m-d H:i:s', $start_at)->addHours($faker->randomDigit);
+
+    return [
+        'recipe_id' => $isRecipe ? $recipe->id : null,
+        'user_id' => '1',
+        'type_schedule' => $isRecipe ? 'recette' : ($faker->boolean ? 'rendezvous' : 'planning'),
+        'title' => $isRecipe ? $recipe->name : implode(' ', $faker->words),
+        'details' => $faker->sentence,
+        'start_at' => $start_at,
+        'end_at' => $end_at,
+        'all_day' => $isRecipe ? 0 : $faker->boolean,
+    ];
 });

@@ -1,17 +1,17 @@
 <?php
 
-use App\Operation;
+use App\Domain\Stock\Entities\Operation;
 use Illuminate\Database\Seeder;
 
 class OperationTableSeeder extends Seeder {
 
 	private $_datasToSeed = [
-		// [
-		// 	'produit_id' => 1,
-		// 	'quantite' => 5,
-		// 	'operation' => '+',
-		// 	'detail' => ''
-		// ],
+		[
+			'product_id' => 2,
+			'quantity' => 5,
+			'operation' => '+',
+			'detail' => ''
+		],
 		// [
 		// 	'produit_id' => 1,
 		// 	'quantite' => 5,
