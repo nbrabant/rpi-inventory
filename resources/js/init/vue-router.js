@@ -208,6 +208,24 @@ var router = new VueRouter({
                     }
                 }
             ]
+        }, {
+            path: '/configuration',
+            component: {
+                template: '<div><template-index route="/configuration" title="Configuration" icon="cog"></template-index></div>',
+            },
+            children: [
+                {
+                    name: 'configuration',
+                    path: '/',
+                    component: () => import('../components/app/configuration/Show.vue'),
+                    meta: {
+                        breadcrumb: [
+                            {name: 'Dashboard', link: '/', icon: 'home'},
+                            {name: 'Configuration'},
+                        ]
+                    }
+                }
+            ]
         }
     ]
 });
