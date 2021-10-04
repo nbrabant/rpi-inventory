@@ -67,6 +67,11 @@
                         title: 'Agenda',
                         icon: 'calendar',
                     },
+                    {
+                        route: 'configuration',
+                        title: 'Configuration',
+                        icon: 'cog',
+                    },
                 ]
             }
         }
