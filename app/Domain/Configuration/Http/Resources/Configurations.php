@@ -25,8 +25,10 @@ class Configurations
      */
     public function index()
     {
-        // @todo : build config with CONFIGURATION_PREFIXES
-        return $this->configurationRepository->getList('trello');
+        return array_reduce(self::CONFIGURATION_PREFIXES, function ($configurations, $prefix) {
+            $configurations[$prefix] = $this->configurationRepository->getList($prefix);
+            return $configurations + [$prefix => $this->configurationRepository->getList($prefix)];
+        }, []);
     }
 
     /**
