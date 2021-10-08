@@ -3,6 +3,7 @@
 namespace App\Application\Providers;
 
 use App\Domain\Cart\CartServiceProvider;
+use App\Domain\Configuration\ConfigurationServiceProvider;
 use App\Domain\Recipe\RecipeServiceProvider;
 use App\Domain\Schedule\ScheduleServiceProvider;
 use App\Domain\Stock\StockServiceProvider;
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
         RecipeServiceProvider::class,
         ScheduleServiceProvider::class,
         StockServiceProvider::class,
+        ConfigurationServiceProvider::class,
     ];
 
     /**

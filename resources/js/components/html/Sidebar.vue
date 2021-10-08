@@ -68,8 +68,8 @@
                         icon: 'calendar',
                     },
                     {
-                        route: 'configuration',
-                        title: 'Configuration',
+                        route: 'configurations',
+                        title: 'Configurations',
                         icon: 'cog',
                     },
                 ]
