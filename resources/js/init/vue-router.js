@@ -209,15 +209,15 @@ var router = new VueRouter({
                 }
             ]
         }, {
-            path: '/configuration',
+            path: '/configurations',
             component: {
                 template: '<div><template-index route="/configuration" title="Configuration" icon="cog"></template-index></div>',
             },
             children: [
                 {
-                    name: 'configuration',
+                    name: 'configurations',
                     path: '/',
-                    component: () => import('../components/app/configuration/Show.vue'),
+                    component: () => import('../components/app/configurations/List.vue'),
                     meta: {
                         breadcrumb: [
                             {name: 'Dashboard', link: '/', icon: 'home'},
