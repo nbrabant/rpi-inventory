@@ -39,6 +39,8 @@
             {{ subtitle }}
         </p>
 
+        <hr v-if="noHr !== true">
+
     </div>
 
 </template>
@@ -62,6 +64,7 @@
             backroute: {},
             title: {},
             subtitle: {},
+            noHr: true,
         },
 
         methods: {
