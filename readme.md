@@ -66,3 +66,28 @@ and
 ```shell script
 npm run-script watch-poll
 ```
+
+## Run with Docker 🐋
+
+1. Clone the project
+```
+git clone https://github.com/nbrabant/rpi-inventory
+```
+2. build with docker compose
+```
+docker-compose up -d --build
+```
+3. Install the dependencies into the container
+```
+docker exec -it composer update (update until lock dependencies gets updated)
+docker exec -it composer dump-autload
+```
+4. Generate Artisan APP_KEY
+```
+docker exec -it php artisan key:generate
+```
+5. Build assets
+```
+docker exec -it npm run watch
+```
+6. Run the app on your **localhost:8080**
