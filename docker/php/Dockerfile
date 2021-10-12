@@ -1,8 +1,7 @@
 FROM php:7.2-fpm
 
 
-RUN apt update && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev libmagickwand-dev libmagickcore-dev sendmail  zlib1g-dev zip \
-    && node npm \
+RUN apt update && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev libmagickwand-dev libmagickcore-dev sendmail  zlib1g-dev zip nodejs npm \
     && docker-php-ext-install intl opcache pdo pdo_mysql \
     && pecl install apcu \
     && pecl install imagick \
