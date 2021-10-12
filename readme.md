@@ -79,15 +79,16 @@ docker-compose up -d --build
 ```
 3. Install the dependencies into the container
 ```
-docker exec -it composer update (update until lock dependencies gets updated)
-docker exec -it composer dump-autload
+docker exec -it php-rpi composer update (update until lock dependencies gets updated)
+docker exec -it php-rpi composer dump-autoload
 ```
 4. Generate Artisan APP_KEY
 ```
-docker exec -it php artisan key:generate
+docker exec -it php-rpi php artisan key:generate
 ```
-5. Build assets
+5. Install node packages and Build assets
 ```
-docker exec -it npm run watch
+docker exec -it php-rpi npm install
+docker exec -it php-rpi npm run watch
 ```
 6. Run the app on your **localhost:8080**
