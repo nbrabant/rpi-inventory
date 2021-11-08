@@ -34,16 +34,7 @@ DB_USERNAME=homestead
 DB_PASSWORD=secret
 ```
 
-If you have Trello account and you want to add the Trello export functionnality, please, add following Trello section
-
-```dotenv
-TRELLO_KEY=my_trello_key
-TRELLO_TOKEN=my_trello_token
-TRELLO_SECRET=my_trello_secret
-TRELLO_REDIRECT_URI=my_trello_redirect_uri
-TRELLO_BOARD=my_trello_board
-TRELLO_LIST=my_trello_list
-```
+If you have Trello account and you want to add the Trello export functionnality, please, use configuration panel to define Trello credentials
 
 #### Install database
 
