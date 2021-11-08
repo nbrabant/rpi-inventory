@@ -42,5 +42,5 @@ Route::namespace('\App\Domain\Schedule\Http\Resources')
 
 Route::namespace('\App\Domain\Configuration\Http\Resources')
     ->group(function() {
-        Route::resource('configurations', 'Configurations', ['only' => ['index', 'store']]);
+        Route::resource('configurations', 'Configurations', ['only' => ['show', 'store']]);
     });

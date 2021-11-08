@@ -24,12 +24,10 @@
 
         <div class="card">
             <div class="content">
-                <html-cardfooter
-                        :no-hr="true"
-                        :updated-at="item.updated_at"
-                        :submit-btn="submitBtn"
-                        :submit-icon="submitIcon"
-                        :submit-text="submitText"></html-cardfooter>
+                <html-cardfooter :no-hr="true"
+                    :submit-btn="submitBtn"
+                    :submit-icon="submitIcon"
+                    :submit-text="submitText"></html-cardfooter>
             </div>
         </div>
 
@@ -39,14 +37,20 @@
 
 <script>
 
-    import RestList from '../../../mixins/restlist'
+    import RestShow from '../../../mixins/restshow'
 
     export default {
 
-        mixins: [RestList],
+        mixins: [RestShow],
 
         data() {
             return {};
+        },
+
+        computed: {
+            submitText: function () {
+                return 'Enregistrer'
+            }
         }
 
     }

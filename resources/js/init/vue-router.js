@@ -217,7 +217,7 @@ var router = new VueRouter({
                 {
                     name: 'configurations',
                     path: '/',
-                    component: () => import('../components/app/configurations/List.vue'),
+                    component: () => import('../components/app/configurations/Show.vue'),
                     meta: {
                         breadcrumb: [
                             {name: 'Dashboard', link: '/', icon: 'home'},
