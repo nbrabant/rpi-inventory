@@ -23,7 +23,7 @@ class Configurations
     /**
      * @return array|mixed[]
      */
-    public function index()
+    public function show()
     {
         return array_reduce(self::CONFIGURATION_PREFIXES, function ($configurations, $prefix) {
             $configurations[$prefix] = $this->configurationRepository->getList($prefix);
@@ -35,12 +35,18 @@ class Configurations
      * Update configuration
      *
      * @param Request $request
+     * @return array|mixed[]
      */
     public function store(Request $request)
     {
-        // @todo : safety clean
-        foreach ($request->configurations as $prefix => $configurations) {
+        foreach ($request->all() as $prefix => $configurations) {
+            if (!in_array($prefix, self::CONFIGURATION_PREFIXES)) {
+                continue;
+            }
+
             $this->configurationRepository->save($prefix, $configurations);
         }
+
+        return $this->show();
     }
 }

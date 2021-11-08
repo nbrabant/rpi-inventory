@@ -29,7 +29,7 @@ class ConfigurationRepository implements ConfigurationRepositoryInterface
         }
         $configContent = var_export($configs, 1);
         return (File::put(
-            app_path() . '/config/' . $prefix . '.php',
+            config_path() . '/' . $prefix . '.php',
             "<?php \n return $configContent ;")
         );
     }
