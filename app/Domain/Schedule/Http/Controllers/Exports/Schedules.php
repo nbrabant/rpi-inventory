@@ -10,27 +10,27 @@ use App\Domain\Cart\Services\CartCommandService;
 class Schedules extends Controller
 {
     /**
-     * @var CartCommandService
+     * @var CartCommandService $cartCommandService
      */
-    private $cart_command_service;
+    private $cartCommandService;
     /**
-     * @var ScheduleQueryService
+     * @var ScheduleQueryService $scheduleQueryService
      */
-    private $schedule_query_service;
+    private $scheduleQueryService;
 
     public function __construct(
-        CartCommandService $cart_command_service,
-        ScheduleQueryService $schedule_query_service
+        CartCommandService $cartCommandService,
+        ScheduleQueryService $scheduleQueryService
     ) {
-        $this->cart_command_service = $cart_command_service;
-        $this->schedule_query_service = $schedule_query_service;
+        $this->cartCommandService = $cartCommandService;
+        $this->scheduleQueryService = $scheduleQueryService;
     }
 
     public function cartlist(Request $request)
     {
-        return $this->cart_command_service->addProductFromRecipes(
+        return $this->cartCommandService->addProductFromRecipes(
             $request,
-            $this->schedule_query_service->getAttachedRecipes($request)
+            $this->scheduleQueryService->getAttachedRecipes($request)
         );
     }
 }

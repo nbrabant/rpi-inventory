@@ -9,31 +9,31 @@ use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
 
 /**
- * @property CartCommandService cart_command_service
- * @property CartQueryService cart_query_service
+ * @property CartCommandService cartCommandService
+ * @property CartQueryService cartQueryService
  */
 class CartProducts extends Controller
 {
     public function __construct(
-        CartCommandService $cart_command_service, 
-        CartQueryService $cart_query_service
+        CartCommandService $cartCommandService,
+        CartQueryService $cartQueryService
     ) {
-        $this->cart_command_service = $cart_command_service;
-        $this->cart_query_service = $cart_query_service;
+        $this->cartCommandService = $cartCommandService;
+        $this->cartQueryService = $cartQueryService;
     }
 
     public function store(Request $request)
     {
-        return $this->cart_command_service->attachProduct($request);
+        return $this->cartCommandService->attachProduct($request);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->cart_command_service->updateProduct($request, $id);
+        return $this->cartCommandService->updateProduct($request, $id);
     }
 
     public function destroy(Request $request, $product_id)
     {
-        return $this->cart_command_service->removeProduct($request, $product_id);
+        return $this->cartCommandService->removeProduct($request, $product_id);
     }
 }

@@ -9,17 +9,17 @@ use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
 
 /**
- * @property ProductCommandService product_command_service
- * @property ProductQueryService product_query_service
+ * @property ProductCommandService productCommandService
+ * @property ProductQueryService productQueryService
  */
 class Consumptions extends Controller
 {
     public function __construct(
-        ProductCommandService $product_command_service, 
-        ProductQueryService $product_query_service
+        ProductCommandService $productCommandService, 
+        ProductQueryService $productQueryService
     ) {
-        $this->product_command_service = $product_command_service;
-        $this->product_query_service = $product_query_service;
+        $this->productCommandService = $productCommandService;
+        $this->productQueryService = $productQueryService;
     }
 
     public function index(Request $request)
@@ -29,16 +29,16 @@ class Consumptions extends Controller
 
     public function create(Request $request)
     {
-        return $this->product_command_service->initializeOperation($request);
+        return $this->productCommandService->initializeOperation($request);
     }
 
     public function store(Request $request)
     {
-        return $this->product_command_service->saveOperation($request);
+        return $this->productCommandService->saveOperation($request);
     }
 
     public function show(Request $request, $id)
     {
-        return $this->product_query_service->getProductWithConsumptions($id, $request);
+        return $this->productQueryService->getProductWithConsumptions($id, $request);
     }
 }

@@ -9,46 +9,46 @@ use App\Domain\Stock\Services\Category\CategoryCommandService;
 use App\Domain\Stock\Services\Category\CategoryQueryService;
 
 /**
- * @property CategoryQueryService category_query_service
- * @property CategoryCommandService category_command_service
+ * @property CategoryQueryService categoryQueryService
+ * @property CategoryCommandService categoryCommandService
  */
 class Categories extends Controller
 {
     public function __construct(
-        CategoryCommandService $category_command_service, 
-        CategoryQueryService $category_query_service
+        CategoryCommandService $categoryCommandService, 
+        CategoryQueryService $categoryQueryService
     ) {
-        $this->category_command_service = $category_command_service;
-        $this->category_query_service = $category_query_service;
+        $this->categoryCommandService = $categoryCommandService;
+        $this->categoryQueryService = $categoryQueryService;
     }
 
     public function index(Request $request)
     {
-        return $this->category_query_service->getCategories($request);
+        return $this->categoryQueryService->getCategories($request);
     }
 
     public function create(Request $request)
     {
-        return $this->category_command_service->initializeCategory($request);
+        return $this->categoryCommandService->initializeCategory($request);
     }
 
     public function store(Request $request)
     {
-        return $this->category_command_service->createCategory($request);
+        return $this->categoryCommandService->createCategory($request);
     }
 
     public function show(Request $request, $id)
     {
-        return $this->category_query_service->getCategory($id, $request);
+        return $this->categoryQueryService->getCategory($id, $request);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->category_command_service->updateCategory($id, $request);
+        return $this->categoryCommandService->updateCategory($id, $request);
     }
 
     public function destroy($id)
     {
-        return $this->category_command_service->destroyCategory($id);
+        return $this->categoryCommandService->destroyCategory($id);
     }
 }

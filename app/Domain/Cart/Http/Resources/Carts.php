@@ -9,26 +9,26 @@ use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
 
 /**
- * @property CartCommandService cart_command_service
- * @property CartQueryService cart_query_service
+ * @property CartCommandService cartCommandService
+ * @property CartQueryService cartQueryService
  */
 class Carts extends Controller
 {
     public function __construct(
-        CartCommandService $cart_command_service, 
-        CartQueryService $cart_query_service
+        CartCommandService $cartCommandService,
+        CartQueryService $cartQueryService
     ) {
-        $this->cart_command_service = $cart_command_service;
-        $this->cart_query_service = $cart_query_service;
+        $this->cartCommandService = $cartCommandService;
+        $this->cartQueryService = $cartQueryService;
     }
 
     public function show(Request $request, $id)
     {
-        return $this->cart_query_service->getCurrent($request);
+        return $this->cartQueryService->getCurrent($request);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->cart_command_service->updateCart($request);
+        return $this->cartCommandService->updateCart($request);
     }
 }

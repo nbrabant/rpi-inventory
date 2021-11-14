@@ -27,7 +27,7 @@ class CartList extends Mailable
      */
     public function __construct(CartInterface $cart)
     {
-        $this->title = 'Liste de courses du ' . Carbon::now()->format('d/m/Y à H:i');
+        $this->title = sprintf('Liste de courses du %s', Carbon::now()->format('d/m/Y à H:i'));
         $this->productLines = $cart->productLines;
     }
 
