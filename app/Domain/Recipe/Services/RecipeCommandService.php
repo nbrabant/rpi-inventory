@@ -5,30 +5,15 @@ namespace App\Domain\Recipe\Services;
 use App\Domain\Recipe\Entities\Recipe;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Validator;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
+use App\Domain\Recipe\Requests\RecipeRequest;
 
 class RecipeCommandService
 {
-    /** @var RecipeRepositoryInterface $recipeRepository */
+    /**
+     * @var RecipeRepositoryInterface $recipeRepository
+     */
     private RecipeRepositoryInterface $recipeRepository;
-
-    protected $validation = [
-        'name'                  => 'required|string',
-        'recipe_type'           => 'required|in:entrée,plat,dessert',
-        'number_people'         => 'required|string|max:64',
-        'preparation_time'      => 'integer',
-        'cooking_time'          => 'integer',
-        'complement'            => 'nullable|string',
-        'products.*.product_id' => 'integer',
-        'products.*.quantity'   => 'integer',
-        // @TODO : define validation rule for product unit?
-        'products.*.unit'       => 'nullable|string|in:grammes,litre,centilitre,cuilliere_cafe,cuilliere_dessert,cuilliere_soupe,verre_liqueur,verre_moutarde,grand_verre,tasse_cafe,bol,sachet,gousse',
-        'steps.*.id'            => 'nullable|integer',
-        'steps.*.name'          => 'string',
-        'steps.*.instruction'   => 'string',
-        'steps.*.position'      => 'integer|max:255',
-    ];
 
     /**
      * Create Cart Recipe Service instance.
@@ -50,14 +35,12 @@ class RecipeCommandService
     }
 
     /**
-     * @param Request $request
+     * @param RecipeRequest $request
      * @return Recipe
      */
-    public function createRecipe(Request $request): Recipe
+    public function createRecipe(RecipeRequest $request): Recipe
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
+        $attributes = $request->validated();
 
         $recipe = $this->recipeRepository->create($attributes);
         $recipe = $this->updateProductsAndSteps($recipe, $attributes);
@@ -67,14 +50,12 @@ class RecipeCommandService
 
     /**
      * @param $id
-     * @param Request $request
+     * @param RecipeRequest $request
      * @return Recipe
      */
-    public function updateRecipe($id, Request $request): Recipe
+    public function updateRecipe($id, RecipeRequest $request): Recipe
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
+        $attributes = $request->validated();
 
         $recipe = $this->recipeRepository->update($attributes, $id);
         $recipe = $this->updateProductsAndSteps($recipe, $attributes);
@@ -127,7 +108,7 @@ class RecipeCommandService
      * @param array $attributes
      * @return array
      */
-    private function sanitizeAttribute(array $attributes = [])
+    private function sanitizeAttribute(array $attributes = []): array
     {
         $return = [];
 
