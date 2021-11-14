@@ -9,46 +9,46 @@ use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
 
 /**
- * @property ProductCommandService product_command_service
- * @property ProductQueryService product_query_service
+ * @property ProductCommandService productCommandService
+ * @property ProductQueryService productQueryService
  */
 class Products extends Controller
 {
     public function __construct(
-        ProductCommandService $product_command_service, 
-        ProductQueryService $product_query_service
+        ProductCommandService $productCommandService, 
+        ProductQueryService $productQueryService
     ) {
-        $this->product_command_service = $product_command_service;
-        $this->product_query_service = $product_query_service;
+        $this->productCommandService = $productCommandService;
+        $this->productQueryService = $productQueryService;
     }
 
     public function index(Request $request)
     {
-        return $this->product_query_service->getProducts($request);
+        return $this->productQueryService->getProducts($request);
     }
 
     public function create(Request $request)
     {
-        return $this->product_command_service->initializeProduct($request);
+        return $this->productCommandService->initializeProduct($request);
     }
 
     public function store(Request $request)
     {
-        return $this->product_command_service->createProduct($request);
+        return $this->productCommandService->createProduct($request);
     }
 
     public function show(Request $request, $id)
     {
-        return $this->product_query_service->getProductRepository($id, $request);
+        return $this->productQueryService->getProductRepository($id, $request);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->product_command_service->updateProduct($id, $request);
+        return $this->productCommandService->updateProduct($id, $request);
     }
 
     public function destroy($id)
     {
-        return $this->product_command_service->destroyProduct($id);
+        return $this->productCommandService->destroyProduct($id);
     }
 }

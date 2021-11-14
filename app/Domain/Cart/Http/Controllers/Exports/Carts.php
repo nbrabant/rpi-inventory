@@ -14,25 +14,25 @@ use App\Domain\Cart\Services\CartCommandService;
 class Carts extends Controller
 {
     /**
-     * @var CartQueryService
+     * @var CartQueryService $cartQueryService
      */
-    private $cart_query_service;
+    private $cartQueryService;
     /**
-     * @var CartCommandService
+     * @var CartCommandService $cartCommandService
      */
-    private $cart_command_service;
+    private $cartCommandService;
 
     public function __construct(
-        CartQueryService $cart_query_service,
-        CartCommandService $cart_command_service
+        CartQueryService $cartQueryService,
+        CartCommandService $cartCommandService
     ) {
-        $this->cart_query_service = $cart_query_service;
-        $this->cart_command_service = $cart_command_service;
+        $this->cartQueryService = $cartQueryService;
+        $this->cartCommandService = $cartCommandService;
     }
 
     public function pdf(Request $request)
     {
-        $cart = $this->cart_query_service->getCurrent($request);
+        $cart = $this->cartQueryService->getCurrent($request);
 
         $datas = [
             'title' => 'Liste de courses du ' . Carbon::now()->format('d/m/Y à H:i'),
@@ -46,16 +46,16 @@ class Carts extends Controller
     public function mail(Request $request)
     {
         Mail::to('aurore.derumier@gmail.com')
-            ->send(new CartList($this->cart_query_service->getCurrent($request)));
+            ->send(new CartList($this->cartQueryService->getCurrent($request)));
 
         return redirect('/#/carts/');
     }
 
     public function trello(Request $request)
     {
-        $cart = $this->cart_query_service->getCurrent($request);
+        $cart = $this->cartQueryService->getCurrent($request);
 
-        $this->cart_command_service->updateTrelloCard($request, $cart->exportToTrello());
+        $this->cartCommandService->updateTrelloCard($request, $cart->exportToTrello());
 
         return redirect('/#/carts/');
     }

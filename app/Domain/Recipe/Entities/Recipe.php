@@ -53,9 +53,10 @@ class Recipe extends Model implements RecipeInterface
 
     public function getImage()
     {
-        if (!is_null($this->visual) && is_file(public_path().'/img/recettes/'.$this->visual)) {
-            return '<img src="/img/recettes/'.$this->visual.'" class="img-responsive"/>';
+        if (!is_null($this->visual) && is_file(public_path() . '/img/recettes/' . $this->visual)) {
+            return '<img src="/img/recettes/' . $this->visual . '" class="img-responsive"/>';
         }
+
         return null;
     }
 }

@@ -9,46 +9,46 @@ use App\Domain\Schedule\Services\ScheduleCommandService;
 use App\Domain\Schedule\Services\ScheduleQueryService;
 
 /**
- * @property ScheduleCommandService schedule_command_service
- * @property ScheduleQueryService schedule_query_service
+ * @property ScheduleCommandService scheduleCommandService
+ * @property ScheduleQueryService scheduleQueryService
  */
 class Schedules extends Controller
 {
     public function __construct(
-        ScheduleCommandService $schedule_command_service, 
-        ScheduleQueryService $schedule_query_service
+        ScheduleCommandService $scheduleCommandService,
+        ScheduleQueryService $scheduleQueryService
     ) {
-        $this->schedule_command_service = $schedule_command_service;
-        $this->schedule_query_service = $schedule_query_service;
+        $this->scheduleCommandService = $scheduleCommandService;
+        $this->schedule_query_service = $scheduleQueryService;
     }
 
     public function index(Request $request)
     {
-        return $this->schedule_query_service->getSchedules($request);
+        return $this->scheduleQueryService->getSchedules($request);
     }
 
     public function create(Request $request)
     {
-        return $this->schedule_command_service->initializeSchedule($request);
+        return $this->scheduleCommandService->initializeSchedule($request);
     }
 
     public function store(Request $request)
     {
-        return $this->schedule_command_service->createSchedule($request);
+        return $this->scheduleCommandService->createSchedule($request);
     }
 
     public function show(Request $request, $id)
     {
-        return $this->schedule_query_service->getSchedule($id, $request);
+        return $this->scheduleQueryService->getSchedule($id, $request);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->schedule_command_service->updateSchedule($id, $request);
+        return $this->scheduleCommandService->updateSchedule($id, $request);
     }
 
     public function destroy($id)
     {
-        return $this->schedule_command_service->destroySchedule($id);
+        return $this->scheduleCommandService->destroySchedule($id);
     }
 }

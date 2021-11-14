@@ -10,7 +10,7 @@ class ProductLine extends Eloquent
 {
     public function __toString(): string
     {
-        return $this->quantity . ' ' . $this->unity . ' ' . $this->product;
+        return sprintf('%s %s %s', $this->quantity, $this->unity, $this->product);;
     }
 
     protected $fillable = [
