@@ -4,6 +4,7 @@ namespace App\Domain\Schedule\Http\Resources;
 
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
+use App\Domain\Schedule\Requests\ScheduleRequest;
 
 use App\Domain\Schedule\Services\ScheduleCommandService;
 use App\Domain\Schedule\Services\ScheduleQueryService;
@@ -27,12 +28,12 @@ class Schedules extends Controller
         return $this->scheduleQueryService->getSchedules($request);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        return $this->scheduleCommandService->initializeSchedule($request);
+        return $this->scheduleCommandService->initializeSchedule();
     }
 
-    public function store(Request $request)
+    public function store(ScheduleRequest $request)
     {
         return $this->scheduleCommandService->createSchedule($request);
     }
@@ -42,7 +43,7 @@ class Schedules extends Controller
         return $this->scheduleQueryService->getSchedule($id, $request);
     }
 
-    public function update(Request $request, $id)
+    public function update(ScheduleRequest $request, $id)
     {
         return $this->scheduleCommandService->updateSchedule($id, $request);
     }

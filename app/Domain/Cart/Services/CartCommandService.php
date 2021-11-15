@@ -12,7 +12,9 @@ use App\Domain\Cart\Rules\IsInCart;
 
 class CartCommandService
 {
-    /** @var CartRepositoryInterface $cartRepository */
+    /**
+     * @var CartRepositoryInterface $cartRepository
+     */
     private CartRepositoryInterface $cartRepository;
 
     /**

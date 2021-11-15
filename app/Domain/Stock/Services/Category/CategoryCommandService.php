@@ -4,8 +4,7 @@ namespace App\Domain\Stock\Services\Category;
 
 use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Validator;
+use App\Domain\Stock\Requests\CategoryRequest;
 
 class CategoryCommandService
 {
@@ -14,11 +13,6 @@ class CategoryCommandService
      */
     private CategoryRepositoryInterface $categoryRepository;
 
-    protected $validation = [
-        'name' 		=> 'required|string|unique:categories,name',
-        'position' 	=> 'required|integer',
-    ];
-
     public function __construct(
         CategoryRepositoryInterface $categoryRepository
     ) {
@@ -26,41 +20,34 @@ class CategoryCommandService
     }
 
     /**
-     * @param Request $request
      * @return Model
      */
-    public function initializeCategory(Request $request): Model
+    public function initializeCategory(): Model
     {
         return $this->categoryRepository->initialize();
     }
 
     /**
-     * @param Request $request
+     * @param CategoryRequest $request
      * @return Model
      */
-    public function createCategory(Request $request): Model
+    public function createCategory(CategoryRequest $request): Model
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
-
-        return $this->categoryRepository->create($attributes);
+        return $this->categoryRepository
+            ->create($request->validated());
     }
 
     /**
      * @param $id
-     * @param Request $request
+     * @param CategoryRequest $request
      * @return Model
      */
-    public function updateCategory($id, Request $request): Model
+    public function updateCategory($id, CategoryRequest $request): Model
     {
-        $this->validation['name'] .= ',' . $id;
+//        $this->validation['name'] .= ',' . $id;
 
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
-
-        return $this->categoryRepository->update($attributes, $id);
+        return $this->categoryRepository
+            ->update($request->validated(), $id);
     }
 
     /**
@@ -71,5 +58,4 @@ class CategoryCommandService
     {
         return $this->categoryRepository->destroy($id);
     }
-
 }

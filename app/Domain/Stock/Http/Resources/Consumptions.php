@@ -7,6 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
+use App\Domain\Stock\Requests\OperationRequest;
 
 /**
  * @property ProductCommandService productCommandService
@@ -27,12 +28,12 @@ class Consumptions extends Controller
         return [];
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        return $this->productCommandService->initializeOperation($request);
+        return $this->productCommandService->initializeOperation();
     }
 
-    public function store(Request $request)
+    public function store(OperationRequest $request)
     {
         return $this->productCommandService->saveOperation($request);
     }
