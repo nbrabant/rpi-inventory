@@ -5,23 +5,14 @@ namespace App\Domain\Schedule\Services;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
-use Validator;
+use App\Domain\Schedule\Requests\ScheduleRequest;
 
 class ScheduleCommandService
 {
-    /** @var ScheduleRepositoryInterface $scheduleRepository */
+    /**
+     * @var ScheduleRepositoryInterface $scheduleRepository
+     */
     private ScheduleRepositoryInterface $scheduleRepository;
-
-    protected $validation = [
-        'recipe_id'     => 'required_if:type_schedule,recette,numeric',
-        'user_id'       => 'numeric',
-        'type_schedule' => 'required|in:recette,rendezvous,planning',
-        'title'         => 'required|string',
-        'details'       => 'string',
-        'start_at'      => 'required|date_format:Y-m-d H:i:s',
-        'end_at'        => 'required|date_format:Y-m-d H:i:s',
-        'all_day'       => 'required|boolean'
-    ];
 
     /**
      * Create Schedule Command Service instance.
@@ -34,23 +25,21 @@ class ScheduleCommandService
     }
 
     /**
-     * @param Request $request
+     * @param ScheduleRequest $request
      * @return Model
      */
-    public function initializeSchedule(Request $request): Model
+    public function initializeSchedule(ScheduleRequest $request): Model
     {
         return $this->scheduleRepository->initialize();
     }
 
     /**
-     * @param Request $request
+     * @param ScheduleRequest $request
      * @return Model
      */
-    public function createSchedule(Request $request): Model
+    public function createSchedule(ScheduleRequest $request): Model
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
+        $attributes = $request->validated();
 
         return $this->scheduleRepository->create($attributes);
     }
@@ -62,9 +51,7 @@ class ScheduleCommandService
      */
     public function updateSchedule($id, Request $request): Model
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
+        $attributes = $request->validated();
 
         $schedule = $this->scheduleRepository->update($attributes, $id);
 
