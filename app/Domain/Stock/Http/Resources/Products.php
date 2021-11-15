@@ -7,6 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
+use App\Domain\Stock\Requests\ProductRequest;
 
 /**
  * @property ProductCommandService productCommandService
@@ -27,12 +28,12 @@ class Products extends Controller
         return $this->productQueryService->getProducts($request);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return $this->productCommandService->initializeProduct($request);
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         return $this->productCommandService->createProduct($request);
     }
@@ -42,7 +43,7 @@ class Products extends Controller
         return $this->productQueryService->getProductRepository($id, $request);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         return $this->productCommandService->updateProduct($id, $request);
     }

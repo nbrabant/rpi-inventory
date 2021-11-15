@@ -7,6 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Recipe\Services\RecipeCommandService;
 use App\Domain\Recipe\Services\RecipeQueryService;
+use App\Domain\Recipe\Requests\RecipeRequest;
 
 /**
  * @property RecipeCommandService recipeCommandService
@@ -27,12 +28,12 @@ class Recipes extends Controller
         return $this->recipeQueryService->getRecipes($request);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        return $this->recipeCommandService->initializeRecipe($request);
+        return $this->recipeCommandService->initializeRecipe();
     }
 
-    public function store(Request $request)
+    public function store(RecipeRequest $request)
     {
         return $this->recipeCommandService->createRecipe($request);
     }
@@ -42,7 +43,7 @@ class Recipes extends Controller
         return $this->recipeQueryService->getRecipe($id, $request);
     }
 
-    public function update(Request $request, $id)
+    public function update(RecipeRequest $request, $id)
     {
         return $this->recipeCommandService->updateRecipe($id, $request);
     }

@@ -3,7 +3,6 @@
 namespace App\Domain\Schedule\Services;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use App\Domain\Schedule\Requests\ScheduleRequest;
 
@@ -25,10 +24,9 @@ class ScheduleCommandService
     }
 
     /**
-     * @param ScheduleRequest $request
      * @return Model
      */
-    public function initializeSchedule(ScheduleRequest $request): Model
+    public function initializeSchedule(): Model
     {
         return $this->scheduleRepository->initialize();
     }
@@ -46,10 +44,10 @@ class ScheduleCommandService
 
     /**
      * @param $id
-     * @param Request $request
+     * @param ScheduleRequest $request
      * @return Model
      */
-    public function updateSchedule($id, Request $request): Model
+    public function updateSchedule($id, ScheduleRequest $request): Model
     {
         $attributes = $request->validated();
 

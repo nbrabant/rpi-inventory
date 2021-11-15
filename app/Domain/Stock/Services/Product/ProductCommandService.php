@@ -6,7 +6,8 @@ use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 use App\Domain\Stock\Contracts\ProductRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Validator;
+use App\Domain\Stock\Requests\ProductRequest;
+use App\Domain\Stock\Requests\OperationRequest;
 
 class ProductCommandService
 {
@@ -14,19 +15,10 @@ class ProductCommandService
      * @var ProductRepositoryInterface $productRepository
      */
     private ProductRepositoryInterface $productRepository;
-
     /**
      * @var OperationRepositoryInterface $operationRepository
      */
     private OperationRepositoryInterface $operationRepository;
-
-    protected $validation = [
-        'category_id'	=> 'required|integer',
-        'name' 			=> 'required|string|unique:products,name',
-        'description'	=> 'required|string',
-        'min_quantity'	=> 'required|integer',
-        'unit'			=> 'string|in:piece,grammes,litre,sachet',
-    ];
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
@@ -37,41 +29,34 @@ class ProductCommandService
     }
 
     /**
-     * @param Request $request
      * @return Model
      */
-    public function initializeProduct(Request $request): Model
+    public function initializeProduct(): Model
     {
         return $this->productRepository->initialize();
     }
 
     /**
-     * @param Request $request
+     * @param ProductRequest $request
      * @return Model
      */
-    public function createProduct(Request $request): Model
+    public function createProduct(ProductRequest $request): Model
     {
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
-
-        return $this->productRepository->create($attributes);
+        return $this->productRepository
+            ->create($request->validated());
     }
 
     /**
      * @param $id
-     * @param Request $request
+     * @param ProductRequest $request
      * @return Model
      */
-    public function updateProduct($id, Request $request): Model
+    public function updateProduct($id, ProductRequest $request): Model
     {
-        $this->validation['name'] .= ',' . $id;
+//        $this->validation['name'] .= ',' . $id;
 
-        $request->validate($this->validation);
-
-        $attributes = $request->only(array_keys($this->validation));
-
-        return $this->productRepository->update($attributes, $id);
+        return $this->productRepository
+            ->update($request->validated(), $id);
     }
 
     public function destroyProduct($id)
@@ -95,26 +80,13 @@ class ProductCommandService
     }
 
     /**
-     * @param Request $request
+     * @param OperationRequest $request
      * @return Model
      */
-    public function saveOperation(Request $request): Model
+    public function saveOperation(OperationRequest $request): Model
     {
-        $request->validate([
-            'product_id' => 'required|integer',
-            'quantity' => 'required|integer',
-            'operation' => 'required|in:+,-',
-            'detail' => 'required|string',
-        ]);
-
-        $attributes = $request->only([
-            'product_id',
-            'quantity',
-            'operation',
-            'detail',
-        ]);
-
-        return $this->operationRepository->create($attributes);
+        return $this->operationRepository
+            ->create($request->validated());
     }
 
     /**

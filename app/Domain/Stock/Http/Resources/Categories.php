@@ -7,6 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Category\CategoryCommandService;
 use App\Domain\Stock\Services\Category\CategoryQueryService;
+use App\Domain\Stock\Requests\CategoryRequest;
 
 /**
  * @property CategoryQueryService categoryQueryService
@@ -27,12 +28,12 @@ class Categories extends Controller
         return $this->categoryQueryService->getCategories($request);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        return $this->categoryCommandService->initializeCategory($request);
+        return $this->categoryCommandService->initializeCategory();
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         return $this->categoryCommandService->createCategory($request);
     }
@@ -42,7 +43,7 @@ class Categories extends Controller
         return $this->categoryQueryService->getCategory($id, $request);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         return $this->categoryCommandService->updateCategory($id, $request);
     }

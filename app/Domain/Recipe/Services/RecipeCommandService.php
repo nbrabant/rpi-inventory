@@ -4,7 +4,6 @@ namespace App\Domain\Recipe\Services;
 
 use App\Domain\Recipe\Entities\Recipe;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use App\Domain\Recipe\Requests\RecipeRequest;
 
@@ -26,10 +25,9 @@ class RecipeCommandService
     }
 
     /**
-     * @param Request $request
      * @return Model
      */
-    public function initializeRecipe(Request $request): Model
+    public function initializeRecipe(): Model
     {
         return $this->recipeRepository->initialize();
     }
