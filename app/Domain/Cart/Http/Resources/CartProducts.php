@@ -7,6 +7,11 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
+use App\Domain\Cart\Requests\{
+    AddToCartRequest,
+    UpdateToCartRequest,
+    RemoveFromCartRequest
+};
 
 /**
  * @property CartCommandService cartCommandService
@@ -22,17 +27,17 @@ class CartProducts extends Controller
         $this->cartQueryService = $cartQueryService;
     }
 
-    public function store(Request $request)
+    public function store(AddToCartRequest $request)
     {
         return $this->cartCommandService->attachProduct($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateToCartRequest $request, $id)
     {
         return $this->cartCommandService->updateProduct($request, $id);
     }
 
-    public function destroy(Request $request, $product_id)
+    public function destroy(RemoveFromCartRequest $request, $product_id)
     {
         return $this->cartCommandService->removeProduct($request, $product_id);
     }

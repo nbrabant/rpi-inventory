@@ -36,10 +36,9 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * Create if it need and return current active cart
      *
-     * @param Request $request
      * @return Cart
      */
-    public function getCurrentOrCreate(Request $request): Cart
+    public function getCurrentOrCreate(): Cart
     {
         return $this->model
                     ->with('productLines')
@@ -68,13 +67,13 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function updateCurrent(Request $request, $attributes): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
 
         $cart->fill($attributes);
 
         $cart->save();
 
-        return $this->getCurrentOrCreate($request);
+        return $this->getCurrentOrCreate();
     }
 
     /**
@@ -102,7 +101,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function associateProduct(Request $request, $attributes): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
         $cart->productLines()->create($attributes);
 
         $cart->load('productLines');
@@ -120,7 +119,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function updateProduct(Request $request, $attributes, $product_id): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
 
         $productLine = $cart->productLines()->where('product_id', $product_id)->first();
         $productLine->fill($attributes);
@@ -140,7 +139,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function dissociateProduct(Request $request, $product_id): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
 
         $productLine = $cart->productLines()->where('product_id', $product_id)->delete();
 
@@ -156,7 +155,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function purgeCart(Request $request): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
 
         $cart->productLines->map(function ($productLine) {
             $productLine->delete();
@@ -174,7 +173,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      */
     public function addOrUpdateProducts(Request $request, $recipeProducts): Cart
     {
-        $cart = $this->getCurrentOrCreate($request);
+        $cart = $this->getCurrentOrCreate();
 
         $recipeProducts->map(function ($recipeProduct) use ($request, $cart) {
             if ($cart->productLines->where('product_id', $recipeProduct->product_id)->isEmpty()) {
