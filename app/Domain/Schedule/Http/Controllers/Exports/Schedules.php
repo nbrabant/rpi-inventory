@@ -2,8 +2,8 @@
 
 namespace App\Domain\Schedule\Http\Controllers\Exports;
 
+use App\Domain\Cart\Requests\ExportCartRequest;
 use App\Domain\Schedule\Services\ScheduleQueryService;
-use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
 use App\Domain\Cart\Services\CartCommandService;
 
@@ -26,7 +26,14 @@ class Schedules extends Controller
         $this->scheduleQueryService = $scheduleQueryService;
     }
 
-    public function cartlist(Request $request)
+    /**
+     * @warning: Schedule single responsability
+     * @todo: trigger event with associated products
+     *
+     * @param ExportCartRequest $request
+     * @return \App\Domain\Cart\Contracts\CartInterface
+     */
+    public function cartlist(ExportCartRequest $request)
     {
         return $this->cartCommandService->addProductFromRecipes(
             $request,

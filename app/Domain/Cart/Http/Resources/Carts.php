@@ -7,6 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
+use App\Domain\Cart\Requests\FinishedCartRequest;
 
 /**
  * @property CartCommandService cartCommandService
@@ -27,7 +28,7 @@ class Carts extends Controller
         return $this->cartQueryService->getCurrent($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(FinishedCartRequest $request, $id)
     {
         return $this->cartCommandService->updateCart($request);
     }

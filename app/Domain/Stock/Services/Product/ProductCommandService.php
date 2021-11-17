@@ -53,8 +53,6 @@ class ProductCommandService
      */
     public function updateProduct($id, ProductRequest $request): Model
     {
-//        $this->validation['name'] .= ',' . $id;
-
         return $this->productRepository
             ->update($request->validated(), $id);
     }

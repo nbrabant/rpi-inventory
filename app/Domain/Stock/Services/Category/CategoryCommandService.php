@@ -44,8 +44,6 @@ class CategoryCommandService
      */
     public function updateCategory($id, CategoryRequest $request): Model
     {
-//        $this->validation['name'] .= ',' . $id;
-
         return $this->categoryRepository
             ->update($request->validated(), $id);
     }

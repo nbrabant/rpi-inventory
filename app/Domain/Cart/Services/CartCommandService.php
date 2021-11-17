@@ -3,12 +3,14 @@
 namespace App\Domain\Cart\Services;
 
 use App\Domain\Cart\Contracts\CartInterface;
-use Illuminate\Http\Request;
-use App\Application\Exceptions\ValidationException;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
-use Validator;
-use App\Domain\Cart\Rules\NotInCart;
-use App\Domain\Cart\Rules\IsInCart;
+use App\Domain\Cart\Requests\{
+    FinishedCartRequest,
+    AddToCartRequest,
+    UpdateToCartRequest,
+    RemoveFromCartRequest,
+    ExportCartRequest
+};
 
 class CartCommandService
 {
@@ -29,95 +31,69 @@ class CartCommandService
     }
 
     /**
-     * @param Request $request
+     * @param FinishedCartRequest $request
      * @return CartInterface
      */
-    public function updateCart(Request $request): CartInterface
+    public function updateCart(FinishedCartRequest $request): CartInterface
     {
-        $request->validate([
-            'finished' => 'boolean'
-        ]);
-
-        $attributes = $request->only(['finished']);
-
-        return $this->cartRepository->updateCurrent($request, $attributes);
+        return $this->cartRepository
+            ->updateCurrent($request, $request->validated());
     }
 
     public function updateTrelloCard(Request $request, $trelloCardId): CartInterface
     {
-        return $this->cartRepository->updateCurrent($request, ['trello_card_id' => $trelloCardId]);
+        return $this->cartRepository
+            ->updateCurrent($request, ['trello_card_id' => $trelloCardId]);
     }
 
     /**
      * add product
      *
-     * @param Request $request
+     * @param AddToCartRequest $request
      * @return CartInterface
      */
-    public function attachProduct(Request $request): CartInterface
+    public function attachProduct(AddToCartRequest $request): CartInterface
     {
-        $request->validate([
-            'product_id' => ['required', 'integer', new NotInCart],
-            'quantity' => 'required|integer'
-        ]);
-
-        $attributes = $request->only(['product_id', 'quantity']);
-
-        return $this->cartRepository->associateProduct($request, $attributes);
+        return $this->cartRepository
+            ->associateProduct($request, $request->validated());
     }
 
     /**
      * update product
      *
-     * @param Request $request
+     * @param UpdateToCartRequest $request
      * @param $cart_id
      * @return CartInterface
      */
-    public function updateProduct(Request $request, $cart_id): CartInterface
+    public function updateProduct(UpdateToCartRequest $request, $cart_id): CartInterface
     {
-        $request->validate([
-            'product_id' => ['required', 'integer', new IsInCart],
-            'quantity' => 'required|integer'
-        ]);
-
-        $attributes = $request->only(['product_id', 'quantity']);
-
-        return $this->cartRepository->updateProduct($request, $attributes, $attributes['product_id']);
+        return $this->cartRepository
+            ->updateProduct($request, $request->validated(), $request->validated()['product_id']);
     }
 
     /**
      * remove product
      *
-     * @param Request $request
+     * @param RemoveFromCartRequest $request
      * @param $product_id
      * @return CartInterface
-     * @throws ValidationException
      */
-    public function removeProduct(Request $request, $product_id): CartInterface
+    public function removeProduct(RemoveFromCartRequest $request, $product_id): CartInterface
     {
-        $validator = Validator::make(['product_id' => $product_id], [
-            'product_id' => ['required', 'integer', new IsInCart]
-        ]);
-
-        if ($validator->fails()) {
-            throw new ValidationException($validator->errors(), 401);
-        }
-
-        return $this->cartRepository->dissociateProduct($request, $product_id);
+        return $this->cartRepository
+            ->dissociateProduct($request->validated(), $product_id);
     }
 
     /**
-     * @param Request $request
+     * @param ExportCartRequest $request
      * @param $recipes
      * @return CartInterface
      */
-    public function addProductFromRecipes(Request $request, $recipes): CartInterface
+    public function addProductFromRecipes(ExportCartRequest $request, $recipes): CartInterface
     {
-        $request->validate([
-            'exportType' => ['in:export,cleanexport']
-        ]);
+        $request->validated();
 
-        $cart = $this->cartRepository->getCurrentOrCreate($request);
+        $cart = $this->cartRepository->getCurrentOrCreate();
 
         if ($request->exportType === 'cleanexport') {
             $this->cartRepository->purgeCart($request);

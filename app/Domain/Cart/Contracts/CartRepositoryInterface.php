@@ -11,10 +11,9 @@ interface CartRepositoryInterface extends BaseRepositoryInterface
 	/**
 	 * Create if it need and return current active cart
 	 * 
-	 * @param Request $request
 	 * @return CartInterface
 	 */
-	public function getCurrentOrCreate(Request $request): CartInterface;
+	public function getCurrentOrCreate(): CartInterface;
 
 	/**
 	 * Retrieve current active cart

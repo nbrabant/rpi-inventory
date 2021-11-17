@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Cart\Rules;
+namespace App\Domain\Cart\Requests\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;

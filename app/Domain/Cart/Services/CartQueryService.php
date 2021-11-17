@@ -28,7 +28,7 @@ class CartQueryService
      */
     public function getCurrent(Request $request): CartInterface
     {
-        return $this->cartRepository->getCurrentOrCreate($request);
+        return $this->cartRepository->getCurrentOrCreate();
     }
 
 }
