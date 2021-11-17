@@ -20,7 +20,7 @@ class Schedules extends Controller
         ScheduleQueryService $scheduleQueryService
     ) {
         $this->scheduleCommandService = $scheduleCommandService;
-        $this->schedule_query_service = $scheduleQueryService;
+        $this->scheduleQueryService = $scheduleQueryService;
     }
 
     public function index(Request $request)

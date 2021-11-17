@@ -2,7 +2,7 @@
 
 namespace App\Domain\Cart\Helpers;
 
-use Gregoriohc\LaravelTrello\Facades\Wrapper as Trello;
+//use Gregoriohc\LaravelTrello\Facades\Wrapper as Trello;
 
 trait TrelloTraitHelper
 {
@@ -25,12 +25,12 @@ trait TrelloTraitHelper
 				$checklist = $this->createChecklist($card, $category);
 			}
 
-			Trello::checklist()
-                ->items()
-                ->create(
-                    $checklist->getId(),
-                    $productline
-                );
+//			Trello::checklist()
+//                ->items()
+//                ->create(
+//                    $checklist->getId(),
+//                    $productline
+//                );
 		});
 
         return $card->getId();
@@ -41,31 +41,31 @@ trait TrelloTraitHelper
 			if (is_null($trelloCardId)) {
 				return $this->createTrelloCard();
 			}
-            return Trello::manager()->getCard($trelloCardId);
+//            return Trello::manager()->getCard($trelloCardId);
         } catch (\Exception $e) {
 			return $this->createTrelloCard();
         }
     }
 
     protected static function createTrelloCard() {
-        $card = Trello::manager()->getCard();
-		$card->setBoardId(Trello::getDefaultBoardId())
-		   ->setListId(Trello::getDefaultListId())
-		   ->setName('Liste de courses')
-		   ->setDescription('Liste de courses créées le '.date('d/m/Y à H:i:s'))
-		   ->setPosition('top')
-		   // ->addMember(Trello::manager()->getMember('5475d84e12b4e8e6664d2ef1'))
-		   // ->addMember(Trello::manager()->getMember('55da1690984b5375687860ce'))
-		   ->save();
-		return $card;
+//        $card = Trello::manager()->getCard();
+//		$card->setBoardId(Trello::getDefaultBoardId())
+//		   ->setListId(Trello::getDefaultListId())
+//		   ->setName('Liste de courses')
+//		   ->setDescription('Liste de courses créées le '.date('d/m/Y à H:i:s'))
+//		   ->setPosition('top')
+//		   // ->addMember(Trello::manager()->getMember('5475d84e12b4e8e6664d2ef1'))
+//		   // ->addMember(Trello::manager()->getMember('55da1690984b5375687860ce'))
+//		   ->save();
+//		return $card;
     }
 
     public function createChecklist($card, $categoryName) {
-        $checklist = Trello::manager()->getChecklist();
-        $checklist->setCard($card)
-                ->setName($categoryName)
-                ->save();
-		return $checklist;
+//        $checklist = Trello::manager()->getChecklist();
+//        $checklist->setCard($card)
+//                ->setName($categoryName)
+//                ->save();
+//		return $checklist;
     }
 
     public function clearChecklists($card) {
