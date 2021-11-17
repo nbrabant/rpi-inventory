@@ -178,7 +178,7 @@ return [
         App\Application\Providers\RouteServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
-        Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
+//        Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
 
     ],
 
@@ -230,7 +230,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Trello' => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
+//        PR or fork gregoriohc/laravel-trello
+//        Removed from composer.json => "gregoriohc/laravel-trello": "^0.3.0",
+//        'Trello' => Gregoriohc\LaravelTrello\Facades\Wrapper::class,
     ],
 
 ];
