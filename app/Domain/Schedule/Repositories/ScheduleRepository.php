@@ -2,7 +2,9 @@
 
 namespace App\Domain\Schedule\Repositories;
 
+use App\Domain\Schedule\Contracts\ScheduleInterface;
 use App\Domain\Schedule\Entities\Schedule;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Infrastructure\Contracts\BaseRepository;
@@ -10,7 +12,10 @@ use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 
 class ScheduleRepository extends BaseRepository implements ScheduleRepositoryInterface
 {
-    protected $perPage = 300; // @TODO : après transmission, récupération par date sans limite
+    /**
+     * @var int $perPage
+     */
+    protected int $perPage = 300; // @TODO : après transmission, récupération par date sans limite
 
     /**
      * Return repository entity model used
@@ -41,9 +46,9 @@ class ScheduleRepository extends BaseRepository implements ScheduleRepositoryInt
      * Retrieve all recipe from Context
      *
      * @param Request $request
-     * @return void
+     * @return Collection
      */
-    public function getAllRecipes(Request $request)
+    public function getAllRecipes(Request $request): Collection
     {
         return $this->model->query()
             ->byDateInterval($request['dateRange'])

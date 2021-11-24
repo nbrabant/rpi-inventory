@@ -6,7 +6,7 @@ use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model;
 
-class RecipeProduct extends Model
+class RecipeProduct extends Model implements RecipeInterface
 {
     /**
      * @var string[] $fillable
@@ -48,22 +48,7 @@ class RecipeProduct extends Model
      */
     public static function getUniteList(): array
     {
-        return [
-            '' 					=> '---',
-            'grammes' 			=> 'Grammes',
-            'litre' 			=> 'Litre',
-            'centilitre' 		=> 'Centilitre',
-            'cuilliere_cafe' 	=> 'Cuillere à Cafe',
-            'cuilliere_dessert' => 'Cuillere à Dessert',
-            'cuilliere_soupe' 	=> 'Cuillere à Soupe',
-            'verre_liqueur' 	=> 'Verre à liqueur',
-            'verre_moutarde' 	=> 'Verre à moutarde',
-            'grand_verre' 		=> 'Grand verre',
-            'tasse_cafe' 		=> 'Tasse à café',
-            'bol' 				=> 'Bol',
-            'sachet' 			=> 'Sachet',
-            'gousse' 			=> 'Gousse',
-        ];
+        return self::UNITS_LIST;
     }
 
     /**
@@ -83,25 +68,10 @@ class RecipeProduct extends Model
      */
     public function getQuantity(): float
     {
-        if ($this->unite == 'centilitre') {
-            return $this->quantity * 0.1;
-        } elseif ($this->unite == 'cuilliere_cafe') {
-            return $this->quantity * 4;
-        } elseif ($this->unite == 'cuilliere_dessert') {
-            return $this->quantity * 8;
-        } elseif ($this->unite == 'cuilliere_soupe') {
-            return $this->quantity * 12;
-        } elseif ($this->unite == 'verre_liqueur') {
-            return $this->quantity * 0.03;
-        } elseif ($this->unite == 'tasse_cafe') {
-            return $this->quantity * 0.1;
-        } elseif ($this->unite == 'verre_moutarde') {
-            return $this->quantity * 0.15;
-        } elseif ($this->unite == 'grand_verre') {
-            return $this->quantity * 0.25;
-        } elseif ($this->unite == 'bol') {
-            return $this->quantity * 0.35;
+        if (self::UNIT_QUANTITY_RATIO[$this->getUnite()]) {
+            return $this->quantity * self::UNIT_QUANTITY_RATIO[$this->getUnite()];
         }
+
         return $this->quantity;
     }
 

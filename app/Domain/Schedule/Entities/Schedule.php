@@ -2,22 +2,27 @@
 
 namespace App\Domain\Schedule\Entities;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Recipe;
+use App\Domain\Schedule\Contracts\ScheduleInterface;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 
-class Schedule extends Model
+class Schedule extends Model implements ScheduleInterface
 {
-    const SCHEDULE_TYPE_RECIPE = 'recette';
-    const SCHEDULE_TYPE_RENDEZVOUS = 'rendezvous';
-    const SCHEDUDE_TYPE_PLANNING = 'planning';
-
-    private $scheduleColors = [
+    /**
+     * @var string[] $scheduleColors
+     */
+    private array $scheduleColors = [
         self::SCHEDULE_TYPE_RECIPE => '#330000',
         self::SCHEDULE_TYPE_RENDEZVOUS => '#003300',
         self::SCHEDUDE_TYPE_PLANNING => '#000033',
     ];
 
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'recipe_id',
         'user_id',
@@ -29,20 +34,37 @@ class Schedule extends Model
         'all_day',
     ];
 
+    /**
+     * @var string[] $dates
+     */
     protected $dates = ['start_at', 'end_at'];
 
-    public function recipe()
+    /**
+     * @TODO : Recipe domain responsability
+     *
+     * @return RecipeInterface
+     */
+    public function recipe(): RecipeInterface
     {
         return $this->belongsTo(Recipe::class);
     }
 
-    public function getColorAttribute()
+    /**
+     * @return string
+     */
+    public function getColorAttribute(): string
     {
         return $this->scheduleColors[$this->type_schedule] ?? '#000000';
     }
 
-    // @TODO : refactor this...
-    public function scopeByDateInterval($query, $dates = '')
+    /**
+     * @TODO : refactor this...
+     *
+     * @param Builder $query
+     * @param string $dates
+     * @return Builder
+     */
+    public function scopeByDateInterval(Builder $query, $dates = ''): Builder
     {
         if (!isset($dates->startAt)) {
             $startDate = Carbon::now()->startOfWeek();
@@ -74,7 +96,10 @@ class Schedule extends Model
         return $query;
     }
 
-    public function toArray()
+    /**
+     * @return string[]
+     */
+    public function toArray(): array
     {
         $array = parent::toArray();
 

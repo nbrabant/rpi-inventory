@@ -6,13 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use App\Domain\Schedule\Requests\ScheduleRequest;
 
+/**
+ * @property ScheduleRepositoryInterface $scheduleRepository
+ */
 class ScheduleCommandService
 {
-    /**
-     * @var ScheduleRepositoryInterface $scheduleRepository
-     */
-    private ScheduleRepositoryInterface $scheduleRepository;
-
     /**
      * Create Schedule Command Service instance.
      *
@@ -43,24 +41,21 @@ class ScheduleCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param ScheduleRequest $request
      * @return Model
      */
-    public function updateSchedule($id, ScheduleRequest $request): Model
+    public function updateSchedule(int $id, ScheduleRequest $request): Model
     {
-        $attributes = $request->validated();
-
-        $schedule = $this->scheduleRepository->update($attributes, $id);
-
-        return $schedule;
+        return $this->scheduleRepository
+            ->update($request->validated(), $id);
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return int
      */
-    public function destroySchedule($id): int
+    public function destroySchedule(int $id): int
     {
         return $this->scheduleRepository->destroy($id);
     }
