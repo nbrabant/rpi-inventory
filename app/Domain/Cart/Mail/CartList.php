@@ -3,6 +3,7 @@
 namespace App\Domain\Cart\Mail;
 
 use App\Domain\Cart\Contracts\CartInterface;
+use App\Domain\Cart\Entities\ProductLine;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -17,7 +18,9 @@ class CartList extends Mailable
      * @var string $title
      */
     public string $title;
-
+    /**
+     * @var ProductLine $productLines
+     */
     public $productLines;
 
     /**

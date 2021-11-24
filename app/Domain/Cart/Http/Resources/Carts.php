@@ -2,6 +2,7 @@
 
 namespace App\Domain\Cart\Http\Resources;
 
+use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
 
@@ -15,6 +16,10 @@ use App\Domain\Cart\Requests\FinishedCartRequest;
  */
 class Carts extends Controller
 {
+    /**
+     * @param CartCommandService $cartCommandService
+     * @param CartQueryService $cartQueryService
+     */
     public function __construct(
         CartCommandService $cartCommandService,
         CartQueryService $cartQueryService
@@ -23,12 +28,22 @@ class Carts extends Controller
         $this->cartQueryService = $cartQueryService;
     }
 
-    public function show(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return CartInterface
+     */
+    public function show(Request $request, int $id): CartInterface
     {
         return $this->cartQueryService->getCurrent($request);
     }
 
-    public function update(FinishedCartRequest $request, $id)
+    /**
+     * @param FinishedCartRequest $request
+     * @param int $id
+     * @return CartInterface
+     */
+    public function update(FinishedCartRequest $request, int $id): CartInterface
     {
         return $this->cartCommandService->updateCart($request);
     }
