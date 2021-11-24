@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 class ProductLine extends Eloquent implements ProductLineInterface
 {
     /**
-     * @var string[]
+     * @var string[] $fillable
      */
     protected $fillable = [
         'cart_id',

@@ -2,18 +2,17 @@
 
 namespace App\Domain\Recipe\Services;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Recipe;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use App\Domain\Recipe\Requests\RecipeRequest;
 
+/**
+ * @property RecipeRepositoryInterface $recipeRepository
+ */
 class RecipeCommandService
 {
-    /**
-     * @var RecipeRepositoryInterface $recipeRepository
-     */
-    private RecipeRepositoryInterface $recipeRepository;
-
     /**
      * Create Cart Recipe Service instance.
      *
@@ -36,7 +35,7 @@ class RecipeCommandService
      * @param RecipeRequest $request
      * @return Recipe
      */
-    public function createRecipe(RecipeRequest $request): Recipe
+    public function createRecipe(RecipeRequest $request): RecipeInterface
     {
         $attributes = $request->validated();
 
@@ -47,11 +46,11 @@ class RecipeCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param RecipeRequest $request
      * @return Recipe
      */
-    public function updateRecipe($id, RecipeRequest $request): Recipe
+    public function updateRecipe(int $id, RecipeRequest $request): Recipe
     {
         $attributes = $request->validated();
 
@@ -73,10 +72,10 @@ class RecipeCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return int
      */
-    public function destroyRecipe($id): int
+    public function destroyRecipe(int $id): int
     {
         return $this->recipeRepository->destroy($id);
     }
@@ -84,11 +83,11 @@ class RecipeCommandService
     /**
      * Update Recipe's Products and Steps
      *
-     * @param Recipe $recipe
-     * @param array $attributes
-     * @return Recipe
+     * @param RecipeInterface $recipe
+     * @param mixed[] $attributes
+     * @return RecipeInterface
      */
-    private function updateProductsAndSteps(Recipe $recipe, array $attributes): Recipe
+    private function updateProductsAndSteps(RecipeInterface $recipe, array $attributes): RecipeInterface
     {
         $recipe = $this->recipeRepository->syncProducts(
             $recipe,
@@ -103,8 +102,8 @@ class RecipeCommandService
     }
 
     /**
-     * @param array $attributes
-     * @return array
+     * @param mixed[] $attributes
+     * @return mixed[]
      */
     private function sanitizeAttribute(array $attributes = []): array
     {

@@ -12,7 +12,9 @@ class Cart extends Eloquent implements CartInterface
 {
     use TrelloTraitHelper;
 
-    /** @var string[]  */
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'finished',
         'trello_card_id'

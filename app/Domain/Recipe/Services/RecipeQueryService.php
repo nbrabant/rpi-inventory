@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * @property RecipeRepositoryInterface $recipeRepository
+ */
 class RecipeQueryService
 {
-    /** @var RecipeRepositoryInterface $recipeRepository */
-    private RecipeRepositoryInterface $recipeRepository;
-
     /**
      * Create Cart Recipe Service instance.
      *
@@ -32,11 +32,11 @@ class RecipeQueryService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return Model
      */
-    public function getRecipe($id, Request $request): Model
+    public function getRecipe(int $id, Request $request): Model
     {
         return $this->recipeRepository->find($id, $request);
     }

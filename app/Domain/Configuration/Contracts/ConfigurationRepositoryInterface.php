@@ -2,7 +2,9 @@
 
 namespace App\Domain\Configuration\Contracts;
 
-interface ConfigurationRepositoryInterface
+use App\Infrastructure\Contracts\BaseRepositoryInterface;
+
+interface ConfigurationRepositoryInterface extends BaseRepositoryInterface
 {
     /**
      * Retrieve configurations by prefix

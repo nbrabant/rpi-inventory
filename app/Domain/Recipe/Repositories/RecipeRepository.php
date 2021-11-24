@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe\Repositories;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\RecipeProduct;
 use App\Domain\Recipe\Entities\RecipeStep;
 use App\Infrastructure\Contracts\BaseRepository;
@@ -11,10 +12,13 @@ use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 
 class RecipeRepository extends BaseRepository implements RecipeRepositoryInterface
 {
-    protected $with = ['products', 'steps'];
+    /**
+     * @var string[]
+     */
+    protected array $with = ['products', 'steps'];
 
     /**
-	 * Return repository entity model used
+	 * @inheritDoc
 	 *
 	 * @return string
 	 */
@@ -24,7 +28,7 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
     }
 
     /**
-     * Initialize new Eloquent model
+     * @inheritDoc
      *
      * @return Recipe
      */
@@ -33,8 +37,12 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
         return new $this->model();
     }
 
-    // refactoring
-    public function syncProducts(Recipe $recipe, array $productsList = [])
+    /**
+     * @TODO : refactoring
+     *
+     * @inheritDoc
+     */
+    public function syncProducts(RecipeInterface $recipe, array $productsList = []): RecipeInterface
     {
         $recipe->products->map(function ($recipeProduct) use (&$productsList) {
             $found = array_filter($productsList, function ($product) use ($recipeProduct) {
@@ -75,8 +83,12 @@ class RecipeRepository extends BaseRepository implements RecipeRepositoryInterfa
         return $recipe;
     }
 
-    // refactoring
-    public function syncSteps(Recipe $recipe, array $stepsList = [])
+    /**
+     * @TODO : refactoring
+     *
+     * @inheritDoc
+     */
+    public function syncSteps(RecipeInterface $recipe, array $stepsList = []): RecipeInterface
     {
         $recipe->steps->map(function ($recipeStep) use (&$stepsList) {
             $found = array_filter($stepsList, function ($step) use ($recipeStep) {

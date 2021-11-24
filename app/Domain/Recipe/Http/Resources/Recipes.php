@@ -2,12 +2,14 @@
 
 namespace App\Domain\Recipe\Http\Resources;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
-
 use App\Domain\Recipe\Services\RecipeCommandService;
 use App\Domain\Recipe\Services\RecipeQueryService;
 use App\Domain\Recipe\Requests\RecipeRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * @property RecipeCommandService recipeCommandService
@@ -15,6 +17,10 @@ use App\Domain\Recipe\Requests\RecipeRequest;
  */
 class Recipes extends Controller
 {
+    /**
+     * @param RecipeCommandService $recipeCommandService
+     * @param RecipeQueryService $recipeQueryService
+     */
     public function __construct(
         RecipeCommandService $recipeCommandService,
         RecipeQueryService $recipeQueryService
@@ -23,32 +29,57 @@ class Recipes extends Controller
         $this->recipeQueryService = $recipeQueryService;
     }
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function index(Request $request): LengthAwarePaginator
     {
         return $this->recipeQueryService->getRecipes($request);
     }
 
-    public function create()
+    /**
+     * @return Model
+     */
+    public function create(): Model
     {
         return $this->recipeCommandService->initializeRecipe();
     }
 
-    public function store(RecipeRequest $request)
+    /**
+     * @param RecipeRequest $request
+     * @return RecipeInterface
+     */
+    public function store(RecipeRequest $request): RecipeInterface
     {
         return $this->recipeCommandService->createRecipe($request);
     }
 
-    public function show($id, Request $request)
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return Model
+     */
+    public function show(int $id, Request $request): Model
     {
         return $this->recipeQueryService->getRecipe($id, $request);
     }
 
-    public function update(RecipeRequest $request, $id)
+    /**
+     * @param RecipeRequest $request
+     * @param int $id
+     * @return RecipeInterface
+     */
+    public function update(RecipeRequest $request, int $id): RecipeInterface
     {
         return $this->recipeCommandService->updateRecipe($id, $request);
     }
 
-    public function destroy($id)
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function destroy(int $id): int
     {
         return $this->recipeCommandService->destroyRecipe($id);
     }

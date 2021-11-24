@@ -22,12 +22,13 @@ interface BaseRepositoryInterface
 	 */
     public function initialize(): Model;
 
-	/**
-	 * Build and return builded query from request context
-	 * 
-	 * @return \Illuminate\Pagination\LengthAwarePaginator
-	 */
-	public function getAll(Request $request): \Illuminate\Pagination\LengthAwarePaginator;
+    /**
+     * Build and return builded query from request context
+     *
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+	public function getAll(Request $request): LengthAwarePaginator;
 
     /**
      * Create, persist and return new Eloquent Model
@@ -69,6 +70,6 @@ interface BaseRepositoryInterface
 	 * @param array $withRelation
 	 * @return void
 	 */
-	public function setWithRelation($withRelation = []): void;
+	public function setWithRelation(array $withRelation = []): void;
 
 }
