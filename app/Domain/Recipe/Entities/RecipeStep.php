@@ -2,10 +2,14 @@
 
 namespace App\Domain\Recipe\Entities;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class RecipeStep extends Model
 {
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'recipe_id',
         'name',
@@ -13,9 +17,15 @@ class RecipeStep extends Model
         'position',
     ];
 
+    /**
+     * @var bool $timestamps
+     */
     public $timestamps = false;
 
-    public function recipe()
+    /**
+     * @return RecipeInterface
+     */
+    public function recipe(): RecipeInterface
     {
         return $this->belongsTo(Recipe::class);
     }

@@ -27,7 +27,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     /**
      * @var array $with
      */
-    protected $with = [];
+    protected array $with = [];
 
     public function __construct(App $app)
     {
@@ -118,7 +118,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param array $withRelation
      * @return void
      */
-	public function setWithRelation($withRelation = []): void
+	public function setWithRelation(array $withRelation = []): void
     {
         $this->with = $withRelation;
     }

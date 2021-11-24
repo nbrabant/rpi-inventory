@@ -2,11 +2,15 @@
 
 namespace App\Domain\Recipe\Entities;
 
+use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model;
 
 class RecipeProduct extends Model
 {
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'recipe_id',
         'product_id',
@@ -14,19 +18,35 @@ class RecipeProduct extends Model
         'unit',
     ];
 
+    /**
+     * @var bool $timestamps
+     */
     public $timestamps = false;
 
-    public function recipe()
+    /**
+     * @TODO : Schedule domain responsability
+     *
+     * @return RecipeInterface
+     */
+    public function recipe(): RecipeInterface
     {
         return $this->belongsTo(Recipe::class);
     }
 
-    public function product()
+    /**
+     * @TODO : Stock domain responsability
+     *
+     * @return Product
+     */
+    public function product(): Product
     {
         return $this->belongsTo(Product::class);
     }
 
-    public static function getUniteList()
+    /**
+     * @return mixed[]
+     */
+    public static function getUniteList(): array
     {
         return [
             '' 					=> '---',
@@ -46,16 +66,22 @@ class RecipeProduct extends Model
         ];
     }
 
-    public function getUnite()
+    /**
+     * @return string
+     */
+    public function getUnite(): string
     {
         return self::getUniteList()[$this->unite];
     }
 
-    // verbose unity
-
-    // convert quantity
-    // http://tout-metz.com/recette/conversion-unite-cuisine
-    public function getQuantity()
+    /**
+     * verbose unity
+     *
+     * convert quantity
+     * http://tout-metz.com/recette/conversion-unite-cuisine
+     * @return float
+     */
+    public function getQuantity(): float
     {
         if ($this->unite == 'centilitre') {
             return $this->quantity * 0.1;
@@ -79,7 +105,11 @@ class RecipeProduct extends Model
         return $this->quantity;
     }
 
-    public static function verboseUnite($unite = '')
+    /**
+     * @param string $unite
+     * @return string
+     */
+    public static function verboseUnite($unite = ''): string
     {
         if ($arrayName = array_key_exists(strtolower($unite), self::getUniteList())) {
             return $unite;
@@ -116,7 +146,10 @@ class RecipeProduct extends Model
         return $unite;
     }
 
-    public function toArray()
+    /**
+     * @return array
+     */
+    public function toArray(): array
     {
         $array = parent::toArray();
 

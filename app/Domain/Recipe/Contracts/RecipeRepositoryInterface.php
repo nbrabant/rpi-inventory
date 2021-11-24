@@ -6,7 +6,17 @@ use App\Infrastructure\Contracts\BaseRepositoryInterface;
 
 interface RecipeRepositoryInterface extends BaseRepositoryInterface
 {
-    public function syncProducts(RecipeInterface $recipe, array $products);
+    /**
+     * @param RecipeInterface $recipe
+     * @param mixed[] $productsList
+     * @return RecipeInterface
+     */
+    public function syncProducts(RecipeInterface $recipe, array $productsList): RecipeInterface;
 
-    public function syncSteps(RecipeInterface $recipe, array $steps);
+    /**
+     * @param RecipeInterface $recipe
+     * @param mixed[] $stepsList
+     * @return RecipeInterface
+     */
+    public function syncSteps(RecipeInterface $recipe, array $stepsList): RecipeInterface;
 }

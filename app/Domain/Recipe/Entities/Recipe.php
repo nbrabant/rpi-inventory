@@ -3,6 +3,7 @@
 namespace App\Domain\Recipe\Entities;
 
 use App\Domain\Schedule\Entities\Schedule;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Image;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Recipe\Contracts\RecipeInterface;
@@ -13,6 +14,9 @@ class Recipe extends Model implements RecipeInterface
 {
     // use CrawlerTraitHelper;
 
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'name',
         'recipe_type',
@@ -23,22 +27,37 @@ class Recipe extends Model implements RecipeInterface
         'complement',
     ];
 
-    public function plannings()
+    /**
+     * @TODO : Schedule domain responsability
+     *
+     * @return HasMany
+     */
+    public function plannings(): HasMany
     {
         return $this->hasMany(Schedule::class);
     }
 
-    public function products()
+    /**
+     * @return HasMany
+     */
+    public function products(): HasMany
     {
         return $this->hasMany(RecipeProduct::class);
     }
 
-    public function steps()
+    /**
+     * @return HasMany
+     */
+    public function steps(): HasMany
     {
         return $this->hasMany(RecipeStep::class);
     }
 
-    public static function getList($emptyLine = false)
+    /**
+     * @param bool $emptyLine
+     * @return mixed[]
+     */
+    public static function getList(bool $emptyLine = false): array
     {
         $return = [];
         if ($emptyLine) {
@@ -51,7 +70,10 @@ class Recipe extends Model implements RecipeInterface
         return $return;
     }
 
-    public function getImage()
+    /**
+     * @return string|null
+     */
+    public function getImage(): ?string
     {
         if (!is_null($this->visual) && is_file(public_path() . '/img/recettes/' . $this->visual)) {
             return '<img src="/img/recettes/' . $this->visual . '" class="img-responsive"/>';
