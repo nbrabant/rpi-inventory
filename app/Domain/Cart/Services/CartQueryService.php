@@ -6,11 +6,11 @@ use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Http\Request;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
+/**
+ * @property CartRepositoryInterface $cartRepository
+ */
 class CartQueryService
 {
-    /** @var CartRepositoryInterface $cartRepository */
-    private CartRepositoryInterface $cartRepository;
-
     /**
      * Create CartQuery Service instance.
      *
@@ -23,10 +23,9 @@ class CartQueryService
     }
 
     /**
-     * @param Request $request
      * @return CartInterface
      */
-    public function getCurrent(Request $request): CartInterface
+    public function getCurrent(): CartInterface
     {
         return $this->cartRepository->getCurrentOrCreate();
     }

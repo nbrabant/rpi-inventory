@@ -2,7 +2,7 @@
 
 namespace App\Domain\Cart\Http\Resources;
 
-use Illuminate\Http\Request;
+use App\Domain\Cart\Contracts\CartInterface;
 use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Cart\Services\CartCommandService;
@@ -19,6 +19,10 @@ use App\Domain\Cart\Requests\{
  */
 class CartProducts extends Controller
 {
+    /**
+     * @param CartCommandService $cartCommandService
+     * @param CartQueryService $cartQueryService
+     */
     public function __construct(
         CartCommandService $cartCommandService,
         CartQueryService $cartQueryService
@@ -27,17 +31,31 @@ class CartProducts extends Controller
         $this->cartQueryService = $cartQueryService;
     }
 
-    public function store(AddToCartRequest $request)
+    /**
+     * @param AddToCartRequest $request
+     * @return CartInterface
+     */
+    public function store(AddToCartRequest $request): CartInterface
     {
         return $this->cartCommandService->attachProduct($request);
     }
 
-    public function update(UpdateToCartRequest $request, $id)
+    /**
+     * @param UpdateToCartRequest $request
+     * @param int $id
+     * @return CartInterface
+     */
+    public function update(UpdateToCartRequest $request, int $id): CartInterface
     {
         return $this->cartCommandService->updateProduct($request, $id);
     }
 
-    public function destroy(RemoveFromCartRequest $request, $product_id)
+    /**
+     * @param RemoveFromCartRequest $request
+     * @param int $product_id
+     * @return CartInterface
+     */
+    public function destroy(RemoveFromCartRequest $request, int $product_id): CartInterface
     {
         return $this->cartCommandService->removeProduct($request, $product_id);
     }

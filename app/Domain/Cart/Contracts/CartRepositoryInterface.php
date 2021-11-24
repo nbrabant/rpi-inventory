@@ -26,10 +26,10 @@ interface CartRepositoryInterface extends BaseRepositoryInterface
 	 * Fill current active cart with attributes and return it
 	 *
 	 * @param Request $request
-	 * @param array $attributes
+	 * @param mixed[] $attributes
 	 * @return CartInterface
 	 */
-	public function updateCurrent(Request $request, $attributes): CartInterface;
+	public function updateCurrent(Request $request, array $attributes): CartInterface;
 
 	/**
 	 * Determine if current active cart has the specified product
@@ -37,26 +37,26 @@ interface CartRepositoryInterface extends BaseRepositoryInterface
 	 * @param int $product_id
 	 * @return bool
 	 */
-	public function cartHasProduct($product_id): bool;
+	public function cartHasProduct(int $product_id): bool;
 
 	/**
 	 * Associate product to current active cart
 	 *
 	 * @param Request $request
-	 * @param [type] $attributes
+	 * @param mixed[] $attributes
 	 * @return CartInterface
 	 */
-	public function associateProduct(Request $request, $attributes): CartInterface;
+	public function associateProduct(Request $request, array $attributes): CartInterface;
 
 	/**
 	 * Update cart's product information
 	 *
 	 * @param Request $request
-	 * @param [type] $attributes
+	 * @param mixed[] $attributes
 	 * @param int $product_id
 	 * @return CartInterface
 	 */
-	public function updateProduct(Request $request, $attributes, $product_id): CartInterface;
+	public function updateProduct(Request $request, array $attributes, int $product_id): CartInterface;
 
 	/**
 	 * Dissociate product to current cart
@@ -65,7 +65,7 @@ interface CartRepositoryInterface extends BaseRepositoryInterface
 	 * @param int $product_id
 	 * @return CartInterface
 	 */
-	public function dissociateProduct(Request $request, $product_id): CartInterface;
+	public function dissociateProduct(Request $request, int $product_id): CartInterface;
 
 	/**
 	 * Remove all the products of current cart

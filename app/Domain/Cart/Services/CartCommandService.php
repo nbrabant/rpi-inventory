@@ -11,14 +11,13 @@ use App\Domain\Cart\Requests\{
     RemoveFromCartRequest,
     ExportCartRequest
 };
+use Illuminate\Http\Request;
 
+/**
+ * @property CartRepositoryInterface $cartRepository
+ */
 class CartCommandService
 {
-    /**
-     * @var CartRepositoryInterface $cartRepository
-     */
-    private CartRepositoryInterface $cartRepository;
-
     /**
      * Create Cart Command Service instance.
      *
@@ -40,7 +39,12 @@ class CartCommandService
             ->updateCurrent($request, $request->validated());
     }
 
-    public function updateTrelloCard(Request $request, $trelloCardId): CartInterface
+    /**
+     * @param ExportCartRequest $request
+     * @param int $trelloCardId
+     * @return CartInterface
+     */
+    public function updateTrelloCard(ExportCartRequest $request, int $trelloCardId): CartInterface
     {
         return $this->cartRepository
             ->updateCurrent($request, ['trello_card_id' => $trelloCardId]);
@@ -62,10 +66,10 @@ class CartCommandService
      * update product
      *
      * @param UpdateToCartRequest $request
-     * @param $cart_id
+     * @param int $cart_id
      * @return CartInterface
      */
-    public function updateProduct(UpdateToCartRequest $request, $cart_id): CartInterface
+    public function updateProduct(UpdateToCartRequest $request, int $cart_id): CartInterface
     {
         return $this->cartRepository
             ->updateProduct($request, $request->validated(), $request->validated()['product_id']);
@@ -75,16 +79,18 @@ class CartCommandService
      * remove product
      *
      * @param RemoveFromCartRequest $request
-     * @param $product_id
+     * @param int $product_id
      * @return CartInterface
      */
-    public function removeProduct(RemoveFromCartRequest $request, $product_id): CartInterface
+    public function removeProduct(RemoveFromCartRequest $request, int $product_id): CartInterface
     {
         return $this->cartRepository
             ->dissociateProduct($request->validated(), $product_id);
     }
 
     /**
+     * @TODO : verify request type
+     *
      * @param ExportCartRequest $request
      * @param $recipes
      * @return CartInterface

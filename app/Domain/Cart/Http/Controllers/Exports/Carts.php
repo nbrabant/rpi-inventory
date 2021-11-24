@@ -2,7 +2,10 @@
 
 namespace App\Domain\Cart\Http\Controllers\Exports;
 
+use App\Domain\Cart\Requests\ExportCartRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 use App\Infrastructure\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -10,18 +13,18 @@ use Carbon\Carbon;
 use App\Domain\Cart\Mail\CartList;
 use App\Domain\Cart\Services\CartQueryService;
 use App\Domain\Cart\Services\CartCommandService;
+use PDF;
 
+/**
+ * @property CartQueryService $cartQueryService
+ * @property CartCommandService $cartCommandService
+ */
 class Carts extends Controller
 {
     /**
-     * @var CartQueryService $cartQueryService
+     * @param CartQueryService $cartQueryService
+     * @param CartCommandService $cartCommandService
      */
-    private $cartQueryService;
-    /**
-     * @var CartCommandService $cartCommandService
-     */
-    private $cartCommandService;
-
     public function __construct(
         CartQueryService $cartQueryService,
         CartCommandService $cartCommandService
@@ -30,7 +33,11 @@ class Carts extends Controller
         $this->cartCommandService = $cartCommandService;
     }
 
-    public function pdf(Request $request)
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function pdf(Request $request): Response
     {
         $cart = $this->cartQueryService->getCurrent($request);
 
@@ -39,11 +46,16 @@ class Carts extends Controller
             'productLines' => $cart->productLines
         ];
 
-        $pdf = \PDF::loadView('pdf.exportliste', $datas);
+        /** @var \Barryvdh\DomPDF\PDF $pdf */
+        $pdf = PDF::loadView('pdf.exportliste', $datas);
         return $pdf->download('liste-courses.pdf');
     }
 
-    public function mail(Request $request)
+    /**
+     * @param Request $request
+     * @return Redirector
+     */
+    public function mail(Request $request): Redirector
     {
         Mail::to('aurore.derumier@gmail.com')
             ->send(new CartList($this->cartQueryService->getCurrent($request)));
@@ -51,7 +63,11 @@ class Carts extends Controller
         return redirect('/#/carts/');
     }
 
-    public function trello(Request $request)
+    /**
+     * @param ExportCartRequest $request
+     * @return Redirector
+     */
+    public function trello(ExportCartRequest $request): Redirector
     {
         $cart = $this->cartQueryService->getCurrent($request);
 

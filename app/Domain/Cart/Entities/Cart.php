@@ -2,31 +2,42 @@
 
 namespace App\Domain\Cart\Entities;
 
-use App\Domain\Cart\Entities\ProductLine;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use App\Domain\Cart\Helpers\TrelloTraitHelper;
 use App\Domain\Cart\Contracts\CartInterface;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Eloquent implements CartInterface
 {
     use TrelloTraitHelper;
 
+    /** @var string[]  */
     protected $fillable = [
         'finished',
         'trello_card_id'
     ];
 
-    public function productLines()
+    /**
+     * @return HasMany
+     */
+    public function productLines(): HasMany
     {
         return $this->hasMany(ProductLine::class);
     }
 
-    public function getProductListIds()
+    /**
+     * @return int[]
+     */
+    public function getProductListIds(): array
     {
         return $this->productLines()->lists('product_id')->toArray();
     }
 
-    public function getProductsOrderedByCategory()
+    /**
+     * @return Collection
+     */
+    public function getProductsOrderedByCategory(): Collection
     {
         return $this->productLines()->with([
             'product',

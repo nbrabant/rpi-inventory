@@ -5,11 +5,11 @@ namespace App\Domain\Cart\Requests\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
+/**
+ * @property CartRepositoryInterface $cartRepository
+ */
 class IsInCart implements Rule
 {
-    /** @var CartRepositoryInterface $cartRepository */
-    private CartRepositoryInterface $cartRepository;
-    
     /**
      * Create a new rule instance.
      *
