@@ -12,7 +12,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
-    protected $perPage = 10;
+    protected int $perPage = 10;
 
     /**
      * @var App $app
