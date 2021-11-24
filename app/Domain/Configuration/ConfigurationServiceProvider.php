@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Domain\Configuration;
-
 
 use App\Application\Providers\DomainServiceProvider;
 use App\Domain\Configuration\Contracts\ConfigurationRepositoryInterface;

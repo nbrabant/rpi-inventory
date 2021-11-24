@@ -22,11 +22,13 @@ class ConfigurationRepository implements ConfigurationRepositoryInterface
      */
     public function save(string $prefix, array $configurations): bool
     {
+        /** @var mixed[] $configs */
         $configs = Config::get($prefix);
 
         foreach ($configurations as $key => $value) {
             $configs[$key] = $value;
         }
+
         $configContent = var_export($configs, 1);
         return (File::put(
             config_path() . '/' . $prefix . '.php',
