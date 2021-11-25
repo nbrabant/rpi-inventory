@@ -9,17 +9,12 @@ use Illuminate\Http\Request;
 use App\Domain\Stock\Requests\ProductRequest;
 use App\Domain\Stock\Requests\OperationRequest;
 
+/**
+ * @property ProductRepositoryInterface $productRepository
+ * @property OperationRepositoryInterface $operationRepository
+ */
 class ProductCommandService
 {
-    /**
-     * @var ProductRepositoryInterface $productRepository
-     */
-    private ProductRepositoryInterface $productRepository;
-    /**
-     * @var OperationRepositoryInterface $operationRepository
-     */
-    private OperationRepositoryInterface $operationRepository;
-
     public function __construct(
         ProductRepositoryInterface $productRepository,
         OperationRepositoryInterface $operationRepository
@@ -47,17 +42,21 @@ class ProductCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param ProductRequest $request
      * @return Model
      */
-    public function updateProduct($id, ProductRequest $request): Model
+    public function updateProduct(int $id, ProductRequest $request): Model
     {
         return $this->productRepository
             ->update($request->validated(), $id);
     }
 
-    public function destroyProduct($id)
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function destroyProduct(int $id): int
     {
         return $this->productRepository->destroy($id);
     }
@@ -97,10 +96,10 @@ class ProductCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return bool
      */
-    public function updateProductStockQuantity($id): bool
+    public function updateProductStockQuantity(int $id): bool
     {
         $product = $this->productRepository->find($id);
         $product->quantity = $this->operationRepository->countQuantityByProduct($id);

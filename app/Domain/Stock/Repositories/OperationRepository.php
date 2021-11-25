@@ -9,9 +9,7 @@ use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 class OperationRepository extends BaseRepository implements OperationRepositoryInterface
 {
     /**
-	 * Return repository entity model used
-	 *
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function model(): string
     {
@@ -19,7 +17,7 @@ class OperationRepository extends BaseRepository implements OperationRepositoryI
     }
 
     /**
-	 * Initialize new Eloquent model
+	 * @inheritDoc
 	 *
 	 * @return Operation
 	 */
@@ -31,10 +29,7 @@ class OperationRepository extends BaseRepository implements OperationRepositoryI
     }
 
     /**
-     * Count quantity for a product
-     *
-     * @param string $productId
-     * @return int
+     * @inheritDoc
      */
 	public function countQuantityByProduct(string $productId): int
     {

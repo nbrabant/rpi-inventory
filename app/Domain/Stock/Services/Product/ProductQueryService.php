@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * @property ProductRepositoryInterface $productRepository
+ */
 class ProductQueryService
 {
     /**
-     * @var ProductRepositoryInterface $productRepository
+     * @param ProductRepositoryInterface $productRepository
      */
-    private ProductRepositoryInterface $productRepository;
-
     public function __construct(
         ProductRepositoryInterface $productRepository
     ) {
@@ -30,21 +31,21 @@ class ProductQueryService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return Model
      */
-    public function getProductRepository($id, Request $request): Model
+    public function getProductRepository(int $id, Request $request): Model
     {
         return $this->productRepository->find($id, $request);
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return Model
      */
-    public function getProductWithConsumptions($id, Request $request): Model
+    public function getProductWithConsumptions(int $id, Request $request): Model
     {
         $this->productRepository->setWithRelation('operations');
 

@@ -5,6 +5,7 @@ namespace App\Domain\Recipe\Entities;
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RecipeProduct extends Model implements RecipeInterface
 {
@@ -26,9 +27,9 @@ class RecipeProduct extends Model implements RecipeInterface
     /**
      * @TODO : Schedule domain responsability
      *
-     * @return RecipeInterface
+     * @return BelongsTo
      */
-    public function recipe(): RecipeInterface
+    public function recipe(): BelongsTo
     {
         return $this->belongsTo(Recipe::class);
     }
@@ -36,9 +37,9 @@ class RecipeProduct extends Model implements RecipeInterface
     /**
      * @TODO : Stock domain responsability
      *
-     * @return Product
+     * @return BelongsTo
      */
-    public function product(): Product
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

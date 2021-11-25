@@ -6,13 +6,14 @@ use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Stock\Requests\CategoryRequest;
 
+/**
+ * @property CategoryRepositoryInterface $categoryRepository
+ */
 class CategoryCommandService
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @param CategoryRepositoryInterface $categoryRepository
      */
-    private CategoryRepositoryInterface $categoryRepository;
-
     public function __construct(
         CategoryRepositoryInterface $categoryRepository
     ) {
@@ -38,21 +39,21 @@ class CategoryCommandService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param CategoryRequest $request
      * @return Model
      */
-    public function updateCategory($id, CategoryRequest $request): Model
+    public function updateCategory(int $id, CategoryRequest $request): Model
     {
         return $this->categoryRepository
             ->update($request->validated(), $id);
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return int
      */
-    public function destroyCategory($id): int
+    public function destroyCategory(int $id): int
     {
         return $this->categoryRepository->destroy($id);
     }

@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+/**
+ * @property CategoryRepositoryInterface $categoryRepository
+ */
 class CategoryQueryService
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @param CategoryRepositoryInterface $categoryRepository
      */
-    private CategoryRepositoryInterface $categoryRepository;
-
     public function __construct(
         CategoryRepositoryInterface $categoryRepository
     ) {
@@ -30,11 +31,11 @@ class CategoryQueryService
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param Request $request
      * @return Model
      */
-    public function getCategory($id, Request $request): Model
+    public function getCategory(int $id, Request $request): Model
     {
         return $this->categoryRepository->find($id, $request);
     }
