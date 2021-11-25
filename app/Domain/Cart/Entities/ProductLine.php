@@ -8,6 +8,7 @@ use App\Domain\Stock\Entities\Category;
 use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductLine extends Eloquent implements ProductLineInterface
 {
@@ -29,9 +30,9 @@ class ProductLine extends Eloquent implements ProductLineInterface
     }
 
     /**
-     * @return CartInterface
+     * @return BelongsTo
      */
-    public function cart(): CartInterface
+    public function cart(): BelongsTo
     {
         return $this->belongsTo(Cart::class);
     }
@@ -39,9 +40,9 @@ class ProductLine extends Eloquent implements ProductLineInterface
     /**
      * @TODO : Stock domain responsability
      *
-     * @return Product
+     * @return BelongsTo
      */
-    public function product(): Product
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

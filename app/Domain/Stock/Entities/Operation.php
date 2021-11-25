@@ -2,15 +2,21 @@
 
 namespace App\Domain\Stock\Entities;
 
+use App\Domain\Stock\Contracts\OperationInterface;
+use App\Domain\Stock\Contracts\ProductInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Operation extends Eloquent
+class Operation extends Eloquent implements OperationInterface
 {
-    const INCREMENT_OPERATOR = '+';
-    const DECREMENT_OPERATOR = '-';
-
+    /**
+     * @var string $table
+     */
     protected $table = 'operations';
 
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'product_id',
         'quantity',
@@ -18,13 +24,20 @@ class Operation extends Eloquent
         'detail'
     ];
 
-    public function product()
+    /**
+     * @return BelongsTo
+     */
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function sumProductQuantity()
+    /**
+     * @return int
+     */
+    public function sumProductQuantity(): int
     {
+        /** @var OperationInterface $operations */
         $operations = self::where('product_id', $this->product_id)->get();
 
         return array_reduce($operations, function ($sum, $operation) {

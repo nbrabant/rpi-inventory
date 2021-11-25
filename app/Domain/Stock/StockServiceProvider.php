@@ -25,7 +25,7 @@ class StockServiceProvider extends DomainServiceProvider
     /**
      * Indicates if loading of the provider is deferred.
      *
-     * @var bool
+     * @var bool $defer
      */
     protected $defer = true;
 

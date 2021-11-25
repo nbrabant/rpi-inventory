@@ -4,19 +4,25 @@ namespace App\Domain\Stock\Entities;
 
 use App\Domain\Recipe\Entities\RecipeProduct;
 use App\Domain\Cart\Entities\ProductLine;
+use App\Domain\Stock\Contracts\ProductInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 
-class Product extends Eloquent
+class Product extends Eloquent implements ProductInterface
 {
-    const STATUS_SUCCESS = 'alert-success';
-    const STATUS_WARNING = 'alert-warning';
-    const STATUS_DANGER = 'alert-danger';
-
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
     }
 
+    /**
+     * @var string[] $fillable
+     */
     protected $fillable = [
         'category_id',
         'name',
@@ -26,28 +32,45 @@ class Product extends Eloquent
         'unit'
     ];
 
-    public function category()
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function operations()
+    /**
+     * @return HasMany
+     */
+    public function operations(): HasMany
     {
         return $this->hasMany(Operation::class)
             ->orderBy('created_at', 'DESC');
     }
 
-    public function productLine()
+    /**
+     * @return HasMany
+     */
+    public function productLine(): HasMany
     {
         return $this->hasMany(ProductLine::class);
     }
 
-    public function recipes()
+    /**
+     * @return HasMany
+     */
+    public function recipes(): HasMany
     {
         return $this->hasMany(RecipeProduct::class);
     }
 
-    public function scopeWithoutIds($query, $ids = [])
+    /**
+     * @param Builder $query
+     * @param array $ids
+     * @return Builder
+     */
+    public function scopeWithoutIds(Builder $query, array $ids = []): Builder
     {
         if (is_array($ids) && !empty($ids)) {
             $query->whereNotIn('id', $ids);
@@ -55,7 +78,12 @@ class Product extends Eloquent
         return $query;
     }
 
-    public static function getList($withoutId = null, $emptyLine = true)
+    /**
+     * @param null $withoutId
+     * @param bool $emptyLine
+     * @return array
+     */
+    public static function getList($withoutId = null, bool $emptyLine = true): array
     {
         $return = [];
         if ($emptyLine) {
@@ -69,7 +97,10 @@ class Product extends Eloquent
         return $return;
     }
 
-    public function getStatus()
+    /**
+     * @return string
+     */
+    public function getStatus(): string
     {
         if ($this->min_quantity == 0 || $this->quantity > $this->min_quantity) {
             return self::STATUS_SUCCESS;

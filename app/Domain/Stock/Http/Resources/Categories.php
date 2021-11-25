@@ -2,12 +2,14 @@
 
 namespace App\Domain\Stock\Http\Resources;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Category\CategoryCommandService;
 use App\Domain\Stock\Services\Category\CategoryQueryService;
 use App\Domain\Stock\Requests\CategoryRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * @property CategoryQueryService categoryQueryService
@@ -15,6 +17,10 @@ use App\Domain\Stock\Requests\CategoryRequest;
  */
 class Categories extends Controller
 {
+    /**
+     * @param CategoryCommandService $categoryCommandService
+     * @param CategoryQueryService $categoryQueryService
+     */
     public function __construct(
         CategoryCommandService $categoryCommandService, 
         CategoryQueryService $categoryQueryService
@@ -23,32 +29,57 @@ class Categories extends Controller
         $this->categoryQueryService = $categoryQueryService;
     }
 
-    public function index(Request $request)
+    /**
+     * @param Request $request
+     * @return LengthAwarePaginator
+     */
+    public function index(Request $request): LengthAwarePaginator
     {
         return $this->categoryQueryService->getCategories($request);
     }
 
-    public function create()
+    /**
+     * @return Model
+     */
+    public function create(): Model
     {
         return $this->categoryCommandService->initializeCategory();
     }
 
-    public function store(CategoryRequest $request)
+    /**
+     * @param CategoryRequest $request
+     * @return Model
+     */
+    public function store(CategoryRequest $request): Model
     {
         return $this->categoryCommandService->createCategory($request);
     }
 
-    public function show(Request $request, $id)
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Model
+     */
+    public function show(Request $request, int $id): Model
     {
         return $this->categoryQueryService->getCategory($id, $request);
     }
 
-    public function update(CategoryRequest $request, $id)
+    /**
+     * @param CategoryRequest $request
+     * @param int $id
+     * @return Model
+     */
+    public function update(CategoryRequest $request, int $id): Model
     {
         return $this->categoryCommandService->updateCategory($id, $request);
     }
 
-    public function destroy($id)
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function destroy(int $id): int
     {
         return $this->categoryCommandService->destroyCategory($id);
     }

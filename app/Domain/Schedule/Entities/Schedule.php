@@ -7,6 +7,7 @@ use App\Domain\Recipe\Entities\Recipe;
 use App\Domain\Schedule\Contracts\ScheduleInterface;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Query\Builder;
 
 class Schedule extends Model implements ScheduleInterface
@@ -42,9 +43,9 @@ class Schedule extends Model implements ScheduleInterface
     /**
      * @TODO : Recipe domain responsability
      *
-     * @return RecipeInterface
+     * @return BelongsTo
      */
-    public function recipe(): RecipeInterface
+    public function recipe(): BelongsTo
     {
         return $this->belongsTo(Recipe::class);
     }

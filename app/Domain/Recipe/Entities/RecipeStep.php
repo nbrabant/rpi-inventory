@@ -4,6 +4,7 @@ namespace App\Domain\Recipe\Entities;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class RecipeStep extends Model
 {
@@ -23,9 +24,9 @@ class RecipeStep extends Model
     public $timestamps = false;
 
     /**
-     * @return RecipeInterface
+     * @return BelongsTo
      */
-    public function recipe(): RecipeInterface
+    public function recipe(): BelongsTo
     {
         return $this->belongsTo(Recipe::class);
     }

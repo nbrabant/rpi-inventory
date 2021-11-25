@@ -149,7 +149,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         if ($request->limit === 'full') {
             $model         = static::MODEL;
             $this->perPage = $model::count();
-        } elseif (ctype_digit($request->limit)) {
+        } elseif (ctype_digit($request->limit) && $request->limit) {
             $this->perPage = (int) $request->limit;
         }
 

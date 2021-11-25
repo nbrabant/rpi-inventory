@@ -8,12 +8,13 @@ use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
-    protected $perPage = false;
+    /**
+     * @var int
+     */
+    protected int $perPage = 0;
 
     /**
-	 * Return repository entity model used
-	 *
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function model(): string
     {
@@ -21,7 +22,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     }
 
     /**
-	 * Initialize new Eloquent model
+	 * @inheritDoc
 	 *
 	 * @return Category
 	 */

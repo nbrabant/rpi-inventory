@@ -9,9 +9,7 @@ use App\Domain\Stock\Contracts\ProductRepositoryInterface;
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
     /**
-	 * Return repository entity model used
-	 *
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function model(): string
     {
@@ -19,9 +17,9 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
     /**
-	 * Initialize new Eloquent model
-	 *
-	 * @return Product
+	 * @inheritDoc
+     *
+     * @return Product
 	 */
     public function initialize(): Product
     {
