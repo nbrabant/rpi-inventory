@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Contracts;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use App\Application\Exceptions\RepositoryException;
 use Illuminate\Database\Eloquent\Model;
@@ -12,17 +13,20 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
+    /**
+     * @var int $perPage
+     */
     protected int $perPage = 10;
 
     /**
      * @var App $app
      */
-    private $app;
+    private App $app;
 
     /**
      * @var Model $model
      */
-    protected $model;
+    protected Model $model;
 
     /**
      * @var array $with
@@ -36,10 +40,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-	 * Build and return builded query from request context
-	 * 
-	 * @return \Illuminate\\Pagination\\LengthAwarePaginator
-	 */
+     * @inheritDoc
+     */
     public function getAll(Request $request): LengthAwarePaginator
     {
         $query = $this->model->query();
@@ -48,6 +50,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
             $query->with($this->with);
         }
 
+        // @TODO : move to search criteria
         $query = $this->handleFieldsParameters($query, $request);
         $query = $this->handleOrderByParameters($query, $request);
         $query = $this->handleSearchParameters($query, $request);
@@ -57,10 +60,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-	 * Create, persist and return new Eloquent Model
-	 * 
-	 * @return \Illuminate\Database\Eloquent\Model
-	 */
+     * @inheritDoc
+     */
     public function create(array $attributes): Model
     {
         $object = $this->model->create($attributes);
@@ -69,11 +70,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * Update Eloquent model from his identifier
-     *
-     * @param array $attributes
-     * @param int $id
-     * @return \Illuminate\Database\Eloquent\Model
+     * @inheritDoc
      */
     public function update(array $attributes, int $id): Model
     {
@@ -90,10 +87,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * Destroy the models for the given IDs.
-     *
-     * @param int $id
-     * @return int
+     * @inheritDoc
      */
 	public function destroy(int $id): int
     {
@@ -101,11 +95,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * Find Eloquent Model from his identifier based on field list
-     *
-     * @param string $id
-     * @param array|object $columns
-     * @return Model
+     * @inheritDoc
      */
 	public function find(string $id, $columns = array('*')): Model
     {
@@ -113,17 +103,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * Add relationnal to request
-     *
-     * @param array $withRelation
-     * @return void
+     * @inheritDoc
      */
 	public function setWithRelation(array $withRelation = []): void
     {
         $this->with = $withRelation;
     }
-    
-    private function makeModel()
+
+    /**
+     * @throws RepositoryException
+     * @throws BindingResolutionException
+     */
+    private function makeModel(): void
     {
         $model = $this->app->make($this->model());
 
@@ -131,10 +122,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
-        return $this->model = $model;
+        $this->model = $model;
     }
 
-    // CRITERIA
+    // CRITERIA - move to specific builder class
 
     /**
      * Handle "limit" on Query object depending on Request datas.
@@ -144,10 +135,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handlePaginationParameters(QueryBuilder $query, Request $request)
+    protected function handlePaginationParameters(QueryBuilder $query, Request $request): QueryBuilder
     {
         if ($request->limit === 'full') {
-            $model         = static::MODEL;
+            $model         = static::MODEL; // @TODO : test this...
             $this->perPage = $model::count();
         } elseif (ctype_digit($request->limit) && $request->limit) {
             $this->perPage = (int) $request->limit;
@@ -164,7 +155,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleFieldsParameters(QueryBuilder $query, Request $request)
+    protected function handleFieldsParameters(QueryBuilder $query, Request $request): QueryBuilder
     {
         if (! $request->fields) {
             return $query;
@@ -186,7 +177,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleOrderByParameters(QueryBuilder $query, Request $request)
+    protected function handleOrderByParameters(QueryBuilder $query, Request $request): QueryBuilder
     {
         if (! $request->sortCol || ! $request->sortDir) {
             return $query;
@@ -216,7 +207,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleSearchParameters(QueryBuilder $query, Request $request)
+    protected function handleSearchParameters(QueryBuilder $query, Request $request): QueryBuilder
     {
         if (!$request->search || (!is_array($request->search) && !is_string($request->search))) {
             return $query;
@@ -250,13 +241,13 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * Build search query for the given field name, type and values.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param string       $searchType
+     * @param string $fieldName
+     * @param string $searchType
      * @param mixed        $values
      *
      * @return QueryBuilder
      */
-    protected function handleSearchQuery(QueryBuilder $query, $fieldName, $searchType, $values)
+    protected function handleSearchQuery(QueryBuilder $query, string $fieldName, string $searchType, $values): QueryBuilder
     {
         $dotPos = strpos($fieldName, '.');
         if ($dotPos === false || $dotPos <= 0) {
@@ -282,19 +273,20 @@ abstract class BaseRepository implements BaseRepositoryInterface
                 });
             }
         }
+
+        return $query;
     }
 
     /**
      * Choose search constraint based on search type.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param string       $searchType
+     * @param string $fieldName
+     * @param string $searchType
      * @param mixed        $values
-
      * @return QueryBuilder
      */
-    protected function handleSearchType(QueryBuilder $query, $fieldName, $searchType, $values)
+    protected function handleSearchType(QueryBuilder $query, string $fieldName, string $searchType, $values): QueryBuilder
     {
         if ($searchType === 'equal' && is_string($values) && mb_strlen($values)) {
             return $this->handleSearchEqual($query, $fieldName, $values);
@@ -337,7 +329,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleSearchEqual(QueryBuilder $query, $fieldName, $value)
+    protected function handleSearchEqual(QueryBuilder $query, string $fieldName, string $value): QueryBuilder
     {
         return $query->where($fieldName, $value);
     }
@@ -351,7 +343,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleSearchLike(QueryBuilder $query, $fieldName, $values)
+    protected function handleSearchLike(QueryBuilder $query, string $fieldName, string $values): QueryBuilder
     {
         foreach (explode(' ', $values) as $value) {
             $query->where($fieldName, 'like', '%'.$value.'%');
@@ -369,7 +361,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      *
      * @return QueryBuilder
      */
-    protected function handleSearchOrLike(QueryBuilder $query, $fieldName, $values)
+    protected function handleSearchOrLike(QueryBuilder $query, string $fieldName, string $values): QueryBuilder
     {
         foreach (explode(' ', $values) as $value) {
             $query->orWhere($fieldName, 'like', '%'.$value.'%');
@@ -382,12 +374,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * Add interval constraint on query for the given field name and values.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param array        $values
+     * @param string $fieldName
+     * @param array $values
      *
      * @return QueryBuilder
      */
-    protected function handleSearchBetween(QueryBuilder $query, $fieldName, $values)
+    protected function handleSearchBetween(QueryBuilder $query, string $fieldName, array $values): QueryBuilder
     {
         if (array_key_exists('min', $values) && mb_strlen($values['min'])) {
             $query->where($fieldName, '>=', $values['min']);
@@ -404,12 +396,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * Add date interval constraint on query for the given field name and values.
      *
      * @param QueryBuilder $query
-     * @param string       $fieldName
-     * @param array        $values
+     * @param string $fieldName
+     * @param array $values
      *
      * @return QueryBuilder
      */
-    protected function handleSearchBetweenDates(QueryBuilder $query, $fieldName, $values)
+    protected function handleSearchBetweenDates(QueryBuilder $query, string $fieldName, array $values): QueryBuilder
     {
         if (array_key_exists('min', $values) && mb_strlen($values['min'])) {
             $query->where(DB::raw('DATE('.$fieldName.')'), '>=', $values['min']);
