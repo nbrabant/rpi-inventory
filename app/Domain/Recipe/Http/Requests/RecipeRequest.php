@@ -2,6 +2,7 @@
 
 namespace App\Domain\Recipe\Http\Requests;
 
+use App\Domain\Recipe\Http\Requests\Rules\IsValidProductUnit;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RecipeRequest extends FormRequest
@@ -21,7 +22,7 @@ class RecipeRequest extends FormRequest
      *
      * @return mixed[]
      */
-    public function rules(): array
+    public function rules(IsValidProductUnit $isValidProductUnit): array
     {
         return [
             'name'                  => 'required|string',
@@ -32,8 +33,7 @@ class RecipeRequest extends FormRequest
             'complement'            => 'nullable|string',
             'products.*.product_id' => 'integer',
             'products.*.quantity'   => 'integer',
-            // @TODO : define validation rule for product unit?
-            'products.*.unit'       => 'nullable|string|in:grammes,litre,centilitre,cuilliere_cafe,cuilliere_dessert,cuilliere_soupe,verre_liqueur,verre_moutarde,grand_verre,tasse_cafe,bol,sachet,gousse',
+            'products.*.unit'       => ['nullable', 'string', $isValidProductUnit],
             'steps.*.id'            => 'nullable|integer',
             'steps.*.name'          => 'string',
             'steps.*.instruction'   => 'string',
