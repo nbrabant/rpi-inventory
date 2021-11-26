@@ -5,7 +5,7 @@ namespace App\Domain\Stock\Entities;
 use App\Domain\Stock\Contracts\CategoryInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Category extends Eloquent implements CategoryInterface
 {

@@ -57,10 +57,10 @@ class Categories extends Controller
 
     /**
      * @param Request $request
-     * @param int $id
+     * @param string $id
      * @return Model
      */
-    public function show(Request $request, int $id): Model
+    public function show(Request $request, string $id): Model
     {
         return $this->categoryQueryService->getCategory($id, $request);
     }

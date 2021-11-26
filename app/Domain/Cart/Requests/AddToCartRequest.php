@@ -22,10 +22,10 @@ class AddToCartRequest extends FormRequest
      *
      * @return mixed[]
      */
-    public function rules(): array
+    public function rules(NotInCart $notInCart): array
     {
         return [
-            'product_id' => ['required', 'integer', new NotInCart],
+            'product_id' => ['required', 'integer', $notInCart],
             'quantity' => 'required|integer'
         ];
     }

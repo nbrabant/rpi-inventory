@@ -11,24 +11,17 @@ class ConfigurationServiceProvider extends DomainServiceProvider
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = 'App\Domain\Configuration\Http\Controllers';
+    protected static string $webNamespace = 'App\Domain\Configuration\Http\Controllers';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = 'App\Domain\Configuration\Http\Resources';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool $defer
-     */
-    protected $defer = true;
+    protected static string $apiNamespace = 'App\Domain\Configuration\Http\Resources';
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [
+    protected array $injections = [
         ConfigurationRepositoryInterface::class => ConfigurationRepository::class,
     ];
 }

@@ -30,10 +30,10 @@ class Carts extends Controller
 
     /**
      * @param Request $request
-     * @param int $id
+     * @param string $id
      * @return CartInterface
      */
-    public function show(Request $request, int $id): CartInterface
+    public function show(Request $request, string $id): CartInterface
     {
         return $this->cartQueryService->getCurrent($request);
     }

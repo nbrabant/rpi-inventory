@@ -22,10 +22,10 @@ class RemoveFromCartRequest extends FormRequest
      *
      * @return mixed[]
      */
-    public function rules(): array
+    public function rules(IsInCart $isInCart): array
     {
         return [
-            'product_id' => ['required', 'integer', new IsInCart]
+            'product_id' => ['required', 'integer', $isInCart]
         ];
     }
 }

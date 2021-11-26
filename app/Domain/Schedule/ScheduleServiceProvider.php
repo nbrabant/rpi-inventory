@@ -11,24 +11,18 @@ class ScheduleServiceProvider extends DomainServiceProvider
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = 'App\Domain\Schedule\Http\Controllers';
+    protected static string $webNamespace = 'App\Domain\Schedule\Http\Controllers';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = 'App\Domain\Schedule\Http\Resources';
+    protected static string $apiNamespace = 'App\Domain\Schedule\Http\Resources';
 
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool $defer
-     */
-    protected $defer = true;
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [
+    protected array $injections = [
         ScheduleRepositoryInterface::class => ScheduleRepository::class
     ];
 

@@ -56,10 +56,10 @@ class Consumptions extends Controller
 
     /**
      * @param Request $request
-     * @param int $id
+     * @param string $id
      * @return Model
      */
-    public function show(Request $request, int $id): Model
+    public function show(Request $request, string $id): Model
     {
         return $this->productQueryService->getProductWithConsumptions($id, $request);
     }

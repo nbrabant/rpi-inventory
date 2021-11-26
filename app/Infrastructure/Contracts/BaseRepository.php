@@ -133,9 +133,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Request      $request
      * @param QueryBuilder $query
      *
-     * @return QueryBuilder
+     * @return LengthAwarePaginator
      */
-    protected function handlePaginationParameters(QueryBuilder $query, Request $request): QueryBuilder
+    protected function handlePaginationParameters(QueryBuilder $query, Request $request): LengthAwarePaginator
     {
         if ($request->limit === 'full') {
             $model         = static::MODEL; // @TODO : test this...

@@ -7,32 +7,27 @@ use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
 use App\Domain\Cart\Entities\Cart;
 use App\Domain\Cart\Repositories\CartRepository;
+use App\Domain\Cart\Requests\Rules\IsInCart;
+use App\Domain\Cart\Requests\Rules\NotInCart;
+use Illuminate\Support\Facades\App;
 
 class CartServiceProvider extends DomainServiceProvider
 {
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = 'App\Domain\Cart\Http\Controllers';
+    protected static string $webNamespace = 'App\Domain\Cart\Http\Controllers';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = 'App\Domain\Cart\Http\Resources';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool $defer
-     */
-    protected $defer = true;
+    protected static string $apiNamespace = 'App\Domain\Cart\Http\Resources';
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [
+    protected array $injections = [
         CartInterface::class => Cart::class,
         CartRepositoryInterface::class => CartRepository::class,
     ];
-
 }
