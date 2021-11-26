@@ -4,7 +4,7 @@ namespace App\Domain\Cart\Services;
 
 use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
-use App\Domain\Cart\Requests\{
+use App\Domain\Cart\Http\Requests\{
     FinishedCartRequest,
     AddToCartRequest,
     UpdateToCartRequest,

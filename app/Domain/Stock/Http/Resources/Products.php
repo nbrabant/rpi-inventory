@@ -8,7 +8,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
-use App\Domain\Stock\Requests\ProductRequest;
+use App\Domain\Stock\Http\Requests\ProductRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**

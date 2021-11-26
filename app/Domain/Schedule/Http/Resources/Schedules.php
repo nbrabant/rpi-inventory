@@ -5,7 +5,7 @@ namespace App\Domain\Schedule\Http\Resources;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
-use App\Domain\Schedule\Requests\ScheduleRequest;
+use App\Domain\Schedule\Http\Requests\ScheduleRequest;
 
 use App\Domain\Schedule\Services\ScheduleCommandService;
 use App\Domain\Schedule\Services\ScheduleQueryService;

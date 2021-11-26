@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Cart\Requests;
+namespace App\Domain\Cart\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Domain\Cart\Requests\Rules\NotInCart;
+use App\Domain\Cart\Http\Requests\Rules\NotInCart;
 
 class AddToCartRequest extends FormRequest
 {

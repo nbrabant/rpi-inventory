@@ -7,9 +7,6 @@ use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
 use App\Domain\Cart\Entities\Cart;
 use App\Domain\Cart\Repositories\CartRepository;
-use App\Domain\Cart\Requests\Rules\IsInCart;
-use App\Domain\Cart\Requests\Rules\NotInCart;
-use Illuminate\Support\Facades\App;
 
 class CartServiceProvider extends DomainServiceProvider
 {

@@ -4,7 +4,7 @@ namespace App\Domain\Schedule\Services;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
-use App\Domain\Schedule\Requests\ScheduleRequest;
+use App\Domain\Schedule\Http\Requests\ScheduleRequest;
 
 /**
  * @property ScheduleRepositoryInterface $scheduleRepository

@@ -4,7 +4,7 @@ namespace App\Domain\Stock\Services\Category;
 
 use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use App\Domain\Stock\Requests\CategoryRequest;
+use App\Domain\Stock\Http\Requests\CategoryRequest;
 
 /**
  * @property CategoryRepositoryInterface $categoryRepository

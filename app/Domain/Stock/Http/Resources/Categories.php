@@ -8,7 +8,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Stock\Services\Category\CategoryCommandService;
 use App\Domain\Stock\Services\Category\CategoryQueryService;
-use App\Domain\Stock\Requests\CategoryRequest;
+use App\Domain\Stock\Http\Requests\CategoryRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**

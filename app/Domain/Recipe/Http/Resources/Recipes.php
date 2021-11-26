@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
 use App\Domain\Recipe\Services\RecipeCommandService;
 use App\Domain\Recipe\Services\RecipeQueryService;
-use App\Domain\Recipe\Requests\RecipeRequest;
+use App\Domain\Recipe\Http\Requests\RecipeRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
