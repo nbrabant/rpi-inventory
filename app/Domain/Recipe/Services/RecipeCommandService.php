@@ -6,7 +6,7 @@ use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Recipe;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
-use App\Domain\Recipe\Requests\RecipeRequest;
+use App\Domain\Recipe\Http\Requests\RecipeRequest;
 
 /**
  * @property RecipeRepositoryInterface $recipeRepository

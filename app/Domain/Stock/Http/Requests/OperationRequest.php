@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Cart\Requests;
+namespace App\Domain\Stock\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FinishedCartRequest extends FormRequest
+class OperationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,12 +19,15 @@ class FinishedCartRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return mixed[]
+     * @return string[]
      */
     public function rules(): array
     {
         return [
-            'finished' => 'boolean'
+            'product_id' => 'required|integer',
+            'quantity' => 'required|integer',
+            'operation' => 'required|in:+,-',
+            'detail' => 'required|string',
         ];
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Domain\Cart\Requests;
+namespace App\Domain\Cart\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Domain\Cart\Http\Requests\Rules\IsInCart;
 
-class ExportCartRequest extends FormRequest
+class UpdateToCartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +22,11 @@ class ExportCartRequest extends FormRequest
      *
      * @return mixed[]
      */
-    public function rules(): array
+    public function rules(IsInCart $isInCart): array
     {
         return [
-            'exportType' => ['in:export,cleanexport']
+            'product_id' => ['required', 'integer', $isInCart],
+            'quantity' => 'required|integer'
         ];
     }
 }

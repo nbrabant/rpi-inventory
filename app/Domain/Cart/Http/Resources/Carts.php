@@ -8,7 +8,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
-use App\Domain\Cart\Requests\FinishedCartRequest;
+use App\Domain\Cart\Http\Requests\FinishedCartRequest;
 
 /**
  * @property CartCommandService cartCommandService

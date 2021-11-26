@@ -6,8 +6,10 @@ use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 use App\Domain\Stock\Contracts\ProductRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Stock\Requests\ProductRequest;
-use App\Domain\Stock\Requests\OperationRequest;
+use App\Domain\Stock\Http\Requests\{
+    ProductRequest,
+    OperationRequest
+};
 
 /**
  * @property ProductRepositoryInterface $productRepository

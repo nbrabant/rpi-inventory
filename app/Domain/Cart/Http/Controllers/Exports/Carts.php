@@ -2,7 +2,7 @@
 
 namespace App\Domain\Cart\Http\Controllers\Exports;
 
-use App\Domain\Cart\Requests\ExportCartRequest;
+use App\Domain\Cart\Http\Requests\ExportCartRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;

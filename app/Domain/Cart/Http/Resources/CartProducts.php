@@ -7,7 +7,7 @@ use App\Infrastructure\Http\Controllers\Controller;
 
 use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
-use App\Domain\Cart\Requests\{
+use App\Domain\Cart\Http\Requests\{
     AddToCartRequest,
     UpdateToCartRequest,
     RemoveFromCartRequest
