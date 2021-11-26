@@ -33,11 +33,11 @@ class ScheduleQueryService
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function getSchedule(int $id, Request $request): Model
+    public function getSchedule(string $id, Request $request): Model
     {
         return $this->scheduleRepository->find($id, $request);
     }

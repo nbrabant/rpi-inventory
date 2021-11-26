@@ -56,11 +56,11 @@ class Recipes extends Controller
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function show(int $id, Request $request): Model
+    public function show(string $id, Request $request): Model
     {
         return $this->recipeQueryService->getRecipe($id, $request);
     }

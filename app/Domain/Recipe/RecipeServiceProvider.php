@@ -13,24 +13,17 @@ class RecipeServiceProvider extends DomainServiceProvider
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = 'App\Domain\Recipe\Http\Controllers';
+    protected static string $webNamespace = 'App\Domain\Recipe\Http\Controllers';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = 'App\Domain\Recipe\Http\Resources';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool $defer
-     */
-    protected $defer = true;
+    protected static string $apiNamespace = 'App\Domain\Recipe\Http\Resources';
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [
+    protected array $injections = [
         RecipeInterface::class => Recipe::class,
         RecipeRepositoryInterface::class => RecipeRepository::class,
     ];

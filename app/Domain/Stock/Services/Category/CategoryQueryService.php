@@ -31,11 +31,11 @@ class CategoryQueryService
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function getCategory(int $id, Request $request): Model
+    public function getCategory(string $id, Request $request): Model
     {
         return $this->categoryRepository->find($id, $request);
     }

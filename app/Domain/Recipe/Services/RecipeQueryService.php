@@ -32,11 +32,11 @@ class RecipeQueryService
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function getRecipe(int $id, Request $request): Model
+    public function getRecipe(string $id, Request $request): Model
     {
         return $this->recipeRepository->find($id, $request);
     }

@@ -15,24 +15,17 @@ class StockServiceProvider extends DomainServiceProvider
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = 'App\Domain\Stock\Http\Controllers';
+    protected static string $webNamespace = 'App\Domain\Stock\Http\Controllers';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = 'App\Domain\Stock\Http\Resources';
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool $defer
-     */
-    protected $defer = true;
+    protected static string $apiNamespace = 'App\Domain\Stock\Http\Resources';
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [
+    protected array $injections = [
         CategoryRepositoryInterface::class => CategoryRepository::class,
         ProductRepositoryInterface::class => ProductRepository::class,
         OperationRepositoryInterface::class => OperationRepository::class,

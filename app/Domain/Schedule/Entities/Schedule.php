@@ -8,7 +8,7 @@ use App\Domain\Schedule\Contracts\ScheduleInterface;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Schedule extends Model implements ScheduleInterface
 {

@@ -31,21 +31,21 @@ class ProductQueryService
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function getProductRepository(int $id, Request $request): Model
+    public function getProductRepository(string $id, Request $request): Model
     {
         return $this->productRepository->find($id, $request);
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @param Request $request
      * @return Model
      */
-    public function getProductWithConsumptions(int $id, Request $request): Model
+    public function getProductWithConsumptions(string $id, Request $request): Model
     {
         $this->productRepository->setWithRelation('operations');
 

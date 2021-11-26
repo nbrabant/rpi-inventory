@@ -10,17 +10,24 @@ abstract class DomainServiceProvider extends ServiceProvider implements RoutePro
     /**
      * @var string $webNamespace
      */
-    protected static $webNamespace = '';
+    protected static string $webNamespace = '';
 
     /**
      * @var string $apiNamespace
      */
-    protected static $apiNamespace = '';
+    protected static string $apiNamespace = '';
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool $defer
+     */
+    protected bool $defer = true;
 
     /**
      * @var string[] $injections dependencies to inject
      */
-    protected $injections = [];
+    protected array $injections = [];
 
     public function register()
     {
