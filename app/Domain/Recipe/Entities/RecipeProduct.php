@@ -47,7 +47,7 @@ class RecipeProduct extends Model implements RecipeInterface
     /**
      * @return mixed[]
      */
-    public static function getUniteList(): array
+    public static function getUnitList(): array
     {
         return self::UNITS_LIST;
     }
@@ -55,9 +55,9 @@ class RecipeProduct extends Model implements RecipeInterface
     /**
      * @return string
      */
-    public function getUnite(): string
+    public function getUnit(): string
     {
-        return self::getUniteList()[$this->unite];
+        return self::getUnitList()[$this->unit] ?? $this->unit;
     }
 
     /**
@@ -69,52 +69,52 @@ class RecipeProduct extends Model implements RecipeInterface
      */
     public function getQuantity(): float
     {
-        if (self::UNIT_QUANTITY_RATIO[$this->getUnite()]) {
-            return $this->quantity * self::UNIT_QUANTITY_RATIO[$this->getUnite()];
+        if (isset(self::UNIT_QUANTITY_RATIO[$this->unit])) {
+            return $this->quantity * self::UNIT_QUANTITY_RATIO[$this->unit];
         }
 
         return $this->quantity;
     }
 
     /**
-     * @param string $unite
+     * @param string $unit
      * @return string
      */
-    public static function verboseUnite($unite = ''): string
+    public static function verboseUnite($unit = ''): string
     {
-        if ($arrayName = array_key_exists(strtolower($unite), self::getUniteList())) {
-            return $unite;
+        if (array_key_exists(strtolower($unit), self::getUnitList())) {
+            return $unit;
         }
 
-        if (in_array(strtolower($unite), ['g', 'grs', 'gramme'])) {
+        if (in_array(strtolower($unit), ['g', 'grs', 'gramme'])) {
             return 'grammes';
-        } elseif (in_array(strtolower($unite), ['l', 'litres'])) {
+        } elseif (in_array(strtolower($unit), ['l', 'litres'])) {
             return 'litre';
-        } elseif (in_array(strtolower($unite), ['cl', 'centilitres'])) {
+        } elseif (in_array(strtolower($unit), ['cl', 'centilitres'])) {
             return 'centilitre';
-        } elseif (in_array(strtolower($unite), ['cuillère à café', 'cuillères à café', 'cuillère café', 'cuillères café'])) {
+        } elseif (in_array(strtolower($unit), ['cuillère à café', 'cuillères à café', 'cuillère café', 'cuillères café'])) {
             return 'cuilliere_cafe';
-        } elseif (in_array(strtolower($unite), ['cuillère à dessert', 'cuillère à dessert', 'cuillère dessert', 'cuillère dessert'])) {
+        } elseif (in_array(strtolower($unit), ['cuillère à dessert', 'cuillère à dessert', 'cuillère dessert', 'cuillère dessert'])) {
             return 'cuilliere_dessert';
-        } elseif (in_array(strtolower($unite), ['cuillère à soupe', 'cuillères à soupe', 'cuillère soupe', 'cuillères soupe'])) {
+        } elseif (in_array(strtolower($unit), ['cuillère à soupe', 'cuillères à soupe', 'cuillère soupe', 'cuillères soupe'])) {
             return 'cuilliere_soupe';
-        } elseif (in_array(strtolower($unite), ['verre à liqueur', 'verres à liqueur', 'verre liqueur', 'verres liqueur'])) {
+        } elseif (in_array(strtolower($unit), ['verre à liqueur', 'verres à liqueur', 'verre liqueur', 'verres liqueur'])) {
             return 'verre_liqueur';
-        } elseif (in_array(strtolower($unite), ['verre à moutarde', 'verres à moutarde', 'verre moutarde', 'verres moutarde'])) {
+        } elseif (in_array(strtolower($unit), ['verre à moutarde', 'verres à moutarde', 'verre moutarde', 'verres moutarde'])) {
             return 'verre_moutarde';
-        } elseif (in_array(strtolower($unite), ['grand verre', 'grand verres'])) {
+        } elseif (in_array(strtolower($unit), ['grand verre', 'grand verres'])) {
             return 'grand_verre';
-        } elseif (in_array(strtolower($unite), ['tasse à café', 'tasses à café', 'tasse café', 'tasses café'])) {
+        } elseif (in_array(strtolower($unit), ['tasse à café', 'tasses à café', 'tasse café', 'tasses café'])) {
             return 'tasse_cafe';
-        } elseif (in_array(strtolower($unite), ['bols'])) {
+        } elseif (in_array(strtolower($unit), ['bols'])) {
             return 'bol';
-        } elseif (in_array(strtolower($unite), ['sachets'])) {
+        } elseif (in_array(strtolower($unit), ['sachets'])) {
             return 'sachet';
-        } elseif (in_array(strtolower($unite), ['gousses'])) {
+        } elseif (in_array(strtolower($unit), ['gousses'])) {
             return 'gousse';
         }
 
-        return $unite;
+        return $unit;
     }
 
     /**
