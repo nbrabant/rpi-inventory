@@ -13,15 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 class Schedule extends Model implements ScheduleInterface
 {
     /**
-     * @var string[] $scheduleColors
-     */
-    private array $scheduleColors = [
-        self::SCHEDULE_TYPE_RECIPE => '#330000',
-        self::SCHEDULE_TYPE_RENDEZVOUS => '#003300',
-        self::SCHEDUDE_TYPE_PLANNING => '#000033',
-    ];
-
-    /**
      * @var string[] $fillable
      */
     protected $fillable = [
@@ -55,7 +46,7 @@ class Schedule extends Model implements ScheduleInterface
      */
     public function getColorAttribute(): string
     {
-        return $this->scheduleColors[$this->type_schedule] ?? '#000000';
+        return self::SCHEDULE_COLORS[$this->type_schedule] ?? '#000000';
     }
 
     /**
