@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Recipe\Tests\Unit\Entity;
+namespace App\Domain\Recipe\Tests\Unit\Entities;
 
 use App\Domain\Recipe\Entities\RecipeProduct;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +16,7 @@ class RecipeProductTest extends TestCase
      * @param int $quantity
      * @param float $expected
      */
-    public function testGetQuantityShouldReturnQuantityRatio(string $unite, int $quantity, float $expected)
+    public function testGetQuantityShouldReturnQuantityRatio(string $unite, int $quantity, float $expected): void
     {
         $recipeProduct = new RecipeProduct([
             'unit' => $unite,

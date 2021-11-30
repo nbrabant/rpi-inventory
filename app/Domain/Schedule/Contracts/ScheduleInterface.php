@@ -13,7 +13,16 @@ interface ScheduleInterface
      */
     public const SCHEDULE_TYPE_RENDEZVOUS = 'rendezvous';
     /**
-     * @var string SCHEDUDE_TYPE_PLANNING
+     * @var string SCHEDULE_TYPE_PLANNING
      */
-    public const SCHEDUDE_TYPE_PLANNING = 'planning';
+    public const SCHEDULE_TYPE_PLANNING = 'planning';
+
+    /**
+     * @var string[] SCHEDULE_COLORS
+     */
+    public const SCHEDULE_COLORS = [
+        self::SCHEDULE_TYPE_RECIPE => '#330000',
+        self::SCHEDULE_TYPE_RENDEZVOUS => '#003300',
+        self::SCHEDULE_TYPE_PLANNING => '#000033',
+    ];
 }

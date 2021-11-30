@@ -10,5 +10,8 @@ use App\Domain\Stock\Repositories\OperationRepository as Operation;
 
 class ProductOperationQuantityTest extends TestCase
 {
-    
+    public function test()
+    {
+        self::assertTrue(true);
+    }
 }
