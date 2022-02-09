@@ -3,10 +3,12 @@
 namespace App\Domain\Stock\Entities;
 
 use App\Domain\Stock\Contracts\OperationInterface;
-use App\Domain\Stock\Contracts\ProductInterface;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int product_id
+ */
 class Operation extends Eloquent implements OperationInterface
 {
     /**
@@ -37,7 +39,7 @@ class Operation extends Eloquent implements OperationInterface
      */
     public function sumProductQuantity(): int
     {
-        /** @var OperationInterface $operations */
+        /** @var OperationInterface[] $operations */
         $operations = self::where('product_id', $this->product_id)->get();
 
         return array_reduce($operations, function ($sum, $operation) {

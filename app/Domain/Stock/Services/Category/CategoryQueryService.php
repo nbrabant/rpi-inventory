@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property CategoryRepositoryInterface $categoryRepository
- */
 class CategoryQueryService
 {
+    /**
+     * @var CategoryRepositoryInterface $categoryRepository
+     */
+    private CategoryRepositoryInterface $categoryRepository;
+
     /**
      * @param CategoryRepositoryInterface $categoryRepository
      */

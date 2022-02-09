@@ -3,6 +3,7 @@
 namespace App\Domain\Recipe\Entities;
 
 use App\Domain\Schedule\Entities\Schedule;
+use App\Infrastructure\Entities\Traits\Listable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Image;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ use App\Domain\Recipe\Contracts\RecipeInterface;
 
 class Recipe extends Model implements RecipeInterface
 {
+    use Listable;
     // use CrawlerTraitHelper;
 
     /**
@@ -51,23 +53,6 @@ class Recipe extends Model implements RecipeInterface
     public function steps(): HasMany
     {
         return $this->hasMany(RecipeStep::class);
-    }
-
-    /**
-     * @param bool $emptyLine
-     * @return mixed[]
-     */
-    public static function getList(bool $emptyLine = false): array
-    {
-        $return = [];
-        if ($emptyLine) {
-            $return['-1'] = '---';
-        }
-
-        static::get()->map(function ($item) use (&$return) {
-            $return[$item->id] = $item->name;
-        });
-        return $return;
     }
 
     /**

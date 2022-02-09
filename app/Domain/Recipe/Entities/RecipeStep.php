@@ -6,6 +6,9 @@ use App\Domain\Recipe\Contracts\RecipeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int id
+ */
 class RecipeStep extends Model
 {
     /**

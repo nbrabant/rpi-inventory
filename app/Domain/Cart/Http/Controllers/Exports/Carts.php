@@ -15,12 +15,17 @@ use App\Domain\Cart\Services\CartQueryService;
 use App\Domain\Cart\Services\CartCommandService;
 use PDF;
 
-/**
- * @property CartQueryService $cartQueryService
- * @property CartCommandService $cartCommandService
- */
 class Carts extends Controller
 {
+    /**
+     * @var CartQueryService $cartQueryService
+     */
+    private CartQueryService $cartQueryService;
+    /**
+     * @var CartCommandService $cartCommandService
+     */
+    private CartCommandService $cartCommandService;
+
     /**
      * @param CartQueryService $cartQueryService
      * @param CartCommandService $cartCommandService

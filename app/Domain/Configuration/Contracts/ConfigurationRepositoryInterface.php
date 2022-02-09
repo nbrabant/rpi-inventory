@@ -2,9 +2,7 @@
 
 namespace App\Domain\Configuration\Contracts;
 
-use App\Infrastructure\Contracts\BaseRepositoryInterface;
-
-interface ConfigurationRepositoryInterface extends BaseRepositoryInterface
+interface ConfigurationRepositoryInterface
 {
     /**
      * Retrieve configurations by prefix
@@ -21,5 +19,5 @@ interface ConfigurationRepositoryInterface extends BaseRepositoryInterface
      * @param array $configurations
      * @return bool
      */
-    public function save(string $prefix, array $configurations): bool;
+    public function saveConfiguration(string $prefix, array $configurations): bool;
 }

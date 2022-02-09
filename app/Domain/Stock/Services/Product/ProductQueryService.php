@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property ProductRepositoryInterface $productRepository
- */
 class ProductQueryService
 {
+    /**
+     * @var ProductRepositoryInterface $productRepository
+     */
+    private ProductRepositoryInterface $productRepository;
+
     /**
      * @param ProductRepositoryInterface $productRepository
      */

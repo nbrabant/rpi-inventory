@@ -5,8 +5,82 @@ namespace App\Domain\Recipe\Http\Requests;
 use App\Domain\Recipe\Http\Requests\Rules\IsValidProductUnit;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string name
+ * @property string recipe_type
+ * @property int number_people
+ * @property int preparation_time
+ * @property int cooking_time
+ * @property string complement
+ * @property mixed[] products
+ * @property mixed[] steps
+ */
 class RecipeRequest extends FormRequest
 {
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRecipeType(): string
+    {
+        return $this->recipe_type;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNumberPeople(): int
+    {
+        return $this->number_people;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPreparationTime(): int
+    {
+        return $this->preparation_time;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCookingTime(): int
+    {
+        return $this->cooking_time;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComplement(): string
+    {
+        return $this->complement;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getProducts(): array
+    {
+        return $this->products;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function getSteps(): array
+    {
+        return $this->steps;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -20,6 +94,7 @@ class RecipeRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @param IsValidProductUnit $isValidProductUnit
      * @return mixed[]
      */
     public function rules(IsValidProductUnit $isValidProductUnit): array

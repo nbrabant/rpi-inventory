@@ -4,6 +4,7 @@ namespace App\Domain\Cart\Services;
 
 use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
+use App\Domain\Cart\Entities\Dto\ProductData;
 use App\Domain\Cart\Http\Requests\{
     FinishedCartRequest,
     AddToCartRequest,
@@ -13,11 +14,13 @@ use App\Domain\Cart\Http\Requests\{
 };
 use Illuminate\Http\Request;
 
-/**
- * @property CartRepositoryInterface $cartRepository
- */
 class CartCommandService
 {
+    /**
+     * @var CartRepositoryInterface $cartRepository
+     */
+    private CartRepositoryInterface $cartRepository;
+
     /**
      * Create Cart Command Service instance.
      *
@@ -59,33 +62,31 @@ class CartCommandService
     public function attachProduct(AddToCartRequest $request): CartInterface
     {
         return $this->cartRepository
-            ->associateProduct($request, $request->validated());
+            ->associateProduct(ProductData::fromRequest($request));
     }
 
     /**
      * update product
      *
      * @param UpdateToCartRequest $request
-     * @param int $cart_id
      * @return CartInterface
      */
-    public function updateProduct(UpdateToCartRequest $request, int $cart_id): CartInterface
+    public function updateProduct(UpdateToCartRequest $request): CartInterface
     {
         return $this->cartRepository
-            ->updateProduct($request, $request->validated(), $request->validated()['product_id']);
+            ->updateProduct(ProductData::fromRequest($request));
     }
 
     /**
      * remove product
      *
      * @param RemoveFromCartRequest $request
-     * @param int $product_id
      * @return CartInterface
      */
-    public function removeProduct(RemoveFromCartRequest $request, int $product_id): CartInterface
+    public function removeProduct(RemoveFromCartRequest $request): CartInterface
     {
         return $this->cartRepository
-            ->dissociateProduct($request->validated(), $product_id);
+            ->dissociateProduct(ProductData::fromRequest($request));
     }
 
     /**
@@ -106,7 +107,7 @@ class CartCommandService
         }
 
         $recipes->map(function ($recipe) use ($request) {
-            $cart = $this->cartRepository->addOrUpdateProducts($request, $recipe->products);
+            $this->cartRepository->addOrUpdateProducts($request, $recipe->products);
         });
 
         return $cart;

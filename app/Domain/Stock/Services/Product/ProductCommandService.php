@@ -4,6 +4,8 @@ namespace App\Domain\Stock\Services\Product;
 
 use App\Domain\Stock\Contracts\OperationRepositoryInterface;
 use App\Domain\Stock\Contracts\ProductRepositoryInterface;
+use App\Domain\Stock\Entities\Dto\OperationData;
+use App\Domain\Stock\Entities\Dto\ProductData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Domain\Stock\Http\Requests\{
@@ -11,12 +13,22 @@ use App\Domain\Stock\Http\Requests\{
     OperationRequest
 };
 
-/**
- * @property ProductRepositoryInterface $productRepository
- * @property OperationRepositoryInterface $operationRepository
- */
 class ProductCommandService
 {
+    /**
+     * @var ProductRepositoryInterface $productRepository
+     */
+    private ProductRepositoryInterface $productRepository;
+    /**
+     * @var OperationRepositoryInterface $operationRepository
+     */
+    private OperationRepositoryInterface $operationRepository;
+
+    /**
+     * ProductCommandService constructor.
+     * @param ProductRepositoryInterface $productRepository
+     * @param OperationRepositoryInterface $operationRepository
+     */
     public function __construct(
         ProductRepositoryInterface $productRepository,
         OperationRepositoryInterface $operationRepository
@@ -40,7 +52,7 @@ class ProductCommandService
     public function createProduct(ProductRequest $request): Model
     {
         return $this->productRepository
-            ->create($request->validated());
+            ->save(ProductData::fromRequest($request));
     }
 
     /**
@@ -51,7 +63,7 @@ class ProductCommandService
     public function updateProduct(int $id, ProductRequest $request): Model
     {
         return $this->productRepository
-            ->update($request->validated(), $id);
+            ->save(ProductData::fromRequest($request), $id);
     }
 
     /**
@@ -85,7 +97,7 @@ class ProductCommandService
     public function saveOperation(OperationRequest $request): Model
     {
         return $this->operationRepository
-            ->create($request->validated());
+            ->save(OperationData::fromRequest($request));
     }
 
     /**
@@ -99,13 +111,13 @@ class ProductCommandService
 
     /**
      * @param int $id
-     * @return bool
+     * @return Model
      */
-    public function updateProductStockQuantity(int $id): bool
+    public function updateProductStockQuantity(int $id): Model
     {
-        $product = $this->productRepository->find($id);
-        $product->quantity = $this->operationRepository->countQuantityByProduct($id);
-
-        return $product->save();
+        return $this->productRepository->update(
+            ['quantity' => $this->operationRepository->countQuantityByProduct($id)],
+            $id
+        );
     }
 }

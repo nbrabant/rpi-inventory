@@ -5,13 +5,20 @@ namespace App\Domain\Stock\Entities;
 use App\Domain\Recipe\Entities\RecipeProduct;
 use App\Domain\Cart\Entities\ProductLine;
 use App\Domain\Stock\Contracts\ProductInterface;
+use App\Infrastructure\Entities\Traits\Listable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @property mixed name
+ * @property mixed quantity
+ * @property mixed min_quantity
+ */
 class Product extends Eloquent implements ProductInterface
 {
+    use Listable;
+
     /**
      * @return string
      */
@@ -66,38 +73,6 @@ class Product extends Eloquent implements ProductInterface
     }
 
     /**
-     * @param Builder $query
-     * @param array $ids
-     * @return Builder
-     */
-    public function scopeWithoutIds(Builder $query, array $ids = []): Builder
-    {
-        if (is_array($ids) && !empty($ids)) {
-            $query->whereNotIn('id', $ids);
-        }
-        return $query;
-    }
-
-    /**
-     * @param null $withoutId
-     * @param bool $emptyLine
-     * @return array
-     */
-    public static function getList($withoutId = null, bool $emptyLine = true): array
-    {
-        $return = [];
-        if ($emptyLine) {
-            $return['-1'] = '---';
-        }
-
-        static::without($withoutId)->get()->map(function ($item) use (&$return) {
-            $return[$item->id] = $item->name;
-        });
-
-        return $return;
-    }
-
-    /**
      * @return string
      */
     public function getStatus(): string
@@ -124,7 +99,10 @@ class Product extends Eloquent implements ProductInterface
                 ->get();
     }
 
-    public function getUniteList()
+    /**
+     * @return string[]
+     */
+    public function getUniteList(): array
     {
         return [
             '' 			=> '---',
@@ -134,7 +112,10 @@ class Product extends Eloquent implements ProductInterface
         ];
     }
 
-    public function toArray()
+    /**
+     * @return mixed[]
+     */
+    public function toArray(): array
     {
         $datas = parent::toArray();
 

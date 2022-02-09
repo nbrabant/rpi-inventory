@@ -11,12 +11,17 @@ use App\Domain\Recipe\Services\RecipeQueryService;
 use App\Domain\Recipe\Http\Requests\RecipeRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property RecipeCommandService recipeCommandService
- * @property RecipeQueryService recipeQueryService
- */
 class Recipes extends Controller
 {
+    /**
+     * @var RecipeCommandService $recipeCommandService
+     */
+    private RecipeCommandService $recipeCommandService;
+    /**
+     * @var RecipeQueryService $recipeQueryService
+     */
+    private RecipeQueryService $recipeQueryService;
+
     /**
      * @param RecipeCommandService $recipeCommandService
      * @param RecipeQueryService $recipeQueryService

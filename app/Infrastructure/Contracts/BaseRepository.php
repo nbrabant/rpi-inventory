@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Contracts;
 
+use App\Infrastructure\Entities\Dto;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Request;
 use App\Application\Exceptions\RepositoryException;
@@ -57,6 +58,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $query = $this->handlePaginationParameters($query, $request);
 
         return $query;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function save(Dto $recipeData, ?int $id = null): Model
+    {
+        if (!is_null($id)) {
+            return $this->update((array)$recipeData, $id);
+        }
+
+        return $this->create((array)$recipeData);
     }
 
     /**

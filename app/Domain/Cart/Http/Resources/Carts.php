@@ -10,12 +10,17 @@ use App\Domain\Cart\Services\CartCommandService;
 use App\Domain\Cart\Services\CartQueryService;
 use App\Domain\Cart\Http\Requests\FinishedCartRequest;
 
-/**
- * @property CartCommandService cartCommandService
- * @property CartQueryService cartQueryService
- */
 class Carts extends Controller
 {
+    /**
+     * @var CartCommandService $cartCommandService
+     */
+    private CartCommandService $cartCommandService;
+    /**
+     * @var CartQueryService $cartQueryService
+     */
+    private CartQueryService $cartQueryService;
+
     /**
      * @param CartCommandService $cartCommandService
      * @param CartQueryService $cartQueryService

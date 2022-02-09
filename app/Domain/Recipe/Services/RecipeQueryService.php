@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property RecipeRepositoryInterface $recipeRepository
- */
 class RecipeQueryService
 {
+    /**
+     * @var RecipeRepositoryInterface $recipeRepository
+     */
+    private RecipeRepositoryInterface $recipeRepository;
+
     /**
      * Create Cart Recipe Service instance.
      *
