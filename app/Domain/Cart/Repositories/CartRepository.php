@@ -5,6 +5,7 @@ namespace App\Domain\Cart\Repositories;
 use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Contracts\ProductLineInterface;
 use App\Domain\Cart\Entities\Cart;
+use App\Domain\Cart\Entities\Dto\ProductData;
 use App\Domain\Cart\Entities\ProductLine;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -67,10 +68,10 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function cartHasProduct(int $product_id): bool
+    public function cartHasProduct(int $productId): bool
     {
         $product = ProductLine::join('carts', 'carts.id', '=', 'product_lines.cart_id')
-            ->where('product_id', $product_id)
+            ->where('product_id', $productId)
             ->where('carts.finished', 0)
             ->first();
 
@@ -80,11 +81,11 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function associateProduct(Request $request, array $attributes): CartInterface
+    public function associateProduct(ProductData $productData): CartInterface
     {
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
-        $cart->productLines()->create($attributes);
+        $cart->productLines()->create((array)$productData);
 
         $cart->load('productLines');
 
@@ -94,15 +95,15 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function updateProduct(Request $request, array $attributes, int $product_id): CartInterface
+    public function updateProduct(ProductData $productData): CartInterface
     {
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
 
-        /** @var ProductLineInterface $productLine */
-        $productLine = $cart->productLines()->where('product_id', $product_id)->first();
-        $productLine->fill($attributes);
-        $productLine->save();
+        $cart->productLines()
+            ->where('product_id', $productData->product_id)
+            ->fill((array)$productData)
+            ->save();
 
         $cart->load('productLines');
 
@@ -112,12 +113,12 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function dissociateProduct(Request $request, $product_id): CartInterface
+    public function dissociateProduct(ProductData $productData): CartInterface
     {
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
 
-        $cart->productLines()->where('product_id', $product_id)->delete();
+        $cart->productLines()->where('product_id', $productData->product_id)->delete();
 
         $cart->load('productLines');
 

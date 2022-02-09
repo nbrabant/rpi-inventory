@@ -20,7 +20,7 @@ class ConfigurationRepository implements ConfigurationRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function save(string $prefix, array $configurations): bool
+    public function saveConfiguration(string $prefix, array $configurations): bool
     {
         /** @var mixed[] $configs */
         $configs = Config::get($prefix);

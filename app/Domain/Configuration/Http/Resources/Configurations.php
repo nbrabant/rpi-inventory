@@ -5,9 +5,6 @@ namespace App\Domain\Configuration\Http\Resources;
 use App\Domain\Configuration\Contracts\ConfigurationRepositoryInterface;
 use Illuminate\Http\Request;
 
-/**
- * @property ConfigurationRepositoryInterface $configurationRepository
- */
 class Configurations
 {
     /**
@@ -16,6 +13,10 @@ class Configurations
     public const CONFIGURATION_PREFIXES = [
         'trello'
     ];
+    /**
+     * @var ConfigurationRepositoryInterface $configurationRepository
+     */
+    private ConfigurationRepositoryInterface $configurationRepository;
 
     /**
      * @param ConfigurationRepositoryInterface $configurationRepository
@@ -50,7 +51,7 @@ class Configurations
                 continue;
             }
 
-            $this->configurationRepository->save($prefix, $configurations);
+            $this->configurationRepository->saveConfiguration($prefix, $configurations);
         }
 
         return $this->show();

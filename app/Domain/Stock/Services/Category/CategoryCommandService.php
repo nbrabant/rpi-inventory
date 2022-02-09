@@ -3,14 +3,17 @@
 namespace App\Domain\Stock\Services\Category;
 
 use App\Domain\Stock\Contracts\CategoryRepositoryInterface;
+use App\Domain\Stock\Entities\Dto\CategoryData;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Stock\Http\Requests\CategoryRequest;
 
-/**
- * @property CategoryRepositoryInterface $categoryRepository
- */
 class CategoryCommandService
 {
+    /**
+     * @var CategoryRepositoryInterface $categoryRepository
+     */
+    private CategoryRepositoryInterface $categoryRepository;
+
     /**
      * @param CategoryRepositoryInterface $categoryRepository
      */
@@ -35,7 +38,7 @@ class CategoryCommandService
     public function createCategory(CategoryRequest $request): Model
     {
         return $this->categoryRepository
-            ->create($request->validated());
+            ->save(CategoryData::fromRequest($request));
     }
 
     /**
@@ -46,7 +49,7 @@ class CategoryCommandService
     public function updateCategory(int $id, CategoryRequest $request): Model
     {
         return $this->categoryRepository
-            ->update($request->validated(), $id);
+            ->save(CategoryData::fromRequest($request), $id);
     }
 
     /**

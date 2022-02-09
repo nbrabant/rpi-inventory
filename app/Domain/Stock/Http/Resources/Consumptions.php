@@ -10,12 +10,17 @@ use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
 use App\Domain\Stock\Http\Requests\OperationRequest;
 
-/**
- * @property ProductCommandService productCommandService
- * @property ProductQueryService productQueryService
- */
 class Consumptions extends Controller
 {
+    /**
+     * @var ProductCommandService $productCommandService
+     */
+    private ProductCommandService $productCommandService;
+    /**
+     * @var ProductQueryService $productQueryService
+     */
+    private ProductQueryService $productQueryService;
+
     /**
      * @param ProductCommandService $productCommandService
      * @param ProductQueryService $productQueryService

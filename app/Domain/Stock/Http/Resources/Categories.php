@@ -11,12 +11,17 @@ use App\Domain\Stock\Services\Category\CategoryQueryService;
 use App\Domain\Stock\Http\Requests\CategoryRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property CategoryQueryService categoryQueryService
- * @property CategoryCommandService categoryCommandService
- */
 class Categories extends Controller
 {
+    /**
+     * @var CategoryCommandService $categoryCommandService
+     */
+    private CategoryCommandService $categoryCommandService;
+    /**
+     * @var CategoryQueryService $categoryQueryService
+     */
+    private CategoryQueryService $categoryQueryService;
+
     /**
      * @param CategoryCommandService $categoryCommandService
      * @param CategoryQueryService $categoryQueryService

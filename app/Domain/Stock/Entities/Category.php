@@ -3,12 +3,18 @@
 namespace App\Domain\Stock\Entities;
 
 use App\Domain\Stock\Contracts\CategoryInterface;
+use App\Infrastructure\Entities\Traits\Listable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @property string name
+ */
 class Category extends Eloquent implements CategoryInterface
 {
+    use Listable;
+
     /**
      * @return string
      */
@@ -44,23 +50,5 @@ class Category extends Eloquent implements CategoryInterface
             $order = 'ASC';
         }
         return $query->orderBy('position', $order);
-    }
-
-    /**
-     * @param bool $emptyLine
-     * @return string[]
-     */
-    public static function getList(bool $emptyLine = true): array
-    {
-        $return = [];
-        if ($emptyLine) {
-            $return['-1'] = '---';
-        }
-
-        static::get()->map(function ($item) use (&$return) {
-            $return[$item->id] = $item->name;
-        });
-
-        return $return;
     }
 }

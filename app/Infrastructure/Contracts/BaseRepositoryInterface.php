@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Contracts;
 
+use App\Infrastructure\Entities\Dto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -29,6 +30,15 @@ interface BaseRepositoryInterface
      * @return LengthAwarePaginator
      */
 	public function getAll(Request $request): LengthAwarePaginator;
+
+    /**
+     * Save from Dto and return Eloquent Model
+     *
+     * @param Dto $recipeData
+     * @param int|null $id
+     * @return mixed
+     */
+    public function save(Dto $recipeData, int $id = null);
 
     /**
      * Create, persist and return new Eloquent Model

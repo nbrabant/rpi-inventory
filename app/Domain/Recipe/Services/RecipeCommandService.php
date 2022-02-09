@@ -3,24 +3,43 @@
 namespace App\Domain\Recipe\Services;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
-use App\Domain\Recipe\Entities\Recipe;
+use App\Domain\Recipe\Entities\Dto\RecipeData;
+use App\Domain\Recipe\Services\Recipe\ProductCommandService;
+use App\Domain\Recipe\Services\Recipe\StepCommandService;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;
 use App\Domain\Recipe\Http\Requests\RecipeRequest;
 
-/**
- * @property RecipeRepositoryInterface $recipeRepository
- */
 class RecipeCommandService
 {
+    /**
+     * @var RecipeRepositoryInterface $recipeRepository
+     */
+    private RecipeRepositoryInterface $recipeRepository;
+    /**
+     * @var ProductCommandService $productCommandService
+     */
+    private ProductCommandService $productCommandService;
+    /**
+     * @var StepCommandService $stepCommandService
+     */
+    private StepCommandService $stepCommandService;
+
     /**
      * Create Cart Recipe Service instance.
      *
      * @param RecipeRepositoryInterface $recipeRepository
+     * @param ProductCommandService $productCommandService
+     * @param StepCommandService $stepCommandService
      */
-    public function __construct(RecipeRepositoryInterface $recipeRepository)
-    {
+    public function __construct(
+        RecipeRepositoryInterface $recipeRepository,
+        ProductCommandService $productCommandService,
+        StepCommandService $stepCommandService
+    ) {
         $this->recipeRepository = $recipeRepository;
+        $this->productCommandService = $productCommandService;
+        $this->stepCommandService = $stepCommandService;
     }
 
     /**
@@ -33,14 +52,15 @@ class RecipeCommandService
 
     /**
      * @param RecipeRequest $request
-     * @return Recipe
+     * @return RecipeInterface
      */
     public function createRecipe(RecipeRequest $request): RecipeInterface
     {
-        $attributes = $request->validated();
+        $recipeData = RecipeData::fromRequest($request);
 
-        $recipe = $this->recipeRepository->create($attributes);
-        $recipe = $this->updateProductsAndSteps($recipe, $attributes);
+        $recipe = $this->recipeRepository->save($recipeData);
+        $recipe = $this->productCommandService->synchronize($recipe, $recipeData->products);
+        $recipe = $this->stepCommandService->synchronize($recipe, $recipeData->steps);
 
         return $recipe;
     }
@@ -48,14 +68,15 @@ class RecipeCommandService
     /**
      * @param int $id
      * @param RecipeRequest $request
-     * @return Recipe
+     * @return RecipeInterface
      */
-    public function updateRecipe(int $id, RecipeRequest $request): Recipe
+    public function updateRecipe(int $id, RecipeRequest $request): RecipeInterface
     {
-        $attributes = $request->validated();
+        $recipeData = RecipeData::fromRequest($request);
 
-        $recipe = $this->recipeRepository->update($attributes, $id);
-        $recipe = $this->updateProductsAndSteps($recipe, $attributes);
+        $recipe = $this->recipeRepository->save($recipeData, $id);
+        $recipe = $this->productCommandService->synchronize($recipe, $recipeData->products);
+        $recipe = $this->stepCommandService->synchronize($recipe, $recipeData->steps);
 
         // if ($request->file('image') && $request->file('image')->isValid()) {
         //     $imageName = str_slug_fr($recipe->name).'-'.$recipe->id.'.'.$request->file('image')->getClientOriginalExtension();
@@ -79,44 +100,4 @@ class RecipeCommandService
     {
         return $this->recipeRepository->destroy($id);
     }
-
-    /**
-     * Update Recipe's Products and Steps
-     *
-     * @param RecipeInterface $recipe
-     * @param mixed[] $attributes
-     * @return RecipeInterface
-     */
-    private function updateProductsAndSteps(RecipeInterface $recipe, array $attributes): RecipeInterface
-    {
-        $recipe = $this->recipeRepository->syncProducts(
-            $recipe,
-            $this->sanitizeAttribute($attributes['products'])
-        );
-        $recipe = $this->recipeRepository->syncSteps(
-            $recipe,
-            $this->sanitizeAttribute($attributes['steps'])
-        );
-
-        return $recipe;
-    }
-
-    /**
-     * @param mixed[] $attributes
-     * @return mixed[]
-     */
-    private function sanitizeAttribute(array $attributes = []): array
-    {
-        $return = [];
-
-        $attributes = reset($attributes);
-        foreach ($attributes as $column => $values) {
-            foreach ($values as $key => $value) {
-                @$return[$key][$column] = $value;
-            }
-        }
-
-        return $return;
-    }
-
 }

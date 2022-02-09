@@ -3,17 +3,22 @@
 namespace App\Domain\Schedule\Http\Controllers\Exports;
 
 use App\Domain\Cart\Contracts\CartInterface;
-use App\Domain\Cart\Requests\ExportCartRequest;
+use App\Domain\Cart\Http\Requests\ExportCartRequest;
 use App\Domain\Schedule\Services\ScheduleQueryService;
 use App\Infrastructure\Http\Controllers\Controller;
 use App\Domain\Cart\Services\CartCommandService;
 
-/**
- * @property CartCommandService $cartCommandService
- * @property ScheduleQueryService $scheduleQueryService
- */
 class Schedules extends Controller
 {
+    /**
+     * @var CartCommandService $cartCommandService
+     */
+    private CartCommandService $cartCommandService;
+    /**
+     * @var ScheduleQueryService $scheduleQueryService
+     */
+    private ScheduleQueryService $scheduleQueryService;
+
     /**
      * @param CartCommandService $cartCommandService
      * @param ScheduleQueryService $scheduleQueryService

@@ -5,8 +5,28 @@ namespace App\Domain\Cart\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Domain\Cart\Http\Requests\Rules\IsInCart;
 
-class UpdateToCartRequest extends FormRequest
+/**
+ * @property int product_id
+ * @property int quantity
+ */
+class UpdateToCartRequest extends FormRequest implements CartProductRequestInterface
 {
+    /**
+     * @inheritDoc
+     */
+    public function getProductId(): int
+    {
+        return $this->product_id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -20,6 +40,7 @@ class UpdateToCartRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @param IsInCart $isInCart
      * @return mixed[]
      */
     public function rules(IsInCart $isInCart): array

@@ -13,12 +13,17 @@ use App\Domain\Cart\Http\Requests\{
     RemoveFromCartRequest
 };
 
-/**
- * @property CartCommandService cartCommandService
- * @property CartQueryService cartQueryService
- */
 class CartProducts extends Controller
 {
+    /**
+     * @var CartCommandService $cartCommandService
+     */
+    private CartCommandService $cartCommandService;
+    /**
+     * @var CartQueryService $cartQueryService
+     */
+    private CartQueryService $cartQueryService;
+
     /**
      * @param CartCommandService $cartCommandService
      * @param CartQueryService $cartQueryService
@@ -47,7 +52,7 @@ class CartProducts extends Controller
      */
     public function update(UpdateToCartRequest $request, int $id): CartInterface
     {
-        return $this->cartCommandService->updateProduct($request, $id);
+        return $this->cartCommandService->updateProduct($request);
     }
 
     /**
@@ -57,6 +62,6 @@ class CartProducts extends Controller
      */
     public function destroy(RemoveFromCartRequest $request, int $product_id): CartInterface
     {
-        return $this->cartCommandService->removeProduct($request, $product_id);
+        return $this->cartCommandService->removeProduct($request);
     }
 }

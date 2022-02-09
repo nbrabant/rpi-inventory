@@ -6,11 +6,13 @@ use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Http\Request;
 use App\Domain\Cart\Contracts\CartRepositoryInterface;
 
-/**
- * @property CartRepositoryInterface $cartRepository
- */
 class CartQueryService
 {
+    /**
+     * @var CartRepositoryInterface $cartRepository
+     */
+    private CartRepositoryInterface $cartRepository;
+
     /**
      * Create CartQuery Service instance.
      *

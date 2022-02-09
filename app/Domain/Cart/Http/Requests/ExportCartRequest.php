@@ -4,6 +4,9 @@ namespace App\Domain\Cart\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string exportType
+ */
 class ExportCartRequest extends FormRequest
 {
     /**

@@ -4,6 +4,11 @@ namespace App\Domain\Stock\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property int category
+ * @property string name
+ * @property int position
+ */
 class CategoryRequest extends FormRequest
 {
     /**
@@ -27,5 +32,29 @@ class CategoryRequest extends FormRequest
             'name' 		=> 'required|string|unique:categories,name,' . $this->category,
             'position' 	=> 'required|integer',
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition(): int
+    {
+        return $this->position;
     }
 }

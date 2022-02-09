@@ -2,15 +2,18 @@
 
 namespace App\Domain\Schedule\Services;
 
+use App\Domain\Schedule\Entities\Dto\ScheduleData;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use App\Domain\Schedule\Http\Requests\ScheduleRequest;
 
-/**
- * @property ScheduleRepositoryInterface $scheduleRepository
- */
 class ScheduleCommandService
 {
+    /**
+     * @var ScheduleRepositoryInterface $scheduleRepository
+     */
+    private ScheduleRepositoryInterface $scheduleRepository;
+
     /**
      * Create Schedule Command Service instance.
      *
@@ -35,9 +38,8 @@ class ScheduleCommandService
      */
     public function createSchedule(ScheduleRequest $request): Model
     {
-        $attributes = $request->validated();
-
-        return $this->scheduleRepository->create($attributes);
+        return $this->scheduleRepository
+            ->save(ScheduleData::fromRequest($request));
     }
 
     /**
@@ -48,7 +50,7 @@ class ScheduleCommandService
     public function updateSchedule(int $id, ScheduleRequest $request): Model
     {
         return $this->scheduleRepository
-            ->update($request->validated(), $id);
+            ->save(ScheduleData::fromRequest($request), $id);
     }
 
     /**

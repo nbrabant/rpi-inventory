@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property ScheduleRepositoryInterface $scheduleRepository
- */
 class ScheduleQueryService
 {
+    /**
+     * @var ScheduleRepositoryInterface $scheduleRepository
+     */
+    private ScheduleRepositoryInterface $scheduleRepository;
+
     /**
      * Create Schedule Query Service instance.
      *

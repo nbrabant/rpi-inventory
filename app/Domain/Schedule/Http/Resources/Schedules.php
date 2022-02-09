@@ -11,12 +11,17 @@ use App\Domain\Schedule\Services\ScheduleCommandService;
 use App\Domain\Schedule\Services\ScheduleQueryService;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property ScheduleCommandService scheduleCommandService
- * @property ScheduleQueryService scheduleQueryService
- */
 class Schedules extends Controller
 {
+    /**
+     * @var ScheduleCommandService $scheduleCommandService
+     */
+    private ScheduleCommandService $scheduleCommandService;
+    /**
+     * @var ScheduleQueryService $scheduleQueryService
+     */
+    private ScheduleQueryService $scheduleQueryService;
+
     /**
      * @param ScheduleCommandService $scheduleCommandService
      * @param ScheduleQueryService $scheduleQueryService

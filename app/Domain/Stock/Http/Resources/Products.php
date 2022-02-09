@@ -11,12 +11,17 @@ use App\Domain\Stock\Services\Product\ProductQueryService;
 use App\Domain\Stock\Http\Requests\ProductRequest;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-/**
- * @property ProductCommandService productCommandService
- * @property ProductQueryService productQueryService
- */
 class Products extends Controller
 {
+    /**
+     * @var ProductCommandService $productCommandService
+     */
+    private ProductCommandService $productCommandService;
+    /**
+     * @var ProductQueryService $productQueryService
+     */
+    private ProductQueryService $productQueryService;
+
     /**
      * @param ProductCommandService $productCommandService
      * @param ProductQueryService $productQueryService

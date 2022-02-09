@@ -7,6 +7,9 @@ use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int product_id
+ */
 class RecipeProduct extends Model implements RecipeInterface
 {
     /**
