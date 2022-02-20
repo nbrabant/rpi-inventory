@@ -2,6 +2,8 @@
 
 namespace App\Application\Providers;
 
+use App\Domain\Cart\Listeners\NotifyPurgeCart;
+use App\Infrastructure\Events\CleanCart;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -17,12 +19,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        // 'App\Events\Operation' => [
-        //     'App\Listeners\EventListener',
-        // ],
-        // 'App\Events\CartlistSaving' => [
-        //     'App\Listeners\CartlistUpdating',
-        // ]
+        CleanCart::class => [
+            NotifyPurgeCart::class
+        ]
     ];
 
     /**

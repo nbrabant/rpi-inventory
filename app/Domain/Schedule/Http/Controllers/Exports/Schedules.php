@@ -5,6 +5,7 @@ namespace App\Domain\Schedule\Http\Controllers\Exports;
 use App\Domain\Cart\Contracts\CartInterface;
 use App\Domain\Cart\Http\Requests\ExportToCartRequest;
 use App\Domain\Schedule\Services\ScheduleQueryService;
+use App\Infrastructure\Events\CleanCart;
 use App\Infrastructure\Http\Controllers\Controller;
 use App\Domain\Cart\Services\CartCommandService;
 
@@ -40,7 +41,7 @@ class Schedules extends Controller
      */
     public function cartlist(ExportToCartRequest $request): CartInterface
     {
-//        event(new OrderShipped($order));
+        CleanCart::dispatchIf($request->exportType === 'cleanexport');
 
         return $this->cartCommandService->addProductFromRecipes(
             $request,

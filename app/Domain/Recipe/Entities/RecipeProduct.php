@@ -77,6 +77,8 @@ class RecipeProduct extends Model implements RecipeInterface
     }
 
     /**
+     * @TODO : Refactoring this!!! use value object
+     *
      * @param string $unit
      * @return string
      */
@@ -88,29 +90,53 @@ class RecipeProduct extends Model implements RecipeInterface
 
         if (in_array(strtolower($unit), ['g', 'grs', 'gramme'])) {
             return 'grammes';
-        } elseif (in_array(strtolower($unit), ['l', 'litres'])) {
+        }
+
+        if (in_array(strtolower($unit), ['l', 'litres'])) {
             return 'litre';
-        } elseif (in_array(strtolower($unit), ['cl', 'centilitres'])) {
+        }
+
+        if (in_array(strtolower($unit), ['cl', 'centilitres'])) {
             return 'centilitre';
-        } elseif (in_array(strtolower($unit), ['cuillère à café', 'cuillères à café', 'cuillère café', 'cuillères café'])) {
+        }
+
+        if (in_array(strtolower($unit), ['cuillère à café', 'cuillères à café', 'cuillère café', 'cuillères café'])) {
             return 'cuilliere_cafe';
-        } elseif (in_array(strtolower($unit), ['cuillère à dessert', 'cuillère à dessert', 'cuillère dessert', 'cuillère dessert'])) {
+        }
+
+        if (in_array(strtolower($unit), ['cuillère à dessert', 'cuillère à dessert', 'cuillère dessert', 'cuillère dessert'])) {
             return 'cuilliere_dessert';
-        } elseif (in_array(strtolower($unit), ['cuillère à soupe', 'cuillères à soupe', 'cuillère soupe', 'cuillères soupe'])) {
+        }
+
+        if (in_array(strtolower($unit), ['cuillère à soupe', 'cuillères à soupe', 'cuillère soupe', 'cuillères soupe'])) {
             return 'cuilliere_soupe';
-        } elseif (in_array(strtolower($unit), ['verre à liqueur', 'verres à liqueur', 'verre liqueur', 'verres liqueur'])) {
+        }
+
+        if (in_array(strtolower($unit), ['verre à liqueur', 'verres à liqueur', 'verre liqueur', 'verres liqueur'])) {
             return 'verre_liqueur';
-        } elseif (in_array(strtolower($unit), ['verre à moutarde', 'verres à moutarde', 'verre moutarde', 'verres moutarde'])) {
+        }
+
+        if (in_array(strtolower($unit), ['verre à moutarde', 'verres à moutarde', 'verre moutarde', 'verres moutarde'])) {
             return 'verre_moutarde';
-        } elseif (in_array(strtolower($unit), ['grand verre', 'grand verres'])) {
+        }
+
+        if (in_array(strtolower($unit), ['grand verre', 'grand verres'])) {
             return 'grand_verre';
-        } elseif (in_array(strtolower($unit), ['tasse à café', 'tasses à café', 'tasse café', 'tasses café'])) {
+        }
+
+        if (in_array(strtolower($unit), ['tasse à café', 'tasses à café', 'tasse café', 'tasses café'])) {
             return 'tasse_cafe';
-        } elseif (in_array(strtolower($unit), ['bols'])) {
+        }
+
+        if (in_array(strtolower($unit), ['bols'])) {
             return 'bol';
-        } elseif (in_array(strtolower($unit), ['sachets'])) {
+        }
+
+        if (in_array(strtolower($unit), ['sachets'])) {
             return 'sachet';
-        } elseif (in_array(strtolower($unit), ['gousses'])) {
+        }
+
+        if (in_array(strtolower($unit), ['gousses'])) {
             return 'gousse';
         }
 

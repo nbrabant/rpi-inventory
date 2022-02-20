@@ -102,10 +102,6 @@ class CartCommandService
 
         $cart = $this->cartRepository->getCurrentOrCreate();
 
-        if ($request->exportType === 'cleanexport') {
-            $this->cartRepository->purgeCart();
-        }
-
         $recipes->map(function ($recipe) use ($request) {
             $this->cartRepository->addOrUpdateProducts($request, $recipe->products);
         });
