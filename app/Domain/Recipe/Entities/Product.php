@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Domain\Stock\Entities;
+namespace App\Domain\Recipe\Entities;
 
-use App\Domain\Cart\Entities\ProductLine;
-use App\Domain\Stock\Contracts\ProductInterface;
 use App\Infrastructure\Entities\Traits\Listable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -14,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property mixed quantity
  * @property mixed min_quantity
  */
-class Product extends Eloquent implements ProductInterface
+class Product extends Eloquent
 {
     use Listable;
 
@@ -39,28 +36,11 @@ class Product extends Eloquent implements ProductInterface
     ];
 
     /**
-     * @return BelongsTo
-     */
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    /**
      * @return HasMany
      */
-    public function operations(): HasMany
+    public function recipes(): HasMany
     {
-        return $this->hasMany(Operation::class)
-            ->orderBy('created_at', 'DESC');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function productLine(): HasMany
-    {
-        return $this->hasMany(ProductLine::class);
+        return $this->hasMany(RecipeProduct::class);
     }
 
     /**
@@ -74,20 +54,6 @@ class Product extends Eloquent implements ProductInterface
             return self::STATUS_WARNING;
         }
         return self::STATUS_DANGER;
-    }
-
-    /**
-     * récup des produits avec stock > stock mini hors produit dans la liste
-     *
-     * @param array $withoutIds
-     * @return array
-     */
-    public static function getOutOfStockProducts($withoutIds = [])
-    {
-        return self::withoutIds($withoutIds)
-                ->where('min_quantity', '>', 0)
-                ->whereRaw('products.quantity <= products.min_quantity')
-                ->get();
     }
 
     /**

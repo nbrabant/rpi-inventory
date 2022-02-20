@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="product in recipeProducts" :key="product.id">
-                        <td>{{ product.product_name }}</td>
+                        <td>{{ product.name }}</td>
                         <td>
                             <form-text
                                 v-model="product.quantity"
@@ -117,7 +117,7 @@
 
                 let product = {
                     product_id: payload.key,
-                    product_name: payload.value,
+                    name: payload.value,
                 }
 
                 this.$parent.addProduct(product)

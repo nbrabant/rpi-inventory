@@ -128,7 +128,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function purgeCart(Request $request): CartInterface
+    public function purgeCart(): CartInterface
     {
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
