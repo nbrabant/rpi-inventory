@@ -69,7 +69,7 @@ interface CartRepositoryInterface extends BaseRepositoryInterface
 	 * 
 	 * @return CartInterface
 	 */
-	public function purgeCart(Request $request): CartInterface;
+	public function purgeCart(): CartInterface;
 
 	/**
 	 * Synchronize product added to cart

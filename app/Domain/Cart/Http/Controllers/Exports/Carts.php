@@ -2,7 +2,7 @@
 
 namespace App\Domain\Cart\Http\Controllers\Exports;
 
-use App\Domain\Cart\Http\Requests\ExportCartRequest;
+use App\Domain\Cart\Http\Requests\ExportToCartRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
@@ -69,10 +69,10 @@ class Carts extends Controller
     }
 
     /**
-     * @param ExportCartRequest $request
+     * @param ExportToCartRequest $request
      * @return Redirector
      */
-    public function trello(ExportCartRequest $request): Redirector
+    public function trello(ExportToCartRequest $request): Redirector
     {
         $cart = $this->cartQueryService->getCurrent($request);
 

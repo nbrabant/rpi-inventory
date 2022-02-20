@@ -3,12 +3,13 @@
 namespace App\Domain\Recipe\Entities;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
-use App\Domain\Stock\Entities\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int product_id
+ * @property string|null unit
+ * @property int quantity
  */
 class RecipeProduct extends Model implements RecipeInterface
 {
@@ -28,8 +29,6 @@ class RecipeProduct extends Model implements RecipeInterface
     public $timestamps = false;
 
     /**
-     * @TODO : Schedule domain responsability
-     *
      * @return BelongsTo
      */
     public function recipe(): BelongsTo
@@ -38,8 +37,6 @@ class RecipeProduct extends Model implements RecipeInterface
     }
 
     /**
-     * @TODO : Stock domain responsability
-     *
      * @return BelongsTo
      */
     public function product(): BelongsTo
@@ -127,8 +124,8 @@ class RecipeProduct extends Model implements RecipeInterface
     {
         $array = parent::toArray();
 
-        $array['product_name'] = $this->product->name ?? '';
-        $array['product_quantity'] = $this->quantity . ' ' . $this->getQuantity();
+        $array['name'] = $this->product->name ?? '';
+        $array['stock'] = $this->quantity . ' ' . $this->getQuantity();
 
         return $array;
     }

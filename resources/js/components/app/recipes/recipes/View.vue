@@ -29,7 +29,7 @@
             <div class="content">
                 <ul>
                     <li v-for="product in item.products" :key="product.id">
-                        - {{ product.quantity }} {{ product.unit }} {{ product.product_name }}
+                        - {{ product.quantity }} {{ product.unit }} {{ product.name }}
                     </li>
                 </ul>
             </div>

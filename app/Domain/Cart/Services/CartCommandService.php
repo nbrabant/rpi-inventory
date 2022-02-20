@@ -10,7 +10,7 @@ use App\Domain\Cart\Http\Requests\{
     AddToCartRequest,
     UpdateToCartRequest,
     RemoveFromCartRequest,
-    ExportCartRequest
+    ExportToCartRequest
 };
 use Illuminate\Http\Request;
 
@@ -43,11 +43,11 @@ class CartCommandService
     }
 
     /**
-     * @param ExportCartRequest $request
+     * @param ExportToCartRequest $request
      * @param int $trelloCardId
      * @return CartInterface
      */
-    public function updateTrelloCard(ExportCartRequest $request, int $trelloCardId): CartInterface
+    public function updateTrelloCard(ExportToCartRequest $request, int $trelloCardId): CartInterface
     {
         return $this->cartRepository
             ->updateCurrent($request, ['trello_card_id' => $trelloCardId]);
@@ -90,20 +90,20 @@ class CartCommandService
     }
 
     /**
-     * @TODO : verify request type
+     * @TODO : verify request type - migrate to schedule -> use event driving
      *
-     * @param ExportCartRequest $request
+     * @param ExportToCartRequest $request
      * @param $recipes
      * @return CartInterface
      */
-    public function addProductFromRecipes(ExportCartRequest $request, $recipes): CartInterface
+    public function addProductFromRecipes(ExportToCartRequest $request, $recipes): CartInterface
     {
         $request->validated();
 
         $cart = $this->cartRepository->getCurrentOrCreate();
 
         if ($request->exportType === 'cleanexport') {
-            $this->cartRepository->purgeCart($request);
+            $this->cartRepository->purgeCart();
         }
 
         $recipes->map(function ($recipe) use ($request) {
