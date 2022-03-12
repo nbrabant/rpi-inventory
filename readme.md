@@ -68,18 +68,17 @@ git clone https://github.com/nbrabant/rpi-inventory
 ```
 docker-compose up -d --build
 ```
-3. Install the dependencies into the container
+3. Install the dependencies and the node packages into the container
 ```
-docker exec -it php-rpi composer update (update until lock dependencies gets updated)
-docker exec -it php-rpi composer dump-autoload
+make install
 ```
 4. Generate Artisan APP_KEY
 ```
-docker exec -it php-rpi php artisan key:generate
+make generate_key
 ```
-5. Install node packages and Build assets
+5. Build assets and run php artisan socket
 ```
-docker exec -it php-rpi npm install
-docker exec -it php-rpi npm run watch
+make run_npm
+make run_php
 ```
 6. Run the app on your **localhost:8080**
