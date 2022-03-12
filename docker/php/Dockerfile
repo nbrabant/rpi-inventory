@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 
 
 RUN apt update && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev libmagickwand-dev libmagickcore-dev sendmail  zlib1g-dev zip nodejs npm \

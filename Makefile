@@ -1,10 +1,22 @@
+install: ## Install PHP and NPM dependencies
+	docker exec -it php-rpi composer install && docker exec -it php-rpi npm install
+
+generate_key: ## Generate Laravel APP_KEY
+	docker exec -it php-rpi php artisan key:generate
+
 db-refresh: ## Reset and reinstall DB and datas
-	php artisan migrate:refresh --seed
+	docker exec -it php-rpi php artisan migrate:refresh --seed
 
 test: ## Launch unit tests
-	./vendor/bin/phpunit
+	docker exec -it php-rpi ./vendor/bin/phpunit
 
-.PHONY: db-reset test
+run-npm: ## build and run front
+	docker exec -it php-rpi npm run watch
+
+run-php: ## run php socket
+	docker exec -it php-rpi php artisan serve
+
+.PHONY: install generate_key db-refresh test run-npm run-php
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) \
