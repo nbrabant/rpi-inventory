@@ -24,18 +24,6 @@ class Product extends Eloquent
     }
 
     /**
-     * @var string[] $fillable
-     */
-    protected $fillable = [
-        'category_id',
-        'name',
-        'description',
-        'quantity',
-        'min_quantity',
-        'unit'
-    ];
-
-    /**
      * @return HasMany
      */
     public function recipes(): HasMany

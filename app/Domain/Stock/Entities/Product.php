@@ -2,7 +2,6 @@
 
 namespace App\Domain\Stock\Entities;
 
-use App\Domain\Cart\Entities\ProductLine;
 use App\Domain\Stock\Contracts\ProductInterface;
 use App\Infrastructure\Entities\Traits\Listable;
 use Illuminate\Database\Eloquent\Model as Eloquent;
@@ -53,14 +52,6 @@ class Product extends Eloquent implements ProductInterface
     {
         return $this->hasMany(Operation::class)
             ->orderBy('created_at', 'DESC');
-    }
-
-    /**
-     * @return HasMany
-     */
-    public function productLine(): HasMany
-    {
-        return $this->hasMany(ProductLine::class);
     }
 
     /**
