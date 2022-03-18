@@ -10,6 +10,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @property string $type_schedule
+ * @property Carbon $start_at
+ * @property Carbon $end_at
+ * @property string $color
+ */
 class Schedule extends Model implements ScheduleInterface
 {
     /**
