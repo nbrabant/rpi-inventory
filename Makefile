@@ -4,6 +4,12 @@ install: ## Install PHP and NPM dependencies
 generate_key: ## Generate Laravel APP_KEY
 	docker exec -it php-rpi php artisan key:generate
 
+db-install: ## install DB
+	docker exec -it php-rpi php artisan migrate
+
+db-seed: ## install datas
+	docker exec -it php-rpi php artisan migrate
+
 db-refresh: ## Reset and reinstall DB and datas
 	docker exec -it php-rpi php artisan migrate:refresh --seed
 
@@ -15,6 +21,12 @@ run-npm: ## build and run front
 
 run-php: ## run php socket
 	docker exec -it php-rpi php artisan serve
+
+bash-fpm: ## run a bash exec for fpm
+	docker exec -it php-rpi bash
+
+bash-mariadb: ## run a bash exec for mysql
+	docker exec -it database-rpi bash
 
 .PHONY: install generate_key db-refresh test run-npm run-php
 
