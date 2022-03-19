@@ -9,10 +9,12 @@ use App\Domain\Cart\Http\Requests\{
     FinishedCartRequest,
     AddToCartRequest,
     UpdateToCartRequest,
-    RemoveFromCartRequest,
-    ExportToCartRequest
+    RemoveFromCartRequest
 };
+use App\Domain\Schedule\Http\Requests\ExportToCartRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class CartCommandService
 {
@@ -90,20 +92,15 @@ class CartCommandService
     }
 
     /**
-     * @TODO : verify request type - migrate to schedule -> use event driving
-     *
-     * @param ExportToCartRequest $request
-     * @param $recipes
+     * @param Collection $products
      * @return CartInterface
      */
-    public function addProductFromRecipes(ExportToCartRequest $request, $recipes): CartInterface
+    public function addProducts(Collection $products): CartInterface
     {
-        $request->validated();
-
         $cart = $this->cartRepository->getCurrentOrCreate();
 
-        $recipes->map(function ($recipe) use ($request) {
-            $this->cartRepository->addOrUpdateProducts($request, $recipe->products);
+        $products->map(function (ProductData $productData) {
+            $this->cartRepository->addOrUpdateProduct($productData);
         });
 
         return $cart;

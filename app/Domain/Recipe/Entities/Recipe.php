@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Image;
 use Illuminate\Database\Eloquent\Model;
 use App\Domain\Recipe\Contracts\RecipeInterface;
+use Illuminate\Support\Collection;
 
 // use App\Helpers\CrawlerTraitHelper;
 
+/**
+ * @property Collection<Product> $products
+ * @property string $visual
+ */
 class Recipe extends Model implements RecipeInterface
 {
     use Listable;

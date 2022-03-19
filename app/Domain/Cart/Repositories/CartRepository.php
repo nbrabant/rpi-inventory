@@ -143,27 +143,16 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
     /**
      * @inheritDoc
      */
-    public function addOrUpdateProducts(Request $request, $recipeProducts): CartInterface
+    public function addOrUpdateProduct(ProductData $productData): CartInterface
     {
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
 
-        /**
-         * @TODO : recipe product should provide from another domain
-         */
-        $recipeProducts->map(function ($recipeProduct) use ($request, $cart) {
-            if ($cart->productLines->where('product_id', $recipeProduct->product_id)->isEmpty()) {
-                $this->associateProduct($request, [
-                    'product_id' => $recipeProduct->product_id,
-                    'quantity' => $recipeProduct->quantity,
-                    'unit' => $recipeProduct->unit,
-                ]);
-            } else {
-                $this->updateProduct($request, [
-                    'quantity' => $recipeProduct->quantity,
-                ], $recipeProduct->product_id);
-            }
-        });
+        if ($cart->productLines->where('product_id', $productData->product_id)->isEmpty()) {
+            $this->associateProduct($productData);
+        } else {
+            $this->updateProduct($productData);
+        }
 
         $cart->load('productLines');
 
