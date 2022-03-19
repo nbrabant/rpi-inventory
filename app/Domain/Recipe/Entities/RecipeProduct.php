@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int product_id
  * @property string|null unit
  * @property int quantity
+ * @property Product $product
  */
 class RecipeProduct extends Model implements RecipeInterface
 {

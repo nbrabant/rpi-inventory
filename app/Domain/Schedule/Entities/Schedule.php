@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
  * @property Carbon $start_at
  * @property Carbon $end_at
  * @property string $color
+ * @property Recipe|null $recipe
  */
 class Schedule extends Model implements ScheduleInterface
 {

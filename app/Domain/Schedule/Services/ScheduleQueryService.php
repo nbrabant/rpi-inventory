@@ -2,10 +2,12 @@
 
 namespace App\Domain\Schedule\Services;
 
+use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
+use App\Domain\Schedule\Entities\Dto\NeededProductsData;
+use App\Domain\Schedule\Entities\Schedule;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use App\Domain\Schedule\Contracts\ScheduleRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ScheduleQueryService
@@ -46,13 +48,17 @@ class ScheduleQueryService
 
     /**
      * @param Request $request
-     * @return Collection
+     * @return NeededProductsData
      */
-    public function getAttachedRecipes(Request $request): Collection
+    public function getAttachedProducts(Request $request): NeededProductsData
     {
         return $this->scheduleRepository->getAllRecipes($request)
-            ->map(function ($schedule) {
-                return $schedule->recipe;
-            });
+            ->map(function (Schedule $schedule) {
+                return $schedule->recipe->products;
+            })->reduce(function (NeededProductsData $neededProductsData, Collection $recipeProducts) {
+                return $neededProductsData->addProducts($recipeProducts);
+            }, new NeededProductsData([
+                'products' => collect([])
+            ]));
     }
 }

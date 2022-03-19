@@ -2,8 +2,10 @@
 
 namespace App\Application\Providers;
 
+use App\Domain\Cart\Listeners\NotifyExportCart;
 use App\Domain\Cart\Listeners\NotifyPurgeCart;
 use App\Infrastructure\Events\CleanCart;
+use App\Infrastructure\Events\ExportCart;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -21,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         CleanCart::class => [
             NotifyPurgeCart::class
+        ],
+        ExportCart::class => [
+            NotifyExportCart::class
         ]
     ];
 

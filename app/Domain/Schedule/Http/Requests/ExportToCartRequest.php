@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Cart\Http\Requests;
+namespace App\Domain\Schedule\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
