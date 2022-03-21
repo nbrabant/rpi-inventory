@@ -23,16 +23,4 @@ interface RecipeInterface
         'sachet' 			=> 'Sachet',
         'gousse' 			=> 'Gousse',
     ];
-
-    public const UNIT_QUANTITY_RATIO = [
-        'centilitre'        => 0.1,
-        'cuilliere_cafe'    => 4,
-        'cuilliere_dessert' => 8,
-        'cuilliere_soupe'   => 12,
-        'verre_liqueur'     => 0.03,
-        'tasse_cafe'        => 0.1,
-        'verre_moutarde'    => 0.15,
-        'grand_verre'       => 0.25,
-        'bol'               => 0.35,
-    ];
 }
