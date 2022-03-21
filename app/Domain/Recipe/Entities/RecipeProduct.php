@@ -3,6 +3,7 @@
 namespace App\Domain\Recipe\Entities;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
+use App\Domain\Recipe\Entities\ValueObject\Quantity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null unit
  * @property int quantity
  * @property Product $product
+ * @property string $stock
  */
 class RecipeProduct extends Model implements RecipeInterface
 {
@@ -62,19 +64,12 @@ class RecipeProduct extends Model implements RecipeInterface
     }
 
     /**
-     * verbose unity
-     *
-     * convert quantity
-     * http://tout-metz.com/recette/conversion-unite-cuisine
-     * @return float
+     * @param $value
+     * @return string
      */
-    public function getQuantity(): float
+    public function getStockAttribute($value): string
     {
-        if (isset(self::UNIT_QUANTITY_RATIO[$this->unit])) {
-            return $this->quantity * self::UNIT_QUANTITY_RATIO[$this->unit];
-        }
-
-        return $this->quantity;
+        return (string)new Quantity($this->quantity, $this->unit);
     }
 
     /**
@@ -152,7 +147,7 @@ class RecipeProduct extends Model implements RecipeInterface
         $array = parent::toArray();
 
         $array['name'] = $this->product->name ?? '';
-        $array['stock'] = $this->quantity . ' ' . $this->getQuantity();
+        $array['stock'] = $this->stock;
 
         return $array;
     }

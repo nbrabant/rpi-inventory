@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class RecipeProductTest extends TestCase
 {
     /**
-     * Test correct quantity ratio conversion
+     * Test correct needed quantity conversion
      *
      * @dataProvider ratioProvider
      *
@@ -16,14 +16,14 @@ class RecipeProductTest extends TestCase
      * @param int $quantity
      * @param float $expected
      */
-    public function testGetQuantityShouldReturnQuantityRatio(string $unite, int $quantity, float $expected): void
+    public function testGetQuantityShouldReturnNeededQuantity(string $unite, int $quantity, string $expected): void
     {
         $recipeProduct = new RecipeProduct([
             'unit' => $unite,
             'quantity' => $quantity
         ]);
-
-        self::assertEquals($expected, $recipeProduct->getQuantity());
+dd($recipeProduct->toArray());
+        self::assertEquals($expected, $recipeProduct->stock);
     }
 
     /**
@@ -34,16 +34,16 @@ class RecipeProductTest extends TestCase
     public static function ratioProvider(): array
     {
         return [
-            ['centilitre', 2, 0.2],
-            ['cuilliere_cafe', 2, 8.0],
-            ['cuilliere_dessert', 2, 16.0],
-            ['cuilliere_soupe', 2, 24.0],
-            ['verre_liqueur', 2, 0.06],
-            ['tasse_cafe', 2, 0.2],
-            ['verre_moutarde', 2, 0.3],
-            ['grand_verre', 2, 0.5],
-            ['bol', 2, 0.7],
-            ['louche', 2, 2],
+            ['centilitre', 2, '0.2 centilitre'],
+            ['cuilliere_cafe', 2, '8 coffee spoons'],
+            ['cuilliere_dessert', 2, '16 dessert spoons'],
+            ['cuilliere_soupe', 2, '24 soup spoons'],
+            ['verre_liqueur', 2, '0.06 shoot glass'],
+            ['tasse_cafe', 2, '0.2 coffee cup'],
+            ['verre_moutarde', 2, '0.3 mustard glass'],
+            ['grand_verre', 2, '0.5 large glass'],
+            ['bol', 2, '0.7 bowl'],
+            ['louche', 2, '2 ladles'],
         ];
     }
 }
