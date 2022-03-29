@@ -192,7 +192,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      */
     protected function handleOrderByParameters(QueryBuilder $query, Request $request): QueryBuilder
     {
-        if (! $request->sortCol || ! $request->sortDir) {
+        if (!$request->sortCol || !$request->sortDir) {
             return $query;
         }
 
@@ -236,7 +236,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         } elseif (is_string($request->search)) {
             $requestSearch = json_decode($request->search);
 
-            if (!$requestSearch || empty($requestSearch)) {
+            if (!$requestSearch) {
                 return $query;
             }
 
