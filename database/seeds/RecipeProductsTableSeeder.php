@@ -33,7 +33,7 @@ class RecipeProductsTableSeeder extends Seeder
 		[ 'recipe_id' => 6, 'product' => 'oignons', 'quantity' => '1' ],
 		[ 'recipe_id' => 6, 'product' => 'tomate pelée', 'quantity' => '1' ],
 		[ 'recipe_id' => 6, 'product' => 'Haricot rouge', 'quantity' => '400', 'unit' => 'grammes' ],
-		[ 'recipe_id' => 6, 'product' => 'Chili poudre', 'quantity' => '2', 'unit' => 'cuillere_cafe' ],
+		[ 'recipe_id' => 6, 'product' => 'Chili poudre', 'quantity' => '2', 'unit' => 'cuilliere_cafe' ],
 		[ 'recipe_id' => 6, 'product' => 'Ail', 'quantity' => '1' ],
 
 		[ 'recipe_id' => 7, 'product' => 'oeuf', 'quantity' => '2' ],
@@ -43,7 +43,7 @@ class RecipeProductsTableSeeder extends Seeder
 		[ 'recipe_id' => 7, 'product' => 'Chévre', 'quantity' => '1' ],
 
 		[ 'recipe_id' => 8, 'product' => 'oeuf', 'quantity' => '1' ],
-		[ 'recipe_id' => 8, 'product' => 'Créme fraiche', 'quantity' => '1', 'unit' => 'cuillere_soupe' ],
+		[ 'recipe_id' => 8, 'product' => 'Créme fraiche', 'quantity' => '1', 'unit' => 'cuilliere_soupe' ],
 		[ 'recipe_id' => 8, 'product' => 'Gnocchis', 'quantity' => '600', 'unit' => 'grammes' ],
 		[ 'recipe_id' => 8, 'product' => 'Munster', 'quantity' => '200', 'unit' => 'grammes' ],
 		[ 'recipe_id' => 8, 'product' => 'Bacon', 'quantity' => '150', 'unit' => 'grammes' ],
@@ -57,12 +57,12 @@ class RecipeProductsTableSeeder extends Seeder
 
 		[ 'recipe_id' => 10, 'product' => 'Blanc de poulet', 'quantity' => '300', 'unit' => 'grammes' ],
 		[ 'recipe_id' => 10, 'product' => 'oignons', 'quantity' => '2' ],
-		[ 'recipe_id' => 10, 'product' => 'Huile d\'olive', 'quantity' => '1', 'unit' => 'cuillere_soupe' ],
-		[ 'recipe_id' => 10, 'product' => 'Curry', 'quantity' => '2', 'unit' => 'cuillere_cafe' ],
+		[ 'recipe_id' => 10, 'product' => 'Huile d\'olive', 'quantity' => '1', 'unit' => 'cuilliere_soupe' ],
+		[ 'recipe_id' => 10, 'product' => 'Curry', 'quantity' => '2', 'unit' => 'cuilliere_cafe' ],
 
 		[ 'recipe_id' => 11, 'product' => 'oeuf', 'quantity' => '4' ],
 		[ 'recipe_id' => 11, 'product' => 'champignon', 'quantity' => '1' ],
-		[ 'recipe_id' => 11, 'product' => 'Créme fraiche', 'quantity' => '1', 'unit' => 'cuillere_soupe' ],
+		[ 'recipe_id' => 11, 'product' => 'Créme fraiche', 'quantity' => '1', 'unit' => 'cuilliere_soupe' ],
 		[ 'recipe_id' => 11, 'product' => 'Lardons fumés', 'quantity' => '200', 'unit' => 'grammes' ],
 
 		[ 'recipe_id' => 12, 'product' => 'Pâte brisée', 'quantity' => '1' ],

@@ -3,7 +3,7 @@
 namespace App\Domain\Recipe\Tests\Unit\Entities;
 
 use App\Domain\Recipe\Entities\RecipeProduct;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class RecipeProductTest extends TestCase
 {
@@ -22,7 +22,7 @@ class RecipeProductTest extends TestCase
             'unit' => $unite,
             'quantity' => $quantity
         ]);
-dd($recipeProduct->toArray());
+
         self::assertEquals($expected, $recipeProduct->stock);
     }
 

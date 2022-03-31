@@ -14,12 +14,12 @@ class CreateRecetteProduitTable extends Migration
      */
     public function up()
     {
-		Schema::create('recettes_produits', function(Blueprint $table){
+		Schema::create('recipe_products', function(Blueprint $table){
 			$table->increments('id');
-			$table->integer('recette_id');
-			$table->integer('produit_id');
-			$table->integer('quantite');
-			$table->enum('unite', [
+			$table->integer('recipe_id');
+			$table->integer('product_id');
+			$table->integer('quantity');
+			$table->enum('unit', [
 				'grammes',
 				'litre',
 				'centilitre',
@@ -35,12 +35,12 @@ class CreateRecetteProduitTable extends Migration
 				'bol',
 			])->nullable()->default(null);
 
-			// $table->foreign('recette_id')
-			// 	->references('id')->on('recettes')
+			// $table->foreign('recipe_id')
+			// 	->references('id')->on('recipes')
 			// 	->onDelete('cascade');
 			//
-			// $table->foreign('produit_id')
-			// 	->references('id')->on('produits')
+			// $table->foreign('product_id')
+			// 	->references('id')->on('products')
 			// 	->onDelete('cascade');
 		});
     }
@@ -52,6 +52,6 @@ class CreateRecetteProduitTable extends Migration
      */
     public function down()
     {
-        Schema::drop('recettes_produits');
+        Schema::drop('recipe_products');
     }
 }

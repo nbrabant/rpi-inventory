@@ -12,15 +12,16 @@ class CreateProduitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('produits', function(Blueprint $table){
+        Schema::create('products', function(Blueprint $table){
 			$table->increments('id');
-			$table->integer('categorie_id')->unsigned();
-			$table->string('nom');
+			$table->integer('category_id')->unsigned();
+			$table->string('name');
 			$table->text('description')->nullable();
-			$table->integer('quantite')->unsigned();
-			$table->integer('quantite_min')->unsigned()->default(0);
-			$table->enum('unite', [
-				'grammes',
+			$table->integer('quantity')->unsigned();
+			$table->integer('min_quantity')->unsigned()->default(0);
+			$table->enum('unit', [
+                'piece',
+                'grammes',
 				'litre',
 				'sachet',
 			])->nullable();
@@ -39,6 +40,6 @@ class CreateProduitsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('produits');
+        Schema::drop('products');
     }
 }

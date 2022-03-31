@@ -102,6 +102,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
 
         $cart->productLines()
             ->where('product_id', $productData->product_id)
+            ->first()
             ->fill((array)$productData)
             ->save();
 
@@ -118,7 +119,9 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
         /** @var CartInterface $cart */
         $cart = $this->getCurrentOrCreate();
 
-        $cart->productLines()->where('product_id', $productData->product_id)->delete();
+        $cart->productLines()
+            ->where('product_id', $productData->product_id)
+            ->delete();
 
         $cart->load('productLines');
 
