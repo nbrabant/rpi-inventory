@@ -13,6 +13,9 @@ db-seed: ## install datas
 db-refresh: ## Reset and reinstall DB and datas
 	docker exec -it php-rpi php artisan migrate:refresh --seed
 
+config-clear: ## Clear the config cache
+	docker exec -it php-rpi php artisan config:clear
+
 test: ## Launch unit tests
 	docker exec -it php-rpi ./vendor/bin/phpunit
 
@@ -28,7 +31,7 @@ bash-fpm: ## run a bash exec for fpm
 bash-mariadb: ## run a bash exec for mysql
 	docker exec -it database-rpi bash
 
-.PHONY: install generate_key db-refresh test run-npm run-php
+.PHONY: install generate_key db-refresh test run-npm run-php config-clear
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) \

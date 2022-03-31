@@ -12,10 +12,10 @@ class CreateListesTable extends Migration
      */
     public function up()
     {
-        Schema::create('listes', function(Blueprint $table){
+        Schema::create('carts', function(Blueprint $table){
 			$table->increments('id');
             $table->string('trello_card_id')->nullable();
-			$table->boolean('termine')->default(0);
+			$table->boolean('finished')->default(0);
 			$table->timestamps();
 		});
     }
@@ -27,6 +27,6 @@ class CreateListesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('listes');
+        Schema::drop('carts');
     }
 }

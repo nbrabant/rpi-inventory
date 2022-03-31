@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property mixed name
- * @property mixed quantity
- * @property mixed min_quantity
+ * @property string name
+ * @property int quantity
+ * @property int min_quantity
  */
 class Product extends Eloquent
 {
@@ -32,19 +32,6 @@ class Product extends Eloquent
     }
 
     /**
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        if ($this->min_quantity == 0 || $this->quantity > $this->min_quantity) {
-            return self::STATUS_SUCCESS;
-        } elseif ($this->quantity == $this->min_quantity) {
-            return self::STATUS_WARNING;
-        }
-        return self::STATUS_DANGER;
-    }
-
-    /**
      * @return string[]
      */
     public function getUniteList(): array
@@ -55,17 +42,5 @@ class Product extends Eloquent
             'litre' 	=> 'Litre',
             'sachet' 	=> 'Sachet'
         ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function toArray(): array
-    {
-        $datas = parent::toArray();
-
-        $datas['status'] = $this->getStatus();
-
-        return $datas;
     }
 }

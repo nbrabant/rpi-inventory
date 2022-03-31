@@ -12,13 +12,17 @@ class Agenda extends Migration
      */
     public function up()
     {
-		Schema::create('agendas', function(Blueprint $table) {
+		Schema::create('schedules', function(Blueprint $table) {
 			$table->increments('id');
-			$table->integer('recette_id');
-			$table->date('date_recette');
-			$table->enum('moment', ['matin', 'midi', 'soir']);
-			$table->boolean('realise');
-			$table->timestamps();
+            $table->integer('recipe_id')->nullable();
+            $table->integer('user_id')->default(1);
+            $table->enum('type_schedule', ['recette', 'rendezvous', 'planning']);
+            $table->string('title');
+            $table->text('details')->nullable();
+            $table->dateTime('start_at');
+            $table->dateTime('end_at');
+            $table->boolean('all_day')->default(0);
+            $table->timestamps();
 		});
     }
 
@@ -29,6 +33,6 @@ class Agenda extends Migration
      */
     public function down()
     {
-        Schema::drop('agendas');
+        Schema::drop('schedules');
     }
 }

@@ -22,6 +22,6 @@ class FixEnumColumn extends Migration
 
     protected function fixEnumFormat($table, $fieldname)
     {
-        return DB::statement('ALTER TABLE `'.$table.'` CHANGE COLUMN `'.$fieldname.'` `'.$fieldname.'` VARCHAR(255) NULL');
+//        return DB::statement('ALTER TABLE `'.$table.'` CHANGE COLUMN `'.$fieldname.'` `'.$fieldname.'` VARCHAR(255) NULL');
     }
 }

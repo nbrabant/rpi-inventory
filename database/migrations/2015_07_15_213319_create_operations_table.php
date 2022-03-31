@@ -14,14 +14,14 @@ class CreateOperationsTable extends Migration
     {
         Schema::create('operations', function(Blueprint $table){
 			$table->increments('id');
-			$table->integer('produit_id')->unsigned();
-			$table->integer('quantite')->unsigned();
+			$table->integer('product_id')->unsigned();
+			$table->integer('quantity')->unsigned();
 			$table->enum('operation', ['+', '-'])->default('+');
 			$table->string('detail');
 			$table->timestamps();
 
 			// $table->foreign('produit_id')
-			// 	->references('id')->on('produits')
+			// 	->references('id')->on('products')
 			// 	->onDelete('cascade');
 		});
     }

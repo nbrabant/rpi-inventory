@@ -20,10 +20,6 @@ class CreateRecipeStepsTable extends Migration
             $table->text('instruction')->nullable();
             $table->integer('position')->default(255);
         });
-
-        Schema::table('recipes', function (Blueprint $table) {
-            $table->dropColumn('instructions');
-        });
     }
 
     /**
@@ -34,9 +30,5 @@ class CreateRecipeStepsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('recipe_steps');
-
-        Schema::table('recipes', function (Blueprint $table) {
-            $table->text('instructions');
-        });
     }
 }
