@@ -29,5 +29,5 @@ RUN chmod 777 -R storage bootstrap/cache
 RUN chown -R www-data:www-data /var/www/app/storage
 RUN chown -R www-data:www-data /var/www/app/bootstrap/cache
 
+RUN chmod 777 -R /var/www/app/storage
 RUN touch /var/www/app/storage/logs/laravel.log
-RUN chmod 777 /var/www/app/storage/logs/laravel.log
