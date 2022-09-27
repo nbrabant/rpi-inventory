@@ -13,7 +13,10 @@ down: ## stop application containers
 generate_key: ## Generate Laravel APP_KEY
 	docker exec -it php-rpi php artisan key:generate
 
-db-migrate: ## run migrations
+db-install: ## install DB
+	docker exec -it php-rpi php artisan migrate
+
+db-seed: ## install datas
 	docker exec -it php-rpi php artisan migrate
 
 db-refresh: ## Reset and reinstall DB and datas
@@ -37,16 +40,7 @@ bash-fpm: ## run a bash exec for fpm
 bash-mariadb: ## run a bash exec for mysql
 	docker exec -it database-rpi bash
 
-xdebug-auto:
-	docker/scripts/xdebug.sh auto
-xdebug-on:
-	docker/scripts/xdebug.sh on
-xdebug-profile:
-	docker/scripts/xdebug.sh profile
-xdebug-off:
-	docker/scripts/xdebug.sh off
-
-.PHONY: install generate_key db-refresh test run-npm run-php config-clear logs-fpm xdebug-auto xdebug-on xdebug-profile xdebug-off
+.PHONY: install generate_key db-refresh test run-npm run-php config-clear
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) \

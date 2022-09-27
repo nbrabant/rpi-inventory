@@ -23,10 +23,18 @@ composer install
 npm install
 ```
 
-Next step, you should configure the `.env` file. To start, you should just 
-copy .env.example to .env
+Next step, you should configure the `.env` file :
 
-If you have Trello account and you want to add the Trello export functionality, please, use configuration panel to define Trello credentials
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+```
+
+If you have Trello account and you want to add the Trello export functionnality, please, use configuration panel to define Trello credentials
 
 #### Install database
 
@@ -70,8 +78,8 @@ make generate_key
 ```
 5. Build assets and run php artisan socket
 ```
-make run-npm
-make run-php
+make run_npm
+make run_php
 ```
 6. Run the app on your **localhost:8080**
 
