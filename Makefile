@@ -7,9 +7,6 @@ build-php: ## build php docker image
 up: ## start application containers
 	docker-compose up -d
 
-down: ## stop application containers
-	docker-compose down
-
 generate_key: ## Generate Laravel APP_KEY
 	docker exec -it php-rpi php artisan key:generate
 
@@ -39,15 +36,6 @@ bash-fpm: ## run a bash exec for fpm
 
 bash-mariadb: ## run a bash exec for mysql
 	docker exec -it database-rpi bash
-
-xdebug-auto:
-	docker/scripts/xdebug.sh auto
-xdebug-on:
-	docker/scripts/xdebug.sh on
-xdebug-profile:
-	docker/scripts/xdebug.sh profile
-xdebug-off:
-	docker/scripts/xdebug.sh off
 
 .PHONY: install generate_key db-refresh test run-npm run-php config-clear
 
