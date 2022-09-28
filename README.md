@@ -6,12 +6,12 @@ Manage pantry, edit meals of the week and organize your week's shopping list
 
 ### Local installation
 
-#### Requirement
+#### Stack
 
-- PHP 7.4 or highter
+- PHP 8.1
 - Composer
 - MySQL 
-- Nginx / Apache 2
+- Nginx
 - Node + NPM 
 
 #### Install project
@@ -74,3 +74,11 @@ make run-npm
 make run-php
 ```
 6. Run the app on your **localhost:8080**
+
+## XDebug
+
+If you want to use xdebug for debugging you have to setup some things:
+
+```shell script
+php artisan serve
+```
