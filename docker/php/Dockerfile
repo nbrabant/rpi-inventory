@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:7.4-fpm
 
 COPY docker/php/xdebug /xdebug
 
@@ -6,13 +6,11 @@ RUN apt update && apt install -y zlib1g-dev g++ git libicu-dev zip libzip-dev li
     && docker-php-ext-install intl opcache pdo pdo_mysql \
     && pecl install apcu \
     && pecl install imagick \
-    && pecl install xdebug \
     && docker-php-ext-enable apcu \
     && docker-php-ext-enable imagick \
     && docker-php-ext-configure zip \
     && docker-php-ext-install gd \
-    && docker-php-ext-install zip \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-install zip
 
 WORKDIR /var/www/app
 
