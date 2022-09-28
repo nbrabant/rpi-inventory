@@ -20,7 +20,7 @@ services:
     depends_on:
       - database-rpi
     environment:
-      - "PHP_IDE_CONFIG=serverName=phpRpi"
+      - "PHP_IDE_CONFIG=serverName=php-rpi"
   nginx-rpi:
     container_name: nginx-rpi
     image: nginx:stable-alpine

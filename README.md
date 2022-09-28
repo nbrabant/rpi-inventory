@@ -77,8 +77,25 @@ make run-php
 
 ## XDebug
 
-If you want to use xdebug for debugging you have to setup some things:
+If you want to use xdebug for debugging you have to start it with (running on port 9003):
 
 ```shell script
-php artisan serve
+make xdebug-auto
 ```
+
+There are also some other xdebug configs you can use:
+- on (start_with_request false)
+- profile (for profiling: profiling result will be saved at storage/logs)
+- auto (start_with_request true)
+- off (to deactivate xdebug)
+
+If you want to see the differences of those config, check them out. You can find them in
+docker/php/xdebug
+
+#### IDE Config for XDebug
+Depending on your IDE you need so setup some smaller things.
+
+- PHPStorm: 
+    - Settings > PHP > Debug > Debug port: 9003
+    - Settings > PHP > Servers > add server with name "php-rpi" with path mappings. You need to map your project root to "/var/www/app"
+

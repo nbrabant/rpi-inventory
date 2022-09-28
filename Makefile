@@ -22,12 +22,6 @@ db-refresh: ## Reset and reinstall DB and datas
 config-clear: ## Clear the config cache
 	docker exec -it php-rpi php artisan config:clear
 
-cache-clear: ## Clear the compiled view files
-	docker exec -it php-rpi php artisan view:clear
-
-route-list: ## Clear the config cache
-	docker exec -it php-rpi php artisan route:list
-
 test: ## Launch unit tests
 	docker exec -it php-rpi ./vendor/bin/phpunit
 
@@ -43,9 +37,6 @@ bash-fpm: ## run a bash exec for fpm
 bash-mariadb: ## run a bash exec for mysql
 	docker exec -it database-rpi bash
 
-logs-fpm: ## run a bash exec for mysql
-	docker logs php-rpi -f
-
 xdebug-auto:
 	docker/scripts/xdebug.sh auto
 xdebug-on:
@@ -55,7 +46,7 @@ xdebug-profile:
 xdebug-off:
 	docker/scripts/xdebug.sh off
 
-.PHONY: install generate_key db-refresh test run-npm run-php config-clear logs-fpm
+.PHONY: install generate_key db-refresh test run-npm run-php config-clear logs-fpm xdebug-auto xdebug-on xdebug-profile xdebug-off
 
 help:
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) \
