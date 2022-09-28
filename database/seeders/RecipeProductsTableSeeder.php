@@ -1,4 +1,6 @@
-	<?php
+<?php
+
+namespace Database\Seeders;
 
 use App\Domain\Stock\Entities\Product;
 use App\Domain\Recipe\Entities\RecipeProduct;
