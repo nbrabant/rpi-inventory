@@ -1,7 +1,5 @@
 <?php
 
-namespace Database\Seeders;
-
 use App\Domain\Stock\Entities\Operation;
 use Illuminate\Database\Seeder;
 

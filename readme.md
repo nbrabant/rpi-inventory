@@ -6,12 +6,12 @@ Manage pantry, edit meals of the week and organize your week's shopping list
 
 ### Local installation
 
-#### Requirement
+#### Stack
 
-- PHP 7.4 or highter
+- PHP 8.1
 - Composer
 - MySQL 
-- Nginx / Apache 2
+- Nginx
 - Node + NPM 
 
 #### Install project
