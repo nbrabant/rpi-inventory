@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Domain\Schedule\Entities\Schedule;
 use Illuminate\Database\Seeder;
 

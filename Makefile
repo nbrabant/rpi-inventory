@@ -1,6 +1,12 @@
 install: ## Install PHP and NPM dependencies
 	docker exec -it php-rpi composer install && docker exec -it php-rpi npm install
 
+up: ## start application containers
+	docker-compose up -d
+
+down: ## stop application containers
+	docker-compose down
+
 generate_key: ## Generate Laravel APP_KEY
 	docker exec -it php-rpi php artisan key:generate
 
