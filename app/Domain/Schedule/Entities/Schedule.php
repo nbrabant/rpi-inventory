@@ -5,6 +5,8 @@ namespace App\Domain\Schedule\Entities;
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Recipe;
 use App\Domain\Schedule\Contracts\ScheduleInterface;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

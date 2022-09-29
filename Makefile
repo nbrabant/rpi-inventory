@@ -10,10 +10,7 @@ down: ## stop application containers
 generate_key: ## Generate Laravel APP_KEY
 	docker exec -it php-rpi php artisan key:generate
 
-db-install: ## install DB
-	docker exec -it php-rpi php artisan migrate
-
-db-seed: ## install datas
+db-migrate: ## run migrations
 	docker exec -it php-rpi php artisan migrate
 
 db-refresh: ## Reset and reinstall DB and datas
