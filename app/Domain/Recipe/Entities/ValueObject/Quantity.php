@@ -20,13 +20,13 @@ class Quantity
     ];
 
     private float $quantity;
-    private string $unit;
+    private ?string $unit;
 
     /**
      * @param float $quantity
-     * @param string $unit
+     * @param string|null $unit
      */
-    public function __construct(float $quantity, string $unit)
+    public function __construct(float $quantity, ?string $unit)
     {
         $this->quantity = $quantity;
         $this->unit = $unit;

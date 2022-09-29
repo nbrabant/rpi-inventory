@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * @property string name
  * @property string recipe_type
- * @property int number_people
+ * @property string number_people
  * @property int preparation_time
  * @property int cooking_time
  * @property string complement
@@ -36,7 +36,7 @@ class RecipeRequest extends FormRequest
     /**
      * @return int
      */
-    public function getNumberPeople(): int
+    public function getNumberPeople(): string
     {
         return $this->number_people;
     }
@@ -60,7 +60,7 @@ class RecipeRequest extends FormRequest
     /**
      * @return string
      */
-    public function getComplement(): string
+    public function getComplement(): ?string
     {
         return $this->complement;
     }

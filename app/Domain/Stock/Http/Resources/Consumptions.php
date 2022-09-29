@@ -5,7 +5,6 @@ namespace App\Domain\Stock\Http\Resources;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Infrastructure\Http\Controllers\Controller;
-
 use App\Domain\Stock\Services\Product\ProductCommandService;
 use App\Domain\Stock\Services\Product\ProductQueryService;
 use App\Domain\Stock\Http\Requests\OperationRequest;
@@ -26,7 +25,7 @@ class Consumptions extends Controller
      * @param ProductQueryService $productQueryService
      */
     public function __construct(
-        ProductCommandService $productCommandService, 
+        ProductCommandService $productCommandService,
         ProductQueryService $productQueryService
     ) {
         $this->productCommandService = $productCommandService;
@@ -45,9 +44,9 @@ class Consumptions extends Controller
     /**
      * @return Model
      */
-    public function create(): Model
+    public function create(Request $request): Model
     {
-        return $this->productCommandService->initializeOperation();
+        return $this->productCommandService->initializeOperation($request);
     }
 
     /**

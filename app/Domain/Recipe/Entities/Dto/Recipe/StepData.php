@@ -19,7 +19,7 @@ class StepData extends Dto
     public static function fromAttribute($step): self
     {
         return new static([
-            'id'            => $step['id'],
+            'id'            => $step['id'] ?? null,
             'name'          => $step['name'],
             'instruction'   => $step['instruction'],
             'position'      => $step['position'],
