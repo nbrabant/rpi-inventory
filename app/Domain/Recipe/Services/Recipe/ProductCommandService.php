@@ -4,6 +4,8 @@ namespace App\Domain\Recipe\Services\Recipe;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Dto\Recipe\ProductData;
+use App\Domain\Recipe\Entities\Product;
+use App\Domain\Recipe\Entities\Recipe;
 use App\Domain\Recipe\Entities\RecipeProduct;
 use Illuminate\Support\Collection;
 
@@ -62,11 +64,11 @@ class ProductCommandService
     }
 
     /**
-     * @param RecipeInterface $recipe
+     * @param Recipe $recipe
      * @param Collection<ProductData> $products
      * @return $this
      */
-    private function addProducts(RecipeInterface $recipe, Collection $products): self
+    private function addProducts(Recipe $recipe, Collection $products): self
     {
         $filtered = $products->filter(function (ProductData $product) use ($recipe) {
             return null === $recipe->products->firstWhere('product_id', $product->product_id);

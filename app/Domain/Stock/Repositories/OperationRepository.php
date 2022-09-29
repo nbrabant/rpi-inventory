@@ -42,6 +42,12 @@ class OperationRepository extends BaseRepository implements OperationRepositoryI
                 $count = ($item->operation === Operation::INCREMENT_OPERATOR) ? ($count + $item->quantity) : ($count - $item->quantity);
             });
 
+        /**
+         * @TODO validate if count is not negative
+         * currently it is possible that the $count is a signed int (negative e.g."-5") when the user wants to "retrait" products.
+         * As the quantity field in the database is unsigned, mysql will not do the following update and exit with:
+         * SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'quantity' at row 1 (SQL: update `products` set `quantity` = -3
+         */
         return $count;
     }
 }
