@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Domain\Schedule\Entities\Schedule;
+use Database\Factories\ScheduleFactory;
 use Illuminate\Database\Seeder;
 
-class SchedulesSeeder extends Seeder
+class SchedulesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class SchedulesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Schedule::class, 200)->create();
+        ScheduleFactory::new([])->count(200)->create();
     }
 }
