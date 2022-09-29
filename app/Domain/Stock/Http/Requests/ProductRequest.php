@@ -5,7 +5,7 @@ namespace App\Domain\Stock\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property int product
+ * @property int|null product
  * @property int categoryId
  * @property string name
  * @property string description
@@ -43,7 +43,7 @@ class ProductRequest extends FormRequest
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->product;
     }
