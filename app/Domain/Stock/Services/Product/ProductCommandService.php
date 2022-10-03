@@ -15,27 +15,10 @@ use App\Domain\Stock\Http\Requests\{
 
 class ProductCommandService
 {
-    /**
-     * @var ProductRepositoryInterface $productRepository
-     */
-    private ProductRepositoryInterface $productRepository;
-    /**
-     * @var OperationRepositoryInterface $operationRepository
-     */
-    private OperationRepositoryInterface $operationRepository;
-
-    /**
-     * ProductCommandService constructor.
-     * @param ProductRepositoryInterface $productRepository
-     * @param OperationRepositoryInterface $operationRepository
-     */
     public function __construct(
-        ProductRepositoryInterface $productRepository,
-        OperationRepositoryInterface $operationRepository
-    ) {
-        $this->productRepository = $productRepository;
-        $this->operationRepository = $operationRepository;
-    }
+        private ProductRepositoryInterface $productRepository,
+        private OperationRepositoryInterface $operationRepository
+    ) {}
 
     /**
      * @return Model
@@ -101,12 +84,13 @@ class ProductCommandService
     }
 
     /**
-     * @param $attributes
+     * @param mixed[] $operationData
      * @return Model
      */
-    public function createOperation($attributes): Model
+    public function createOperation(array $operationData): Model
     {
-        return $this->operationRepository->create($attributes);
+        return $this->operationRepository
+            ->save(OperationData::fromArray($operationData));
     }
 
     /**

@@ -4,19 +4,13 @@ namespace App\Domain\Cart\Listeners;
 
 use App\Domain\Cart\Entities\Dto\ProductData;
 use App\Domain\Cart\Services\CartCommandService;
-use App\Infrastructure\Events\ExportCart;
+use App\Domain\Schedule\Events\ExportCart;
 
 class NotifyExportCart
 {
-    private CartCommandService $cartCommandService;
-
-    /**
-     * @param CartCommandService $cartCommandService
-     */
-    public function __construct(CartCommandService $cartCommandService)
-    {
-        $this->cartCommandService = $cartCommandService;
-    }
+    public function __construct(
+        private CartCommandService $cartCommandService
+    ) {}
 
     /**
      * @param ExportCart $exportCart

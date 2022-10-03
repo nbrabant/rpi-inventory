@@ -2,7 +2,6 @@
 
 namespace App\Domain\Recipe\Services;
 
-use App\Infrastructure\Events\CleanCart;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Domain\Recipe\Contracts\RecipeRepositoryInterface;

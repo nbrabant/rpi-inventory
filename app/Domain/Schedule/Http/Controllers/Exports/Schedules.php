@@ -2,10 +2,10 @@
 
 namespace App\Domain\Schedule\Http\Controllers\Exports;
 
+use App\Domain\Schedule\Events\CleanCart;
+use App\Domain\Schedule\Events\ExportCart;
 use App\Domain\Schedule\Http\Requests\ExportToCartRequest;
 use App\Domain\Schedule\Services\ScheduleQueryService;
-use App\Infrastructure\Events\CleanCart;
-use App\Infrastructure\Events\ExportCart;
 use App\Infrastructure\Http\Controllers\Controller;
 
 class Schedules extends Controller
