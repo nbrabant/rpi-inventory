@@ -3,7 +3,7 @@
 namespace App\Domain\Stock\Entities;
 
 use App\Domain\Stock\Contracts\OperationInterface;
-use App\Infrastructure\Events\OperationCreating;
+use App\Domain\Stock\Events\OperationCreating;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 

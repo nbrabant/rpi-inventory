@@ -2,7 +2,6 @@
 
 namespace App\Domain\Stock\Listeners;
 
-use App\Domain\Stock\Entities\Operation;
 use App\Domain\Stock\Services\Product\ProductCommandService;
 
 class UpdateStockQuantity
@@ -20,8 +19,10 @@ class UpdateStockQuantity
         $this->productCommandService = $productCommandService;
     }
 
-    public function handle(Operation $operation): void
+    public function handle($event): void
     {
-        $this->productCommandService->updateProductStockQuantity($operation->product_id);
+        $this->productCommandService->updateProductStockQuantity(
+            $event->getOperation()->product_id
+        );
     }
 }
