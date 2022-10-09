@@ -1,6 +1,9 @@
 install: ## Install PHP and NPM dependencies
 	docker exec -it php-rpi composer install && docker exec -it php-rpi npm install
 
+build-php: ## build php docker image
+	docker-compose build php-rpi
+
 up: ## start application containers
 	docker-compose up -d
 
