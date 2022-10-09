@@ -17,7 +17,7 @@ class CreateProduitsTable extends Migration
 			$table->integer('category_id')->unsigned();
 			$table->string('name');
 			$table->text('description')->nullable();
-			$table->integer('quantity')->unsigned();
+			$table->integer('quantity')->default(0)->unsigned();
 			$table->integer('min_quantity')->unsigned()->default(0);
 			$table->enum('unit', [
                 'piece',
