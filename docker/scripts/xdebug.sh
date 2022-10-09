@@ -32,25 +32,25 @@ PHP_PATH="//usr/local/etc/php"
 
 function enableXdebug {
     docker-compose exec ${CONTAINER_NAME} bash -c "ln -sf /xdebug/xdebug.on.ini /${PHP_PATH}/conf.d/docker-php-ext-xdebug.ini"
-    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 1'
+    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 $(pgrep -f "php-fpm: master process")'
     echo "XDebug enabled"
 }
 
 function disableXdebug {
     docker-compose exec ${CONTAINER_NAME} bash -c "rm -f /${PHP_PATH}/conf.d/docker-php-ext-xdebug.ini"
-    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 1'
+    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 $(pgrep -f "php-fpm: master process")'
     echo "XDebug disabled"
 }
 
 function autoXdebug {
     docker-compose exec ${CONTAINER_NAME} bash -c "ln -sf /xdebug/xdebug.auto.ini /${PHP_PATH}/conf.d/docker-php-ext-xdebug.ini"
-    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 1'
+    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 $(pgrep -f "php-fpm: master process")'
     echo "XDebug autostart enabled"
 }
 
 function profileXdebug {
     docker-compose exec ${CONTAINER_NAME} bash -c "ln -sf /xdebug/xdebug.profile.ini /${PHP_PATH}/conf.d/docker-php-ext-xdebug.ini"
-    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 1'
+    docker-compose exec ${CONTAINER_NAME} bash -c 'kill -USR2 $(pgrep -f "php-fpm: master process")'
     echo "XDebug profile enabled"
 }
 
