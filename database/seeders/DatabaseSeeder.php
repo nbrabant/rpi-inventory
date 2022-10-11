@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -20,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecipeTableSeeder::class);
         $this->call(RecipeProductsTableSeeder::class);
         $this->call(RecipeStepsTableSeeder::class);
-        $this->call(SchedulesSeeder::class);
+        $this->call(SchedulesTableSeeder::class);
 
         Model::reguard();
     }

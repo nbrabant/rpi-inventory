@@ -4,6 +4,7 @@ namespace App\Domain\Recipe\Services\Recipe;
 
 use App\Domain\Recipe\Contracts\RecipeInterface;
 use App\Domain\Recipe\Entities\Dto\Recipe\StepData;
+use App\Domain\Recipe\Entities\Recipe;
 use App\Domain\Recipe\Entities\RecipeStep;
 use Illuminate\Support\Collection;
 
@@ -66,14 +67,14 @@ class StepCommandService
      * @param Collection<StepData> $steps
      * @return $this
      */
-    private function addSteps(RecipeInterface $recipe, Collection $steps): self
+    private function addSteps(Recipe $recipe, Collection $steps): self
     {
         $filtered = $steps->filter(function (StepData $step) use ($recipe) {
             return null === $recipe->steps->firstWhere('id', $step->id);
         });
 
         $filtered->each(function (StepData $step) use($recipe) {
-            $recipe->products()->save((array)$step);
+            $recipe->products()->save($step);
         });
 
         return $this;

@@ -23,18 +23,10 @@ composer install
 npm install
 ```
 
-Next step, you should configure the `.env` file :
+Next step, you should configure the `.env` file. To start, you should just 
+copy .env.example to .env
 
-```dotenv
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=homestead
-DB_USERNAME=homestead
-DB_PASSWORD=secret
-```
-
-If you have Trello account and you want to add the Trello export functionnality, please, use configuration panel to define Trello credentials
+If you have Trello account and you want to add the Trello export functionality, please, use configuration panel to define Trello credentials
 
 #### Install database
 
@@ -78,7 +70,32 @@ make generate_key
 ```
 5. Build assets and run php artisan socket
 ```
-make run_npm
-make run_php
+make run-npm
+make run-php
 ```
 6. Run the app on your **localhost:8080**
+
+## XDebug
+
+If you want to use xdebug for debugging you have to start it with (running on port 9003):
+
+```shell script
+make xdebug-auto
+```
+
+There are also some other xdebug configs you can use:
+- on (start_with_request false)
+- profile (for profiling: profiling result will be saved at storage/logs)
+- auto (start_with_request true)
+- off (to deactivate xdebug)
+
+If you want to see the differences of those config, check them out. You can find them in
+docker/php/xdebug
+
+#### IDE Config for XDebug
+Depending on your IDE you need so setup some smaller things.
+
+- PHPStorm: 
+    - Settings > PHP > Debug > Debug port: 9003
+    - Settings > PHP > Servers > add server with name "php-rpi" with path mappings. You need to map your project root to "/var/www/app"
+

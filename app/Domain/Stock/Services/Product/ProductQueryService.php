@@ -49,8 +49,7 @@ class ProductQueryService
      */
     public function getProductWithConsumptions(string $id, Request $request): Model
     {
-        $this->productRepository->setWithRelation('operations');
-
+        $this->productRepository->setWithRelation(['operations']);
         return $this->productRepository->find($id, $request);
     }
 

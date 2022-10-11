@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Domain\Recipe\Entities\RecipeStep;
 use Illuminate\Database\Seeder;
 

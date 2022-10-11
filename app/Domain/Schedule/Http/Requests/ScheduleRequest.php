@@ -20,7 +20,7 @@ class ScheduleRequest extends FormRequest
     /**
      * @return int
      */
-    public function getRecipeId(): int
+    public function getRecipeId(): ?int
     {
         return $this->recipe_id;
     }
@@ -58,17 +58,17 @@ class ScheduleRequest extends FormRequest
     }
 
     /**
-     * @return DateTimeInterface
+     * @return DateTimeInterface|string
      */
-    public function getStartAt(): DateTimeInterface
+    public function getStartAt(): DateTimeInterface|string
     {
         return $this->start_at;
     }
 
     /**
-     * @return DateTimeInterface
+     * @return DateTimeInterface|string
      */
-    public function getEndAt(): DateTimeInterface
+    public function getEndAt(): DateTimeInterface|string
     {
         return $this->end_at;
     }

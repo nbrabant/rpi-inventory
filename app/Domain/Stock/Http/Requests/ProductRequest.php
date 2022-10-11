@@ -5,11 +5,11 @@ namespace App\Domain\Stock\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * @property int product
- * @property int categoryId
+ * @property int|null product
+ * @property int category_id
  * @property string name
  * @property string description
- * @property int minQuantity
+ * @property int min_quantity
  * @property string unit
  */
 class ProductRequest extends FormRequest
@@ -43,7 +43,7 @@ class ProductRequest extends FormRequest
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->product;
     }
@@ -53,7 +53,7 @@ class ProductRequest extends FormRequest
      */
     public function getCategoryId(): int
     {
-        return $this->categoryId;
+        return $this->category_id;
     }
 
     /**
@@ -77,7 +77,7 @@ class ProductRequest extends FormRequest
      */
     public function getMinQuantity(): int
     {
-        return $this->minQuantity;
+        return $this->min_quantity;
     }
 
     /**

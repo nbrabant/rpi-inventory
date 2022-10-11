@@ -15,12 +15,12 @@ services:
     build:
       context: .
       dockerfile: docker/php/Dockerfile
-    ports:
-      - '9000:9000'
     volumes:
       - .:/var/www/app
     depends_on:
       - database-rpi
+    environment:
+      - "PHP_IDE_CONFIG=serverName=php-rpi"
   nginx-rpi:
     container_name: nginx-rpi
     image: nginx:stable-alpine
