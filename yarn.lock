@@ -886,7 +886,6 @@
     "merge-source-map" "^1.1.0"
     "postcss" "^7.0.14"
     "postcss-selector-parser" "^6.0.2"
-    "prettier" "^1.18.2"
     "source-map" "~0.6.1"
     "vue-template-es2015-compiler" "^1.9.0"
   optionalDependencies:
@@ -1763,7 +1762,6 @@
     "anymatch" "^2.0.0"
     "async-each" "^1.0.1"
     "braces" "^2.3.2"
-    "fsevents" "^1.2.7"
     "glob-parent" "^3.1.0"
     "inherits" "^2.0.3"
     "is-binary-path" "^1.0.0"
@@ -6996,6 +6994,11 @@
   "resolved" "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
   "version" "2.3.4"
 
+"vue-i18n@^8.27.2":
+  "integrity" "sha512-QVzn7u2WVH8F7eSKIM00lujC7x1mnuGPaTnDTmB01Hd709jDtB9kYtBqM+MWmp5AJRx3gnqAdZbee9MelqwFBg=="
+  "resolved" "https://registry.npmjs.org/vue-i18n/-/vue-i18n-8.27.2.tgz"
+  "version" "8.27.2"
+
 "vue-loader@^15.4.2":
   "integrity" "sha512-oeMOs2b5o5gRqkxfds10bCx6JeXYTwivRgbb8hzOrcThD2z1+GqEKE3EX9A2SGbsYDf4rXwRg6D5n1w0jO5SwA=="
   "resolved" "https://registry.npmjs.org/vue-loader/-/vue-loader-15.9.5.tgz"
@@ -7050,10 +7053,8 @@
   "resolved" "https://registry.npmjs.org/watchpack/-/watchpack-1.7.4.tgz"
   "version" "1.7.4"
   dependencies:
-    "chokidar" "^3.4.1"
     "graceful-fs" "^4.1.2"
     "neo-async" "^2.5.0"
-    "watchpack-chokidar2" "^2.0.0"
   optionalDependencies:
     "chokidar" "^3.4.1"
     "watchpack-chokidar2" "^2.0.0"

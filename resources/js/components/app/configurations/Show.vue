@@ -9,6 +9,8 @@
                     subtitle="Configuration de l'application"></html-cardheader>
         </div>
 
+        <locale-switcher/>
+
         <div class="card" v-for="(configurations, prefix) in item">
             <html-cardheader
                     :title="prefix|capitalize"
@@ -36,11 +38,9 @@
 </template>
 
 <script>
-
     import RestShow from '../../../mixins/restshow'
 
     export default {
-
         mixins: [RestShow],
 
         data() {
