@@ -16,6 +16,7 @@ import FormHiddenComponent from '../components/form/Hidden.vue';
 import FormFileComponent from '../components/form/File.vue';
 import FormImageComponent from '../components/form/Image.vue';
 import TemplateIndexComponent from '../components/template/Index.vue';
+import LocaleSwitcher from '../components/app/configurations/LocaleSwitcher'
 
 
 // Html components
@@ -41,6 +42,7 @@ Vue.component('form-hidden', FormHiddenComponent)
 // Vue.component('form-wysiwyg',           require('../components/form/Wysiwyg.vue'))
 Vue.component('form-file', FormFileComponent)
 Vue.component('form-image', FormImageComponent)
+Vue.component('locale-switcher', LocaleSwitcher)
 
 // Template components
 Vue.component('template-index', TemplateIndexComponent)

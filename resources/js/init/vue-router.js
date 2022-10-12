@@ -1,5 +1,6 @@
 
 import VueRouter from 'vue-router';
+import i18n from '../i18n'
 
 Vue.use(VueRouter)
 
@@ -233,5 +234,6 @@ var router = new VueRouter({
 // start routing
 const app = new Vue({
     router,
-    render: h => h('router-view')
+    render: h => h('router-view'),
+    i18n
 }).$mount('#app');
