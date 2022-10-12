@@ -13,11 +13,16 @@ class OperationData extends Dto
      */
     public static function fromRequest(OperationRequest $request): self
     {
-        return new static([
+        return self::fromArray([
             'product_id'    => $request->getProductId(),
             'quantity'      => $request->getQuantity(),
             'operation'     => $request->getOperation(),
             'detail'        => $request->getDetail(),
         ]);
+    }
+
+    public static function fromArray(array $operationData): self
+    {
+        return new static($operationData);
     }
 }

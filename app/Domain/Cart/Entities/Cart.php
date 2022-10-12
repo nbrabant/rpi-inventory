@@ -2,10 +2,11 @@
 
 namespace App\Domain\Cart\Entities;
 
+use App\Domain\Cart\Contracts\CartInterface;
+use App\Domain\Cart\Events\CartFinished;
+use App\Domain\Cart\Helpers\TrelloTraitHelper;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as Eloquent;
-use App\Domain\Cart\Helpers\TrelloTraitHelper;
-use App\Domain\Cart\Contracts\CartInterface;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Eloquent implements CartInterface
@@ -18,6 +19,13 @@ class Cart extends Eloquent implements CartInterface
     protected $fillable = [
         'finished',
         'trello_card_id'
+    ];
+
+    /**
+     * @var string[] $dispatchesEvents
+     */
+    protected $dispatchesEvents = [
+        'saved' => CartFinished::class
     ];
 
     /**

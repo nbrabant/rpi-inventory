@@ -3,6 +3,7 @@
 namespace App\Domain\Stock\Entities;
 
 use App\Domain\Stock\Contracts\OperationInterface;
+use App\Domain\Stock\Events\OperationCreating;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -24,6 +25,13 @@ class Operation extends Eloquent implements OperationInterface
         'quantity',
         'operation',
         'detail'
+    ];
+
+    /**
+     * @var string[] $dispatchesEvents
+     */
+    protected $dispatchesEvents = [
+        'created' => OperationCreating::class
     ];
 
     /**
