@@ -2,16 +2,13 @@
 
 Manage pantry, edit meals of the week and organize your week's shopping list
 
-## Installation
+## Local installation on Host (not recommended)
 
-### Local installation
+#### Requirements
 
-#### Requirement
-
-- PHP 7.4 or highter
+- PHP 8.1
 - Composer
-- MySQL 
-- Nginx / Apache 2
+- MySQL
 - Node + NPM 
 
 #### Install project
@@ -23,14 +20,20 @@ composer install
 npm install
 ```
 
-Next step, you should configure the `.env` file. To start, you should just 
-copy .env.example to .env
+Next step, you should configure the `.env` file. To start,
+you should just copy .env.example to .env
+When you run the application on your host (without docker)
+thats the point where you need to configure the correct 
+env variables for your local database.
 
-If you have Trello account and you want to add the Trello export functionality, please, use configuration panel to define Trello credentials
+If you have Trello account and you want to add the Trello
+export functionality, please, use configuration panel to
+define Trello credentials
 
-#### Install database
+#### Seed database
 
-Sample data are pre-installed, to install database and this datas, execute the command :
+Sample data are pre-installed, to install database and
+this datas, execute the command :
 
 ```shell script
 php artisan migrate:refresh --seed
@@ -43,14 +46,14 @@ In two separate terminal, launch the commands below :
 ```shell script
 php artisan serve
 ```
-
 and
-
 ```shell script
 npm run-script watch-poll
 ```
 
-## Run with Docker 🐋
+Open up browser and start the app calling **http://localhost:8000**
+
+## Run with Docker 🐋 (recommended)
 
 1. Clone the project
 ```
@@ -64,18 +67,29 @@ docker-compose up -d --build
 ```
 make install
 ```
+**(optional step for Windows DEV's when running in WSL)**
+
+setup storage permissions
+```
+sudo chmod 777 -R storage/
+```
 4. Generate Artisan APP_KEY
 ```
 make generate_key
 ```
-5. Build assets and run php artisan socket
+5. Seed database
+```
+make db-refresh
+```
+6. Build assets with "watch" option. After executing this
+you need to let the cli open as npm watch module needs to
+watch for filechanges.
 ```
 make run-npm
-make run-php
 ```
-6. Run the app on your **localhost:8080**
+7. Open up browser and start the app calling **http://localhost:8080**
 
-## XDebug
+## Debugging PHP with XDebug
 
 If you want to use xdebug for debugging you have to start it with (running on port 9003):
 
@@ -84,10 +98,10 @@ make xdebug-auto
 ```
 
 There are also some other xdebug configs you can use:
-- on (start_with_request false)
-- profile (for profiling: profiling result will be saved at storage/logs)
-- auto (start_with_request true)
-- off (to deactivate xdebug)
+- `xdebug-on` (start_with_request false)
+- `xdebug-profile` (for profiling: profiling result will be saved at storage/logs)
+- `xdebug-auto` (start_with_request true)
+- `xdebug-off` (to deactivate xdebug)
 
 If you want to see the differences of those config, check them out. You can find them in
 docker/php/xdebug
