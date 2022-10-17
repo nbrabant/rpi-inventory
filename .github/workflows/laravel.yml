@@ -28,6 +28,7 @@ jobs:
       run: |
         mkdir -p storage
         touch ./storage/database.sqlite
+        chmod 777 ./storage/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: testing
