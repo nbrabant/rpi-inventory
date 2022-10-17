@@ -29,7 +29,7 @@ jobs:
         mkdir -p storage
         touch ./storage/database.sqlite
         chmod 777 ./storage/database.sqlite
-        php artisan db-refresh
+        php artisan migrate:refresh --seed
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: testing
