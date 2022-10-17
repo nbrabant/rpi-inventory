@@ -14,16 +14,16 @@ class CartTest extends TestCase
 
     protected function setUp(): void
     {
-        (new ProductTableSeeder())->run();
         parent::setUp();
+        (new ProductTableSeeder())->run();
     }
 
     protected function tearDown(): void
     {
-
         Product::truncate();
         Cart::truncate();
         ProductLine::truncate();
+        parent::tearDown();
     }
 
     public function test_add_product_to_cart()
