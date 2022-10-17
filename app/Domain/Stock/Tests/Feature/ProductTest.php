@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Stock\Entities\Category;
+use App\Domain\Stock\Entities\Product;
 use Database\Seeders\CategoryTableSeeder;
 use Tests\TestCase;
 
@@ -10,15 +11,18 @@ class ProductTest extends TestCase
 
     protected function setUp(): void
     {
-        (new CategoryTableSeeder)->run();
         parent::setUp();
+        $cat = Category::all('*')->first();
+        if (empty($cat)) {
+            (new CategoryTableSeeder)->run();
+        }
     }
 
     protected function tearDown(): void
     {
         Category::truncate();
         // clean up
-        $product = \App\Domain\Stock\Entities\Product::where('id', $this->productId);
+        $product = Product::where('id', $this->productId);
         $product->delete();
         parent::tearDown();
     }
@@ -43,7 +47,5 @@ class ProductTest extends TestCase
         $resp = $this->get("/api/products/$this->productId");
         $decoded = $resp->decodeResponseJson();
         $this->assertEquals(0, $decoded['quantity']);
-
-
     }
 }
