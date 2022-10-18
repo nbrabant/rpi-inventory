@@ -41,6 +41,7 @@ class CartTest extends TestCase
 
     public function test_add_and_update_product_in_cart()
     {
+        (new ProductTableSeeder())->run();
         $newQuantity = 666;
         $postData = ['product_id' => $this->productId, 'quantity' => 0];
         $this->post('/api/cartproducts', $postData);
@@ -65,6 +66,7 @@ class CartTest extends TestCase
 
     public function test_add_and_finish_cart()
     {
+        (new ProductTableSeeder())->run();
         $postData = ['product_id' => $this->productId, 'quantity' => 0];
         $resp = $this->post('/api/cartproducts', $postData);
         $decoded = $resp->decodeResponseJson();
