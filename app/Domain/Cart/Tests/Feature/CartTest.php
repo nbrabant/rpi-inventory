@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Domain\Cart\Tests\Feature;
-
 use App\Domain\Cart\Entities\Cart;
 use App\Domain\Cart\Entities\ProductLine;
 use App\Domain\Stock\Entities\Product;
@@ -15,7 +13,6 @@ class CartTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        (new ProductTableSeeder())->run();
     }
 
     protected function tearDown(): void
@@ -28,6 +25,7 @@ class CartTest extends TestCase
 
     public function test_add_product_to_cart()
     {
+        (new ProductTableSeeder())->run();
         $postData = ['product_id' => $this->productId, 'quantity' => 0];
         $resp = $this->post('/api/cartproducts', $postData);
         $decoded = $resp->decodeResponseJson();
