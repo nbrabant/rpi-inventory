@@ -1,9 +1,6 @@
 <?php
+namespace App\Domain\Cart\Tests\Feature;
 
-use App\Domain\Cart\Entities\Cart;
-use App\Domain\Cart\Entities\ProductLine;
-use App\Domain\Stock\Entities\Product;
-use Database\Seeders\ProductTableSeeder;
 use Tests\TestCase;
 
 class CartTest extends TestCase
