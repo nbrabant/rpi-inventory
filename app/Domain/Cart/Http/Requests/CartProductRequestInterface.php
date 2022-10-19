@@ -7,7 +7,7 @@ interface CartProductRequestInterface
     /**
      * @return int
      */
-    public function getProductId(): int;
+    public function getProductId(): ?int;
 
     /**
      * @return int

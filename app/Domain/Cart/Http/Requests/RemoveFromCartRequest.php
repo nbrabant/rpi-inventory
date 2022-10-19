@@ -13,9 +13,9 @@ class RemoveFromCartRequest extends FormRequest implements CartProductRequestInt
     /**
      * @inheritDoc
      */
-    public function getProductId(): int
+    public function getProductId(): ?int
     {
-        return $this->product_id;
+        return $this->product_id ?? null;
     }
 
     /**

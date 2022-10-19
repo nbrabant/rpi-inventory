@@ -281,8 +281,7 @@ export default Vue.extend({
                     route += '/' + params[key]
                 }
             }
-
-            this.HTTP.delete(route, this.item, params)
+            this.HTTP.delete(route, { data: params })
                 .then(response => {
                     this.successRestDelete(response)
                 }).catch(response => {
