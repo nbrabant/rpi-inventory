@@ -8,16 +8,6 @@ class CartTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
-
     public function test_add_product_to_cart()
     {
         $productId = $this->createProduct('test_add_product_to_cart');

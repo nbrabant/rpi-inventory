@@ -3,10 +3,13 @@
 use App\Domain\Stock\Entities\Category;
 use App\Domain\Stock\Entities\Product;
 use Database\Seeders\CategoryTableSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ConsumptionTest extends TestCase
 {
+    use RefreshDatabase;
+
     const PRODUCT_NAME = 'Consumption Test Name';
     const PRODUCT_DATA = [
         'quantity' => 0,
@@ -18,42 +21,17 @@ class ConsumptionTest extends TestCase
         'unit' => 'piece',
     ];
 
-    private string $productId;
-    private string $productName = '';
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $cat = Category::all('*')->first();
-        if (empty($cat)) {
-            (new CategoryTableSeeder)->run();
-        }
-
-        // remove article if already created
-        $product = Product::where('name', self::PRODUCT_NAME);
-        $product->delete();
-    }
-
-    protected function tearDown(): void
-    {
-        Category::truncate();
-        // clean up
-        $product = Product::where('name', self::PRODUCT_NAME);
-        $product->delete();
-        parent::tearDown();
-    }
-
     public function test_add_consumptions()
     {
         $resp = $this->post('/api/products', self::PRODUCT_DATA);
         $decoded = $resp->decodeResponseJson();
-        $this->productId = $decoded['id'];
+        $productId = $decoded['id'];
 
         $consumptionData = [
             'created' => true,
             'detail' => 'Bought in shop',
             'operation' => '+',
-            'product_id' => $this->productId,
+            'product_id' => $productId,
             'quantity' => 2,
         ];
 
@@ -64,7 +42,7 @@ class ConsumptionTest extends TestCase
         $addResp = $this->post('/api/consumptions', $consumptionData);
         $this->assertEquals(201, $addResp->getStatusCode());
 
-        $resp = $this->get("/api/products/$this->productId");
+        $resp = $this->get("/api/products/$productId");
         $decoded = $resp->decodeResponseJson();
         $this->assertEquals(4, $decoded['quantity']);
 
@@ -73,13 +51,13 @@ class ConsumptionTest extends TestCase
             'created' => true,
             'detail' => 'Used',
             'operation' => '-',
-            'product_id' => $this->productId,
+            'product_id' => $productId,
             'quantity' => 4,
         ];
         $subResp = $this->post('/api/consumptions', $subData);
         $this->assertEquals(201, $subResp->getStatusCode());
 
-        $resp = $this->get("/api/products/$this->productId");
+        $resp = $this->get("/api/products/$productId");
         $decoded = $resp->decodeResponseJson();
         $this->assertEquals(0, $decoded['quantity']);
     }

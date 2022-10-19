@@ -3,29 +3,12 @@
 use App\Domain\Stock\Entities\Category;
 use App\Domain\Stock\Entities\Product;
 use Database\Seeders\CategoryTableSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ProductTest extends TestCase
 {
-    private int $productId;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $cat = Category::all('*')->first();
-        if (empty($cat)) {
-            (new CategoryTableSeeder)->run();
-        }
-    }
-
-    protected function tearDown(): void
-    {
-        Category::truncate();
-        // clean up
-        $product = Product::where('id', $this->productId);
-        $product->delete();
-        parent::tearDown();
-    }
+    use RefreshDatabase;
 
     public function test_create_product_and_check_initial_quantity()
     {
@@ -42,9 +25,9 @@ class ProductTest extends TestCase
         $resp = $this->post('/api/products', $postData);
         $this->assertEquals(201, $resp->getStatusCode());
         $decoded = $resp->decodeResponseJson();
-        $this->productId = $decoded['id'];
+        $productId = $decoded['id'];
 
-        $resp = $this->get("/api/products/$this->productId");
+        $resp = $this->get("/api/products/$productId");
         $decoded = $resp->decodeResponseJson();
         $this->assertEquals(0, $decoded['quantity']);
     }
